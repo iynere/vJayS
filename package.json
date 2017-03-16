@@ -1,7 +1,7 @@
 {
-  "name": "__BONES_NEEDS_A_NAME__",
+  "name": "hatrock",
   "version": "0.0.1",
-  "description": "A happy little skeleton.",
+  "description": "hatrock project",
   "main": "index.js",
   "scripts": {
     "validate": "check-node-version --node '>= 6.7.0'",
@@ -23,19 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/queerviolet/bones.git"
+    "url": "git+https://github.com/isar0se/hatrock"
   },
   "keywords": [
     "react",
-    "redux",
-    "skeleton"
+    "redux"
   ],
-  "author": "Ashi Krishnan <me@ashi.works>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/queerviolet/bones/issues"
-  },
-  "homepage": "https://github.com/queerviolet/bones#readme",
+  "homepage": "https://github.com/isar0se/hatrock#readme",
   "dependencies": {
     "axios": "^0.15.2",
     "babel-preset-stage-2": "^6.18.0",
