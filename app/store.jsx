@@ -7,13 +7,13 @@ import thunkMiddleware from 'redux-thunk'
 import {whoami} from './reducers/auth'
 
 const store = createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(
-      createLogger({collapsed: true}),
-      thunkMiddleware
-    )
-  )
+	rootReducer,
+	composeWithDevTools(
+		applyMiddleware(
+			createLogger({collapsed: true}),
+			thunkMiddleware
+		)
+	)
 )
 
 export default store
