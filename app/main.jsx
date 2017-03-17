@@ -8,6 +8,13 @@ import store from './store'
 import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
+import LiveApp from './components/LiveApp'
+
+const socket = io(window.location.origin)
+
+socket.on('connect', () => {
+  console.log("*******I have connected to the server!*****")
+})
 
 const ExampleApp = connect(
   ({ auth }) => ({ user: auth })
@@ -28,6 +35,7 @@ render (
         <IndexRedirect to="/jokes" />
         <Route path="/jokes" component={Jokes} />
       </Route>
+      <Route path="/live" component={LiveApp} />
     </Router>
   </Provider>,
   document.getElementById('main')
