@@ -9,6 +9,7 @@ import Jokes from './components/Jokes'
 import Login from './components/Login'
 import WhoAmI from './components/WhoAmI'
 import LiveApp from './components/LiveApp'
+import Fullscreen from './containers/Fullscreen'
 
 const socket = io(window.location.origin)
 
@@ -35,6 +36,7 @@ render (
         <IndexRedirect to="/jokes" />
         <Route path="/jokes" component={Jokes} />
       </Route>
+      <Route path="/full" component={Fullscreen} />
       <Route path="/live" component={LiveApp} />
     </Router>
   </Provider>,
