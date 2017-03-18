@@ -1,8 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Container} from 'semantic-ui-react'
 import YouTube from 'react-youtube'
 
-export const Fullscreen = ({player, queue}) => {
+const Output = ({player, queue}) => {
   
   return (
     <div>
@@ -13,3 +14,10 @@ export const Fullscreen = ({player, queue}) => {
     </div>
   )
 }
+
+const mapStateToProps = ({player, queue}) => ({
+  player,
+  queue
+})
+
+export default connect(mapStateToProps)(Output)
