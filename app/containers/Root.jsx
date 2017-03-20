@@ -6,7 +6,7 @@ import Footer from './Footer'
 export const Root = () => (
   <div>
     <Navbar />
-    {/*<Body />
-    <Footer />*/}
+    {/*<Body />*/}
+    {/*<Footer />*/}
   </div>
 )

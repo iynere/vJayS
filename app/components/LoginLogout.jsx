@@ -3,6 +3,7 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import {Button, Dropdown, Menu} from 'semantic-ui-react'
 import {logout} from 'APP/app/reducers/auth'
+import {fetchPlaylists} from 'APP/app/reducers/playlist'
 
 class LoginLogout extends Component {
   constructor(props) {
@@ -15,12 +16,15 @@ class LoginLogout extends Component {
   renderUser() {
     const user = this.props.user
     return (
-      <Dropdown.Menu text={`Hello ${user.name || user.email}!`} className='link item'>
-        <Dropdown.Item>Import Playlists
-        </Dropdown.Item>
-        <Dropdown.Item>View Your Sets
-        </Dropdown.Item>
-      </Dropdown.Menu>
+      <Dropdown text={`Hello ${user.name || user.email}!`} className='link item'>
+        <Dropdown.Menu>
+          <Dropdown.Item
+            onClick={this.props.fetchPlaylists}>Import Playlists
+          </Dropdown.Item>
+          <Dropdown.Item>View Your Sets
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     )
   }
   
@@ -55,4 +59,4 @@ const mapStateToProps = ({auth}) => ({
   user: auth
 })
 
-export default connect(mapStateToProps, {logout})(LoginLogout)
+export default connect(mapStateToProps, {logout, fetchPlaylists})(LoginLogout)

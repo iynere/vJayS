@@ -9,7 +9,7 @@ const auth = require('express').Router()
 
 /*************************
  * Auth strategies
- *
+ * 
  * The OAuth model knows how to configure Passport middleware.
  * To enable an auth strategy, ensure that the appropriate
  * environment variables are set.
@@ -46,18 +46,19 @@ OAuth.setupStrategy({
   passport
 })
 
+// commented this out to try youtube oauth
 // Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
 // environment variables.
-OAuth.setupStrategy({
-  provider: 'google',
-  strategy: require('passport-google-oauth').OAuth2Strategy,
-  config: {
-    clientID: env.GOOGLE_CLIENT_ID,
-    clientSecret: env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `${app.baseUrl}/api/auth/login/google`,
-  },
-  passport
-})
+// OAuth.setupStrategy({
+//  provider: 'google',
+//  strategy: require('passport-google-oauth').OAuth2Strategy,
+//  config: {
+//    clientID: env.GOOGLE_CLIENT_ID,
+//    clientSecret: env.GOOGLE_CLIENT_SECRET,
+//    callbackURL: `${app.baseUrl}/api/auth/login/google`,
+//  },
+//  passport
+// })
 
 // Github needs the GITHUB_CLIENT_ID AND GITHUB_CLIENT_SECRET
 // environment variables.
@@ -70,6 +71,17 @@ OAuth.setupStrategy({
     callbackURL: `${app.baseUrl}/api/auth/login/github`,
   },
   passport
+})
+
+// from https://github.com/yanatan16/passport-youtube-v3 synced with bones' style to the best of our knowledge
+OAuth.setupStrategy({
+  provider: 'youtube',
+  strategy: require('passport-youtube-v3').Strategy,
+  config: {
+    clientID: env.GOOGLE_CLIENT_ID,
+    clientSecret: env.GOOGLE_CLIENT_SECRET,
+    callbackURL: `${app.baseUrl}/api/auth/login/google`
+  }
 })
 
 // Other passport configuration:
@@ -128,7 +140,7 @@ auth.post('/login/local', passport.authenticate('local', { successRedirect: '/',
 // Register this route as a callback URL with OAuth provider
 auth.get('/login/:strategy', (req, res, next) =>
   passport.authenticate(req.params.strategy, {
-    scope: 'email',
+    scope: ['https://www.googleapis.com/auth/youtube.readonly'], // 'email'
     successRedirect: '/',
     // Specify other config here, such as "scope"
   })(req, res, next)
