@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import {Button, Dropdown, Menu} from 'semantic-ui-react'
 import {logout} from 'APP/app/reducers/auth'
-import {fetchPlaylists} from 'APP/app/reducers/playlist'
+import {fetchPlaylists} from 'APP/app/reducers/playlists'
 
 class LoginLogout extends Component {
   constructor(props) {
@@ -45,12 +45,10 @@ class LoginLogout extends Component {
   render() {
     const user = this.props.user
     return (
-      <Menu>
-        <Menu.Menu position='right'>
-          {user ? this.renderUser() : null}
-          {user ? this.renderLogout() : this.renderLogin()}
-        </Menu.Menu>
-      </Menu>
+      <Menu.Menu position='right'>
+        {user ? this.renderUser() : null}
+        {user ? this.renderLogout() : this.renderLogin()}
+      </Menu.Menu>
     )
   }
 }
