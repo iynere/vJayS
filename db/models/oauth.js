@@ -24,7 +24,7 @@ const OAuth = db.define('oauths', {
   // Further reading on indexes:
   // 1. Sequelize and indexes: http://docs.sequelizejs.com/en/2.0/docs/models-definition/#indexes
   // 2. Postgres documentation: https://www.postgresql.org/docs/9.1/static/indexes.html
-	indexes: [{fields: ['uid'], unique: true,}],
+  indexes: [{fields: ['uid'], unique: true,}],
 })
 
 // OAuth.V2 is a default argument for the OAuth.setupStrategy method - it's our callback function that will execute when the user has successfully logged in

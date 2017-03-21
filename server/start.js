@@ -6,6 +6,7 @@ const {resolve} = require('path')
 const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
+const socketio = require('socket.io')
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
 // Bones has a symlink from node_modules/APP to the root of the app.
@@ -78,7 +79,16 @@ if (module === require.main) {
       console.log(`Listening on http://${urlSafeHost}:${port}`)
     }
   )
+
+  var io = socketio(server)
+
+  io.on('connection', clientSocket => {
+    console.log("A client has connected!")
+  })
 }
+
+
+
 
 // This check on line 64 is only starting the server if this file is being run directly by Node, and not required by another file.
 // Bones does this for testing reasons. If we're running our app in development or production, we've run it directly from Node using 'npm start'.

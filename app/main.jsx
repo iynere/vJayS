@@ -3,31 +3,27 @@ import React from 'react'
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
+import {fetchQueue} from 'APP/app/utils/queue'
+import store from 'APP/app/store'
+import Output from 'APP/app/containers/Output'
+import {Root} from 'APP/app/containers/Root'
 
-import store from './store'
-import Jokes from './components/Jokes'
-import Login from './components/Login'
-import WhoAmI from './components/WhoAmI'
+const socket = io(window.location.origin)
 
-const ExampleApp = connect(
-  ({ auth }) => ({ user: auth })
-) (
-  ({ user, children }) =>
-    <div>
-      <nav>
-        {user ? <WhoAmI/> : <Login/>}
-      </nav> 
-      {children}
-    </div>
-)
+socket.on('connect', () => {
+  console.log("*******I have connected to the server!*****")
+})
+
+const onRootEnter = () => {
+  store.dispatch(fetchQueue('queueLeft'))
+  store.dispatch(fetchQueue('queueRight'))
+}
 
 render (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={ExampleApp}>
-        <IndexRedirect to="/jokes" />
-        <Route path="/jokes" component={Jokes} />
-      </Route>
+      <Route path="/" component={Root} onEnter={onRootEnter} />
+      <Route path="/output" component={Output} />
     </Router>
   </Provider>,
   document.getElementById('main')

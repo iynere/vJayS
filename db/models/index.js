@@ -6,7 +6,12 @@
 
 const User = require('./user')
 const OAuth = require('./oauth')
+const Set = require('./set')
+
+Set.belongsTo(User)
+User.hasMany(Set)
 
 OAuth.belongsTo(User)
 User.hasOne(OAuth)
+
 module.exports = {User}
