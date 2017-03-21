@@ -4,9 +4,9 @@ import {Body} from './Body'
 import Footer from './Footer'
 
 export const Root = () => (
-  <div>
-    <Navbar />
-    <Body />
-    {/*<Footer />*/}
-  </div>
+	<div>
+		<Navbar />
+		<Body />
+		{/*<Footer />*/}
+	</div>
 )
