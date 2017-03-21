@@ -23,6 +23,8 @@ const Output = ({player, queue}) => {
   
   return (
     <div>
+      <div className="effects">
+      </div>
       <div className="youtube1">
         <YouTube 
           opts={playerOptions}
@@ -35,7 +37,6 @@ const Output = ({player, queue}) => {
           videoId='v5kRrLmGJho'
         />
       </div>
-      
     </div>
   )
 }
