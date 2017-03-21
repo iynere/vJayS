@@ -1,17 +1,18 @@
 import React from 'react'
 import {Container} from 'semantic-ui-react'
-import YouTubePlayer from 'react-youtube'
+import Player from '../components/Player'
 import Queue from '../components/Queue'
 
 export const Deck = props => (
-	<Container>
-		<div>blah blah blah</div>
-		{/*<Player />*/}
-		{/*<Controls />*/}
-		<Queue 
-			direction={props.direction}
-		/>
-	</Container>
+  <Container>
+    <Player 
+      direction={props.direction}
+    />
+    {/*<Controls />*/}
+    {/*<Queue 
+          direction={props.direction}
+        />*/}
+  </Container>
 )
 
 // if we're reusing components, how do we render them with different information ?

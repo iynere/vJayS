@@ -1,4 +1,3 @@
-import store from 'store'
 import {RECEIVE_LEFT, receiveQueue, fetchQueue, addToQueue, removeFromQueue} from '../utils/queue'
 
 // REDUCER
