@@ -7,6 +7,9 @@ import {fetchQueue} from 'APP/app/utils/queue'
 import store from 'APP/app/store'
 import Output from 'APP/app/containers/Output'
 import {Root} from 'APP/app/containers/Root'
+import LiveApp from './components/LiveApp'
+import Controller from './components/Controller'
+
 
 const socket = io(window.location.origin)
 
@@ -24,6 +27,8 @@ render (
     <Router history={browserHistory}>
       <Route path="/" component={Root} onEnter={onRootEnter} />
       <Route path="/output" component={Output} />
+      <Route path="/live" component={LiveApp} />
+      <Route path="/controller" component={Controller}/>
     </Router>
   </Provider>,
   document.getElementById('main')

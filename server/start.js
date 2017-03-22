@@ -81,10 +81,8 @@ if (module === require.main) {
   )
 
   var io = socketio(server)
-
-  io.on('connection', clientSocket => {
-    console.log("A client has connected!")
-  })
+  require('./sockets/controller')(io);
+  require('./sockets/mobile')(io);
 }
 
 

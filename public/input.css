@@ -75,3 +75,43 @@
   border: none;
   margin-top: 0px;
 }*/
+
+/*P5 and effects*/
+#p5parent{
+  width:800px;
+  height: 800px;
+  opacity:.5;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+#p6parent{
+  width:800px;
+  height: 800px;
+  opacity:.5;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+#p7parent{
+  width:800px;
+  height: 800px;
+  opacity:.9;
+  position: absolute;
+  top:0;
+  left:0;
+}
+
+.mainScreen{
+  position: absolute;
+  padding-right: 0;
+  padding-left: 0;
+  margin-top: -5px;
+  margin-right: 5px;
+  margin-left: 5px;
+  background-color:green;
+}
+
+/*---P5 and effects---*/
