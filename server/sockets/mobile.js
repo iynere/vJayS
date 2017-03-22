@@ -4,5 +4,10 @@ module.exports = function(io) {
       mobileSocket.on('mouse_position', (data)=>{
         mobileSocket.broadcast.emit('sendMousePostoMain', data)
       })
+
+      mobileSocket.on('getInterface', ()=>{
+        console.log("mobile asked to get interface");
+        mobileSocket.broadcast.emit('getCommandType')
+      })
     });
 };

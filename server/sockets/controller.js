@@ -5,22 +5,34 @@ module.exports = function(io) {
         controllerSocket.broadcast.emit('clearCanvas')
       })
 
-      controllerSocket.on('ellipseButtonClicked', ()=>{
+      controllerSocket.on('ellipseButtonClicked', (commandType)=>{
         controllerSocket.broadcast.emit('drawEllipse')
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
-      controllerSocket.on('clickedColorEllipse', ()=>{
+      controllerSocket.on('clickedColorEllipse', (commandType)=>{
         controllerSocket.broadcast.emit('drawColorEllipse')
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
-      controllerSocket.on('clickedWhiteEllipse', ()=> {
+      controllerSocket.on('clickedWhiteEllipse', (commandType)=> {
         controllerSocket.broadcast.emit('drawWhiteEllipse')
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
-      controllerSocket.on('clickedSnake', ()=> {
+      controllerSocket.on('clickedSnake', (commandType)=> {
         controllerSocket.broadcast.emit('drawSnake')
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
+      controllerSocket.on('clickedEmoticons', (commandType)=> {
+        controllerSocket.broadcast.emit('drawEmoticons')
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
+      })
+
+      controllerSocket.on('sendCommand', (commandType)=> {
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
+      })
 
 
     });
