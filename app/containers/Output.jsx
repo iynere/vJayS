@@ -1,18 +1,36 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
-import EffectScreen from '../components/EffectScreen'
+import EffectScreen from './EffectScreen'
 
 var socket = io(window.location.origin)
 
 class Output extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      videoLeft: {},
+      videoRight: {}
+    }
   }
   
   componentDidMount() {
     socket.on('connect', () => {
       console.log('output socket is live!')
+    })
+    
+    socket.on('sendVideoLeftToOutput', videoLeft => {
+      console.log('LEFT: ', videoLeft)
+      this.setState({
+        videoLeft
+      })
+    })
+    
+    socket.on('sendVideoRightToOutput', videoRight => {
+      console.log('RIGHT: ', videoRight)
+      this.setState({
+        videoRight
+      })
     })
   }
   
@@ -41,15 +59,16 @@ class Output extends Component {
         <div className="youtube1">
           <YouTube 
             opts={playerOptions}
-            videoId='LOpRj927vRc'
+            videoId={this.state.videoLeft ? this.state.videoLeft.videoId : ''}
           />
         </div>
         <div className="youtube2">
           <YouTube 
             opts={playerOptions}
-            videoId='v5kRrLmGJho'
+            videoId={this.state.videoRight ? this.state.videoRight.videoId : ''}
           />
         </div>
+        {<EffectScreen />}
       </div>
     )
   }

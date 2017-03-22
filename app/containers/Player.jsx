@@ -8,6 +8,18 @@ class Player extends Component {
   constructor(props) {
     super(props)
   }
+  
+  componentDidMount() {
+    let videoToLoad = this.props.queue[0]
+    
+    socket.on('connect', () => {
+      console.log('player socket is here!')
+    })
+    
+    // if (videoToLoad) {
+    //  socket.emit(`playerMounted${this.props.direction}`, videoToLoad)
+    // }
+  }
 
   render() {
     const playerOptions = {
@@ -29,14 +41,19 @@ class Player extends Component {
     
     return (
       <YouTube
-        videoId={this.props.queue.length ? this.props.queue[0].id.videoId : null}
+        videoId={this.props.queue.length ? this.props.queue[0].id.videoId : ''}
         opts={playerOptions}
         onReady={event => {
-          console.log('VIDEO READY: ',event.target)
-          socket.emit(this.props.direction == 'left' ? 'leftVideoReady' : 'rightVideoReady')
-        }}
-        onStateChange={event => {
-          console.log('VIDEO STATE CHANGE: ',event.target)
+          const videoEvent = {
+            videoId: this.props.queue[0].id.videoId, 
+            pauseVideo: event.target.pauseVideo,
+            playVideo: event.target.playVideo,
+            seekTo: event.target.seekTo,
+            setPlaybackRate: event.target.setPlaybackRate
+          }
+          
+          console.log(event.target)
+          socket.emit(`playerMounted${this.props.direction}`, videoEvent)
         }}
       />
     )   

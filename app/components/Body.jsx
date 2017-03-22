@@ -12,7 +12,7 @@ export const Body = () => (
         />
       </Grid.Column>
       <Grid.Column>
-        <Controller />
+        {<Controller />}
       </Grid.Column>
       <Grid.Column>
         <Deck 
