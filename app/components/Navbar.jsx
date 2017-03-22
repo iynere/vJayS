@@ -1,8 +1,8 @@
 import React from 'react'
 import {Menu, Button} from 'semantic-ui-react'
-import YouTubeSearch from 'APP/app/components/YouTubeSearch'
+import YouTubeSearch from 'APP/app/containers/YouTubeSearch'
 import store from 'APP/app/store'
-import LoginLogout from 'APP/app/components/LoginLogout'
+import LoginLogout from 'APP/app/containers/LoginLogout'
 import {addToQueue, fetchQueue, clearQueue} from 'APP/app/utils/queue'
 
 export const Navbar = () => {

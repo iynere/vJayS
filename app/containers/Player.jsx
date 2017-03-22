@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
 
+var socket = io(window.location.origin)
+
 class Player extends Component {
   constructor(props) {
     super(props)
@@ -12,7 +14,7 @@ class Player extends Component {
       // width: window.innerWidth - 30,
       // height: window.innerHeight - 130,
       playerVars: {
-        autoplay: 1,
+        autoplay: 0,
         cc_load_policy: 0,
         controls: 0,
         disablekb: 1,
@@ -31,6 +33,7 @@ class Player extends Component {
         opts={playerOptions}
         onReady={event => {
           console.log('VIDEO READY: ',event.target)
+          socket.emit(this.props.direction == 'left' ? 'leftVideoReady' : 'rightVideoReady')
         }}
         onStateChange={event => {
           console.log('VIDEO STATE CHANGE: ',event.target)
