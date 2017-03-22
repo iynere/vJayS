@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import { List } from 'semantic-ui-react';
 import SortableQueueItem from './SortableQueueItem';
-import './App.css';
 
 const listItemStyle = {
   maxWidth: "120px",
