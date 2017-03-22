@@ -25,7 +25,7 @@ class LiveApp extends Component {
       <div>
         <h4>Getting to the live app!!</h4>
         <h3>Command: {this.props.command}</h3>
-          <div id="p5parent" onTouchMove={this.handleTouchMove}></div>
+          <div className="touchPad"  onTouchMove={this.handleTouchMove}></div>
       </div>
     )
   }

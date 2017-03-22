@@ -3,7 +3,7 @@ var socket
 function sketch(p) {
   p.setup = setup
   function setup() {
-    var p5Canvas=p.createCanvas(600, 600, true);
+    var p5Canvas=p.createCanvas(window.innerWidth, window.innerHeight, true);
     p5Canvas.parent("p5parent");
 
     socket = io(window.location.origin)
@@ -27,7 +27,7 @@ function sketch(p) {
 function sketch2(p) {
   p.setup = setup
   function setup() {
-    var p5Canvas=p.createCanvas(600, 600, true);
+    var p5Canvas=p.createCanvas(window.innerWidth, window.innerHeight, true);
     p5Canvas.parent("p6parent");
 
     socket = io(window.location.origin)
@@ -64,7 +64,7 @@ function snakeSketch(p) {
   p.draw = draw
 
   function setup() {
-    var p5Canvas=p.createCanvas(600, 600, true);
+    var p5Canvas=p.createCanvas(window.innerWidth, window.innerHeight, true);
     p5Canvas.parent("p7parent");
 
     p.strokeWeight(9);

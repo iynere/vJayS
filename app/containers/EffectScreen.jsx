@@ -35,9 +35,6 @@ class EffectScreen extends Component {
 
     return (
       <div>
-        <h4>We're at the main screen!!</h4>
-        <div className="mainScreen">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/FdUj7KCO_G0" frameBorder="0" allowFullScreen></iframe>
           {
             this.state.sketchFunction === sketch ?
             <div id="p5parent" className="p5parents">
@@ -56,7 +53,6 @@ class EffectScreen extends Component {
               <P5Wrapper sketch={snakeSketch}/>
             </div> : null
           }
-        </div>
       </div>
     )
   }
