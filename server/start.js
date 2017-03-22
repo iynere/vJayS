@@ -83,6 +83,7 @@ if (module === require.main) {
   var io = socketio(server)
   require('./sockets/controller')(io);
   require('./sockets/mobile')(io);
+  require('./sockets/player')(io);
 }
 
 
