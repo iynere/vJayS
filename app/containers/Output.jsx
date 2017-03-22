@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
+import EffectScreen from '../components/EffectScreen'
 
 const Output = ({player, queue}) => {
-  
+
   const playerOptions = {
     width: window.innerWidth,
     height: window.innerHeight,
@@ -20,23 +21,22 @@ const Output = ({player, queue}) => {
       showInfo: 0
     }
   }
-  
+
   return (
     <div>
-      <div className="effects">
-      </div>
       <div className="youtube1">
-        <YouTube 
+        <YouTube
           opts={playerOptions}
           videoId='LOpRj927vRc'
         />
       </div>
       <div className="youtube2">
-        <YouTube 
+        <YouTube
           opts={playerOptions}
           videoId='v5kRrLmGJho'
         />
       </div>
+      <EffectScreen/>
     </div>
   )
 }

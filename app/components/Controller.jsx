@@ -51,7 +51,6 @@ class Controller extends Component {
 				<button onClick={this.handleColorButton}>Color Ellipse</button>
 					<button onClick={this.handleSnakeButton}>Snake</button>
         <button onClick={this.handleClearButton}>Clear</button>
-				<Link to="/mainscreen">to MainScreen</Link>
 		</div>
 		)
 	}
