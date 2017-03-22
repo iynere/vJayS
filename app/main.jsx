@@ -29,7 +29,6 @@ render (
       <Route path="/" component={Root} onEnter={onRootEnter} />
       <Route path="/output" component={Output} />
       <Route path="/live" component={LiveApp} />
-      <Route path="/effects" component={EffectScreen}/>
       <Route path="/controller" component={Controller}/>
     </Router>
   </Provider>,
