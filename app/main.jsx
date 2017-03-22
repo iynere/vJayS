@@ -7,6 +7,8 @@ import {fetchQueue} from 'APP/app/utils/queue'
 import store from 'APP/app/store'
 import Output from 'APP/app/containers/Output'
 import {Root} from 'APP/app/containers/Root'
+import {TapComponent} from 'APP/app/components/TapComponent'
+// import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const socket = io(window.location.origin)
 
@@ -24,7 +26,10 @@ render (
     <Router history={browserHistory}>
       <Route path="/" component={Root} onEnter={onRootEnter} />
       <Route path="/output" component={Output} />
+      <Route path="/TapComponent" component={TapComponent}/>
     </Router>
   </Provider>,
   document.getElementById('main')
 )
+
+// injectTapEventPlugin();
