@@ -8,7 +8,6 @@ import store from 'APP/app/store'
 import Output from 'APP/app/containers/Output'
 import {Root} from 'APP/app/containers/Root'
 import LiveApp from './components/LiveApp'
-import EffectScreen from './components/EffectScreen'
 import Controller from './components/Controller'
 
 
