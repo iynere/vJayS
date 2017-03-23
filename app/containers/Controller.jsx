@@ -53,7 +53,7 @@ class Controller extends Component {
   handleColorButton(){
     console.log("controller click color")
     this.props.handleSetCommand("color")
-    let commandType="touchpad"
+    let commandType="touchpadColor"
     socket.emit('clickedColorEllipse',commandType)
   }
 

@@ -4,17 +4,18 @@ module.exports = function(io) {
         controllerSocket.broadcast.emit('clearCanvas')
       })
 
+      controllerSocket.on('clickedWhiteEllipse', (commandType)=> {
+        // updates main output
+        controllerSocket.broadcast.emit('drawWhiteEllipse')
+        // updates mobile front end
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
+      })
+
       controllerSocket.on('clickedColorEllipse', (commandType)=>{
         controllerSocket.broadcast.emit('drawColorEllipse')
         controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
-      controllerSocket.on('clickedWhiteEllipse', (commandType)=> {
-        controllerSocket.broadcast.emit('drawWhiteEllipse')
-        console.log("clicking")
-        controllerSocket.broadcast.emit('TestingSocket')
-        controllerSocket.broadcast.emit('allowInteraction', commandType)
-      })
 
       controllerSocket.on('clickedEmoticons', (commandType)=> {
         controllerSocket.broadcast.emit('drawEmoticons')

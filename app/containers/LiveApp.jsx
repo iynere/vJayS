@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {sketch, sketch2} from '../sketches/sketchMobile'
+import P5Wrapper from 'react-p5-wrapper'
 import EmoticonButtons from '../components/EmoticonButtons'
 import TapComponent from '../components/TapComponent'
 import SliderComponent from '../components/SliderComponent'
@@ -26,10 +28,6 @@ class LiveApp extends Component {
       this.setState({interface: interaction})
     })
 
-    socket.on('TestingSocket', () => {
-      console.log("Testing socket")
-    })
-
     if(this.state.interface=== ""){
       socket.emit('getInterface')
     }
@@ -38,6 +36,7 @@ class LiveApp extends Component {
   }
 
   handleTouchMove(e){
+    console.log("Mouse is moving")
     e.preventDefault()
     let x, y
     x=e.touches[0].clientX
@@ -53,7 +52,21 @@ class LiveApp extends Component {
   render() {
     return (
       <div>
-          {this.state.interface === "touchpad" ?  <div className="touchPad"  onTouchMove={this.handleTouchMove}></div>: null}
+        {/*Refactor this*/}
+          {this.state.interface === "touchpad" ?  
+          <div className="touchPad"  onTouchMove={this.handleTouchMove}>
+            <div id="p5parent">
+              <h4>Shimmy with your touch screen</h4>
+              <P5Wrapper sketch={sketch}/>
+            </div>
+          </div> : null}
+          {/*this.state.interface === "touchpadColor" ?
+          <div className="touchPad"  onTouchMove={this.handleTouchMove}>
+            <div id="p5parent">
+              <h4>Shimmy with your touch screen COLOR</h4>
+              <P5Wrapper sketch={sketch2}/>
+            </div>
+          </div> : null*/}
           {this.state.interface === "emoticons" ? <EmoticonButtons handleEmojiClick={this.handleEmojiClick}/>: null}
           {this.state.interface === "tap" ? <TapComponent /> : null}
           {this.state.interface === "slider" ? <SliderComponent /> : null}
