@@ -80,7 +80,7 @@ input[type=range]
   To change css styles:
   http://danielstern.ca/range.css/#/ */
 }
-   
+
 /*.react-typeahead-container {
   border: 1px solid #024e6a;
   padding: 5px 8px;
@@ -140,7 +140,26 @@ input[type=range]
    width:100%;
    height:100%;
    opacity:1;
+   display:flex;
+   justify-content: space-around;
 }
+
+@keyframes emojiRain{
+  0% {
+      top:100vh;
+  }
+  100% {
+      top: 50vh;
+  }
+}
+
+.emojiAnimation{
+  position: relative;
+  animation-name: emojiRain;
+  animation-duration: 5s;
+  animation-timing-function: ease-in;
+}
+
 /*---P5 and effects---*/
 
 /*Emoji Buttons*/
