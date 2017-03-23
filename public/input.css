@@ -52,6 +52,35 @@
   margin: 10px auto;
 }
 
+.mobileComponent {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tapButton {
+  height: 500px;
+  width: 500px;
+  text-align: center;
+  font-size: 300%;
+/*    display: block;*/
+/*  height: 100vh;*/
+}
+
+
+input[type=range]
+{
+  width: 500px;
+  position: absolute;
+  top: 40%;
+  transform: rotate(270deg);
+  /*
+  To change css styles:
+  http://danielstern.ca/range.css/#/ */
+}
+   
 /*.react-typeahead-container {
   border: 1px solid #024e6a;
   padding: 5px 8px;
@@ -104,5 +133,39 @@
   left:0;
 }
 
-
+.emojiEffect{
+   position: absolute;
+   top:0;
+   left:0;
+   width:100%;
+   height:100%;
+   opacity:1;
+}
 /*---P5 and effects---*/
+
+/*Emoji Buttons*/
+.buttonsContainer{
+ display:flex;
+ width:100%;
+ height: 100vh;
+ background-color: lightblue;
+ justify-content: space-around;
+ padding: 30px;
+}
+
+.emojiButton{
+ display:flex;
+ width: 25em;
+ height: 25em;
+ background-color: lightgray;
+ border: 2px solid gray;
+ border-radius:50%;
+ justify-content: center;
+ align-items: center;
+}
+
+.buttonsContainer img{
+ width: 20em;
+ height: 20em;
+}
+/*---Emoji Buttons---*/

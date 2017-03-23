@@ -1,26 +1,28 @@
 var socket
 
 function sketch(p) {
-  p.setup = setup
-  function setup() {
-    var p5Canvas=p.createCanvas(window.innerWidth, window.innerHeight, true);
-    p5Canvas.parent("p5parent");
+    console.log("sketch running.....")
+    p.setup = setup
+    function setup() {
 
-    socket = io(window.location.origin)
-    socket.on('connect', () => {
-      console.log("~~sketch~MainScreen Socket~~~~~")
+      var p5Canvas=p.createCanvas(window.innerWidth, window.innerHeight, true);
+      p5Canvas.parent("p5parent");
 
-      socket.on('sendMousePostoMain', (data)=>{
-        console.log("main",data);
-        p.ellipse(data.x, data.y, 80, 80);
+      socket = io(window.location.origin)
+      socket.on('connect', () => {
+        console.log("~~sketch~MainScreen Socket~~~~~")
+
+        socket.on('sendMousePostoMain', (data)=>{
+          console.log("main",data);
+          p.ellipse(data.x, data.y, 80, 80);
+        })
+
+        socket.on('clearCanvas', ()=>{
+          console.log("clearing canvas");
+          p5Canvas.clear();
+        })
       })
-
-      socket.on('clearCanvas', ()=>{
-        console.log("clearing canvas");
-        p5Canvas.clear();
-      })
-    })
-  }
+    }
 }
 
 
@@ -113,6 +115,5 @@ function snakeSketch(p) {
 
 module.exports = {
   sketch,
-  sketch2,
-  snakeSketch
+  sketch2
 }

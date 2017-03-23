@@ -11,13 +11,32 @@ class Controller extends Component {
 
   constructor(){
     super()
+    this.commandType=this.commandType.bind(this)
     this.handleWhiteButton = this.handleWhiteButton.bind(this)
     this.handleColorButton = this.handleColorButton.bind(this)
-    this.handleSnakeButton = this.handleSnakeButton.bind(this)
+    this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
+    this.handleTapButton = this.handleTapButton.bind(this)
+    this.handleSliderButton = this.handleSliderButton.bind(this)
   }
 
   componentDidMount() {
+    socket.on('connect', () => {
+      console.log("~~~Getting the socket to work in this component!~~~~~")
 
+      //sends commandtype to mobile
+      socket.on('getCommandType', () => {
+        console.log("get emoticons", this.props.command)
+        socket.emit("sendCommand", this.commandType())
+      })
+    })
+  }
+
+  commandType(){ //needed for mobile initial loading
+    if(this.props.command === "emoticons"){
+      return "emoticons"
+    }
+
+    return "touchpad"
   }
 
   handleClearButton(){
@@ -27,19 +46,34 @@ class Controller extends Component {
   handleWhiteButton(){
     console.log("controller click white")
     this.props.handleSetCommand("white")
-    socket.emit('clickedWhiteEllipse')
+    let commandType="touchpad"
+    socket.emit('clickedWhiteEllipse', commandType)
   }
 
   handleColorButton(){
     console.log("controller click color")
     this.props.handleSetCommand("color")
-    socket.emit('clickedColorEllipse')
+    let commandType="touchpadColor"
+    socket.emit('clickedColorEllipse',commandType)
   }
 
-  handleSnakeButton(){
-    console.log("controller click snake")
-    this.props.handleSetCommand("snake")
-    socket.emit('clickedSnake')
+  handleEmoticonsButton(){
+    console.log("controller click emoticons")
+    this.props.handleSetCommand("emoticons")
+    let commandType="emoticons"
+    socket.emit('clickedEmoticons', commandType)
+  }
+
+  handleTapButton() {
+    this.props.handleSetCommand("tap")
+    let commandType="tap"
+    socket.emit('clickedTap', commandType)
+  }
+
+  handleSliderButton() {
+    this.props.handleSetCommand("slider")
+    let commandType="slider"
+    socket.emit('clickedSlider', commandType)
   }
 
   render() {
@@ -49,7 +83,9 @@ class Controller extends Component {
         <h4>Controllerrrr</h4>
         <button onClick={this.handleWhiteButton}>White Ellipse</button>
         <button onClick={this.handleColorButton}>Color Ellipse</button>
-          <button onClick={this.handleSnakeButton}>Snake</button>
+        <button onClick={this.handleEmoticonsButton}>Emoticons</button>
+        <button onClick={this.handleTapButton}>Tap</button>
+        <button onClick={this.handleSliderButton}>Slider</button>
         <button onClick={this.handleClearButton}>Clear</button>
     </div>
     )
