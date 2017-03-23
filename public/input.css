@@ -3,7 +3,7 @@
 .youtube1 {
   position: absolute;
   pointer-events: none;
-  opacity: .5;
+  opacity: 0.5;
   z-index: 1;
 }
 

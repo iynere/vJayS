@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 var socket = io(window.location.origin)

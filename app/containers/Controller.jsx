@@ -43,7 +43,7 @@ class Controller extends Component {
   }
 
   render() {
-    console.log("command current", this.props.command);
+    // console.log("command current", this.props.command);
     return (
       <div>
         <h4>Controllerrrr</h4>

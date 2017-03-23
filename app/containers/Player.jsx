@@ -6,17 +6,78 @@ var socket = io(window.location.origin)
 
 class Player extends Component {
   constructor(props) {
+    let Direction = props.direction
     super(props)
+    this.state = {
+      [`video${Direction}`]: {}
+    }
+    
+    this.reinitializeVideo = this.reinitializeVideo.bind(this)
+    this.handleVideoReady = this.handleVideoReady.bind(this)
+    this.handleVideoPlay = this.handleVideoPlay.bind(this)
+    this.handleVideoPause = this.handleVideoPause.bind(this)
+    this.handlePlaybackRateChange = this.handlePlaybackRateChange.bind(this)
+  }
+  
+  componentDidMount() {
+    let Direction = this.props.direction,
+      videoToEmit = this.props.queue[0] ? this.props.queue[0].id.videoId : ''
+  }
+  
+  handleVideoReady(event) {
+    this.reinitializeVideo(event)
+    let Direction = this.props.direction,
+      videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : ''
+    
+    event.target.playVideo()
+    setTimeout(() => {
+      event.target.pauseVideo()
+    }, 100)
+    // console.log('VIDEO THAT WE EMIT', videoToEmit)
+    socket.emit(`playerMounted${Direction}`, videoToEmit)
+  }
+  
+  handleVideoPlay(event) {
+    let Direction = this.props.direction,
+      newCueTime = event.target.getCurrentTime()
+    this.reinitializeVideo(event)
+    socket.emit(`playingVideo${Direction}`, newCueTime)
+  }
+  
+  handleVideoPause(event) {
+    let Direction = this.props.direction,
+      newCueTime = event.target.getCurrentTime()
+    this.reinitializeVideo(event)
+    socket.emit(`pausingVideo${Direction}`, newCueTime)
+  }
+  
+  handlePlaybackRateChange(event) {
+    let Direction = this.props.direction,
+      newRate = event.data
+    console.log(newRate)
+    this.reinitializeVideo(event)
+    socket.emit(`changingVideo${Direction}PlaybackRate`, newRate)
+  }
+  
+  reinitializeVideo(event) {
+    event.target.setPlaybackQuality('small')
+    let Direction = this.props.direction
+    // console.log(event.target)
+    
+    this.setState({
+      [`video${Direction}`]: event.target
+    })
   }
 
   render() {
-    const playerOptions = {
-      // width: window.innerWidth - 30,
+    let queue = this.props.queue,
+      playerOptions = {
+      width: window.innerWidth / 2,
       // height: window.innerHeight - 130,
       playerVars: {
-        autoplay: 0,
+        autoplay: 1,
         cc_load_policy: 0,
-        controls: 0,
+        controls: 1,
         disablekb: 1,
         enablejsapi: 1,
         fs: 0,
@@ -29,15 +90,13 @@ class Player extends Component {
     
     return (
       <YouTube
-        videoId={this.props.queue.length ? this.props.queue[0].id.videoId : null}
+        videoId={queue.length ? queue[0].id.videoId : ''}
         opts={playerOptions}
-        onReady={event => {
-          console.log('VIDEO READY: ',event.target)
-          socket.emit(this.props.direction == 'left' ? 'leftVideoReady' : 'rightVideoReady')
-        }}
-        onStateChange={event => {
-          console.log('VIDEO STATE CHANGE: ',event.target)
-        }}
+        onReady={this.handleVideoReady}
+        onPlay={this.handleVideoPlay}
+        onPause={this.handleVideoPause}
+        onPlaybackRateChange={this.handlePlaybackRateChange}
+        onStateChange={this.reinitializeVideo}
       />
     )   
   }
