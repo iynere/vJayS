@@ -26,6 +26,12 @@ module.exports = function(io) {
         controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
+      controllerSocket.on('clickedSlider', (commandType) => {
+        console.log("Slider was clicked!")
+        controllerSocket.broadcast.emit('drawSlider')
+        controllerSocket.broadcast.emit('allowInteraction', commandType)
+      })
+
       controllerSocket.on('sendCommand', (commandType)=> {
         controllerSocket.broadcast.emit('allowInteraction', commandType)
       })

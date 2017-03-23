@@ -4,6 +4,8 @@ import Script from 'react-load-script'
 import P5Wrapper from 'react-p5-wrapper'
 import {sketch, sketch2, snakeSketch} from '../sketches/sketch'
 import EmojiEffect from '../components/EmojiEffect'
+import TapEffect from '../components/TapEffect'
+import SliderEffect from '../components/SliderEffect'
 
 // from state: liveEffect
 var socket = io(window.location.origin)
@@ -13,7 +15,7 @@ class EffectScreen extends Component {
     super(props)
 
     this.state = {
-      sketchFunction: sketch
+      sketchFunction: sketch,
     }
   }
 
@@ -29,6 +31,16 @@ class EffectScreen extends Component {
     socket.on('drawEmoticons', () => {
       console.log("loading emoji screen")
       this.setState({sketchFunction: "emojiPoll"})
+    })
+
+    socket.on('drawTap', () => {
+      console.log("loading tap screen")
+      this.setState({sketchFunction: "tap"})
+    })
+
+    socket.on('drawSlider', () => {
+      console.log("loading slider screen")
+      this.setState({sketchFunction: "slider"})
     })
   }
 
@@ -52,6 +64,14 @@ class EffectScreen extends Component {
               this.state.sketchFunction === "emojiPoll" ?
             <EmojiEffect />
                : null
+          }
+          {
+            this.state.sketchFunction === "tap" ?
+            <TapEffect /> : null
+          }
+          {
+            this.state.sketchFunction === "slider" ?
+            <SliderEffect /> : null
           }
       </div>
     )

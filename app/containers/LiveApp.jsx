@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import EmoticonButtons from '../components/EmoticonButtons'
+import TapComponent from '../components/TapComponent'
+import SliderComponent from '../components/SliderComponent'
 
 var socket = io(window.location.origin)
 
@@ -53,7 +55,8 @@ class LiveApp extends Component {
       <div>
           {this.state.interface === "touchpad" ?  <div className="touchPad"  onTouchMove={this.handleTouchMove}></div>: null}
           {this.state.interface === "emoticons" ? <EmoticonButtons handleEmojiClick={this.handleEmojiClick}/>: null}
-
+          {this.state.interface === "tap" ? <TapComponent /> : null}
+          {this.state.interface === "slider" ? <SliderComponent /> : null}
       </div>
     )
   }

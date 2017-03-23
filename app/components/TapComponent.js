@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import { Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react'
 
 var socket = io(window.location.origin)
 
-export class TapComponent extends Component {
+export default class TapComponent extends Component {
   constructor() {
     super()
     
@@ -18,8 +17,6 @@ export class TapComponent extends Component {
 
   handleTouchStart(e) {
     e.preventDefault();
-    console.log("Touching the button!")
-    // this.setState({big: !this.state.big})
     this.state.color === "green" ? 
     this.setState({color: "purple"}) :
     this.setState({color: "green"})
@@ -29,7 +26,7 @@ export class TapComponent extends Component {
   render() {
     return (
       <div className="mobileComponent">
-        <Button basic circular className="tapButton" size="massive" onTouchStart={this.handleTouchStart}
+        <Button basic circular className="tapButton" size="massive" onClick={this.handleTouchStart}
           color={this.state.color}>
           T A P
         </Button>
@@ -38,10 +35,4 @@ export class TapComponent extends Component {
   }
 }
 
-
-// export const TapComponent = () => (
-//   <div>
-//     <h4>Tap Component!</h4>
-//   </div>
-// )
 

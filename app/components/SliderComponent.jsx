@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
-export class SliderComponent extends Component {
+const socket = io(window.location.origin)
+
+export default class SliderComponent extends Component {
 	constructor() {
 		super()
 
@@ -12,16 +14,17 @@ export class SliderComponent extends Component {
 		//Insert socket events here
 	}
 
-	handleChange() {
-		console.log("boop")
+	handleChange(event) {
+		socket.emit('movingSlider', event.target.value)
+		// does the slider have an event??
 	}
 
 	render() {
 		return(
 			<div className="mobileComponent">
-				{/*<EmojiPicker />*/}
 				<input className="slider" type="range" onChange={this.handleChange}/>
 			</div>
 		)
 	}
 }
+
