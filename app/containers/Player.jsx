@@ -6,16 +6,18 @@ var socket = io(window.location.origin)
 
 class Player extends Component {
 	constructor(props) {
+		let Direction = props.direction
 		super(props)
 		this.state = {
-			[`video${props.direction}`]: {}
+			[`video${Direction}`]: {}
 		}
 		
 		this.reinitializeVideo = this.reinitializeVideo.bind(this)
 	}
 	
 	componentDidMount() {
-		let videoToLoad = this.props.queue[0]
+		let Direction = this.props.direction,
+			videoToLoad = this.props.queue[0].id.videoId
 		
 		socket.on('connect', () => {
 			console.log('player socket is here!')
@@ -23,30 +25,25 @@ class Player extends Component {
 		
 		socket.on('outputReadyForPlayerVideos', () => {
 			
-			let videoToEmit = this.state[`video${this.props.direction}`]
+			let videoToEmit = videoToLoad
 			
-			socket.emit(`playerMounted${this.props.direction}`, videoToEmit)
+			socket.emit(`playerMounted${Direction}`, videoToEmit)
 		})
 	}
 	
 	reinitializeVideo(event) {
+		let Direction = this.props.direction
 		console.log(event.target)
 		
-		const videoEvent = {
-			videoId: this.props.queue[0].id.videoId, 
-			pauseVideo: event.target.pauseVideo,
-			playVideo: event.target.playVideo,
-			seekTo: event.target.seekTo,
-			setPlaybackRate: event.target.setPlaybackRate
-		}
-		
 		this.setState({
-			[`video${this.props.direction}`]: videoEvent
+			[`video${Direction}`]: event.target
 		})
 	}
 
 	render() {
-		const playerOptions = {
+		let Direction = this.props.direction,
+			queue = this.props.queue,
+			playerOptions = {
 			// width: window.innerWidth - 30,
 			// height: window.innerHeight - 130,
 			playerVars: {
@@ -65,14 +62,21 @@ class Player extends Component {
 		
 		return (
 			<YouTube
-				videoId={this.props.queue.length ? this.props.queue[0].id.videoId : ''}
+				videoId={queue.length ? queue[0].id.videoId : ''}
 				opts={playerOptions}
 				onReady={event => {
 					this.reinitializeVideo(event)
 					
-					let videoToEmit = this.state[`video${this.props.direction}`]
+					let videoToEmit = queue[0].id.videoId
 					
-					socket.emit(`playerMounted${this.props.direction}`, videoToEmit)
+					console.log('VIDEO THAT WE EMIT', videoToEmit)
+					
+					socket.emit(`playerMounted${Direction}`, videoToEmit)
+				}}
+				onPlay={event => {
+					this.reinitializeVideo(event)
+					
+					socket.emit(`playingVideo${Direction}`)
 				}}
 				onStateChange={this.reinitializeVideo}
 			/>
