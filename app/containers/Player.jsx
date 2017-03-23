@@ -20,7 +20,7 @@ class Player extends Component {
 			videoToLoad = this.props.queue[0].id.videoId
 		
 		socket.on('connect', () => {
-			console.log('player socket is here!')
+			// console.log('player socket is here!')
 		})
 		
 		socket.on('outputReadyForPlayerVideos', () => {
@@ -33,7 +33,7 @@ class Player extends Component {
 	
 	reinitializeVideo(event) {
 		let Direction = this.props.direction
-		console.log(event.target)
+		// console.log(event.target)
 		
 		this.setState({
 			[`video${Direction}`]: event.target
@@ -69,7 +69,7 @@ class Player extends Component {
 					
 					let videoToEmit = queue[0].id.videoId
 					
-					console.log('VIDEO THAT WE EMIT', videoToEmit)
+					// console.log('VIDEO THAT WE EMIT', videoToEmit)
 					
 					socket.emit(`playerMounted${Direction}`, videoToEmit)
 				}}
