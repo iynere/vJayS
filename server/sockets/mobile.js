@@ -14,6 +14,6 @@ module.exports = function(io) {
        console.log("emojiClicked", emoji);
        mobileSocket.broadcast.emit('drawEmoji', emoji)
      })
-    
+
     });
 };

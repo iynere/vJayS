@@ -21,12 +21,14 @@ class LiveApp extends Component {
   componentDidMount() {
     socket.on('allowInteraction', (interaction) => {
       console.log("changing to", interaction);
-      this.setState({interface: interaction})
+      if(this.state.interface !== interaction){
+        this.setState({interface: interaction})
+      }
     })
 
-    // if(this.state.interface=== ""){
-    //   socket.emit('getInterface')
-    // }
+    if(this.state.interface=== ""){
+      socket.emit('getInterface')
+    }
 
     this.handleTouchMove=this.handleTouchMove.bind(this)
   }
