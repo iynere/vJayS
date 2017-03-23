@@ -84,6 +84,7 @@ if (module === require.main) {
   require('./sockets/controller.js')(io);
   require('./sockets/mobile.js')(io);
   require('./sockets/player.js')(io);
+  require('./sockets/output.js')(io);
 }
 
 // This check on line 64 is only starting the server if this file is being run directly by Node, and not required by another file.
