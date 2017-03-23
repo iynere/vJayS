@@ -163,24 +163,31 @@ input[type=range]
 /*---P5 and effects---*/
 
 /*Emoji Buttons*/
+.emojiMobile{
+  width:100%;
+  height: 100vh;
+  color:lightblue;
+}
+
+.emojiMobile h1{
+  color:lightblue;
+  font-size:4em;
+}
+
 .buttonsContainer{
+  width:100%;
+  height:100%;
  display:flex;
- width:100%;
- height: 100vh;
- background-color: lightblue;
  justify-content: space-around;
  padding: 30px;
 }
 
 .emojiButton{
- display:flex;
  width: 25em;
  height: 25em;
- background-color: lightgray;
- border: 2px solid gray;
+ border: 5px solid lightblue;
  border-radius:50%;
- justify-content: center;
- align-items: center;
+ background-color:white;
 }
 
 .buttonsContainer img{
