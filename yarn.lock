@@ -3653,6 +3653,10 @@ react-load-script@^0.0.2:
   dependencies:
     react ">=0.14.2"
 
+react-ink@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/react-ink/-/react-ink-6.1.1.tgz#1910465d553f09565f9e061f70a9d5576786b2ee"
+
 react-overlays@^0.6.12:
   version "0.6.12"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.6.12.tgz#a079c750cc429d7db4c7474a95b4b54033e255c3"
@@ -3674,6 +3678,12 @@ react-prop-types@^0.4.0:
   resolved "https://registry.yarnpkg.com/react-prop-types/-/react-prop-types-0.4.0.tgz#f99b0bfb4006929c9af2051e7c1414a5c75b93d0"
   dependencies:
     warning "^3.0.0"
+
+react-rangeslider@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-rangeslider/-/react-rangeslider-2.0.1.tgz#e5b17c6677419198f593d3578dfa6cbf45bb96d2"
+  dependencies:
+    classnames "^2.2.3"
 
 react-redux@^4.4.5:
   version "4.4.6"

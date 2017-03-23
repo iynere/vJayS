@@ -35,7 +35,13 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-2']
         }
       }]
-    }]
+    }],
+    loaders: [
+        {
+            test: /\.json$/,
+            loader: "json-loader"
+        }
+    ]
   },
   plugins: devMode ? [
     new LiveReloadPlugin({

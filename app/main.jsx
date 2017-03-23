@@ -6,11 +6,11 @@ import {connect, Provider} from 'react-redux'
 import {fetchQueue} from 'APP/app/utils/queue'
 import store from 'APP/app/store'
 import Output from 'APP/app/containers/Output'
+
 import {Root} from 'APP/app/components/Root'
 import LiveApp from './containers/LiveApp'
 import EffectScreen from './containers/EffectScreen'
 import Controller from './containers/Controller'
-
 
 const socket = io(window.location.origin)
 
