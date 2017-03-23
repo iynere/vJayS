@@ -81,12 +81,11 @@ if (module === require.main) {
   )
 
   var io = socketio(server)
-  require('./sockets/controller')(io);
-  require('./sockets/mobile')(io);
+  require('./sockets/controller.js')(io);
+  require('./sockets/mobile.js')(io);
+  require('./sockets/player.js')(io);
+  require('./sockets/output.js')(io);
 }
-
-
-
 
 // This check on line 64 is only starting the server if this file is being run directly by Node, and not required by another file.
 // Bones does this for testing reasons. If we're running our app in development or production, we've run it directly from Node using 'npm start'.

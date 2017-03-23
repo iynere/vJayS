@@ -1,7 +1,6 @@
 module.exports = function(io) {
     io.on('connection', function(controllerSocket) {
-
-      controllerSocket.on('clearButtonClicked', (data)=>{
+      controllerSocket.on('clearButtonClicked', data => {
         controllerSocket.broadcast.emit('clearCanvas')
       })
 
@@ -17,11 +16,6 @@ module.exports = function(io) {
 
       controllerSocket.on('clickedWhiteEllipse', (commandType)=> {
         controllerSocket.broadcast.emit('drawWhiteEllipse')
-        controllerSocket.broadcast.emit('allowInteraction', commandType)
-      })
-
-      controllerSocket.on('clickedSnake', (commandType)=> {
-        controllerSocket.broadcast.emit('drawSnake')
         controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 

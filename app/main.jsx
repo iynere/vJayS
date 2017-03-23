@@ -6,11 +6,11 @@ import {connect, Provider} from 'react-redux'
 import {fetchQueue} from 'APP/app/utils/queue'
 import store from 'APP/app/store'
 import Output from 'APP/app/containers/Output'
-import {Root} from 'APP/app/containers/Root'
-import LiveApp from './components/LiveApp'
-import EffectScreen from './components/EffectScreen'
-import Controller from './components/Controller'
 
+import {Root} from 'APP/app/components/Root'
+import LiveApp from './containers/LiveApp'
+import EffectScreen from './containers/EffectScreen'
+import Controller from './containers/Controller'
 
 const socket = io(window.location.origin)
 
@@ -27,9 +27,9 @@ render (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Root} onEnter={onRootEnter} />
+      <Route path="/effects" component={EffectScreen} />
       <Route path="/output" component={Output} />
       <Route path="/live" component={LiveApp} />
-      <Route path="/effects" component={EffectScreen}/>
       <Route path="/controller" component={Controller}/>
     </Router>
   </Provider>,

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Container} from 'semantic-ui-react'
-import Player from '../components/Player'
-import Queue from '../components/Queue'
+import Player from '../containers/Player'
+import Queue from '../containers/Queue'
 
 export const Deck = props => (
   <Container>
