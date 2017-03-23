@@ -45,7 +45,7 @@ class LiveApp extends Component {
 
   handleEmojiClick(emoji){
     console.log("emoji clicked was", emoji)
-    socket.emit('emojiClicked', emoji)
+    // socket.emit('emojiClicked', emoji)
   }
 
   render() {
