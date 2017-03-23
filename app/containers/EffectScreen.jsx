@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import Script from 'react-load-script'
 import P5Wrapper from 'react-p5-wrapper'
 import {sketch, sketch2, snakeSketch} from '../sketches/sketch'
+import EmojiEffect from '../components/EmojiEffect'
 
 // from state: liveEffect
 var socket = io(window.location.origin)
@@ -25,9 +26,9 @@ class EffectScreen extends Component {
       this.setState({sketchFunction: sketch})
     })
 
-
-    socket.on('drawSnake', () => {
-      this.setState({sketchFunction: snakeSketch})
+    socket.on('drawEmoticons', () => {
+      console.log("loading emoji screen")
+      this.setState({sketchFunction: "emojiPoll"})
     })
   }
 
@@ -48,10 +49,9 @@ class EffectScreen extends Component {
             </div> : null
           }
           {
-            this.state.sketchFunction === snakeSketch ?
-            <div id="p7parent" className="p5parents">
-              <P5Wrapper sketch={snakeSketch}/>
-            </div> : null
+              this.state.sketchFunction === "emojiPoll" ?
+            <EmojiEffect />
+               : null
           }
       </div>
     )

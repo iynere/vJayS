@@ -69,7 +69,7 @@ class Output extends Component {
 						videoId={this.state.videoRight ? this.state.videoRight.videoId : ''}
 					/>
 				</div>
-				{<EffectScreen />}
+				<EffectScreen />
 			</div>
 		)
 	}
