@@ -29,8 +29,6 @@ export default class EffectScreen extends Component {
  drawEmoji(emoji){
    let url=this.getUrl(emoji);
 
-   console.log("url", url)
-
    var img=new Image(100,100);
    img.src=url;
 
