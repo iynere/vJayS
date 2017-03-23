@@ -146,10 +146,10 @@ input[type=range]
 
 @keyframes emojiRain{
   0% {
-      top:100vh;
+      top:100%;
   }
   100% {
-      top: 50vh;
+      top: 50%;
   }
 }
 
