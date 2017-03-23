@@ -13,7 +13,7 @@ export const receiveQueue = (queue, queueLeftOrRight) => ({
 // ACTION CREATORS
 export const fetchQueue = queueLeftOrRight => (dispatch, getState) => {
   dispatch(receiveQueue(localStore.get(queueLeftOrRight) || [], queueLeftOrRight))
-  console.log(`${queueLeftOrRight}:`, getState()[queueLeftOrRight])
+  // console.log(`${queueLeftOrRight}:`, getState()[queueLeftOrRight])
 }
 
 export const addToQueue = (video, queueLeftOrRight) => dispatch => {
