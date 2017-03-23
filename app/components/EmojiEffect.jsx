@@ -4,13 +4,16 @@ import React, { Component } from 'react'
 // from state: liveEffect
 var socket = io(window.location.origin)
 
-export default class EffectScreen extends Component {
+export default class EmojiEffect extends Component {
 
  componentDidMount(){
-  socket.on('drawEmoji', (emoji)=>{
-    console.log("draw emoji", emoji);
-    this.drawEmoji(emoji);
-  })
+  console.log("socket has listeners?", socket.hasListeners('drawEmoji'))
+  if(!socket.hasListeners('drawEmoji')){
+    socket.on('drawEmoji', (emoji)=>{
+      console.log("draw emoji", emoji);
+      this.drawEmoji(emoji);
+    })
+  }
 
  }
 
