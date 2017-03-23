@@ -8,12 +8,32 @@ module.exports = function(io) {
 			playerSocket.broadcast.emit('sendVideoRightToOutput', video)
 		})
 		
-		playerSocket.on('playingVideoLeft', () => {
-			playerSocket.broadcast.emit('playOutputVideoLeft')
+		playerSocket.on('playingVideoLeft', cueTime => {
+			playerSocket.broadcast.emit('playOutputVideoLeft', cueTime)
 		})
 		
-		playerSocket.on('playingVideoRight', () => {
-			playerSocket.broadcast.emit('playOutputVideoRight')
+		playerSocket.on('playingVideoRight', cueTime => {
+			playerSocket.broadcast.emit('playOutputVideoRight', cueTime)
+		})
+		
+		playerSocket.on('pausingVideoLeft', cueTime => {
+			playerSocket.broadcast.emit('pauseOutputVideoLeft', cueTime)
+		})
+		
+		playerSocket.on('pausingVideoRight', cueTime => {
+			playerSocket.broadcast.emit('pauseOutputVideoRight', cueTime)
+		})
+		
+		playerSocket.on('changingVideoLeftPlaybackRate', newRate => {
+			playerSocket.broadcast.emit('changeOutputVideoLeftPlaybackRate')
+		})
+		
+		playerSocket.on('changingVideoLeftPlaybackRate', newRate => {
+			playerSocket.broadcast.emit('changeOutputVideoRightPlaybackRate')
+		})
+		
+		playerSocket.on('clearVideos', () => {
+			playerSocket.broadcast.emit('clearOutputVideos')
 		})
 	})
 }

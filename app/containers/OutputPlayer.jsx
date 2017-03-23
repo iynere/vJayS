@@ -29,13 +29,32 @@ class OutputPlayer extends Component {
 			})
 		})
 		
-		socket.on(`playOutputVideo${Direction}`, () => {
+		socket.on(`playOutputVideo${Direction}`, newCueTime => {
 			// console.log('gettin here?')
+			this.state[`video${Direction}`].seekTo(newCueTime)
 			this.state[`video${Direction}`].playVideo()
+		})
+		
+		socket.on(`pauseOutputVideo${Direction}`, newCueTime => {
+			// console.log('gettin here?')
+			this.state[`video${Direction}`].seekTo(newCueTime)
+			this.state[`video${Direction}`].pauseVideo()
+		})
+		
+		socket.on(`changeOutputVideo${Direction}PlaybackRate`, newRate => {
+				this.state[`video${Direction}`].setPlaybackRate(newRate)
+		})
+		
+		socket.on('clearOutputVideos', () => {
+			this.setState({
+				[`video${Direction}Id`]: ''
+			})
 		})
 	}
 	
 	reinitializeVideo(event) {
+		event.target.setPlaybackQuality('small')
+		event.target.setVolume(0)
 		let Direction = this.props.direction
 		this.setState({
 			[`video${Direction}`]: event.target
