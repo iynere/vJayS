@@ -24,14 +24,10 @@ class LiveApp extends Component {
       this.setState({interface: interaction})
     })
 
-    socket.on('TestingSocket', () => {
-      console.log("Testing socket")
-    })
+    // if(this.state.interface=== ""){
+    //   socket.emit('getInterface')
+    // }
 
-    if(this.state.interface=== ""){
-      socket.emit('getInterface')
-    }
-    
     this.handleTouchMove=this.handleTouchMove.bind(this)
   }
 
@@ -45,7 +41,7 @@ class LiveApp extends Component {
 
   handleEmojiClick(emoji){
     console.log("emoji clicked was", emoji)
-    // socket.emit('emojiClicked', emoji)
+    socket.emit('emojiClicked', emoji)
   }
 
   render() {

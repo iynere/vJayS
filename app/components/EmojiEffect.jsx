@@ -7,14 +7,13 @@ var socket = io(window.location.origin)
 export default class EffectScreen extends Component {
 
  componentDidMount(){
-   socket.on('connect', () => {
-     console.log("~~sketch~MainScreen Emoji Socket~~~~~")
+   console.log("component mounted")
 
      socket.on('drawEmoji', (emoji)=>{
        console.log("draw emoji", emoji);
        this.drawEmoji(emoji);
      })
-   })
+
  }
 
  getUrl(emoji){

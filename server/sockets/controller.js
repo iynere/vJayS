@@ -11,8 +11,6 @@ module.exports = function(io) {
 
       controllerSocket.on('clickedWhiteEllipse', (commandType)=> {
         controllerSocket.broadcast.emit('drawWhiteEllipse')
-        console.log("clicking")
-        controllerSocket.broadcast.emit('TestingSocket')
         controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
