@@ -12,7 +12,7 @@ import LiveApp from './containers/LiveApp'
 import EffectScreen from './containers/EffectScreen'
 import Controller from './containers/Controller'
 
-import SaveSet from 'APP/app/components/SaveSet'
+import SaveSet from 'APP/app/containers/SaveSet'
 
 const socket = io(window.location.origin)
 

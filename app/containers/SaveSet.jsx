@@ -42,8 +42,8 @@ class SaveSet extends Component {
 	}
 }
 
-const mapStateToProps = () => {
-	return ({})
+const mapStateToProps = (state) => {
+	return ({}) //UserID
 }
 
 const mapDispatchToProps = (dispatch) => ({
