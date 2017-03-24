@@ -115,6 +115,5 @@ function snakeSketch(p) {
 
 module.exports = {
   sketch,
-  sketch2,
-  snakeSketch
+  sketch2
 }

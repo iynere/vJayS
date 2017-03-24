@@ -4,7 +4,7 @@ import {Deck} from './Deck'
 import Controller from '../containers/Controller'
 
 export const Body = () => (
-  <Grid columns='three' divided>
+  <Grid columns='two'>
     <Grid.Row>
       <Grid.Column>
         <Deck 
@@ -12,12 +12,14 @@ export const Body = () => (
         />
       </Grid.Column>
       <Grid.Column>
-        {<Controller />}
-      </Grid.Column>
-      <Grid.Column>
         <Deck 
           direction='Right'
         />
+      </Grid.Column>
+    </Grid.Row>
+    <Grid.Row>
+      <Grid.Column>
+        <Controller />
       </Grid.Column>
     </Grid.Row>
   </Grid>

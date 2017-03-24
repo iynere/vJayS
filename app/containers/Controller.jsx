@@ -16,6 +16,7 @@ class Controller extends Component {
     this.handleColorButton = this.handleColorButton.bind(this)
     this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
     this.handleTapButton = this.handleTapButton.bind(this)
+    this.handleSliderButton = this.handleSliderButton.bind(this)
   }
 
   componentDidMount() {
@@ -52,7 +53,7 @@ class Controller extends Component {
   handleColorButton(){
     console.log("controller click color")
     this.props.handleSetCommand("color")
-    let commandType="touchpad"
+    let commandType="touchpadColor"
     socket.emit('clickedColorEllipse',commandType)
   }
 
@@ -69,8 +70,14 @@ class Controller extends Component {
     socket.emit('clickedTap', commandType)
   }
 
+  handleSliderButton() {
+    this.props.handleSetCommand("slider")
+    let commandType="slider"
+    socket.emit('clickedSlider', commandType)
+  }
+
   render() {
-    console.log("command current", this.props.command);
+    // console.log("command current", this.props.command);
     return (
       <div>
         <h4>Controllerrrr</h4>
@@ -78,6 +85,7 @@ class Controller extends Component {
         <button onClick={this.handleColorButton}>Color Ellipse</button>
         <button onClick={this.handleEmoticonsButton}>Emoticons</button>
         <button onClick={this.handleTapButton}>Tap</button>
+        <button onClick={this.handleSliderButton}>Slider</button>
         <button onClick={this.handleClearButton}>Clear</button>
     </div>
     )

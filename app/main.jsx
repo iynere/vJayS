@@ -5,33 +5,62 @@ import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import {fetchQueue} from 'APP/app/utils/queue'
 import store from 'APP/app/store'
+<<<<<<< HEAD
 import Output from 'APP/app/containers/Output'
-
+import {Root} from 'APP/app/containers/Root'
+import {TapComponent} from 'APP/app/components/TapComponent'
+// import injectTapEventPlugin from 'react-tap-event-plugin';
+=======
+import localStore from 'store'
+import {Output} from 'APP/app/components/Output'
 import {Root} from 'APP/app/components/Root'
 import LiveApp from './containers/LiveApp'
 import EffectScreen from './containers/EffectScreen'
 import Controller from './containers/Controller'
+>>>>>>> 2db66a71f65b977c106674055ce8d4eae3e4dcbd
 
 const socket = io(window.location.origin)
 
 socket.on('connect', () => {
-  console.log("*******I have connected to the server!*****")
+	console.log("*******I have connected to the server!*****")
+})
+
+// fetch videos for output screen as soon as possible
+socket.on('outputReadyForPlayerVideos', () => {
+	let queueLeft = localStore.get('queueLeft'),
+		queueRight = localStore.get('queueRight')
+	
+	socket.emit(`playerMountedLeft`, queueLeft[0].id.videoId)
+	socket.emit(`playerMountedRight`, queueRight[0].id.videoId)
 })
 
 const onRootEnter = () => {
-  store.dispatch(fetchQueue('queueLeft'))
-  store.dispatch(fetchQueue('queueRight'))
+	store.dispatch(fetchQueue('queueLeft'))
+	store.dispatch(fetchQueue('queueRight'))
 }
 
 render (
+<<<<<<< HEAD
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Root} onEnter={onRootEnter} />
-      <Route path="/effects" component={EffectScreen} />
       <Route path="/output" component={Output} />
-      <Route path="/live" component={LiveApp} />
-      <Route path="/controller" component={Controller}/>
+      <Route path="/TapComponent" component={TapComponent}/>
     </Router>
   </Provider>,
   document.getElementById('main')
+=======
+	<Provider store={store}>
+		<Router history={browserHistory}>
+			<Route path="/" component={Root} onEnter={onRootEnter} />
+			<Route path="/effects" component={EffectScreen} />
+			<Route path="/output" component={Output} />
+			<Route path="/live" component={LiveApp} />
+			<Route path="/controller" component={Controller}/>
+		</Router>
+	</Provider>,
+	document.getElementById('main')
+>>>>>>> 2db66a71f65b977c106674055ce8d4eae3e4dcbd
 )
+
+// injectTapEventPlugin();

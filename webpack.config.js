@@ -36,16 +36,19 @@ module.exports = {
         }
       }]
     }],
+<<<<<<< HEAD
+=======
     loaders: [
         {
             test: /\.json$/,
             loader: "json-loader"
         }
     ]
+>>>>>>> 2db66a71f65b977c106674055ce8d4eae3e4dcbd
   },
   plugins: devMode ? [
     new LiveReloadPlugin({
       appendScriptTag: true
-    })
-  ] : []
+    }), 
+  ] : [],
 };

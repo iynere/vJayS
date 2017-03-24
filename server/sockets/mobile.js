@@ -14,5 +14,15 @@ module.exports = function(io) {
        mobileSocket.broadcast.emit('drawEmoji', emoji)
      })
 
+      mobileSocket.on('tappingScreen', ()=>{
+       console.log("screen tap getting to mobile server");
+       mobileSocket.broadcast.emit('updateTapValue')
+     })
+    
+    mobileSocket.on('movingSlider', (newValue)=>{
+       console.log("moving slider on mobile phone");
+       mobileSocket.broadcast.emit('updateSliderValue', newValue)
+     })
+
     });
 };
