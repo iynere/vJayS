@@ -4,17 +4,17 @@ import React, { Component } from 'react'
 // from state: liveEffect
 var socket = io(window.location.origin)
 
-export default class EffectScreen extends Component {
+export default class EmojiEffect extends Component {
 
  componentDidMount(){
-   socket.on('connect', () => {
-     console.log("~~sketch~MainScreen Emoji Socket~~~~~")
+  console.log("socket has listeners?", socket.hasListeners('drawEmoji'))
+  if(!socket.hasListeners('drawEmoji')){
+    socket.on('drawEmoji', (emoji)=>{
+      console.log("draw emoji", emoji);
+      this.drawEmoji(emoji);
+    })
+  }
 
-     socket.on('drawEmoji', (emoji)=>{
-       console.log("draw emoji", emoji);
-       this.drawEmoji(emoji);
-     })
-   })
  }
 
  getUrl(emoji){
@@ -30,18 +30,36 @@ export default class EffectScreen extends Component {
  drawEmoji(emoji){
    let url=this.getUrl(emoji);
 
-   console.log("url", url)
-
+   var animationDiv=document.createElement('div')
+   animationDiv.setAttribute("class", "emojiAnimation")
    var img=new Image(100,100);
    img.src=url;
+   animationDiv.appendChild(img)
 
-   document.getElementById('emojiEffect').appendChild(img)
 
+   let columns=["col1", "col2", "col3", "col4", "col5", "col6", "col7", "col8", "col9", "col10"]
+   let column=columns[Math.floor(Math.random()*10)+1]
+   document.getElementById(column).appendChild(animationDiv)
+
+   setTimeout(()=>{
+     document.getElementById(column).removeChild(animationDiv)
+   }, 5000)
  }
 
  render(){
    return (
-     <div className="emojiEffect" id="emojiEffect"></div>
+     <div className="emojiEffect" id="emojiEffect">
+       <div id="col1"></div>
+       <div id="col2"></div>
+       <div id="col3"></div>
+       <div id="col4"></div>
+       <div id="col5"></div>
+       <div id="col6"></div>
+       <div id="col7"></div>
+       <div id="col8"></div>
+       <div id="col9"></div>
+       <div id="col10"></div>
+     </div>
    )
  }
 }

@@ -11,7 +11,6 @@ module.exports = function(io) {
       })
 
       mobileSocket.on('emojiClicked', (emoji)=>{
-       console.log("emojiClicked", emoji);
        mobileSocket.broadcast.emit('drawEmoji', emoji)
      })
 
