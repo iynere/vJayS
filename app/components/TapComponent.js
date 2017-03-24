@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Button } from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import { Button } from 'semantic-ui-react';
 
 var socket = io(window.location.origin)
 
@@ -34,5 +35,4 @@ export default class TapComponent extends Component {
     )
   }
 }
-
 
