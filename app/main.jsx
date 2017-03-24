@@ -12,7 +12,7 @@ import LiveApp from './containers/LiveApp'
 import EffectScreen from './containers/EffectScreen'
 import Controller from './containers/Controller'
 
-import SaveSet from 'APP/app/containers/SaveSet'
+import FetchSets from 'APP/app/components/FetchSets'
 
 const socket = io(window.location.origin)
 
@@ -43,7 +43,7 @@ render (
 			<Route path="/output" component={Output} />
 			<Route path="/live" component={LiveApp} />
 			<Route path="/controller" component={Controller}/>
-			<Route path="/set" component={SaveSet}/>
+			<Route path="/set" component={FetchSets}/>
 		</Router>
 	</Provider>,
 	document.getElementById('main')

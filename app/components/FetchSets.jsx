@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {saveSetToDb} from '../reducers/set'
+import {fetchAllSetsFromDb} from '../reducers/set'
 
-class FetchSets extends Component {
+export default class FetchSets extends Component {
+	constructor() {
+		super()
+	}
 
+	render() {
+		return(
+			<h4>BOOP FETCHING SETS</h4>
+		)
+	}
 }
