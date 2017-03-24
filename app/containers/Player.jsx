@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
 import {addToSet} from 'APP/app/reducers/set'
-import {removeFromQueue} from 'APP/app/utils/queue'
+import {removeFromQueue} from 'APP/app/reducers/queue'
 
 var socket = io(window.location.origin)
 
@@ -34,7 +34,7 @@ class Player extends Component {
     setTimeout(() => {
       event.target.pauseVideo()
       event.target.setPlaybackQuality('small')
-    }, 100)
+    }, 200)
     // console.log('VIDEO THAT WE EMIT', videoToEmit)
     socket.emit(`playerMounted${Direction}`, videoToEmit)
   }
@@ -127,7 +127,7 @@ class Player extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  queue: state[`queue${ownProps.direction}`],
+  queue: state.queue[`${ownProps.direction}`],
   set: state.set
 })
 

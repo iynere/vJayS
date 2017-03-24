@@ -29,7 +29,7 @@ class LoginLogout extends Component {
                   .then(res => {
                     console.log('playlists response: ',res.data)
                 }).catch(console.error)
-            }}>Import Playlists
+            }}>Load Youtube Playlists
           </Dropdown.Item>
           <Dropdown.Item>View Your Sets
           </Dropdown.Item>

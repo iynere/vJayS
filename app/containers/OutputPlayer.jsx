@@ -111,7 +111,7 @@ class OutputPlayer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  queue: state[`queue${ownProps.direction}`]
+  queue: state.queue[`${ownProps.direction}`]
 })
 
 export default connect(mapStateToProps)(OutputPlayer)
