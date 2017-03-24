@@ -133,6 +133,18 @@ passport.use(new (require('passport-local').Strategy) (
 
 auth.get('/whoami', (req, res) => res.send(req.user))
 
+auth.get('/users/:userId', (req, res, next) => {
+  OAuth.findOne({
+    where: {
+      user_id: req.params.userId
+    }
+  })
+  .then(userAuth => {
+    res.json(userAuth)
+  })
+  .catch(next)
+})
+
 // POST requests for local login:
 auth.post('/login/local', passport.authenticate('local', { successRedirect: '/', }))
 

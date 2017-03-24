@@ -21,13 +21,14 @@ class LoginLogout extends Component {
         <Dropdown.Menu>
           <Dropdown.Item
             onClick={()=>{
-
-                console.log("do axios here")
-                axios.get('https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true')
-                  .then((res) => {
-                    console.log("youtube axios", res)
-                  }).catch(console.error)
-
+              axios.get(`/api/auth/users/${this.props.user.id}`)
+                .then(res => {
+                  let accessToken = res.data.accessToken
+                  return axios.get(`https://www.googleapis.com/youtube/v3/playlists?access_token=${accessToken}&part=snippet&mine=true`)
+                  })
+                  .then(res => {
+                    console.log('playlists response: ',res.data)
+                }).catch(console.error)
             }}>Import Playlists
           </Dropdown.Item>
           <Dropdown.Item>View Your Sets
