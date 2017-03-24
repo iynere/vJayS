@@ -25,11 +25,11 @@ module.exports = function(io) {
     })
     
     playerSocket.on('changingVideoLeftPlaybackRate', newRate => {
-      playerSocket.broadcast.emit('changeOutputVideoLeftPlaybackRate')
+      playerSocket.broadcast.emit('changeOutputVideoLeftPlaybackRate', newRate)
     })
     
-    playerSocket.on('changingVideoLeftPlaybackRate', newRate => {
-      playerSocket.broadcast.emit('changeOutputVideoRightPlaybackRate')
+    playerSocket.on('changingVideoRightPlaybackRate', newRate => {
+      playerSocket.broadcast.emit('changeOutputVideoRightPlaybackRate', newRate)
     })
     
     playerSocket.on('clearVideos', () => {
