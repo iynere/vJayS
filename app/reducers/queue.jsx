@@ -55,6 +55,31 @@ export const clearQueue = queueLeftOrRight => dispatch => {
   dispatch(receiveQueue([], queueLeftOrRight))
 }
 
+export const loadYoutubePlaylist = playlistItems => dispatch =>{
+  localStore.set("queueLeft", [])
+  localStore.set("queueRight", [])
+
+  let queueLeft=[]
+  let queueRight=[]
+
+  playlistItems.forEach((item, index)=>{
+    let itemForQueue={
+      title: item.snippet.title,
+      thumbnail: item.snippet.thumbnails.default.url,
+      id:{
+        videoId: item.snippet.resourceId.videoId
+      }
+    }
+    index % 2 === 0 ? queueLeft.push(itemForQueue) : queueRight.push(itemForQueue)
+  })
+
+  localStore.set("queueLeft", queueLeft)
+  localStore.set("queueRight", queueRight)
+  dispatch(receiveQueue(queueLeft, 'queueLeft'))
+  dispatch(receiveQueue(queueRight, 'queueRight'))
+}
+
+
 export default reducer
 // move stuff around: combination of remove from queue and add to queue
 

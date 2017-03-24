@@ -34,7 +34,7 @@ class Player extends Component {
     setTimeout(() => {
       event.target.pauseVideo()
       event.target.setPlaybackQuality('small')
-    }, 200)
+    }, 2000)
     // console.log('VIDEO THAT WE EMIT', videoToEmit)
     socket.emit(`playerMounted${Direction}`, videoToEmit)
   }

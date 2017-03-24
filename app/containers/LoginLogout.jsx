@@ -5,6 +5,7 @@ import {Button, Dropdown, Menu} from 'semantic-ui-react'
 import {logout} from 'APP/app/reducers/auth'
 import {fetchPlaylists} from 'APP/app/reducers/playlists'
 import axios from 'axios'
+import {loadYoutubePlaylist} from 'APP/app/reducers/queue'
 
 class LoginLogout extends Component {
   constructor(props) {
@@ -21,13 +22,19 @@ class LoginLogout extends Component {
         <Dropdown.Menu>
           <Dropdown.Item
             onClick={()=>{
+              let accessToken;
               axios.get(`/api/auth/users/${this.props.user.id}`)
                 .then(res => {
-                  let accessToken = res.data.accessToken
+                  accessToken = res.data.accessToken
                   return axios.get(`https://www.googleapis.com/youtube/v3/playlists?access_token=${accessToken}&part=snippet&mine=true`)
-                  })
-                  .then(res => {
-                    console.log('playlists response: ',res.data)
+                })
+                .then(res => {
+                  console.log('playlists response: ',res.data)
+                  let playlistId= res.data.items[0].id
+                  return axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?access_token=${accessToken}&part=snippet&maxResults=50&playlistId=${playlistId}`)
+                }).then((res) => {
+                  console.log("playlist items??", res.data)
+                  this.props.loadYoutubePlaylist(res.data.items)
                 }).catch(console.error)
             }}>Load Youtube Playlists
           </Dropdown.Item>
@@ -67,4 +74,11 @@ const mapStateToProps = ({auth}) => ({
   user: auth
 })
 
-export default connect(mapStateToProps, {logout, fetchPlaylists})(LoginLogout)
+const mapDispatchToProps = (dispatch) => ({
+  logout,
+  loadYoutubePlaylist: playlistItems => {
+    dispatch(loadYoutubePlaylist(playlistItems))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginLogout)
