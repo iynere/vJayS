@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import Typeahead from 'react-typeahead-component2';
 import JSONP from 'jsonp';
-import OptionsTemplate from './OptionsTemplate';
+import OptionsTemplate from '../components/OptionsTemplate';
 import YoutubeFinder from 'youtube-finder';
 
 const googleAutoSuggestURL = '//suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=';

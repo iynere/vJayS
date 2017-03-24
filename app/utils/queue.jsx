@@ -4,15 +4,16 @@ import localStore from 'store'
 export const RECEIVE_LEFT = 'RECEIVE_LEFT'
 export const RECEIVE_RIGHT = 'RECEIVE_RIGHT'
 
-// ACTION CREATOR
+// ACTION TYPES
 export const receiveQueue = (queue, queueLeftOrRight) => ({
   type: queueLeftOrRight === 'queueLeft' ? RECEIVE_LEFT : RECEIVE_RIGHT,
   [queueLeftOrRight]: queue
 })
 
+// ACTION CREATORS
 export const fetchQueue = queueLeftOrRight => (dispatch, getState) => {
   dispatch(receiveQueue(localStore.get(queueLeftOrRight) || [], queueLeftOrRight))
-  console.log(`${queueLeftOrRight}:`, getState()[queueLeftOrRight])
+  // console.log(`${queueLeftOrRight}:`, getState()[queueLeftOrRight])
 }
 
 export const addToQueue = (video, queueLeftOrRight) => dispatch => {
@@ -39,7 +40,7 @@ export const removeFromQueue = (videoIdx, queueLeftOrRight) => dispatch => {
 
 export const clearQueue = queueLeftOrRight => dispatch => {
   localStore.set(queueLeftOrRight, [])
-  dispatch(fetchQueue(queueLeftOrRight))
+  dispatch(receiveQueue([], queueLeftOrRight))
 }
 
 // move stuff around: combination of remove from queue and add to queue
