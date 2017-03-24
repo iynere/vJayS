@@ -4,8 +4,8 @@ import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import {fetchQueue} from 'APP/app/utils/queue'
+import {fetchSetItems} from 'APP/app/reducers/set'
 import store from 'APP/app/store'
-import localStore from 'store'
 import {Output} from 'APP/app/components/Output'
 import {Root} from 'APP/app/components/Root'
 import LiveApp from './containers/LiveApp'
@@ -30,6 +30,7 @@ socket.on('connect', () => {
 const onRootEnter = () => {
   store.dispatch(fetchQueue('queueLeft'))
   store.dispatch(fetchQueue('queueRight'))
+  store.dispatch(fetchSetItems())
 }
 
 render (

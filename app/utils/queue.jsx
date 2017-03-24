@@ -11,7 +11,7 @@ export const receiveQueue = (queue, queueLeftOrRight) => ({
 })
 
 // ACTION CREATORS
-export const fetchQueue = queueLeftOrRight => (dispatch, getState) => {
+export const fetchQueue = queueLeftOrRight => dispatch => {
   dispatch(receiveQueue(localStore.get(queueLeftOrRight) || [], queueLeftOrRight))
   // console.log(`${queueLeftOrRight}:`, getState()[queueLeftOrRight])
 }
@@ -24,7 +24,7 @@ export const addToQueue = (video, queueLeftOrRight) => dispatch => {
   // set new queue
   localStore.set(queueLeftOrRight, queueToUpdate)
   // put new queue on state
-  dispatch(fetchQueue(queueLeftOrRight))
+  dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
 }
 
 export const removeFromQueue = (videoIdx, queueLeftOrRight) => dispatch => {
