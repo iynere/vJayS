@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
+import $ from 'jquery'
 
 var socket = io(window.location.origin)
 
@@ -12,18 +13,18 @@ class OutputPlayer extends Component {
       [`video${Direction}`]: {},
       [`video${Direction}Id`]: ''
     }
-    
+
     this.handleVideoReady = this.handleVideoReady.bind(this)
     this.reinitializeVideo = this.reinitializeVideo.bind(this)
   }
-  
+
   componentDidMount() {
     let Direction = this.props.direction
     socket.on('connect', () => {
       // console.log('output socket is live!')
       socket.emit('outputScreenMounted')
     })
-    
+
     socket.on(`sendVideo${Direction}ToOutput`, videoId => {
       // console.log(`${Direction}: `, videoId)
       this.setState({
@@ -31,37 +32,43 @@ class OutputPlayer extends Component {
       })
       //  console.log('gettin hre?')
     })
-    
+
     socket.on(`playOutputVideo${Direction}`, newCueTime => {
       // console.log('gettin here?')
       this.state[`video${Direction}`].seekTo(newCueTime)
       this.state[`video${Direction}`].playVideo()
     })
-    
+
     socket.on(`pauseOutputVideo${Direction}`, newCueTime => {
       // console.log('gettin here?')
       this.state[`video${Direction}`].pauseVideo()
     })
-    
+
     socket.on(`changeOutputVideo${Direction}PlaybackRate`, newRate => {
         console.log(newRate)
         this.state[`video${Direction}`].setPlaybackRate(newRate)
     })
-    
+
     socket.on('clearOutputVideos', () => {
       this.setState({
         [`video${Direction}Id`]: ''
       })
     })
+
+    socket.on('changeOutputOpacity', (opacity) => {
+      $(document).ready(() => {
+        $('.youtube1').css('opacity', opacity)
+      })
+    })
   }
-  
+
   handleVideoReady(event) {
     this.reinitializeVideo(event)
     setTimeout(() => {
       event.target.pauseVideo()
     }, 100)
   }
-  
+
   reinitializeVideo(event) {
     event.target.setPlaybackQuality('small')
     event.target.setVolume(0)
@@ -70,7 +77,7 @@ class OutputPlayer extends Component {
       [`video${Direction}`]: event.target
     })
   }
-  
+
   render() {
     let Direction = this.props.direction,
       queue = this.props.queue
@@ -91,9 +98,9 @@ class OutputPlayer extends Component {
         showInfo: 0
       }
     }
-    
+
     return (
-      <YouTube 
+      <YouTube
         videoId={queue.length ? queue[0].id.videoId : ''}
         opts={playerOptions}
         onReady={this.handleVideoReady}

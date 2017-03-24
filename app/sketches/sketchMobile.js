@@ -7,7 +7,7 @@ function sketch(p) {
     }
 
     function draw() {
-      console.log("MOUSE EVENT:", p.mouseX, p.mouseY)
+      // console.log("MOUSE EVENT:", p.mouseX, p.mouseY)
       p.ellipse(p.mouseX, p.mouseY, 80, 80);
     }
 }

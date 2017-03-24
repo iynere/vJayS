@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {setCommand} from '../reducers/command'
 import {Link} from 'react-router'
+import SliderComponent from 'APP/app/components/SliderComponent'
+
 
 // from state: liveEffect
 
@@ -17,6 +19,7 @@ class Controller extends Component {
     this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
     this.handleTapButton = this.handleTapButton.bind(this)
     this.handleSliderButton = this.handleSliderButton.bind(this)
+    this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
   }
 
   componentDidMount() {
@@ -76,6 +79,10 @@ class Controller extends Component {
     socket.emit('clickedSlider', commandType)
   }
 
+  handleOpacitySlider(event){
+    socket.emit('changeOpacity', event.target.value/100)
+  }
+
   render() {
     // console.log("command current", this.props.command);
     return (
@@ -87,7 +94,10 @@ class Controller extends Component {
         <button onClick={this.handleTapButton}>Tap</button>
         <button onClick={this.handleSliderButton}>Slider</button>
         <button onClick={this.handleClearButton}>Clear</button>
-    </div>
+        <div>
+          <SliderComponent handleChange={this.handleOpacitySlider}/>
+        </div>
+  </div>
     )
   }
 }
