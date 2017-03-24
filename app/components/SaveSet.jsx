@@ -1,47 +1,56 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {saveSetToDB} from '../reducers/' /*SAVING SET REDUCER HERE*/
-import { Button } from 'semantic-ui-react'
-
-// localStorage.set = [{title: "Sky Ferreira - Everything Is Embarrassing (Official Video)", videoId: "rEamE0MYPkg", thumbnailUrl: "https://i.ytimg.com/vi/rEamE0MYPkg/default.jpg", direction: "Left"}]
+import {saveSetToDb} from '../reducers/set'
+import { Button, Form } from 'semantic-ui-react'
+import localStore from 'store'
 
 class SaveSet extends Component {
 	constructor() {
 		super()
 
-		this.handleClick = this.handleClick.bind(this)
+		this.state={
+			setName: ""
+		}
+
+		this.handleChange = this.handleChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
-	handleClick() {
-		this.props.saveSetToDB(localStorage.set)
+	handleChange(event){
+		this.setState({setName: event.target.value})
+	}
+
+	handleSubmit(event) {
+		event.preventDefault()
+		const videos = localStore.get('set')
+		const setToSave = {"name": this.state.setName, "videos": videos}
+		this.props.saveSetToDb(setToSave)
 	}
 
 	render() {
 		return (
 			<div>
-				<Button onclick={this.handleClick}>Save Set</Button>
+				<Form onSubmit={this.handleSubmit}>
+					<Form.Field>
+						<input type="text" placeholder="Set Name" onChange={this.handleChange} value={this.state.setName}/>
+					</Form.Field>
+				{/*You can move button into form field if you'd like*/}
+					<Button type='submit'>Save Set</Button>
+				</Form>
 			</div>
 		)
 	}
 }
 
-mapStateToProps = () => {
-
+const mapStateToProps = () => {
+	return ({})
 }
 
-mapDispatchToProps = (dispatch) => ({
-	saveSetToDB: (setFromLocalStorage) => {dispatch(saveSetToDB(setFromLocalStorage))}
+const mapDispatchToProps = (dispatch) => ({
+	saveSetToDb: (set) => { dispatch(saveSetToDb(set)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveSet)
-
-/* THUNK
-// export const saveSetToDB = (setFromLocalStorage) => {
-// 	axios.post('/api/sets')
-		.then(()=> )
-// }
-
-*/
 
 
 
