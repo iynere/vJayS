@@ -5,19 +5,14 @@ import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import {fetchQueue} from 'APP/app/utils/queue'
 import store from 'APP/app/store'
-<<<<<<< HEAD
-import Output from 'APP/app/containers/Output'
-import {Root} from 'APP/app/containers/Root'
-import {TapComponent} from 'APP/app/components/TapComponent'
 // import injectTapEventPlugin from 'react-tap-event-plugin';
-=======
+
 import localStore from 'store'
 import {Output} from 'APP/app/components/Output'
 import {Root} from 'APP/app/components/Root'
 import LiveApp from './containers/LiveApp'
 import EffectScreen from './containers/EffectScreen'
 import Controller from './containers/Controller'
->>>>>>> 2db66a71f65b977c106674055ce8d4eae3e4dcbd
 
 const socket = io(window.location.origin)
 
@@ -40,16 +35,6 @@ const onRootEnter = () => {
 }
 
 render (
-<<<<<<< HEAD
-  <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={Root} onEnter={onRootEnter} />
-      <Route path="/output" component={Output} />
-      <Route path="/TapComponent" component={TapComponent}/>
-    </Router>
-  </Provider>,
-  document.getElementById('main')
-=======
 	<Provider store={store}>
 		<Router history={browserHistory}>
 			<Route path="/" component={Root} onEnter={onRootEnter} />
@@ -60,7 +45,6 @@ render (
 		</Router>
 	</Provider>,
 	document.getElementById('main')
->>>>>>> 2db66a71f65b977c106674055ce8d4eae3e4dcbd
 )
 
 // injectTapEventPlugin();
