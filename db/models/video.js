@@ -9,7 +9,7 @@ const Video = db.define('videos', {
 	title: Sequelize.STRING,
 	thumbnail: Sequelize.STRING,
 	videoURL: Sequelize.STRING,
-	direction: Sequelize.ENUM('L', 'R'),
+	direction: Sequelize.ENUM('Left', 'Right'),
 })
 
 module.exports = Video
