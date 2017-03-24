@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   queueRight: require('./queueRight').default,
 //player: require('./player'), // for both players
 //queue: require('./queue'), // for both queues
-//set: require('./set'),
+  set: require('./set').default,
 //effects: ?
   command: require('./command').default
 })

@@ -75,7 +75,7 @@ input[type=range]
   width: 500px;
   position: absolute;
   top: 40%;
-  transform: rotate(270deg);
+  /*transform: rotate(270deg);*/
   /*
   To change css styles:
   http://danielstern.ca/range.css/#/ */
