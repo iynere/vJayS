@@ -2,19 +2,20 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
 import {addToSet} from 'APP/app/reducers/set'
+import {savePlayer} from 'APP/app/reducers/player'
 import {removeFromQueue} from 'APP/app/reducers/queue'
 
 var socket = io(window.location.origin)
 
 class Player extends Component {
   constructor(props) {
-    let Direction = props.direction
     super(props)
+    let Direction = props.direction
     this.state = {
       [`video${Direction}`]: {}
     }
 
-    // this.reinitializeVideo = this.reinitializeVideo.bind(this)
+    this.handlePlayerStateChange = this.handlePlayerStateChange.bind(this)
     this.handleVideoReady = this.handleVideoReady.bind(this)
     this.handleVideoPlay = this.handleVideoPlay.bind(this)
     this.handleVideoPause = this.handleVideoPause.bind(this)
@@ -23,52 +24,55 @@ class Player extends Component {
   }
 
   componentDidMount() {
-    let Direction = this.props.direction,
-      videoToEmit = this.props.queue[0] ? this.props.queue[0].id.videoId : ''
+    // console.log('PROPS', this.props)
   }
 
   handleVideoReady(event) {
     let Direction = this.props.direction,
+      cueTime = event.target.getCurrentTime(),
       videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : ''
+      
+    // this.setState({
+    //  [`video${Direction}`]: event.target
+    // })
+      
+    socket.on('outputReadyForPlayerVideos', () => {
+      
+      socket.emit(`sendCueTimeToOutput${Direction}`, cueTime,)
+    })
+    
+    
 
     setTimeout(() => {
       event.target.pauseVideo()
       event.target.setPlaybackQuality('small')
-    }, 2000)
-    // console.log('VIDEO THAT WE EMIT', videoToEmit)
+    }, 100)
     socket.emit(`playerMounted${Direction}`, videoToEmit)
   }
 
   handleVideoPlay(event) {
     let Direction = this.props.direction,
-      newCueTime = event.target.getCurrentTime()
-    // this.reinitializeVideo(event)
-    socket.emit(`playingVideo${Direction}`, newCueTime)
-    // console.log('video? ',event.target)
-    // this.setState({
-    //  [`video${Direction}`]: event.target
-    // })
+      cueTime = event.target.getCurrentTime()
+    socket.emit(`playingVideo${Direction}`, cueTime)
   }
 
   handleVideoPause(event) {
     let Direction = this.props.direction,
       newCueTime = event.target.getCurrentTime()
-    // this.reinitializeVideo(event)
     socket.emit(`pausingVideo${Direction}`, newCueTime)
+    // this.props.savePlayer(Object.assign({}, event), `player${Direction}`)
   }
 
   handlePlaybackRateChange(event) {
     let Direction = this.props.direction,
       newRate = event.data
-    console.log(newRate)
-    // this.reinitializeVideo(event)
+      
+    // console.log(newRate)
+    
     socket.emit(`changingVideo${Direction}PlaybackRate`, newRate)
   }
 
   handleVideoEnd() {
-
-    // 1. save just the info we need to a set on localStorage:
-    // videoId, title, thumbnailUrl, direction
     let video = this.state[`video${this.props.direction}`],
       setItem = {
         direction: this.props.direction,
@@ -76,22 +80,25 @@ class Player extends Component {
         title: this.props.queue[0].snippet.title,
         thumbnailUrl: this.props.queue[0].snippet.thumbnails.default.url
       }
-    console.log(this.state)
-    console.log('SET ITEM: ', setItem)
+    
+    // console.log(this.state)
+    // console.log('SET ITEM: ', setItem)
+    // console.log("props direction", this.props.direction)
+    
     this.props.addToSet(setItem)
-    console.log("props direction", this.props.direction)
     this.props.removeFromQueue(0, `queue${this.props.direction}`)
   }
 
-  // reinitializeVideo(event) {
-  //  event.target.setPlaybackQuality('small')
-  //  let Direction = this.props.direction
-  //  // console.log(event.target)
-
-  //  this.setState({
-  //    [`video${Direction}`]: event.target
-  //  })
-  // }
+  handlePlayerStateChange(event) {
+    let Direction = this.props.direction
+    
+    // switch (event.data) {
+    //  case -1:
+    //    this.props.savePlayer(event.target, `player${Direction}`)
+    // }
+    
+    console.log('reinitializing ',event)
+  }
 
   render() {
     let queue = this.props.queue,
@@ -114,19 +121,21 @@ class Player extends Component {
 
     return (
       <YouTube
-        videoId={queue.length ? queue[0].id.videoId : ''}
+        videoId={queue && queue.length ? queue[0].id.videoId : ''}
         opts={playerOptions}
         onReady={this.handleVideoReady}
         onPlay={this.handleVideoPlay}
         onPause={this.handleVideoPause}
         onPlaybackRateChange={this.handlePlaybackRateChange}
         onEnd={this.handleVideoEnd}
+        onStateChange={this.handlePlayerStateChange}
       />
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
+  player: state.player[`${ownProps.direction}`],
   queue: state.queue[`${ownProps.direction}`],
   set: state.set
 })
@@ -137,6 +146,10 @@ const mapDispatchToProps = dispatch => ({
   },
   removeFromQueue: (videoId, direction) => {
     dispatch(removeFromQueue(videoId, direction))
+  },
+  savePlayer: (player, direction) => {
+    // console.log('SAVING PLAYER??!??!?', player, direction)
+    dispatch(savePlayer(player, direction))
   }
 })
 

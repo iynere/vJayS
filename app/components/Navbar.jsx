@@ -38,6 +38,7 @@ export const Navbar = () => {
           maxResults='5'
           placeHolder='search ->'
           callback={results => {
+            // console.log(results[0])
             store.dispatch(addToQueue(results[0], 'queueRight'))
           }}
         />

@@ -30,7 +30,7 @@ class LoginLogout extends Component {
                 })
                 .then(res => {
                   console.log('playlists response: ',res.data)
-                  let playlistId= res.data.items[0].id
+                  let playlistId = res.data.items[1].id
                   return axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?access_token=${accessToken}&part=snippet&maxResults=50&playlistId=${playlistId}`)
                 }).then((res) => {
                   console.log("playlist items??", res.data)
@@ -75,7 +75,9 @@ const mapStateToProps = ({auth}) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  logout,
+  logout: () => {
+    dispatch(logout())
+  },
   loadYoutubePlaylist: playlistItems => {
     dispatch(loadYoutubePlaylist(playlistItems))
   }

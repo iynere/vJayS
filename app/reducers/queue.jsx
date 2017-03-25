@@ -62,7 +62,7 @@ export const loadYoutubePlaylist = playlistItems => dispatch =>{
   let queueLeft=[]
   let queueRight=[]
 
-  playlistItems.forEach((item, index)=>{
+  playlistItems.filter(item => item.snippet.thumbnails /*filters out videos that have been deleted but are still in playlists*/).forEach((item, index)=>{
     let itemForQueue={
       title: item.snippet.title,
       thumbnail: item.snippet.thumbnails.default.url,

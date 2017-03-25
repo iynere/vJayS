@@ -15,15 +15,15 @@ class OutputPlayer extends Component {
     }
 
     this.handleVideoReady = this.handleVideoReady.bind(this)
+    this.handleVideoPlay = this.handleVideoPlay.bind(this)
     this.reinitializeVideo = this.reinitializeVideo.bind(this)
   }
 
   componentDidMount() {
+    console.log('propz',this.props)
+    
     let Direction = this.props.direction
-    socket.on('connect', () => {
-      // console.log('output socket is live!')
-      socket.emit('outputScreenMounted')
-    })
+    socket.emit('outputScreenMounted')  
 
     socket.on(`sendVideo${Direction}ToOutput`, videoId => {
       // console.log(`${Direction}: `, videoId)
@@ -60,18 +60,36 @@ class OutputPlayer extends Component {
         $('.youtube1').css('opacity', opacity)
       })
     })
+    
+    
   }
-
+  
   handleVideoReady(event) {
+    socket.on(`seekTo${this.props.direction}`, cueTime => {
+      event.target.seekTo(cueTime)
+    })
+    
     this.reinitializeVideo(event)
     setTimeout(() => {
+      event.target.setPlaybackQuality('small')
       event.target.pauseVideo()
+      event.target.setVolume(0)
+      event.target.setPlaybackRate(1)
     }, 100)
   }
 
+  handleVideoPlay(event) {
+    // let Direction = this.props.direction,
+    //  cueTime = event.target.getCurrentTime()
+    //  event.target.setVolume(0)
+    //  event.target.setPlaybackQuality('small')
+    //  if (cueTime < .5) {
+    //    event.target.pauseVideo()
+    //  }
+  }
+  
   reinitializeVideo(event) {
-    event.target.setPlaybackQuality('small')
-    event.target.setVolume(0)
+    console.log('reinitializing ',event.target)
     let Direction = this.props.direction
     this.setState({
       [`video${Direction}`]: event.target
@@ -105,12 +123,14 @@ class OutputPlayer extends Component {
         opts={playerOptions}
         onReady={this.handleVideoReady}
         onStateChange={this.reinitializeVideo}
+        onPlay={this.handleVideoPlay}
       />
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
+  player: state.player[`${ownProps.direction}`],
   queue: state.queue[`${ownProps.direction}`]
 })
 
