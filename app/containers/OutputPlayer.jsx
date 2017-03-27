@@ -11,27 +11,29 @@ class OutputPlayer extends Component {
     let Direction = props.direction
     this.state = {
       [`video${Direction}`]: {},
-      [`video${Direction}Id`]: ''
+      [`video${Direction}Id`]: '',
+      [`queue${Direction}`]: props.queue
+
     }
 
     this.handleVideoReady = this.handleVideoReady.bind(this)
+    this.handleVideoPlay = this.handleVideoPlay.bind(this)
     this.reinitializeVideo = this.reinitializeVideo.bind(this)
+    this.handleVideoEnd = this.handleVideoEnd.bind(this)
   }
 
   componentDidMount() {
+
     let Direction = this.props.direction
-    socket.on('connect', () => {
-      // console.log('output socket is live!')
-      socket.emit('outputScreenMounted')
-    })
+    socket.emit('outputScreenMounted')
 
     socket.on(`sendVideo${Direction}ToOutput`, videoId => {
       // console.log(`${Direction}: `, videoId)
-      this.setState({
-        [`video${Direction}Id`]: videoId
-      })
-      //  console.log('gettin hre?')
+      // this.setState({
+      //   [`video${Direction}Id`]: videoId
+      // })
     })
+
 
     socket.on(`playOutputVideo${Direction}`, newCueTime => {
       // console.log('gettin here?')
@@ -60,28 +62,58 @@ class OutputPlayer extends Component {
         $('.youtube1').css('opacity', opacity)
       })
     })
+
+
   }
 
   handleVideoReady(event) {
+    socket.on(`seekTo${this.props.direction}`, cueTime => {
+      event.target.seekTo(cueTime)
+    })
+
     this.reinitializeVideo(event)
     setTimeout(() => {
+      event.target.setPlaybackQuality('small')
       event.target.pauseVideo()
+      event.target.setVolume(0)
+      event.target.setPlaybackRate(1)
     }, 100)
   }
 
+  handleVideoPlay(event) {
+    // let Direction = this.props.direction,
+    //  cueTime = event.target.getCurrentTime()
+    //  event.target.setVolume(0)
+    //  event.target.setPlaybackQuality('small')
+    //  if (cueTime < .5) {
+    //    event.target.pauseVideo()
+    //  }
+  }
+
+  handleVideoEnd(){
+
+    let Direction= this.props.direction,
+      newQueue=this.state[`queue${Direction}`].slice(1)
+    console.log("getting to handle Video END", newQueue)
+
+    this.setState({
+      [`queue${Direction}`]: newQueue
+    })
+  }
+
   reinitializeVideo(event) {
-    event.target.setPlaybackQuality('small')
-    event.target.setVolume(0)
     let Direction = this.props.direction
     this.setState({
       [`video${Direction}`]: event.target
+
     })
+    console.log('reinitializing ', this.state)
   }
 
   render() {
     let Direction = this.props.direction,
       queue = this.props.queue
-      console.log('QUEUE',queue)
+
     const playerOptions = {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -101,17 +133,20 @@ class OutputPlayer extends Component {
 
     return (
       <YouTube
-        videoId={queue.length ? queue[0].id.videoId : ''}
+        videoId={this.state[`queue${Direction}`].length ? this.state[`queue${Direction}`][0].id.videoId : ''}
         opts={playerOptions}
         onReady={this.handleVideoReady}
         onStateChange={this.reinitializeVideo}
+        onPlay={this.handleVideoPlay}
+        onEnd={this.handleVideoEnd}
       />
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  queue: state[`queue${ownProps.direction}`]
+  player: state.player[`${ownProps.direction}`],
+  queue: state.queue[`${ownProps.direction}`]
 })
 
 export default connect(mapStateToProps)(OutputPlayer)

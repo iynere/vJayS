@@ -24,7 +24,7 @@ class Controller extends Component {
 
   componentDidMount() {
     socket.on('connect', () => {
-      console.log("~~~Getting the socket to work in this component!~~~~~")
+      // console.log("~~~Getting the socket to work in this component!~~~~~")
 
       //sends commandtype to mobile
       socket.on('getCommandType', () => {
@@ -94,9 +94,7 @@ class Controller extends Component {
         <button onClick={this.handleTapButton}>Tap</button>
         <button onClick={this.handleSliderButton}>Slider</button>
         <button onClick={this.handleClearButton}>Clear</button>
-        <div>
-          <SliderComponent handleChange={this.handleOpacitySlider}/>
-        </div>
+        <SliderComponent className='lol' handleChange={this.handleOpacitySlider}/>
   </div>
     )
   }
