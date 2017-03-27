@@ -44,5 +44,9 @@ module.exports = function(io) {
     playerSocket.on('sendCueTimeToOutputRight', cueTime => {
       playerSocket.broadcast.emit('seekToRight', cueTime)
     })
+
+    playerSocket.on('changePlaybackRate', rate => {
+      playerSocket.broadcast.emit('updatePlaybackRate', rate)
+    })
   })
 }

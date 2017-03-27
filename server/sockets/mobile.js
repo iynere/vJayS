@@ -16,7 +16,7 @@ module.exports = function(io) {
 
       mobileSocket.on('tappingScreen', ()=>{
        console.log("screen tap getting to mobile server");
-       mobileSocket.broadcast.emit('changePlaybackRate', 2)
+       mobileSocket.broadcast.emit('updateTapValue')
      })
     
     mobileSocket.on('movingSlider', (newValue)=>{

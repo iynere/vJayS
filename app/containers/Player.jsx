@@ -44,7 +44,7 @@ class Player extends Component {
       }
     })
 
-    socket.on('changePlaybackRate', (newRate) => {
+    socket.on('updatePlaybackRate', (newRate) => {
       console.log("Changing the playback rate", newRate)
       event.target.setPlaybackRate(newRate)
     })

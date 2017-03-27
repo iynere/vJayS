@@ -33,7 +33,7 @@ render (
 		<Router history={browserHistory}>
 			<Route path="/" component={Root} onEnter={onRootEnter} />
 			<Route path="/effects" component={EffectScreen} />
-			<Route path="/output" component={Output} />
+			<Route path="/output" component={Output} onEnter={onRootEnter} />
 			<Route path="/live" component={LiveApp} />
 			<Route path="/controller" component={Controller}/>
 		</Router>
