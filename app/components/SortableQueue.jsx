@@ -19,11 +19,11 @@ class SortableQueue extends Component {
 		console.log('Old index:', oldIndex);
 			console.log('New index:', newIndex);
 		
-		let video = this.state.queue[oldIndex]
+		let video = this.props.queue[oldIndex]
 		this.props.removeFromQueue(oldIndex, `queue${this.props.direction}`)
 		this.props.insertQueueItem(video, newIndex, `queue${this.props.direction}`)
 		this.setState({
-			queue: arrayMove(this.state.queue, oldIndex, newIndex)
+			queue: arrayMove(this.props.queue, oldIndex, newIndex)
 		})
  };
 
@@ -70,6 +70,7 @@ class SortableQueue extends Component {
 					axis="x"
 					videos={this.props.queue} 
 					onSortEnd={this.onSortEnd}
+					distance={30}
 				/>
 		);
 	}
