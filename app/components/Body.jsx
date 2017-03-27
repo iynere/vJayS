@@ -2,17 +2,18 @@ import React from 'react'
 import {Grid} from 'semantic-ui-react'
 import {Deck} from './Deck'
 import Controller from '../containers/Controller'
+import ControllerVid from '../containers/ControllerVid'
 
 export const Body = () => (
   <Grid columns='two'>
     <Grid.Row>
       <Grid.Column>
-        <Deck 
+        <Deck
           direction='Left'
         />
       </Grid.Column>
       <Grid.Column>
-        <Deck 
+        <Deck
           direction='Right'
         />
       </Grid.Column>
@@ -20,6 +21,7 @@ export const Body = () => (
     <Grid.Row>
       <Grid.Column>
         <Controller />
+        <ControllerVid />
       </Grid.Column>
     </Grid.Row>
   </Grid>

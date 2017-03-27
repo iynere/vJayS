@@ -31,22 +31,24 @@ class Player extends Component {
     let Direction = this.props.direction,
       cueTime = event.target.getCurrentTime(),
       videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : ''
-      
-    // this.setState({
-    //  [`video${Direction}`]: event.target
-    // })
-      
+
+
     socket.on('outputReadyForPlayerVideos', () => {
-      
       socket.emit(`sendCueTimeToOutput${Direction}`, cueTime,)
     })
-    
-    
+
+    /*socket listeners for dj video controls*/
+    socket.on('skipVideo', (direction) => {
+      if(direction === Direction || direction === "both"){
+        this.handleVideoEnd();
+      }
+    })
 
     setTimeout(() => {
       event.target.pauseVideo()
       event.target.setPlaybackQuality('small')
     }, 100)
+
     socket.emit(`playerMounted${Direction}`, videoToEmit)
   }
 
@@ -66,9 +68,9 @@ class Player extends Component {
   handlePlaybackRateChange(event) {
     let Direction = this.props.direction,
       newRate = event.data
-      
+
     // console.log(newRate)
-    
+
     socket.emit(`changingVideo${Direction}PlaybackRate`, newRate)
   }
 
@@ -80,23 +82,23 @@ class Player extends Component {
         "title": this.props.queue[0].snippet.title,
         "thumbnailUrl": this.props.queue[0].snippet.thumbnails.default.url
       }
-    
+
     // console.log(this.state)
     // console.log('SET ITEM: ', setItem)
     // console.log("props direction", this.props.direction)
-    
+
     this.props.addToSet(setItem)
     this.props.removeFromQueue(0, `queue${this.props.direction}`)
   }
 
   handlePlayerStateChange(event) {
     let Direction = this.props.direction
-    
+
     // switch (event.data) {
     //  case -1:
     //    this.props.savePlayer(event.target, `player${Direction}`)
     // }
-    
+
     console.log('reinitializing ',event)
   }
 

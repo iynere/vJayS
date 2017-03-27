@@ -6,5 +6,10 @@ module.exports = function(io) {
         djSocket.broadcast.emit('changeOutputOpacity', opacity)
       })
 
+      djSocket.on('skipVideoPressed', (direction) => {
+
+        djSocket.broadcast.emit('skipVideo', direction)
+      })
+
     })
 }

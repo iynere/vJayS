@@ -7,6 +7,5 @@ export const Root = () => (
   <div>
     <Navbar />
     <Body />
-    {/*<Footer />*/}
   </div>
 )
