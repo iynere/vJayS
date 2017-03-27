@@ -11,7 +11,7 @@ module.exports = require('express').Router()
 	.get('/:userId', (req, res, next) => {
 		// gets all sets
 		Set.findAll({
-			include: [{model: User, where: {id: req.params.userId}}]
+			where: {user_id: req.params.userId}
 		})
 		.then((foundSets) => {
 			res.json(foundSets)
@@ -21,8 +21,7 @@ module.exports = require('express').Router()
 	.get('/:userId/:setId', (req, res, next) => {
 		// get single set
 		Set.findAll({  
-			where: { name: "TestSet2"}, //can probz update to setId
-			include: [{model: Video}, {model: User, where: {id: req.params.userId}}]
+			where: { id: req.params.setId, user_id: req.params.userId }
 			})
 		.then((foundSets) => {
 			res.json(foundSets)
