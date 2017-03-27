@@ -5,6 +5,10 @@ var socket = io(window.location.origin)
 export default class TapEffect extends Component {
 	constructor() {
 		super()
+
+		this.state = {
+			taps: 0
+		}
 	}
 
 	componentDidMount() {

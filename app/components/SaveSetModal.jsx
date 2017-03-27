@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {saveSetToDb} from '../reducers/sets'
+import {saveSetToDb} from '../reducers/set'
 import localStore from 'store'
 import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
 

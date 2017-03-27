@@ -44,6 +44,11 @@ class Player extends Component {
       }
     })
 
+    socket.on('changePlaybackRate', (newRate) => {
+      console.log("Changing the playback rate", newRate)
+      event.target.setPlaybackRate(newRate)
+    })
+
     setTimeout(() => {
       event.target.pauseVideo()
       event.target.setPlaybackQuality('small')
@@ -99,7 +104,7 @@ class Player extends Component {
     //    this.props.savePlayer(event.target, `player${Direction}`)
     // }
 
-    console.log('reinitializing ',event)
+    console.log('reinitializing',event)
   }
 
   render() {

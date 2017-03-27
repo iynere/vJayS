@@ -1,5 +1,6 @@
 import axios from 'axios'
-
+import localStore from 'store'
+import clearSet from './set'
 // CONSTANTS
 export const GET_SETS_FROM_DB = 'GET_SETS_FROM_DB'
 
@@ -21,13 +22,6 @@ export const getAllSets = sets => ({
 
 // ACTION CREATORS
 
-export const saveSetToDb = (set) => dispatch => {
-  axios.post('/api/sets', set)
-    .then(() => {console.log("Saved set and everything's working!")})
-    .catch(console.error)
-  // note: eventually add a "Clear Set" function to clear from local storage
-}
-
 export const fetchSetFromDb = (/*title? id? userId?*/) => dispatch => {
   // do axios stuff
 }
@@ -36,7 +30,6 @@ export const fetchAllSetsFromDb = (userId) => dispatch => {
   // do axios stuff
   axios.get(`/api/sets/${userId}`)
     .then((sets) => {
-      console.log("GETTING SETS FROM DB", sets)
       dispatch(getAllSets(sets))})
     .catch(console.error)
 }
