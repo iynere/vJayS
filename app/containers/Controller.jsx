@@ -19,14 +19,10 @@ class Controller extends Component {
     this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
     this.handleTapButton = this.handleTapButton.bind(this)
     this.handleSliderButton = this.handleSliderButton.bind(this)
-    this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
   }
 
   componentDidMount() {
     socket.on('connect', () => {
-      // console.log("~~~Getting the socket to work in this component!~~~~~")
-
-      //sends commandtype to mobile
       socket.on('getCommandType', () => {
         console.log("get emoticons", this.props.command)
         socket.emit("sendCommand", this.commandType())
@@ -79,12 +75,7 @@ class Controller extends Component {
     socket.emit('clickedSlider', commandType)
   }
 
-  handleOpacitySlider(event){
-    socket.emit('changeOpacity', event.target.value/100)
-  }
-
   render() {
-    // console.log("command current", this.props.command);
     return (
       <div>
         <h4>Controllerrrr</h4>
@@ -94,7 +85,6 @@ class Controller extends Component {
         <button onClick={this.handleTapButton}>Tap</button>
         <button onClick={this.handleSliderButton}>Slider</button>
         <button onClick={this.handleClearButton}>Clear</button>
-        <SliderComponent className='lol' handleChange={this.handleOpacitySlider}/>
   </div>
     )
   }
