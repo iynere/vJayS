@@ -6,14 +6,14 @@ const Set = db.model('sets')
 const Video = db.model('videos')
 
 module.exports = require('express').Router()
-	.get('/', (req, res, next) => {
-		// get all user's sets for display
-		res.status(201).send("OKAY!")
-	})
-	.post('/', (req, res, next) => {
-		Set.create(req.body, { include: [ Video ]})
-			.then((createdSet) => {
-				res.status(201).json(createdSet)
-			})
-			.catch(next)
-	})
+  .get('/', (req, res, next) => {
+    // get all user's sets for display
+    res.status(201).send("OKAY!")
+  })
+  .post('/', (req, res, next) => {
+    Set.create(req.body, { include: [ Video ]})
+      .then((createdSet) => {
+        res.status(201).json(createdSet)
+      })
+      .catch(next)
+  })

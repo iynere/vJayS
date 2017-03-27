@@ -66,12 +66,12 @@ class SortableQueue extends Component {
 		});
 		
 		return (
-				<SortableList
-					axis="x"
-					videos={this.props.queue} 
-					onSortEnd={this.onSortEnd}
-					distance={30}
-				/>
+			<SortableList
+				axis="x"
+				videos={this.props.queue} 
+				onSortEnd={this.onSortEnd}
+				distance={30}
+			/>
 		);
 	}
 }

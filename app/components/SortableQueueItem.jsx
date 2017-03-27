@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Dimmer, Image, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import {removeFromQueue, addToQueue} from 'APP/app/reducers/queue'
+import {removeFromQueue, moveToFront} from 'APP/app/reducers/queue'
 
 class SortableQueueItem extends Component {
 	constructor(props) {
@@ -20,12 +20,8 @@ class SortableQueueItem extends Component {
 	}
 
 	onClickPlay() {
-		console.log(this.props)
-		// console.log(this.props);
-		// console.log('Play!');
-		// let video = this.props.queue[this.props.index]
-		// this.props.removeFromQueue(this.props.index, `queue${this.props.direction}`)
-		// this.props.addToQueue(video, `queue${this.props.direction}`)
+		// console.log(this.props)
+		this.props.moveToFront(this.props.index, `queue${this.props.direction}`)
 	}
 
 	onClickRemove() {
@@ -78,8 +74,8 @@ const mapDispatchToProps = dispatch => ({
 	removeFromQueue: (videoIdx, direction) => {
 		dispatch(removeFromQueue(videoIdx, direction))
 	},
-	addToQueue: (video, direction) => {
-		dispatch(addToQueue(video, direction))
+	moveToFront: (videoIdx, direction) => {
+		dispatch(moveToFront(videoIdx, direction))
 	}
 })
 
