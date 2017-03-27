@@ -28,6 +28,13 @@ class SaveSetModal extends Component {
     })
   }
 
+  handleClose = (e) => {
+    e.preventDefault
+    this.setState({
+      modalOpen: false,
+    })
+  }
+
 	handleSubmit(event) {
 		event.preventDefault()
 		const videos = localStore.get('set')
@@ -42,6 +49,7 @@ class SaveSetModal extends Component {
 		return (
       <Modal trigger={<Button  onClick={this.handleOpen}>Save Set</Button>}
         open={this.state.modalOpen}
+        onClose={this.handleClose}
         basic size='small'
         closeIcon='close'>
         <Modal.Actions>
