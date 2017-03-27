@@ -8,22 +8,24 @@ class FetchSets extends Component {
 		super(props)
 	}
 
-	componentWillMount() {
-		this.props.user ? this.props.fetchAllSetsFromDb(this.props.user.id) : null
+	componentDidMount() {
 		console.log("User ID:", this.props)
+		this.props.fetchAllSetsFromDb(this.props.user.id)
 	}
 
 	render() {
-		console.log("SETS:", this.props.sets)
+		console.log("SETS:", this.props.sets ? this.props.sets.data : "Not yet loaded")
 		// const userId = this.props.user ? this.props.user.id : null
 		// const setList = sets.data ? sets.data.map((set) => 
 		// 	<li>{set}</li>) : null
-		const setList = this.props.sets.data.map((set) => <li>{set}</li>)
+		const setList = this.props.sets.data ? this.props.sets.data.map((set) => <li>{set}</li>) : null
 
 		return(
 			<div>
 				<h4>BOOP FETCHING SETS</h4>
-				<ul>{setList}</ul>
+				<ul>
+					{setList}
+				</ul>
 			</div>
 		)
 	}

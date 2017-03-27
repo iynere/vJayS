@@ -35,7 +35,7 @@ export const fetchAllSetsFromDb = (userId) => dispatch => {
   // do axios stuff
   axios.get(`/api/sets/${userId}`)
     .then((sets) => {console.log("Getting the sets!", sets)})
-    .catch(next)
+    .catch(console.error)
 }
 
 export const addToSet = setItem => dispatch => {

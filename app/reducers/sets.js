@@ -35,7 +35,9 @@ export const fetchSetFromDb = (/*title? id? userId?*/) => dispatch => {
 export const fetchAllSetsFromDb = (userId) => dispatch => {
   // do axios stuff
   axios.get(`/api/sets/${userId}`)
-    .then((sets) => {dispatch(getAllSets(sets))})
+    .then((sets) => {
+      console.log("GETTING SETS FROM DB", sets)
+      dispatch(getAllSets(sets))})
     .catch(console.error)
 }
 

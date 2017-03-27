@@ -6,6 +6,7 @@ import {logout} from 'APP/app/reducers/auth'
 import {fetchPlaylists} from 'APP/app/reducers/playlists'
 import axios from 'axios'
 import {loadYoutubePlaylist} from 'APP/app/reducers/queue'
+import {fetchAllSetsFromDb} from '../reducers/sets'
 
 class LoginLogout extends Component {
   constructor(props) {
@@ -38,8 +39,15 @@ class LoginLogout extends Component {
                 }).catch(console.error)
             }}>Load Youtube Playlists
           </Dropdown.Item>
-          <Link to="/set"><Dropdown.Item>View Your Sets
-          </Dropdown.Item></Link>
+
+          <Link to="/set">
+            <Dropdown.Item onClick={(event) => {
+              event.preventDefault()
+              this.props.fetchAllSetsFromDb(this.props.user.id)
+            }}>
+            View Your Sets
+            </Dropdown.Item>
+          </Link>
         </Dropdown.Menu>
       </Dropdown>
     )
@@ -80,7 +88,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadYoutubePlaylist: playlistItems => {
     dispatch(loadYoutubePlaylist(playlistItems))
-  }
+  },
+  fetchAllSetsFromDb: (userId) => { dispatch(fetchAllSetsFromDb(userId)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginLogout)
