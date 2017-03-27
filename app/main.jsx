@@ -5,6 +5,8 @@ import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import {fetchQueue} from 'APP/app/reducers/queue'
 import {fetchSetItems} from 'APP/app/reducers/set'
+import {whoami} from 'APP/app/reducers/auth'
+import {fetchAllSetsFromDb} from 'APP/app/reducers/sets'
 import store from 'APP/app/store'
 import {Output} from 'APP/app/components/Output'
 import {Root} from 'APP/app/components/Root'
@@ -13,7 +15,7 @@ import EffectScreen from './containers/EffectScreen'
 import Controller from './containers/Controller'
 import axios from 'axios'
 
-import SaveSet from 'APP/app/components/SaveSet'
+import FetchSets from 'APP/app/components/FetchSets'
 
 const socket = io(window.location.origin)
 
@@ -25,6 +27,7 @@ const onRootEnter = () => {
   store.dispatch(fetchQueue('queueLeft'))
   store.dispatch(fetchQueue('queueRight'))
   store.dispatch(fetchSetItems())
+  store.dispatch(whoami)
 }
 
 render (
@@ -35,7 +38,7 @@ render (
 			<Route path="/output" component={Output} />
 			<Route path="/live" component={LiveApp} />
 			<Route path="/controller" component={Controller}/>
-			<Route path="/set" component={SaveSet}/>
+			<Route path="/set" component={FetchSets}/>
 		</Router>
 	</Provider>,
 	document.getElementById('main')

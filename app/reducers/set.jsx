@@ -31,8 +31,11 @@ export const fetchSetFromDb = (/*title? id? userId?*/) => dispatch => {
   // do axios stuff
 }
 
-export const fetchAllSetsFromDb = () => dispatch => {
+export const fetchAllSetsFromDb = (userId) => dispatch => {
   // do axios stuff
+  axios.get(`/api/sets/${userId}`)
+    .then((sets) => {console.log("Getting the sets!", sets)})
+    .catch(console.error)
 }
 
 export const addToSet = setItem => dispatch => {
@@ -43,12 +46,10 @@ export const addToSet = setItem => dispatch => {
 }
 
 export const saveSetToDb = (set) => dispatch => {
-  console.log("Getting the set!", set)
   axios.post('/api/sets', set)
     .then(() => {console.log("Saved set and everything's working!")})
     .catch(console.error)
-  // axios stuff:
-  // when do we want todo this ? do we want users to be able to update their sets in the database ? or does saving a set to the database reset the set in localStorage ?
+  // note: eventually add a "Clear Set" function to clear from local storage
 }
 
 export const clearSet = () => dispatch => {

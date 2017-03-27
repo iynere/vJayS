@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {saveSetToDb} from '../reducers/set'
+import {saveSetToDb} from '../reducers/sets'
 import { Button, Form } from 'semantic-ui-react'
 import localStore from 'store'
 
 class SaveSet extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 
 		this.state={
 			setName: ""
@@ -23,7 +23,7 @@ class SaveSet extends Component {
 	handleSubmit(event) {
 		event.preventDefault()
 		const videos = localStore.get('set')
-		const setToSave = {"name": this.state.setName, "videos": videos}
+		const setToSave = {"name": this.state.setName, "videos": videos, "user_id": this.props.user.id}
 		this.props.saveSetToDb(setToSave)
 	}
 
@@ -42,8 +42,10 @@ class SaveSet extends Component {
 	}
 }
 
-const mapStateToProps = () => {
-	return ({})
+const mapStateToProps = (state) => {
+	return ({
+		user: state.auth
+	}) //UserID
 }
 
 const mapDispatchToProps = (dispatch) => ({
