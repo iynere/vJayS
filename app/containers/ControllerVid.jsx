@@ -16,10 +16,18 @@ export default class ControllerVid extends Component {
     socket.emit('changeOpacity', event.target.value/100)
   }
 
+  handleSkipVideo(direction){
+    socket.emit('skipVideoPressed', direction)
+  }
+
   render() {
     // console.log("command current", this.props.command);
     return (
       <div>
+        <button onClick={()=>this.handleSkipVideo("Left")}>skip left</button>
+        <button onClick={()=>this.handleSkipVideo("both")}>skip</button>
+        <button onClick={()=>this.handleSkipVideo("Right")}>skip right</button>
+
         <SliderComponent className='lol' handleChange={this.handleOpacitySlider}/>
       </div>
     )
