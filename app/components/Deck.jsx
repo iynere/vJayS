@@ -7,7 +7,7 @@ import SortableQueue from '../components/SortableQueue'
 export const Deck = props => {
 
   const queueStyles = {
-    marginLeft: "10px",
+    marginLeft: "10px"
   }
 
   return (
