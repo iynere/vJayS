@@ -5,6 +5,8 @@ import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import {fetchQueue} from 'APP/app/utils/queue'
 import {fetchSetItems} from 'APP/app/reducers/set'
+import {whoami} from 'APP/app/reducers/auth'
+import {fetchAllSetsFromDb} from 'APP/app/reducers/sets'
 import store from 'APP/app/store'
 import {Output} from 'APP/app/components/Output'
 import {Root} from 'APP/app/components/Root'
@@ -33,6 +35,7 @@ const onRootEnter = () => {
   store.dispatch(fetchQueue('queueLeft'))
   store.dispatch(fetchQueue('queueRight'))
   store.dispatch(fetchSetItems())
+  store.dispatch(whoami)
 }
 
 render (

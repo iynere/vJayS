@@ -21,8 +21,8 @@ class LoginLogout extends Component {
           <Dropdown.Item
             onClick={this.props.fetchPlaylists}>Import Playlists
           </Dropdown.Item>
-          <Dropdown.Item>View Your Sets
-          </Dropdown.Item>
+          <Link to="/set"><Dropdown.Item>View Your Sets
+          </Dropdown.Item></Link>
         </Dropdown.Menu>
       </Dropdown>
     )

@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
 //player: require('./player'), // for both players
 //queue: require('./queue'), // for both queues
   set: require('./set').default,
+  sets: require('./sets').default,
 //effects: ?
   command: require('./command').default
 })

@@ -1,32 +1,39 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { List } from 'semantic-ui-react'
-import {fetchAllSetsFromDb} from '../reducers/set'
+import {fetchAllSetsFromDb} from '../reducers/sets'
 
 class FetchSets extends Component {
 	constructor(props) {
 		super(props)
 	}
 
-	componentDidMount() {
-		// this.props.fetchAllSetsFromDb()
+	componentWillMount() {
+		this.props.user ? this.props.fetchAllSetsFromDb(this.props.user.id) : null
 		console.log("User ID:", this.props)
 	}
 
 	render() {
-		// const userId = this.props.user.id
-		// const sets = this.props.fetchAllSetsFromDb(userId)
+		console.log("SETS:", this.props.sets)
+		// const userId = this.props.user ? this.props.user.id : null
+		// const setList = sets.data ? sets.data.map((set) => 
+		// 	<li>{set}</li>) : null
+		const setList = this.props.sets.data.map((set) => <li>{set}</li>)
+
 		return(
-			<h4>BOOP FETCHING SETS</h4>
-			//Link to sets
+			<div>
+				<h4>BOOP FETCHING SETS</h4>
+				<ul>{setList}</ul>
+			</div>
 		)
 	}
 }
 
 const mapStateToProps = (state) => {
 	return ({
-		user: state.auth
-	}) //UserID
+		user: state.auth,
+		sets: state.sets
+	})
 }
 
 const mapDispatchToProps = (dispatch) => ({
