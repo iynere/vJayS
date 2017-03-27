@@ -57,17 +57,10 @@ class OutputPlayer extends Component {
       })
     })
 
-    /*socket listeners for dj video controls*/
     socket.on('changeOutputOpacity', (opacity) => {
       $(document).ready(() => {
         $('.youtube1').css('opacity', opacity)
       })
-    })
-
-    socket.on('skipVideo', (direction) => {
-      if(direction === Direction || direction === "both"){
-        this.handleVideoEnd();
-      }
     })
 
 
