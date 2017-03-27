@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import { List } from 'semantic-ui-react';
 import SortableQueueItem from './SortableQueueItem';
-import {removeFromQueue} from 'APP/app/utils/queue';
+import {removeFromQueue} from 'APP/app/reducers/queue';
 import { connect } from 'react-redux'
 
 
