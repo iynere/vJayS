@@ -15,8 +15,6 @@ import EffectScreen from './containers/EffectScreen'
 import Controller from './containers/Controller'
 import axios from 'axios'
 
-import FetchSets from 'APP/app/components/FetchSets'
-
 const socket = io(window.location.origin)
 
 socket.on('connect', () => {
@@ -34,11 +32,11 @@ render (
 	<Provider store={store}>
 		<Router history={browserHistory}>
 			<Route path="/" component={Root} onEnter={onRootEnter} />
+      <Route path="/output" component={Output} onEnter={onRootEnter}/>
+      <Route path="/live" component={LiveApp} />
+      /*Testing Routes*/
 			<Route path="/effects" component={EffectScreen} />
-			<Route path="/output" component={Output} onEnter={onRootEnter}/>
-			<Route path="/live" component={LiveApp} />
 			<Route path="/controller" component={Controller}/>
-			<Route path="/set" component={FetchSets}/>
 		</Router>
 	</Provider>,
 	document.getElementById('main')

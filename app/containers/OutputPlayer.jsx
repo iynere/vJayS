@@ -23,7 +23,6 @@ class OutputPlayer extends Component {
   }
 
   componentDidMount() {
-
     let Direction = this.props.direction
     socket.emit('outputScreenMounted')
 

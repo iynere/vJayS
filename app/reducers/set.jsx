@@ -47,13 +47,13 @@ export const addToSet = setItem => dispatch => {
 
 export const saveSetToDb = (set) => dispatch => {
   axios.post('/api/sets', set)
-    .then(() => {console.log("Saved set and everything's working!")})
+    .then(() => {
+      dispatch(clearSet())
+      console.log("Saved set and everything's working!")})
     .catch(console.error)
-  // note: eventually add a "Clear Set" function to clear from local storage
 }
 
 export const clearSet = () => dispatch => {
-  // BEFORE WE CLEAR SET, SEND IT TO DATABASE VIA AXIOS
   localStore.set('set', [])
   dispatch(receiveSet([]))
 }

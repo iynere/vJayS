@@ -17,7 +17,9 @@ export const Deck = props => {
     />
     {/*<Controls />*/}
     <div style={queueStyles}>
-      <SortableQueue direction={props.direction} />
+      {/*<SortableQueue
+              direction={props.direction}
+            />*/}
     </div>
   </Container>
 )}

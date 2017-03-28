@@ -47,7 +47,40 @@ export const removeFromQueue = (videoIdx, queueLeftOrRight) => dispatch => {
   // set new queue
   localStore.set(queueLeftOrRight, queueToUpdate)
   // put new queue on state
-  dispatch(fetchQueue(queueLeftOrRight))
+  dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
+}
+
+export const moveToFront = (videoIdx, queueLeftOrRight) => dispatch => {
+  // get the correct queue
+  const queueToUpdate = localStore.get(queueLeftOrRight),
+  
+  // save the video we want to move to front
+    video = queueToUpdate.splice(videoIdx, 1)[0]
+  
+  // move it to front
+  queueToUpdate.unshift(video)
+  
+  // reset queue on localStore
+  localStore.set(queueLeftOrRight, queueToUpdate)
+  
+  // put new queue on state
+  dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
+}
+
+export const insertQueueItem = (video, newIdx, queueLeftOrRight) => dispatch => {
+  // console.log('?????#F?F?? INSERTING')
+  
+  // get the queue to update
+  const queueToUpdate = localStore.get(queueLeftOrRight)
+  
+  // insert the item at the new idx
+  queueToUpdate.splice(newIdx, 0, video)
+
+  // reset it on localStore
+  localStore.set(queueLeftOrRight, queueToUpdate)
+  
+  // rereceive it on state
+  dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
 }
 
 export const clearQueue = queueLeftOrRight => dispatch => {
@@ -63,14 +96,14 @@ export const loadYoutubePlaylist = playlistItems => dispatch =>{
   let queueRight=[]
 
   playlistItems.filter(item => item.snippet.thumbnails /*filters out videos that have been deleted but are still in playlists*/).forEach((item, index)=>{
-    let itemForQueue={
-      title: item.snippet.title,
-      thumbnail: item.snippet.thumbnails.default.url,
-      id:{
-        videoId: item.snippet.resourceId.videoId
-      }
-    }
-    index % 2 === 0 ? queueLeft.push(itemForQueue) : queueRight.push(itemForQueue)
+    // let itemForQueue={
+    //  title: item.snippet.title,
+    //  thumbnail: item.snippet.thumbnails.default.url,
+    //  id:{
+    //    videoId: item.snippet.resourceId.videoId
+    //  }
+    // }
+    index % 2 === 0 ? queueLeft.push(item) : queueRight.push(item)
   })
 
   localStore.set("queueLeft", queueLeft)

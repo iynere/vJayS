@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Dimmer, Image, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import {removeFromQueue, moveToFront} from 'APP/app/reducers/queue'
 
 class SortableQueueItem extends Component {
   constructor(props) {
@@ -19,12 +20,13 @@ class SortableQueueItem extends Component {
   }
 
   onClickPlay() {
-    console.log(this.props);
-    console.log('Play!');
+    // console.log(this.props)
+    this.props.moveToFront(this.props.index, `queue${this.props.direction}`)
   }
 
   onClickRemove() {
-    console.log('Remove.');
+    // console.log(this.props)
+    this.props.removeFromQueue(this.props.index, `queue${this.props.direction}`)
   }
   
   
@@ -43,7 +45,7 @@ class SortableQueueItem extends Component {
     const { active } = this.state
     const content = (
       <div style={dimDivStyle}>
-        <p style={headerStyle}>{this.props.video.title}</p>
+        <p style={headerStyle}>{this.props.video.snippet.title.slice(0,36)}</p>
         
         <Button className="red mini circular icon" onClick={this.onClickRemove.bind(this)}><Icon name="remove"/></Button>
         <Button className="green mini circular icon" onClick={this.onClickPlay.bind(this)}><Icon name="play"/></Button>
@@ -57,7 +59,7 @@ class SortableQueueItem extends Component {
         dimmer={{ active, content }}
         onMouseEnter={this.handleShow.bind(this)}
         onMouseLeave={this.handleHide.bind(this)}
-        src={this.props.video.thumbnail}
+        src={this.props.video.snippet.thumbnails.default.url}
       />
     )
   }
@@ -65,7 +67,16 @@ class SortableQueueItem extends Component {
 
 
 const mapStateToProps = (state, ownProps) => ({
-  queue: state[`queue${ownProps.direction}`]
+  queue: state.queue[`${ownProps.direction}`]
 });
 
-export default connect(mapStateToProps)(SortableQueueItem);
+const mapDispatchToProps = dispatch => ({
+  removeFromQueue: (videoIdx, direction) => {
+    dispatch(removeFromQueue(videoIdx, direction))
+  },
+  moveToFront: (videoIdx, direction) => {
+    dispatch(moveToFront(videoIdx, direction))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortableQueueItem);
