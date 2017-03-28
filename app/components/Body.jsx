@@ -2,6 +2,7 @@ import React from 'react'
 import {Grid} from 'semantic-ui-react'
 import {Deck} from './Deck'
 import Controller from '../containers/Controller'
+import ControllerVid from '../containers/ControllerVid'
 import {Queues} from './Queues'
 
 export const Body = () => (
@@ -25,6 +26,7 @@ export const Body = () => (
         <Grid.Column>
           <Queues />
           <Controller />
+          <ControllerVid />
         </Grid.Column>
       </Grid.Row>
     </Grid>

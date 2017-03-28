@@ -72,6 +72,10 @@ class EffectScreen extends Component {
             this.state.sketchFunction === "slider" ?
             <SliderEffect /> : null
           }
+          {
+            this.state.sketchFunction === "tap" ?
+            <TapEffect /> : null
+          }
       </div>
     )
   }

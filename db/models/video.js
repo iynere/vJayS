@@ -7,8 +7,8 @@ const db = require('APP/db')
 
 const Video = db.define('videos', {
 	title: Sequelize.STRING,
-	thumbnail: Sequelize.STRING,
-	videoURL: Sequelize.STRING,
+	thumbnailUrl: Sequelize.STRING,
+	videoId: Sequelize.STRING,
 	direction: Sequelize.ENUM('Left', 'Right'),
 })
 
