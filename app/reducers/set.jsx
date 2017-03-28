@@ -45,8 +45,8 @@ export const saveSetToDb = (set) => dispatch => {
 export const fetchSetFromDb = (userId, setId) => dispatch => {
   axios.get(`/api/sets/${userId}/${setId}`)
     .then((foundSet) => {
-      // dispatch(receiveSet(foundSet))
-      console.log("Getting the set!", foundSet)
+      dispatch(receiveSet(foundSet.data[0].videos))
+      console.log("Getting the set!", foundSet.data[0].videos)
     })
     .catch(console.error)
 }
