@@ -3,17 +3,10 @@ import {Grid} from 'semantic-ui-react'
 import SortableQueue from './SortableQueue'
 
 export const Queues = () => (
-  <Grid columns='two'>
+  <Grid columns='one'>
     <Grid.Row>
       <Grid.Column>
-        <SortableQueue
-          direction='Left'
-        />
-      </Grid.Column>
-      <Grid.Column>
-        <SortableQueue
-          direction='Right'
-        />
+        <SortableQueue />
       </Grid.Column>
     </Grid.Row>
   </Grid>

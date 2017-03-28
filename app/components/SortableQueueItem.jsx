@@ -29,13 +29,15 @@ class SortableQueueItem extends Component {
     this.props.removeFromQueue(this.props.index, `queue${this.props.direction}`)
   }
   
-  
   render() {
     var headerStyle = {
       color: "#fff",
       paddingBottom: 0,
       marginBottom: "3px",
       marginTop: 0,
+      MozUserSelect: 'none',
+      WebkitUserSelect: 'none',
+      msUserSelect: 'none'   
     }
 
     var dimDivStyle = {

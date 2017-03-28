@@ -50,6 +50,43 @@ export const removeFromQueue = (videoIdx, queueLeftOrRight) => dispatch => {
   dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
 }
 
+export const insertQueueItem = (video, newIdx, queueLeftOrRight) => dispatch => {
+  // console.log('?????#F?F?? INSERTING')
+  
+  // get the queue to update
+  const queueToUpdate = localStore.get(queueLeftOrRight)
+  
+  // insert the item at the new idx
+  queueToUpdate.splice(newIdx, 0, video)
+
+  // reset it on localStore
+  localStore.set(queueLeftOrRight, queueToUpdate)
+  
+  // rereceive it on state
+  dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
+}
+
+export const rearrangeQueueItems = (oldIndex, newIndex) => dispatch => {
+  const leftLength = localStore.get('queueLeft').length
+  // 1. what queue are we starting in ?
+  let startDirection = oldIndex < leftLength ? 'queueLeft' : 'queueRight'
+  
+  let videoIdx = startDirection === 'queueLeft' ? oldIndex : oldIndex - leftLength,
+    video = localStore.get(startDirection)[videoIdx]
+    // console.log('VIDEO: ', video)
+  
+  // 2. remove from start queue
+  dispatch(removeFromQueue(videoIdx, startDirection))
+  
+  // 3. what queue are we ending in ?
+  // 4. insert into end queue
+  if (newIndex < leftLength) {
+    dispatch(insertQueueItem(video, newIndex, 'queueLeft'))
+  } else {
+    dispatch(insertQueueItem(video, newIndex - leftLength, 'queueRight'))
+  }
+}
+
 export const moveToFront = (videoIdx, queueLeftOrRight) => dispatch => {
   // get the correct queue
   const queueToUpdate = localStore.get(queueLeftOrRight),
@@ -64,22 +101,6 @@ export const moveToFront = (videoIdx, queueLeftOrRight) => dispatch => {
   localStore.set(queueLeftOrRight, queueToUpdate)
   
   // put new queue on state
-  dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
-}
-
-export const insertQueueItem = (video, newIdx, queueLeftOrRight) => dispatch => {
-  // console.log('?????#F?F?? INSERTING')
-  
-  // get the queue to update
-  const queueToUpdate = localStore.get(queueLeftOrRight)
-  
-  // insert the item at the new idx
-  queueToUpdate.splice(newIdx, 0, video)
-
-  // reset it on localStore
-  localStore.set(queueLeftOrRight, queueToUpdate)
-  
-  // rereceive it on state
   dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
 }
 
