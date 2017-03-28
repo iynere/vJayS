@@ -4,7 +4,7 @@ import {setCommand} from '../reducers/command'
 import {Link} from 'react-router'
 import SliderComponent from 'APP/app/components/SliderComponent'
 
-// from state: liveEffect
+/*DJ TO MOBILE CONTROLS*/
 
 var socket = io(window.location.origin)
 
@@ -14,10 +14,8 @@ class Controller extends Component {
 		super()
 		this.commandType=this.commandType.bind(this)
 		this.handleWhiteButton = this.handleWhiteButton.bind(this)
-		this.handleColorButton = this.handleColorButton.bind(this)
 		this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
 		this.handleTapButton = this.handleTapButton.bind(this)
-		this.handleSliderButton = this.handleSliderButton.bind(this)
 	}
 
 	componentDidMount() {
@@ -48,13 +46,6 @@ class Controller extends Component {
 		socket.emit('clickedWhiteEllipse', commandType)
 	}
 
-	handleColorButton(){
-		console.log("controller click color")
-		this.props.handleSetCommand("color")
-		let commandType="touchpadColor"
-		socket.emit('clickedColorEllipse',commandType)
-	}
-
 	handleEmoticonsButton(){
 		console.log("controller click emoticons")
 		this.props.handleSetCommand("emoticons")
@@ -68,22 +59,16 @@ class Controller extends Component {
 		socket.emit('clickedTap', commandType)
 	}
 
-	handleSliderButton() {
-		this.props.handleSetCommand("slider")
-		let commandType="slider"
-		socket.emit('clickedSlider', commandType)
-	}
-
 	render() {
 		return (
-			<div>
-				<h4>Controllerrrr</h4>
-				<button onClick={this.handleWhiteButton}>White Ellipse</button>
-				<button onClick={this.handleColorButton}>Color Ellipse</button>
-				<button onClick={this.handleEmoticonsButton}>Emoticons</button>
-				<button onClick={this.handleTapButton}>Tap</button>
-				<button onClick={this.handleSliderButton}>Slider</button>
-				<button onClick={this.handleClearButton}>Clear</button>
+			<div className="dj2MobileControls">
+				<h2>Audience Interactions</h2>
+				<div className="dj2MobileButtons">
+					<button onClick={this.handleWhiteButton}>Draw</button>
+					<button onClick={this.handleEmoticonsButton}>Emoticons</button>
+					<button onClick={this.handleTapButton}>Tap</button>
+					<button onClick={this.handleClearButton}>Clear</button>
+				</div>
 			</div>
 		)
 	}
