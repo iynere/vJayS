@@ -47,19 +47,19 @@ class SaveSetModal extends Component {
 
 	render() {
 		return (
-      <Modal trigger={<Button  onClick={this.handleOpen}>Save Set</Button>}
+      <Modal trigger={<Button basic inverted color={'red'} onClick={this.handleOpen}>Save Set</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         basic size='small'
         closeIcon='close'>
         <Modal.Actions>
   			<div>
-  				<Form onSubmit={this.handleSubmit}>
+  				<Form inverted onSubmit={this.handleSubmit}>
   					<Form.Field>
   						<input type="text" placeholder="Set Name" onChange={this.handleChange} value={this.state.setName}/>
   					</Form.Field>
   				{/*You can move button into form field if you'd like*/}
-  					<Button type='submit'>Save Set</Button>
+  					<Button color={"red"} inverted basic type='submit'>Save Set</Button>
   				</Form>
   			</div>
       </Modal.Actions>

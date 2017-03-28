@@ -1,5 +1,5 @@
 import React from 'react'
-import {Menu, Button} from 'semantic-ui-react'
+import {Menu, Button, Container, Input} from 'semantic-ui-react'
 import YouTubeSearch from 'APP/app/containers/YouTubeSearch'
 import store from 'APP/app/store'
 import LoginLogout from 'APP/app/containers/LoginLogout'
@@ -10,19 +10,24 @@ var socket = io(window.location.origin)
 
 export const Navbar = () => {
 
+  var buttonSpacingStyle = {
+    marginRight: "10px"
+  }
+
   return (
-    <Menu widths={3}>
-      <Menu.Item>
-        <Button basic onClick={evt => {
+    <Menu widths={3} inverted style={{width: "100%", margin: "0 auto"}}>
+      <Container fluid>
+      <Menu.Item style={{ width: "25%", marginLeft: "300px"}}> 
+        <Button basic color={"youtube"} inverted onClick={evt => {
           socket.emit('clearVideos')
           evt.preventDefault()
           store.dispatch(clearQueue('queueLeft'))
           store.dispatch(clearQueue('queueRight'))
-        }}>clear queues</Button>
+        }} style={buttonSpacingStyle}>Clear Queues</Button>
       <SaveSetModal/>
       </Menu.Item>
-      <Menu.Item>
-        <YouTubeSearch
+      <Menu.Item style={{width: "50%"}}>
+        {/*<YouTubeSearch
           apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4' // how to use .env on the front-end
           maxResults='5'
           placeHolder='<- search'
@@ -38,9 +43,11 @@ export const Navbar = () => {
             // console.log(results[0])
             store.dispatch(addToQueue(results[0], 'queueRight'))
           }}
-        />
+        />*/}
+        <Input fluid placeholder="Search Youtube" icon="search" style={{margin: "5px 20px"}}/>
       </Menu.Item>
       <LoginLogout />
+      </Container>
     </Menu>
   )
 }
