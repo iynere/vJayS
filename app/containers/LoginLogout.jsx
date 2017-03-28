@@ -50,7 +50,7 @@ class LoginLogout extends Component {
 
   renderLogin() {
     return (
-      <Button content="Login with Google" icon={'youtube'} color={'youtube'} href='/api/auth/login/google' style={{position: "relative", left: "-40px", width: "60%", maxWidth: "300px"}}></Button>
+      <Button content="Login with Google" icon={'youtube'} color={'youtube'} href='/api/auth/login/google' style={{position: "relative", left: "-50px", width: "60%", maxWidth: "250px"}}></Button>
     )
   }
 
