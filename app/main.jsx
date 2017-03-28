@@ -34,7 +34,7 @@ render (
 			<Route path="/" component={Root} onEnter={onRootEnter} />
       <Route path="/output" component={Output} onEnter={onRootEnter}/>
       <Route path="/live" component={LiveApp} />
-      /*Testing Routes*/
+      {/*Testing Routes*/}
 			<Route path="/effects" component={EffectScreen} />
 			<Route path="/controller" component={Controller}/>
 		</Router>

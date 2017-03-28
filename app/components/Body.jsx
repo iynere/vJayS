@@ -10,12 +10,12 @@ export const Body = () => (
 		<Grid columns='two'>
 			<Grid.Row>
 				<Grid.Column>
-					<Deck 
+					<Deck
 						direction='Left'
 					/>
 				</Grid.Column>
 				<Grid.Column>
-					<Deck 
+					<Deck
 						direction='Right'
 					/>
 				</Grid.Column>
@@ -24,9 +24,9 @@ export const Body = () => (
 		<Grid columns='one'>
 			<Grid.Row>
 				<Grid.Column>
-					<Queues />
-					<Controller />
 					<ControllerVid />
+					<Controller />
+					<Queues />
 				</Grid.Column>
 			</Grid.Row>
 		</Grid>

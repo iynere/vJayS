@@ -1,7 +1,3 @@
-.lol {
-  padding-left: 300px;
-}
-
 .youtube1 {
   position: absolute;
   pointer-events: none;
@@ -54,6 +50,77 @@
   margin: 10px auto;
 }
 
+/*QUEUES CONTAINER*/
+.queuesContainer{
+  border-top:2px solid #333333;
+}
+
+
+
+
+
+/*DJ Controls*/
+
+h2{
+  font-weight: 400;
+}
+
+.djControls{
+  color:white;
+  margin-bottom:30px;
+  border-bottom: 2px solid #333333;
+  padding: 30px;
+  padding-top:0px;
+}
+
+.djControlButtons{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.djControlButtons button{
+  background:#333333;
+  font-size: 2em;
+  padding:10px;
+}
+
+.sliders{
+  width: 500px;
+}
+
+input[type=range]
+{
+  width: 500px;
+  padding: 10px;
+  /*position: absolute;
+  top: 40%;*/
+  /*transform: rotate(270deg);*/
+  /*
+  To change css styles:
+  http://danielstern.ca/range.css/#/ */
+}
+
+.dj2MobileControls{
+  color: white;
+  margin: 30px;
+}
+
+.dj2MobileButtons{
+  display:flex;
+  justify-content: space-around;
+}
+
+.dj2MobileButtons button{
+  background:#333333;
+  font-size: 2em;
+  padding:10px;
+}
+
+
+/*END OF DJ CONTROLS*/
+
+
 .mobileComponent {
   height: 100vh;
   display: flex;
@@ -72,16 +139,6 @@
 }
 
 
-input[type=range]
-{
-  width: 500px;
-  position: absolute;
-  top: 40%;
-  /*transform: rotate(270deg);*/
-  /*
-  To change css styles:
-  http://danielstern.ca/range.css/#/ */
-}
 
 /*.react-typeahead-container {
   border: 1px solid #024e6a;
