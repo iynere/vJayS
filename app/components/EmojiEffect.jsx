@@ -49,16 +49,16 @@ export default class EmojiEffect extends Component {
  render(){
    return (
      <div className="emojiEffect" id="emojiEffect">
-       <div id="col1"></div>
-       <div id="col2"></div>
-       <div id="col3"></div>
-       <div id="col4"></div>
-       <div id="col5"></div>
-       <div id="col6"></div>
-       <div id="col7"></div>
-       <div id="col8"></div>
-       <div id="col9"></div>
-       <div id="col10"></div>
+       <div id="col1" className="col"></div>
+       <div id="col2" className="col"></div>
+       <div id="col3" className="col"></div>
+       <div id="col4" className="col"></div>
+       <div id="col5" className="col"></div>
+       <div id="col6" className="col"></div>
+       <div id="col7" className="col"></div>
+       <div id="col8" className="col"></div>
+       <div id="col9" className="col"></div>
+       <div id="col10" className="col"></div>
      </div>
    )
  }
