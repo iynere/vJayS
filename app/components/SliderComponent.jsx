@@ -22,9 +22,7 @@ export default class SliderComponent extends Component {
 
 	render() {
 		return(
-			<div className="mobileComponent">
-				<input className="slider" type="range" onChange={this.props.handleChange}/>
-			</div>
+				<input type="range" onChange={this.props.handleChange}/>
 		)
 	}
 }

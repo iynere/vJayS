@@ -12,6 +12,10 @@ export default class ControllerVid extends Component {
     this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
   }
 
+  handleVolumeSlider(event){
+    socket.emit('changeVolume', event.target.value*2);
+  }
+
   handleOpacitySlider(event){
     socket.emit('changeOpacity', event.target.value/100)
   }
@@ -23,12 +27,18 @@ export default class ControllerVid extends Component {
   render() {
     // console.log("command current", this.props.command);
     return (
-      <div>
-        <button onClick={()=>this.handleSkipVideo("Left")}>skip left</button>
-        <button onClick={()=>this.handleSkipVideo("both")}>skip</button>
-        <button onClick={()=>this.handleSkipVideo("Right")}>skip right</button>
-
-        <SliderComponent className='lol' handleChange={this.handleOpacitySlider}/>
+      <div className="djControls">
+        <h2>Video Controls</h2>
+        <div className="djControlButtons">
+          <button onClick={()=>this.handleSkipVideo("Left")}>Skip Left</button>
+          <div className="sliders">
+            <SliderComponent  handleChange={this.handleOpacitySlider}/>
+            <p>Opacity</p>
+            <SliderComponent  handleChange={this.handleVolumeSlider}/>
+            <p>Volume</p>
+          </div>
+          <button onClick={()=>this.handleSkipVideo("Right")}>Skip Right</button>
+        </div>
       </div>
     )
   }
