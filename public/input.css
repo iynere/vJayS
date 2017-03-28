@@ -163,10 +163,7 @@ input[type=range]
 .touchPad{
   width:100vw;
   height:100vh;
-  background-color: pink;
 }
-
-
 
 #p5parent{
 
@@ -177,14 +174,6 @@ input[type=range]
 }
 
 #p6parent{
-
-  opacity:1;
-  position: absolute;
-  top:0;
-  left:0;
-}
-
-#p7parent{
 
   opacity:1;
   position: absolute;
@@ -244,9 +233,9 @@ input[type=range]
 .emojiButton{
  width: 25em;
  height: 25em;
- border: 5px solid lightblue;
+ border: 3px solid lightblue;
  border-radius:50%;
- background-color:white;
+ background:none;
 }
 
 .buttonsContainer img{

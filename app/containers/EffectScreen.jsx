@@ -19,8 +19,8 @@ class EffectScreen extends Component {
   }
 
   componentDidMount() {
-    socket.on('drawColorEllipse', () => {
-      this.setState({sketchFunction: sketch2})
+    socket.on('clearCanvas', () => {
+      this.setState({sketchFunction: ""})
     })
 
     socket.on('drawWhiteEllipse', () => {
@@ -37,10 +37,6 @@ class EffectScreen extends Component {
       this.setState({sketchFunction: "tap"})
     })
 
-    socket.on('drawSlider', () => {
-      console.log("loading slider screen")
-      this.setState({sketchFunction: "slider"})
-    })
   }
 
   render() {
@@ -54,23 +50,9 @@ class EffectScreen extends Component {
             </div> : null
           }
           {
-            this.state.sketchFunction === sketch2 ?
-            <div id="p6parent" className="p5parents">
-              <P5Wrapper sketch={sketch2}/>
-            </div> : null
-          }
-          {
               this.state.sketchFunction === "emojiPoll" ?
             <EmojiEffect />
                : null
-          }
-          {
-            this.state.sketchFunction === "tap" ?
-            <TapEffect /> : null
-          }
-          {
-            this.state.sketchFunction === "slider" ?
-            <SliderEffect /> : null
           }
           {
             this.state.sketchFunction === "tap" ?

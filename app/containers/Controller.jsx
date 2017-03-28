@@ -36,7 +36,7 @@ class Controller extends Component {
 	}
 
 	handleClearButton(){
-		socket.emit("clearButtonClicked")
+		socket.emit("clearButtonClicked", "")
 	}
 
 	handleWhiteButton(){
