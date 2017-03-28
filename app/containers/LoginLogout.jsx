@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
-import {Button, Dropdown, Menu} from 'semantic-ui-react'
+import {Button, Icon, Dropdown, Menu} from 'semantic-ui-react'
 import {logout} from 'APP/app/reducers/auth'
 import {fetchPlaylists} from 'APP/app/reducers/playlists'
 import axios from 'axios'
@@ -50,7 +50,7 @@ class LoginLogout extends Component {
 
   renderLogin() {
     return (
-      <Menu.Item><Button basic href='/api/auth/login/google'>Login</Button></Menu.Item>
+      <Button content="Login with Google" icon={'youtube'} color={'youtube'} href='/api/auth/login/google' style={{position: "relative", left: "-40px", width: "60%", maxWidth: "300px"}}></Button>
     )
   }
 
@@ -58,17 +58,17 @@ class LoginLogout extends Component {
     const user = this.props.user
     return (
       <Menu.Item>
-        <Button basic onClick={this.props.logout}>Logout</Button></Menu.Item>
+        <Button onClick={this.props.logout}>Logout</Button></Menu.Item>
     )
   }
 
   render() {
     const user = this.props.user
     return (
-      <Menu.Menu position='right'>
+      <Menu.Item>
         {user ? this.renderUser() : null}
         {user ? this.renderLogout() : this.renderLogin()}
-      </Menu.Menu>
+      </Menu.Item>
     )
   }
 }
