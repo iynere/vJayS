@@ -9,7 +9,6 @@ import SliderComponent from 'APP/app/components/SliderComponent'
 var socket = io(window.location.origin)
 
 class Controller extends Component {
-
 	constructor(){
 		super()
 		this.commandType=this.commandType.bind(this)
@@ -75,17 +74,17 @@ class Controller extends Component {
 }
 
 const mapStateToProps=state => {
-	return {
-		command: state.command
-	}
+  return {
+    command: state.command
+  }
 }
 
 const mapDispatchToProps=dispatch => {
-	return {
-		handleSetCommand (command) {
-			return dispatch(setCommand(command))
-		}
-	}
+  return {
+    handleSetCommand (command) {
+      return dispatch(setCommand(command))
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controller);
