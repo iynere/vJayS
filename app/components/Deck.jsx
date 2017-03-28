@@ -6,22 +6,22 @@ import SortableQueue from '../components/SortableQueue'
 
 export const Deck = props => {
 
-	const queueStyles = {
-		marginLeft: "10px"
-	}
+  const queueStyles = {
+    marginLeft: "10px"
+  }
 
-	return (
-	<Container>
-		<Player 
-			direction={props.direction}
-		/>
-		{/*<Controls />*/}
-		<div style={queueStyles}>
-			{/*<SortableQueue
-							direction={props.direction}
-						/>*/}
-		</div>
-	</Container>
+  return (
+  <Container>
+    <Player 
+      direction={props.direction}
+    />
+    {/*<Controls />*/}
+    <div style={queueStyles}>
+      {/*<SortableQueue
+              direction={props.direction}
+            />*/}
+    </div>
+  </Container>
 )}
 
 // if we're reusing components, how do we render them with different information ?
