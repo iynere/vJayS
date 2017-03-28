@@ -6,7 +6,6 @@ module.exports = function(io) {
       })
 
       mobileSocket.on('getInterface', ()=>{
-        console.log("mobile asked to get interface");
         mobileSocket.broadcast.emit('getCommandType')
       })
 
@@ -15,13 +14,7 @@ module.exports = function(io) {
      })
 
       mobileSocket.on('tappingScreen', ()=>{
-       console.log("screen tap getting to mobile server");
        mobileSocket.broadcast.emit('updateTapValue')
-     })
-    
-    mobileSocket.on('movingSlider', (newValue)=>{
-       console.log("moving slider on mobile phone");
-       mobileSocket.broadcast.emit('updateSliderValue', newValue)
      })
 
     });
