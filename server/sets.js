@@ -20,12 +20,12 @@ module.exports = require('express').Router()
   })
   .get('/:userId/:setId', (req, res, next) => {
     // get single set
-    Set.findAll({
-      where: { id: req.params.setId, user_id: req.params.userId },
+    Set.findOne({
+      where: { id: req.params.setId },
       include: [Video]
       })
-    .then((foundSets) => {
-      res.json(foundSets)
+    .then((foundSet) => {
+      res.json([foundSet])
     })
     .catch(next)
   })

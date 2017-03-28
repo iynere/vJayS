@@ -27,17 +27,6 @@ export const fetchSetItems = () => dispatch => {
   console.log('SET', setItems)
 }
 
-export const fetchSetFromDb = (/*title? id? userId?*/) => dispatch => {
-  // do axios stuff
-}
-
-export const fetchAllSetsFromDb = (userId) => dispatch => {
-  // do axios stuff
-  axios.get(`/api/sets/${userId}`)
-    .then((sets) => {console.log("Getting the sets!", sets)})
-    .catch(console.error)
-}
-
 export const addToSet = setItem => dispatch => {
   let setToUpdate = localStore.get('set') ? localStore.get('set') : []
   setToUpdate.push(setItem)
@@ -49,7 +38,16 @@ export const saveSetToDb = (set) => dispatch => {
   axios.post('/api/sets', set)
     .then(() => {
       dispatch(clearSet())
-      console.log("Saved set and everything's working!")})
+    })
+    .catch(console.error)
+}
+
+export const fetchSetFromDb = (userId, setId) => dispatch => {
+  axios.get(`/api/sets/${userId}/${setId}`)
+    .then((foundSet) => {
+      // dispatch(receiveSet(foundSet))
+      console.log("Getting the set!", foundSet)
+    })
     .catch(console.error)
 }
 
