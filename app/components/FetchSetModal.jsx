@@ -29,7 +29,7 @@ class FetchSetModal extends Component {
     let leftQueue = localStore.get('queueLeft')
     let rightQueue = localStore.get('queueRight')
     this.props.receiveQueue(leftQueue, 'queueLeft')
-    this.props.receiveQueue(rightQueue, 'queueRight') 
+    this.props.receiveQueue(rightQueue, 'queueRight')
     this.setState({
       modalOpen: false,
     })
@@ -65,6 +65,9 @@ class FetchSetModal extends Component {
   				</List>
   			</div>
       </Modal.Content>
+			<Modal.Actions style={{textAlign:"left"}}>
+				<Button onClick={this.handleClose}>Load Set</Button>
+			</Modal.Actions>
       </Modal>
 		)
 	}
@@ -83,7 +86,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   receiveQueue: (queue, queueLeftOrRight) => {
     dispatch(receiveQueue(queue, queueLeftOrRight))
-  } 
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FetchSetModal)
