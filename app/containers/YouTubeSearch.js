@@ -94,7 +94,7 @@ class YoutubeAutocomplete extends Component {
     // this is why you have to do onChange={this.handleChange.bind(this)}
     return <div style={{width: '600px'}}>
       <Typeahead
-      	style={{width: '600px'}}
+        style={{width: '600px'}}
         inputValue={this.state.inputValue}
         placeholder={this.props.placeHolder}
         className={this.props.className}
