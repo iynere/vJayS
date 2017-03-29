@@ -44,15 +44,25 @@ export default class ControllerVid extends Component {
       <div className="djControls">
         <h2><Icon name="options" /> Video Controls</h2>
         <div className="djControlButtons">
-          <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
+          <div className="singleSliders">
+            <SliderComponent />
+            <SliderComponent />
+            <SliderComponent />
+          </div>
           <div className="sliders">
+            <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
             <button onClick={()=>this.handlePlayBoth()}>{this.state.unicode}</button>
+            <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right"></Button>
             <SliderComponent  handleChange={this.handleOpacitySlider}/>
             <p>Opacity</p>
             <SliderComponent  handleChange={this.handleVolumeSlider}/>
             <p>Volume</p>
           </div>
-          <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right"></Button>
+          <div className="singleSliders">
+            <SliderComponent />
+            <SliderComponent />
+            <SliderComponent />
+          </div>
         </div>
       </div>
     )

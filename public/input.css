@@ -12,6 +12,7 @@ a:visited{
 }
 
 .youtube1 {
+  /*Right player*/
   position: absolute;
   pointer-events: none;
   opacity: 0.5;
@@ -100,16 +101,18 @@ h2{
 }
 
 .sliders{
-  width: 500px;
+  width: 35%;
   text-align:center;
 }
-.sliders button{
-  margin-bottom:10px;
+
+.singleSliders{
+  width: 22.5%;
+  text-align:center;
 }
 
 input[type=range]
 {
-  width: 500px;
+  width: 100%;
   padding: 10px;
   /*position: absolute;
   top: 40%;*/
