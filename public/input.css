@@ -1,3 +1,7 @@
+a:visited{
+  color:white;
+}
+
 .effects {
   position: fixed;
   pointer-events: none;

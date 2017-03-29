@@ -4,7 +4,10 @@ import {twemojiList} from 'APP/app/utils/twemojis.js'
 
 export default props => {
   let emojiButtons= twemojiList ? twemojiList.map((twemoji, index) => {
-    return <button className="emojiButton" key={index} onClick={()=>props.handleEmojiClick(index)}>{twemojiList[index]}</button>
+    return <button className="emojiButton" key={index} onTouchStart={(event)=>{
+          event.preventDefault()
+          props.handleEmojiClick(index)
+      }}>{twemojiList[index]}</button>
   }) : null
   return (
     <div className="emojiMobile">
