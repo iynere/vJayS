@@ -8,34 +8,36 @@ var socket = io(window.location.origin)
 
 export default class EmojiEffect extends Component {
 
+  constructor(){
+    super();
+    this.recentCol= []
+    this.drawEmoji=this.drawEmoji.bind(this)
+  }
+
  componentDidMount(){
-  console.log("socket has listeners?", socket.hasListeners('drawEmoji'))
   if(!socket.hasListeners('drawEmoji')){
     socket.on('drawEmoji', (emoji)=>{
       this.drawEmoji(emoji);
     })
   }
-
-
  }
- //
- // getUrl(emoji){
- //   switch (emoji){
- //     case "alien":
- //       return "/logos/alienemoji.png"
- //     case "fire":
- //       return "/logos/fireemoji.png"
- //     default: return null
- //   }
- // }
 
  drawEmoji(emoji){
-    console.log("emo index", emoji)
+    // console.log("emo index", emoji)
     let element=<div className="emojiAnimation">{twemojiList[emoji]}</div>
 
-    let columns=["col1", "col2", "col3", "col4", "col5", "col6", "col7", "col8", "col9", "col10"]
-    let column=columns[Math.floor(Math.random()*10)+1]
+    let num=Math.floor(Math.random()*20)+1
+    while(this.recentCol.indexOf(num) >= 0){
+      let num=Math.floor(Math.random()*20)+1
+    }
+    this.recentCol.push[num]
+    if(this.recentCol.length > 18){
+      this.recentCol=this.recentCol.slice(5)
+    }
+    console.log("recent", this.recentCol)
+    let column=`col${num}`
 
+    // console.log("jlj", column)
     ReactDOM.render(
       element,
       document.getElementById(column)
@@ -47,51 +49,24 @@ export default class EmojiEffect extends Component {
         document.getElementById(column)
       );
     }, 5000)
-
-
-    // let element=<div className="emojiAnimation">{twemojiList[emoji]}</div>
-    //
-    // let columns=["col1", "col2", "col3", "col4", "col5", "col6", "col7", "col8", "col9", "col10"]
-    // let column=columns[Math.floor(Math.random()*10)+1]
-    //
-    // ReactDOM.render(
-    //   element,
-    //   document.getElementById(column)
-    // );
-
-
-
-  //  let url=this.getUrl(emoji);
-   //
-  //  var animationDiv=document.createElement('div')
-  //  animationDiv.setAttribute("class", "emojiAnimation")
-  //  var img=new Image(100,100);
-  //  img.src=url;
-  //  animationDiv.appendChild(img)
-   //
-   //
-  //  let columns=["col1", "col2", "col3", "col4", "col5", "col6", "col7", "col8", "col9", "col10"]
-  //  let column=columns[Math.floor(Math.random()*10)+1]
-  //  document.getElementById(column).appendChild(animationDiv)
-   //
-  //  setTimeout(()=>{
-  //    document.getElementById(column).removeChild(animationDiv)
-  //  }, 5000)
  }
 
  render(){
+   let animationColumns=[], animationColumns2=[];
+   for(let i=1; i <= 10; i++){
+     animationColumns.push(<div key={i} id={`col${i}`} className="col"></div>)
+   }
+   for(let i=11; i <= 20; i++){
+     animationColumns2.push(<div key={i} id={`col${i}`} className="col"></div>)
+   }
    return (
-     <div className="emojiEffect" id="emojiEffect">
-       <div id="col1" className="col"></div>
-       <div id="col2" className="col"></div>
-       <div id="col3" className="col"></div>
-       <div id="col4" className="col"></div>
-       <div id="col5" className="col"></div>
-       <div id="col6" className="col"></div>
-       <div id="col7" className="col"></div>
-       <div id="col8" className="col"></div>
-       <div id="col9" className="col"></div>
-       <div id="col10" className="col"></div>
+     <div>
+       <div className="emojiEffect" id="emojiEffect">
+         {animationColumns}
+       </div>
+       <div className="emojiEffect2" id="emojiEffect">
+         {animationColumns2}
+       </div>
      </div>
    )
  }
