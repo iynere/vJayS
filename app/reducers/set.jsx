@@ -1,6 +1,6 @@
 import axios from 'axios'
 import localStore from 'store'
-import receiveQueue from './queue'
+import {receiveQueue} from './queue'
 // CONSTANTS
 export const RECEIVE_SET = 'RECEIVE_SET'
 
@@ -46,12 +46,12 @@ export const fetchSetFromDb = (userId, setId) => dispatch => {
   axios.get(`/api/sets/${userId}/${setId}`)
     .then((foundSet) => {
       let setArray = foundSet.data[0].videos
-      dispatch(receiveSet(foundSet.data[0].videos))
-      localStore.set("queueLeft", [])
-      localStore.set("queueRight", []) 
+      // dispatch(receiveSet(foundSet.data[0].videos))
+      localStore.set('queueLeft', [])
+      localStore.set('queueRight', []) 
 
-      let queueLeft=[]
-      let queueRight=[]
+      let queueLeft = [],
+        queueRight = []
 
       setArray.forEach((setItem) => {
         let itemForQueue = {
@@ -62,11 +62,14 @@ export const fetchSetFromDb = (userId, setId) => dispatch => {
           }
         }
       
-      setItem.direction === "Left" ? queueLeft.push(itemForQueue) : queueRight.push(itemForQueue)
+      setItem.direction === 'Left' ? queueLeft.push(itemForQueue) : queueRight.push(itemForQueue)
       })
 
-      localStore.set("queueLeft", queueLeft)
-      localStore.set("queueRight", queueRight)
+      localStore.set('queueLeft', queueLeft)
+      localStore.set('queueRight', queueRight)
+      dispatch(receiveQueue(queueLeft, 'queueLeft'))
+      dispatch(receiveQueue(queueRight, 'queueRight'))
+      
     })
     .catch(console.error)
 }
