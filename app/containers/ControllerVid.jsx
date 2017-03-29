@@ -11,12 +11,11 @@ export default class ControllerVid extends Component {
 
   constructor(){
     super()
-    this.play="\u25B6"
-    this.pause="\u23F8"
+    this.play="play"
+    this.pause="pause"
     this.playing=0;
     this.state={
-      unicode: "\u25B6",
-      direction: ""
+      unicode: "play"
     }
     this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
   }
@@ -69,8 +68,9 @@ export default class ControllerVid extends Component {
           </div>
           <div className="sliders">
             <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
-            <button onClick={()=>this.handlePlayBoth()}>{this.state.unicode}</button>
+            <Button inverted basic color="blue" size="huge" icon={this.state.unicode} style={{margin: "10px"}} onClick={()=>this.handlePlayBoth()}></Button>
             <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right"></Button>
+             <p></p>
             <SliderComponent  handleChange={this.handleOpacitySlider}/>
             <p>Opacity</p>
             <SliderComponent  handleChange={this.handleVolumeSlider}/>
