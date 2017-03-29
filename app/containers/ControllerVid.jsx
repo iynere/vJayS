@@ -15,7 +15,7 @@ export default class ControllerVid extends Component {
     this.pause="pause"
     this.playing=0;
     this.state={
-      unicode: "play"
+      playStatus: "play"
     }
     this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
   }
@@ -46,8 +46,8 @@ export default class ControllerVid extends Component {
 
   handlePlayBoth(){
     this.playing = this.playing === 0 ? 1 : 0
-    let unicode = this.playing === 0 ? this.play : this.pause
-    this.setState({unicode: unicode})
+    let playStatus = this.playing === 0 ? this.play : this.pause
+    this.setState({playStatus: playStatus})
     socket.emit('playBothPressed', this.playing)
   }
 
@@ -68,7 +68,7 @@ export default class ControllerVid extends Component {
           </div>
           <div className="sliders">
             <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
-            <Button inverted basic color="blue" size="huge" icon={this.state.unicode} style={{margin: "10px"}} onClick={()=>this.handlePlayBoth()}></Button>
+            <Button inverted basic color="blue" size="huge" icon={this.state.playStatus} style={{margin: "10px"}} onClick={()=>this.handlePlayBoth()}></Button>
             <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right"></Button>
              <p></p>
             <SliderComponent  handleChange={this.handleOpacitySlider}/>
