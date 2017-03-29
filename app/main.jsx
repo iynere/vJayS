@@ -29,15 +29,15 @@ const onRootEnter = () => {
 }
 
 render (
-	<Provider store={store}>
-		<Router history={browserHistory}>
-			<Route path="/" component={Root} onEnter={onRootEnter} />
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={Root} onEnter={onRootEnter} />
       <Route path="/output" component={Output} onEnter={onRootEnter}/>
       <Route path="/live" component={LiveApp} />
       {/*Testing Routes*/}
-			<Route path="/effects" component={EffectScreen} />
-			<Route path="/controller" component={Controller}/>
-		</Router>
-	</Provider>,
-	document.getElementById('main')
+      <Route path="/effects" component={EffectScreen} />
+      <Route path="/controller" component={Controller}/>
+    </Router>
+  </Provider>,
+  document.getElementById('main')
 )
