@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import YouTubeAutocomplete from 'react-youtube-autocomplete';
+import YouTubeSearch from './YouTubeSearch';
 import SearchResultItem from 'APP/app/components/SearchResultItem'
 import {Modal, List, Input} from 'semantic-ui-react'
 import {addToQueue} from 'APP/app/reducers/queue'
@@ -16,7 +16,7 @@ class Search extends Component {
     this.showSearchResults = this.showSearchResults.bind(this)
     // this.onClickLeft=this.onClickLeft.bind(this)
     // this.onClickRight=this.onClickRight.bind(this)
-    this.handleClose=this.handleClose.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   showSearchResults(searchResults) {
@@ -67,7 +67,7 @@ class Search extends Component {
 
     return (
       <div>
-        <YouTubeAutocomplete
+        <YouTubeSearch
           apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4'
           placeHolder="Search YouTube"
           callback={this.showSearchResults}
