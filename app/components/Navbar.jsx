@@ -9,9 +9,13 @@ var socket = io(window.location.origin)
 
 export const Navbar = () => {
 
-  var buttonSpacingStyle = {
-    marginRight: "10px"
-  }
+	var buttonSpacingStyle = {
+		marginRight: "10px"
+	}
+	
+	var searchStyles = {
+		width: "500px"
+	}
 
   return (
     <Menu widths={3} inverted style={{width: "100%", margin: "0 auto"}}>
@@ -48,4 +52,3 @@ export const Navbar = () => {
       </Container>
     </Menu>
   )
-}

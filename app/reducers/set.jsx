@@ -24,7 +24,7 @@ export const receiveSet = set => ({
 export const fetchSetItems = () => dispatch => {
   let setItems = localStore.get('set') ? localStore.get('set') : []
   dispatch(receiveSet(setItems))
-  console.log('SET', setItems)
+  // console.log('SET', setItems)
 }
 
 export const fetchSetFromDb = (/*title? id? userId?*/) => dispatch => {
