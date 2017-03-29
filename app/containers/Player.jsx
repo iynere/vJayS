@@ -4,6 +4,7 @@ import YouTube from 'react-youtube'
 import {addToSet} from 'APP/app/reducers/set'
 import {savePlayer} from 'APP/app/reducers/player'
 import {removeFromQueue} from 'APP/app/reducers/queue'
+import $ from 'jquery'
 
 var socket = io(window.location.origin)
 
@@ -60,6 +61,26 @@ class Player extends Component {
       this.handleVolumeChange(newVol, event.target);
     })
 
+    socket.on('changeVideoHue', (hueRotation, direction) => {
+      console.log("Hue changing!", hueRotation, direction)
+
+      $(document).ready(() => {
+        $(`.${direction}Deck.hue`).css('filter', `hue-rotate(${hueRotation}deg)`)
+      })
+    })
+
+
+    socket.on('changeVideoInvert', (invertPercent, direction) => {
+        $(document).ready(() => {
+          $(`.${direction}Deck.invert`).css('filter', `invert(${invertPercent}%)`)
+        })
+    })
+
+    socket.on('changeVideoSaturate', (saturationPercent, direction) => {
+        $(document).ready(() => {
+          $(`.${direction}Deck.saturate`).css('filter', `saturate(${saturationPercent}%)`)
+        })
+    })
     // 'ready' refers to iframe, not video
     // need to reset playback quality for each new video
     setTimeout(() => {
@@ -169,16 +190,16 @@ class Player extends Component {
     }
 
     return (
-      <YouTube
-        videoId={queue && queue.length ? queue[0].id.videoId : ''}
-        opts={playerOptions}
-        onReady={this.handlePlayerReady}
-        onPlay={this.handleVideoPlay}
-        onPause={this.handleVideoPause}
-        onPlaybackRateChange={this.handlePlaybackRateChange}
-        onEnd={this.handleVideoEnd}
-        onStateChange={this.handlePlayerStateChange}
-      />
+        <YouTube
+          videoId={queue && queue.length ? queue[0].id.videoId : ''}
+          opts={playerOptions}
+          onReady={this.handlePlayerReady}
+          onPlay={this.handleVideoPlay}
+          onPause={this.handleVideoPause}
+          onPlaybackRateChange={this.handlePlaybackRateChange}
+          onEnd={this.handleVideoEnd}
+          onStateChange={this.handlePlayerStateChange}
+        />
     )
   }
 }

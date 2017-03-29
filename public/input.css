@@ -2,6 +2,14 @@ a:visited{
   color:white;
 }
 
+.LeftDeck .hue {
+  filter: hue-rotate();
+}
+
+.RightDeck {
+/*  filter: grayscale(100%);*/
+}
+
 .effects {
   position: fixed;
   pointer-events: none;
@@ -9,6 +17,10 @@ a:visited{
   z-index: 1;
   width:100%;
   height:100%;
+}
+
+.youtube1 .hue {
+  filter: hue-rotate();
 }
 
 .youtube1 {
