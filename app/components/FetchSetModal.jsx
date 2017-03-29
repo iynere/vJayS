@@ -37,6 +37,7 @@ class FetchSetModal extends Component {
 
   onItemClick = (set, e) => {
     this.props.fetchSetFromDb(this.props.user.id, set.id)
+    this.handleClose()
   }
 
   render() {
