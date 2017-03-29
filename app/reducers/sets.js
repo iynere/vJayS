@@ -22,10 +22,6 @@ export const getAllSets = sets => ({
 
 // ACTION CREATORS
 
-export const fetchSetFromDb = (/*title? id? userId?*/) => dispatch => {
-  // do axios stuff
-}
-
 export const fetchAllSetsFromDb = (userId) => dispatch => {
   // do axios stuff
   axios.get(`/api/sets/${userId}`)
