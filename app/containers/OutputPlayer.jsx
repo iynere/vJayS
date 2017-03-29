@@ -16,7 +16,7 @@ class OutputPlayer extends Component {
 
     }
 
-    this.handleVideoReady = this.handleVideoReady.bind(this)
+    this.handlePlayerReady = this.handlePlayerReady.bind(this)
     this.handleVideoPlay = this.handleVideoPlay.bind(this)
     this.reinitializeVideo = this.reinitializeVideo.bind(this)
     this.handleVideoEnd = this.handleVideoEnd.bind(this)
@@ -71,7 +71,7 @@ class OutputPlayer extends Component {
 
   }
 
-  handleVideoReady(event) {
+  handlePlayerReady(event) {
     socket.on(`seekTo${this.props.direction}`, cueTime => {
       event.target.seekTo(cueTime)
     })
@@ -88,6 +88,9 @@ class OutputPlayer extends Component {
   }
 
   handleVideoPlay(event) {
+    setTimeout(() => {
+      event.target.setPlaybackQuality('small')  
+    }, 100)
     // let Direction = this.props.direction,
     //  cueTime = event.target.getCurrentTime()
     //  event.target.setVolume(0)
@@ -97,10 +100,10 @@ class OutputPlayer extends Component {
     //  }
   }
 
-  handleVideoEnd(){
-
-    let Direction= this.props.direction,
-      newQueue=this.state[`queue${Direction}`].slice(1)
+  handleVideoEnd(event){
+    event.target.setPlaybackRate(1)
+    let Direction = this.props.direction,
+      newQueue = this.state[`queue${Direction}`].slice(1)
     console.log("getting to handle Video END", newQueue)
 
     this.setState({
@@ -142,7 +145,7 @@ class OutputPlayer extends Component {
       <YouTube
         videoId={this.state[`queue${Direction}`].length ? this.state[`queue${Direction}`][0].id.videoId : ''}
         opts={playerOptions}
-        onReady={this.handleVideoReady}
+        onReady={this.handlePlayerReady}
         onStateChange={this.reinitializeVideo}
         onPlay={this.handleVideoPlay}
         onEnd={this.handleVideoEnd}

@@ -16,7 +16,7 @@ class Player extends Component {
     }
 
     this.handlePlayerStateChange = this.handlePlayerStateChange.bind(this)
-    this.handleVideoReady = this.handleVideoReady.bind(this)
+    this.handlePlayerReady = this.handlePlayerReady.bind(this)
     this.handleVideoPlay = this.handleVideoPlay.bind(this)
     this.handleVideoPause = this.handleVideoPause.bind(this)
     this.handlePlaybackRateChange = this.handlePlaybackRateChange.bind(this)
@@ -28,7 +28,7 @@ class Player extends Component {
     // console.log('PROPS', this.props)
   }
 
-  handleVideoReady(event) {
+  handlePlayerReady(event) {
     let Direction = this.props.direction,
       cueTime = event.target.getCurrentTime(),
       videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : ''
@@ -68,9 +68,19 @@ class Player extends Component {
     }, 100)
 
     socket.emit(`playerMounted${Direction}`, videoToEmit)
+    
+    // event.target.loadVideoById(this.props.queue[0].id.videoId, event.target.getCurrentTime(), 'small')
+    
+    // setTimeout(() => {
+    //  event.target.pauseVideo()
+    // }, 2)
   }
 
   handleVideoPlay(event) {
+    setTimeout(() => {
+      event.target.setPlaybackQuality('small')  
+    }, 100)
+    
     let Direction = this.props.direction,
       cueTime = event.target.getCurrentTime()
     socket.emit(`playingVideo${Direction}`, cueTime)
@@ -109,7 +119,9 @@ class Player extends Component {
 
   }
 
-  handleVideoEnd() {
+  handleVideoEnd(event) {
+    event.target.setPlaybackRate(1)
+    // console.log('END EVENT: ',event)
     let video = this.state[`video${this.props.direction}`],
       setItem = {
         "direction": this.props.direction,
@@ -160,7 +172,7 @@ class Player extends Component {
       <YouTube
         videoId={queue && queue.length ? queue[0].id.videoId : ''}
         opts={playerOptions}
-        onReady={this.handleVideoReady}
+        onReady={this.handlePlayerReady}
         onPlay={this.handleVideoPlay}
         onPause={this.handleVideoPause}
         onPlaybackRateChange={this.handlePlaybackRateChange}

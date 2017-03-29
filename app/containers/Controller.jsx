@@ -13,7 +13,7 @@ var socket = io(window.location.origin)
 class Controller extends Component {
   constructor(){
     super()
-    this.commandType=this.commandType.bind(this)
+    this.commandType = this.commandType.bind(this)
     this.handleWhiteButton = this.handleWhiteButton.bind(this)
     this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
     this.handleTapButton = this.handleTapButton.bind(this)
@@ -60,25 +60,25 @@ class Controller extends Component {
     socket.emit('clickedTap', commandType)
   }
 
-	handleTapButton() {
-		this.props.handleSetCommand("tap")
-		let commandType="tap"
-		socket.emit('clickedTap', commandType)
-	}
+  handleTapButton() {
+    this.props.handleSetCommand("tap")
+    let commandType="tap"
+    socket.emit('clickedTap', commandType)
+  }
 
-	render() {
-		return (
-			<div className="dj2MobileControls">
-				<h2><Icon name="users" /> Interactions</h2>
-				<Button.Group style={{width: "100%"}}>
-					<Button basic color="green" inverted size="massive" icon="paint brush" content="Draw" onClick={this.handleWhiteButton}></Button>
-					<Button basic color="yellow" inverted size="massive" icon="smile" content="Emoticons" onClick={this.handleEmoticonsButton}></Button>
-					<Button basic color="blue" inverted size="massive" icon="pointing up" content="Tap" onClick={this.handleTapButton}></Button>
-					<Button basic color="red" inverted content="Clear" size="massive" icon="erase" onClick={this.handleClearButton}></Button>
-				</Button.Group>
-			</div>
-		)
-	}
+  render() {
+    return (
+      <div className="dj2MobileControls">
+        <h2><Icon name="users" /> Interactions</h2>
+        <Button.Group style={{width: "100%"}}>
+          <Button basic color="green" inverted size="massive" icon="paint brush" content="Draw" onClick={this.handleWhiteButton}></Button>
+          <Button basic color="yellow" inverted size="massive" icon="smile" content="Emoticons" onClick={this.handleEmoticonsButton}></Button>
+          <Button basic color="blue" inverted size="massive" icon="pointing up" content="Tap" onClick={this.handleTapButton}></Button>
+          <Button basic color="red" inverted content="Clear" size="massive" icon="erase" onClick={this.handleClearButton}></Button>
+        </Button.Group>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps=state => {
