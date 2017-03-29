@@ -14,7 +14,10 @@ export default class ControllerVid extends Component {
     this.play="\u25B6"
     this.pause="\u23F8"
     this.playing=0;
-    this.state={unicode: "\u25B6"}
+    this.state={
+      unicode: "\u25B6",
+      direction: ""
+    }
     this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
   }
 
@@ -24,6 +27,10 @@ export default class ControllerVid extends Component {
 
   handleOpacitySlider(event){
     socket.emit('changeOpacity', event.target.value/100)
+  }
+
+  handleHueSlider(direction, event){
+    socket.emit('changeHueRotation', event.target.value, direction) 
   }
 
   handleSkipVideo(direction){
@@ -45,7 +52,7 @@ export default class ControllerVid extends Component {
         <h2><Icon name="options" /> Video Controls</h2>
         <div className="djControlButtons">
           <div className="singleSliders">
-            <SliderComponent />
+            <SliderComponent handleChange={this.handleHueSlider.bind(this, "Left")}/>
             <SliderComponent />
             <SliderComponent />
           </div>
@@ -59,7 +66,7 @@ export default class ControllerVid extends Component {
             <p>Volume</p>
           </div>
           <div className="singleSliders">
-            <SliderComponent />
+            <SliderComponent handleChange={this.handleHueSlider.bind(this, "Right")}/>
             <SliderComponent />
             <SliderComponent />
           </div>

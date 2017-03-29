@@ -5,6 +5,11 @@ module.exports = function(io) {
         djSocket.broadcast.emit('changeOutputOpacity', opacity)
       })
 
+      djSocket.on('changeHueRotation', (hueRotation, direction) => {
+          console.log("Hue changing!!")
+          djSocket.broadcast.emit('changeVideoHue', hueRotation, direction)
+       })
+
       djSocket.on('changeVolume', (volume) => {
         djSocket.broadcast.emit('changeVideosVolume', volume)
       })

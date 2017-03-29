@@ -2,14 +2,17 @@ import React from 'react'
 import EffectScreen from '../containers/EffectScreen'
 import OutputPlayer from '../containers/OutputPlayer'
 
-export const Output = () => (
+export const Output = () => {
+  const visualClasses = "hue invert saturate"
+
+  return (
   <div>
-    <div className="youtube2">
+    <div className={`youtube2 ${visualClasses}`}>
       <OutputPlayer
         direction='Left'
       />
     </div>
-    <div className="youtube1">
+    <div className={`youtube1 ${visualClasses}`}>
       <OutputPlayer
         direction='Right'
       />
@@ -18,4 +21,4 @@ export const Output = () => (
       <EffectScreen />
     </div>
   </div>
-)
+)}

@@ -62,6 +62,15 @@ class OutputPlayer extends Component {
       })
     })
 
+    socket.on('changeVideoHue', (hueRotation, direction) => {
+      console.log("Hue changing!", hueRotation, direction)
+      let outputScreen = direction === "Left" ? "youtube2" : "youtube1"
+
+      $(document).ready(() => {
+        $(`.${outputScreen}.hue`).css('filter', `hue-rotate(${hueRotation}deg)`)
+      })
+    })
+
     socket.on('skipVideo', (direction) => {
       if(direction === Direction){
         this.handleVideoEnd();
