@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import localStore from 'store'
 import {connect} from 'react-redux'
 import { Button, List, Dropdown, Modal } from 'semantic-ui-react'
 import {fetchAllSetsFromDb} from '../reducers/sets'
 import {fetchSetFromDb} from '../reducers/set'
+import {receiveQueue} from '../reducers/queue'
 
 class FetchSetModal extends Component {
 	constructor(props) {
@@ -24,6 +26,10 @@ class FetchSetModal extends Component {
 
   handleClose = (e) => {
     e.preventDefault
+    let leftQueue = localStore.get('queueLeft')
+    let rightQueue = localStore.get('queueRight')
+    this.props.receiveQueue(leftQueue, 'queueLeft')
+    this.props.receiveQueue(rightQueue, 'queueRight') 
     this.setState({
       modalOpen: false,
     })
@@ -31,7 +37,6 @@ class FetchSetModal extends Component {
 
   onItemClick = (set, e) => {
     this.props.fetchSetFromDb(this.props.user.id, set.id)
-    console.log("CLICKED SET ID!:", set.id)
   }
 
   render() {
@@ -74,6 +79,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
 	fetchAllSetsFromDb: (userId) => { dispatch(fetchAllSetsFromDb(userId)) },
   fetchSetFromDb: (userId, setId) => { dispatch(fetchSetFromDb(userId, setId))
+  },
+  receiveQueue: (queue, queueLeftOrRight) => {
+    dispatch(receiveQueue(queue, queueLeftOrRight))
   } 
 })
 

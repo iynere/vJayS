@@ -1,6 +1,6 @@
 import axios from 'axios'
 import localStore from 'store'
-
+import receiveQueue from './queue'
 // CONSTANTS
 export const RECEIVE_SET = 'RECEIVE_SET'
 
@@ -45,8 +45,28 @@ export const saveSetToDb = (set) => dispatch => {
 export const fetchSetFromDb = (userId, setId) => dispatch => {
   axios.get(`/api/sets/${userId}/${setId}`)
     .then((foundSet) => {
+      let setArray = foundSet.data[0].videos
       dispatch(receiveSet(foundSet.data[0].videos))
-      console.log("Getting the set!", foundSet.data[0].videos)
+      localStore.set("queueLeft", [])
+      localStore.set("queueRight", []) 
+
+      let queueLeft=[]
+      let queueRight=[]
+
+      setArray.forEach((setItem) => {
+        let itemForQueue = {
+          id: {videoId: setItem.videoId},
+          snippet: {
+            title: setItem.title,
+            thumbnails: {default: {url: setItem.thumbnailUrl}}    
+          }
+        }
+      
+      setItem.direction === "Left" ? queueLeft.push(itemForQueue) : queueRight.push(itemForQueue)
+      })
+
+      localStore.set("queueLeft", queueLeft)
+      localStore.set("queueRight", queueRight)
     })
     .catch(console.error)
 }
