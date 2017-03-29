@@ -8,6 +8,7 @@ import axios from 'axios'
 import {loadYoutubePlaylist} from 'APP/app/reducers/queue'
 import {fetchAllSetsFromDb} from '../reducers/sets'
 import FetchSetModal from 'APP/app/components/FetchSetModal'
+import SaveSetModal from 'APP/app/components/SaveSetModal'
 
 class LoginLogout extends Component {
   constructor(props) {
@@ -16,13 +17,15 @@ class LoginLogout extends Component {
     this.renderUser = this.renderUser.bind(this)
     this.renderLogout = this.renderLogout.bind(this)
   }
-
+  
   renderUser() {
     const user = this.props.user
     return (
       <Dropdown text={`Hello ${user.name || user.email}!`} className='link item'>
         <Dropdown.Menu>
-          <Dropdown.Item
+          <SaveSetModal/>
+          <FetchSetModal/>
+        <Dropdown.Item
             onClick={()=>{
               let accessToken;
               axios.get(`/api/auth/users/${this.props.user.id}`)
@@ -31,18 +34,15 @@ class LoginLogout extends Component {
                   return axios.get(`https://www.googleapis.com/youtube/v3/playlists?access_token=${accessToken}&part=snippet&mine=true`)
                 })
                 .then(res => {
-                  console.log('playlists response: ',res.data)
+                  // console.log('playlists response: ',res.data)
                   let playlistId = res.data.items[1].id
                   return axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?access_token=${accessToken}&part=snippet&maxResults=50&playlistId=${playlistId}`)
                 }).then((res) => {
-                  console.log("playlist items??", res.data)
+                  // console.log("playlist items??", res.data)
                   this.props.loadYoutubePlaylist(res.data.items)
                 }).catch(console.error)
             }}>Load Youtube Playlists
           </Dropdown.Item>
-
-            <FetchSetModal/>
-
         </Dropdown.Menu>
       </Dropdown>
     )
@@ -50,7 +50,7 @@ class LoginLogout extends Component {
 
   renderLogin() {
     return (
-      <Button content="Login with Google" icon={'youtube'} color={'youtube'} href='/api/auth/login/google' style={{position: "relative", left: "-40px", width: "60%", maxWidth: "300px"}}></Button>
+      <Button content="Login with Google" icon={'youtube'} color={'youtube'} href='/api/auth/login/google' style={{position: "relative", left: "-50px", width: "60%", maxWidth: "250px"}}></Button>
     )
   }
 
