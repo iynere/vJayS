@@ -116,15 +116,15 @@ export const loadYoutubePlaylist = playlistItems => dispatch =>{
   let queueLeft=[]
   let queueRight=[]
 
-  playlistItems.filter(item => item.snippet.thumbnails /*filters out videos that have been deleted but are still in playlists*/).forEach((item, index)=>{
-    // let itemForQueue={
-    //  title: item.snippet.title,
-    //  thumbnail: item.snippet.thumbnails.default.url,
-    //  id:{
-    //    videoId: item.snippet.resourceId.videoId
-    //  }
-    // }
-    index % 2 === 0 ? queueLeft.push(item) : queueRight.push(item)
+  playlistItems.filter(item => item.snippet.thumbnails /*filters out videos that have been deleted but are still in playlists*/).forEach((item, index)=> {
+    let itemForQueue = {
+      id: {videoId: item.snippet.resourceId.videoId},
+      snippet: {
+        title: item.snippet.title,
+        thumbnails: {default: {url: item.snippet.thumbnails.default.url}}
+      }
+    }
+    index % 2 === 0 ? queueLeft.push(itemForQueue) : queueRight.push(itemForQueue)
   })
 
   localStore.set("queueLeft", queueLeft)

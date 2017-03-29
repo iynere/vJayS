@@ -76,6 +76,8 @@ class OutputPlayer extends Component {
       event.target.seekTo(cueTime)
     })
 
+    // 'ready' refers to iframe—not video
+    // need to reset playback quality, volume, rate each time a new video loads
     this.reinitializeVideo(event)
     setTimeout(() => {
       event.target.setPlaybackQuality('small')

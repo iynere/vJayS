@@ -60,6 +60,8 @@ class Player extends Component {
       this.handleVolumeChange(newVol, event.target);
     })
 
+    // 'ready' refers to iframe, not video
+    // need to reset playback quality for each new video
     setTimeout(() => {
       event.target.pauseVideo()
       event.target.setPlaybackQuality('small')
