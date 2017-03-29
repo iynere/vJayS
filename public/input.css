@@ -242,14 +242,15 @@ input[type=range]
   height:100%;
  display:flex;
  justify-content: space-around;
+ flex-flow: row wrap;
  padding: 30px;
 }
 
 .emojiButton{
  width: 25em;
  height: 25em;
- border: 3px solid lightblue;
  border-radius:50%;
+ border:none;
  background:none;
 }
 

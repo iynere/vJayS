@@ -1,19 +1,23 @@
 import React, { Component } from 'react'
+import Twemoji from 'react-twemoji'
+import {twemojiList} from 'APP/app/utils/twemojis.js'
 
 export default props => {
+  let emojiButtons= twemojiList ? twemojiList.map((twemoji, index) => {
+    return <button className="emojiButton" key={index} onClick={()=>props.handleEmojiClick(index)}>{twemojiList[index]}</button>
+  }) : null
   return (
     <div className="emojiMobile">
       <h1>How are you feeling?</h1>
       <div className="buttonsContainer">
-        <button className="emojiButton" onClick={()=>props.handleEmojiClick("alien")}><img src="/logos/alienemoji.png"/></button>
-        <button className="emojiButton" onClick={()=>props.handleEmojiClick("fire")}><img src="/logos/fireemoji.png"/></button>
+        {emojiButtons}
       </div>
     </div>
   )
-  // return(
-  //   <div className="buttonsContainer">
-  //       <button className="emojiButton" onClick={()=>props.handleEmojiClick("alien")} style={{background: "url('/logos/alienemoji.png')"}}></button>
-  //       <button className="emojiButton" onClick={()=>props.handleEmojiClick("fire")} style={{background: "url('/logos/fireemoji.png')"}}></button>
-  //   </div>
-  // )
 }
+/*
+<div className="buttonsContainer">
+  <button className="emojiButton" onClick={()=>props.handleEmojiClick("alien")}><img src="/logos/alienemoji.png"/></button>
+  <button className="emojiButton" onClick={()=>props.handleEmojiClick("fire")}><img src="/logos/fireemoji.png"/></button>
+</div>
+*/
