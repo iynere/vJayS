@@ -67,9 +67,9 @@ export default class ControllerVid extends Component {
            <p>Saturation</p>
           </div>
           <div className="sliders">
-            <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
-            <Button inverted basic color="blue" size="huge" icon={this.state.playStatus} style={{margin: "10px"}} onClick={()=>this.handlePlayBoth()}></Button>
-            <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right"></Button>
+            <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left " style={{margin: "0px"}}></Button>
+            <Button inverted basic color="blue" size="huge" icon={this.state.playStatus} style={{margin: "20px"}} onClick={()=>this.handlePlayBoth()}></Button>
+            <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right" style={{margin: "0px"}}></Button>
              <p></p>
             <SliderComponent  handleChange={this.handleOpacitySlider}/>
             <p>Opacity</p>
