@@ -12,7 +12,7 @@ export const Navbar = () => {
   var buttonSpacingStyle = {
     marginRight: "10px"
   }
-  
+
   var searchStyles = {
     width: "500px"
   }
@@ -20,7 +20,8 @@ export const Navbar = () => {
   return (
     <Menu widths={3} inverted style={{width: "100%", margin: "0 auto"}}>
       <Container fluid>
-        <Menu.Item style={{ width: "24%"}}> 
+        <Menu.Item style={{ width: "24%"}}>
+          <Button basic color={"youtube"} inverted style={buttonSpacingStyle}><a target="_blank" href="/output">Output</a></Button>
           <Button basic color={"youtube"} inverted onClick={evt => {
             socket.emit('clearVideos')
             evt.preventDefault()
