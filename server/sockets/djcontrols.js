@@ -6,8 +6,15 @@ module.exports = function(io) {
       })
 
       djSocket.on('changeHueRotation', (hueRotation, direction) => {
-          console.log("Hue changing!!")
           djSocket.broadcast.emit('changeVideoHue', hueRotation, direction)
+       })
+
+      djSocket.on('changeInvertPercent', (invertPercent, direction) => {
+          djSocket.broadcast.emit('changeVideoInvert', invertPercent, direction)
+       })
+
+      djSocket.on('changeSaturationPercent', (saturationPercent, direction) => {
+          djSocket.broadcast.emit('changeVideoSaturate', saturationPercent, direction)
        })
 
       djSocket.on('changeVolume', (volume) => {

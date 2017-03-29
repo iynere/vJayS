@@ -33,6 +33,14 @@ export default class ControllerVid extends Component {
     socket.emit('changeHueRotation', event.target.value, direction) 
   }
 
+  handleInvertSlider(direction, event){
+    socket.emit('changeInvertPercent', event.target.value, direction) 
+  }
+
+  handleSaturationSlider(direction, event){
+    socket.emit('changeSaturationPercent', (event.target.value * 6), direction) 
+  }
+
   handleSkipVideo(direction){
     socket.emit('skipVideoPressed', direction)
   }
@@ -53,8 +61,11 @@ export default class ControllerVid extends Component {
         <div className="djControlButtons">
           <div className="singleSliders">
             <SliderComponent handleChange={this.handleHueSlider.bind(this, "Left")}/>
-            <SliderComponent />
-            <SliderComponent />
+            <p>Hue</p>
+            <SliderComponent handleChange={this.handleInvertSlider.bind(this, "Left")}/>
+            <p>Invert</p>
+           <SliderComponent handleChange={this.handleSaturationSlider.bind(this, "Left")}/>
+           <p>Saturation</p>
           </div>
           <div className="sliders">
             <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
@@ -67,8 +78,11 @@ export default class ControllerVid extends Component {
           </div>
           <div className="singleSliders">
             <SliderComponent handleChange={this.handleHueSlider.bind(this, "Right")}/>
-            <SliderComponent />
-            <SliderComponent />
+            <p>Hue</p>
+            <SliderComponent handleChange={this.handleInvertSlider.bind(this, "Right")}/>
+            <p>Invert</p>
+            <SliderComponent handleChange={this.handleSaturationSlider.bind(this, "Right")}/>
+            <p>Saturation</p>
           </div>
         </div>
       </div>

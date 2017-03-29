@@ -69,6 +69,18 @@ class Player extends Component {
       })
     })
 
+
+    socket.on('changeVideoInvert', (invertPercent, direction) => {
+        $(document).ready(() => {
+          $(`.${direction}Deck.invert`).css('filter', `invert(${invertPercent}%)`)
+        })
+    })
+
+    socket.on('changeVideoSaturate', (saturationPercent, direction) => {
+        $(document).ready(() => {
+          $(`.${direction}Deck.saturate`).css('filter', `saturate(${saturationPercent}%)`)
+        })
+    })
     // 'ready' refers to iframe, not video
     // need to reset playback quality for each new video
     setTimeout(() => {
