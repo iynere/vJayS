@@ -1,25 +1,94 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTubeAutocomplete from 'react-youtube-autocomplete';
+import SearchResultItem from 'APP/app/components/SearchResultItem'
+import {Modal, List, Input} from 'semantic-ui-react'
+import {addToQueue} from 'APP/app/reducers/queue'
 
 class Search extends Component {
   constructor(props) {
     super(props)
-    
-    this.onSearchResultsFound = this.onSearchResultsFound.bind(this)
+
+    this.state={
+      open:false,
+      searchResults:[]
+    }
+    this.showSearchResults = this.showSearchResults.bind(this)
+    // this.onClickLeft=this.onClickLeft.bind(this)
+    // this.onClickRight=this.onClickRight.bind(this)
+    this.handleClose=this.handleClose.bind(this)
   }
-  
-  onSearchResultsFound(results) {
-    
+
+  showSearchResults(searchResults) {
+    console.log("search searchResults::", searchResults)
+    this.setState({
+      open          : true,
+      searchResults : searchResults
+    })
   }
-  
+
+  handleClose() {
+   this.setState({open: false});
+  }
+
+ onRequestClose() {
+   this.setState({open: false});
+ }
+
+ // onClickLeft() {
+ //   // console.log(this.props)
+ //  this.setState({open: false});
+ //   this.props.addToQueue(this.props.video, 'queueLeft')
+ // }
+ //
+ // onClickRight() {
+ //   // console.log(this.props)
+ //   this.setState({open: false});
+ //   this.props.addToQueue(this.props.video, 'queueRight')
+ // }
+
   render() {
+    let results
+    if (this.state.searchResults && this.state.searchResults.length) {
+
+      // save results variable as mapped List Items from the results array
+      results = this.state.searchResults.map((video, index) => {
+
+        return (
+          <SearchResultItem
+            key={index}
+            video={video}
+            handleClose={this.handleClose}
+          />
+        )
+      })
+    }
+
+
     return (
-      <YouTubeAutocomplete
-        apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4'
-        placeHolder="Search YouTube"
-        callback={console.log}
-      />
+      <div>
+        <YouTubeAutocomplete
+          apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4'
+          placeHolder="Search YouTube"
+          callback={this.showSearchResults}
+        />
+        <Modal
+          open={this.state.open}
+          onClose={this.handleClose}
+          basic size='small'>
+          <Modal.Content>
+          <div>
+            <h4>Search Results</h4>
+            {results? results: null}
+          </div>
+        </Modal.Content>
+        <Modal.Actions style={{textAlign:"left"}}>
+          {/*<Button onClick={this.handleClose}>Load Set</Button>*/}
+        </Modal.Actions>
+        </Modal>
+      </div>
+
+
     );
   }
 }
@@ -29,7 +98,10 @@ const mapStateToProps = ({search, queue}) => ({
   queue
 })
 
-const mapDispatchToProps = dispatch => ({ })
+const mapDispatchToProps = dispatch => ({
+  addToQueue: (video, direction) => {
+    dispatch(addToQueue(video, direction))
+  }
+})
 
-export default connect(mapStateToProps)(Search)
-
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
