@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {setCommand} from '../reducers/command'
 import {Link} from 'react-router'
 import SliderComponent from 'APP/app/components/SliderComponent'
+import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
+
 
 /*DJ TO MOBILE CONTROLS*/
 
@@ -58,19 +60,25 @@ class Controller extends Component {
     socket.emit('clickedTap', commandType)
   }
 
-  render() {
-    return (
-      <div className="dj2MobileControls">
-        <h2>Audience Interactions</h2>
-        <div className="dj2MobileButtons">
-          <button onClick={this.handleWhiteButton}>Draw</button>
-          <button onClick={this.handleEmoticonsButton}>Emoticons</button>
-          <button onClick={this.handleTapButton}>Tap</button>
-          <button onClick={this.handleClearButton}>Clear</button>
-        </div>
-      </div>
-    )
-  }
+	handleTapButton() {
+		this.props.handleSetCommand("tap")
+		let commandType="tap"
+		socket.emit('clickedTap', commandType)
+	}
+
+	render() {
+		return (
+			<div className="dj2MobileControls">
+				<h2><Icon name="users" /> Interactions</h2>
+				<Button.Group style={{width: "100%"}}>
+					<Button basic color="green" inverted size="massive" icon="paint brush" content="Draw" onClick={this.handleWhiteButton}></Button>
+					<Button basic color="yellow" inverted size="massive" icon="smile" content="Emoticons" onClick={this.handleEmoticonsButton}></Button>
+					<Button basic color="blue" inverted size="massive" icon="pointing up" content="Tap" onClick={this.handleTapButton}></Button>
+					<Button basic color="red" inverted content="Clear" size="massive" icon="erase" onClick={this.handleClearButton}></Button>
+				</Button.Group>
+			</div>
+		)
+	}
 }
 
 const mapStateToProps=state => {

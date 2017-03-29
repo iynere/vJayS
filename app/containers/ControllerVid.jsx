@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import SliderComponent from 'APP/app/components/SliderComponent'
+import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
+
 
 /*~~~DJ CONTROLS TO AFFECT OUTPUT SCREEN~~~*/
 
@@ -40,9 +42,9 @@ export default class ControllerVid extends Component {
 
     return (
       <div className="djControls">
-        <h2>Video Controls</h2>
+        <h2><Icon name="options" /> Video Controls</h2>
         <div className="djControlButtons">
-          <button onClick={()=>this.handleSkipVideo("Left")}>Skip Left</button>
+          <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
           <div className="sliders">
             <button onClick={()=>this.handlePlayBoth()}>{this.state.unicode}</button>
             <SliderComponent  handleChange={this.handleOpacitySlider}/>
@@ -50,7 +52,7 @@ export default class ControllerVid extends Component {
             <SliderComponent  handleChange={this.handleVolumeSlider}/>
             <p>Volume</p>
           </div>
-          <button onClick={()=>this.handleSkipVideo("Right")}>Skip Right</button>
+          <Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right"></Button>
         </div>
       </div>
     )
