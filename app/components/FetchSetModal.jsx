@@ -7,81 +7,91 @@ import {fetchSetFromDb} from '../reducers/set'
 import {receiveQueue} from '../reducers/queue'
 
 class FetchSetModal extends Component {
-	constructor(props) {
-		super(props)
-    this.state={
+  constructor(props) {
+    super(props)
+    this.state = {
       modalOpen:false
     }
 
-    // this.handleClick = this.handleClick.bind(this)
-	}
+    this.handleModalOpen = this.handleModalOpen.bind(this)
+    this.handleModalClose = this.handleModalClose.bind(this)
+  }
 
-  handleOpen = (e) => {
+  handleModalOpen(e) {
     e.preventDefault()
+    this.props.fetchAllSetsFromDb(this.props.user.id)
     this.setState({
       modalOpen: true,
     })
-    this.props.fetchAllSetsFromDb(this.props.user.id)
   }
 
-  handleClose = (e) => {
-    e.preventDefault
-    let leftQueue = localStore.get('queueLeft')
-    let rightQueue = localStore.get('queueRight')
-    this.props.receiveQueue(leftQueue, 'queueLeft')
-    this.props.receiveQueue(rightQueue, 'queueRight')
+  handleModalClose(e) {
+    e.preventDefault()
     this.setState({
       modalOpen: false,
     })
   }
 
-  onItemClick = (set, e) => {
-    this.props.fetchSetFromDb(this.props.user.id, set.id)
-    this.handleClose()
+  handleClick(boundSetIdEvent) {
+    this.props.fetchSetFromDb(this.props.user.id, boundSetIdEvent)
+    this.setState({
+      modalOpen: false,
+    })
   }
 
   render() {
-    let setList
-    if(this.props.sets.data && this.props.sets.data.length >0){
-      setList= this.props.sets.data.map(function(set) {
-        let bindItemClick = this.onItemClick.bind(this, set)
+    let sets
+    if (this.props.sets.data && this.props.sets.data.length) {
+      
+      // save sets variable as mapped List Items from the sets array
+      sets = this.props.sets.data.map(set => {
+        
+        let boundItemClick = this.handleClick.bind(this, set.id)
 
         return (
-          <List.Item key={set.id} onClick={bindItemClick}>{set.name}</List.Item>
+          <List.Item key={set.id}
+            onClick={boundItemClick}>{set.name}
+          </List.Item>
         )
-      }, this)
+      })
     }
 
-		return(
-      <Modal trigger={<Dropdown.Item onClick={this.handleOpen}>View Your Sets</Dropdown.Item>}
+    return (
+      <Modal
+        trigger={
+          <Dropdown.Item
+            onClick={this.handleModalOpen}>
+            View Your Sets
+          </Dropdown.Item>
+        }
         open={this.state.modalOpen}
-        onClose={this.handleClose}
+        onClose={this.handleModalClose}
         basic size='small'>
         <Modal.Content>
-  			<div>
-  				<h4>Your Sets</h4>
-  				<List selection inverted onClick={this.handleClick}>
-            {setList ? setList : null}
-  				</List>
-  			</div>
+        <div>
+          <h4>Select a Set</h4>
+          <List selection inverted onClick={null /*this.handleClick*/}>
+            {sets ? sets : null}
+          </List>
+        </div>
       </Modal.Content>
-			<Modal.Actions style={{textAlign:"left"}}>
-				<Button onClick={this.handleClose}>Load Set</Button>
-			</Modal.Actions>
+      <Modal.Actions style={{textAlign:"left"}}>
+        {/*<Button onClick={this.handleClose}>Load Set</Button>*/}
+      </Modal.Actions>
       </Modal>
-		)
-	}
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
-	return ({
-		user: state.auth,
-		sets: state.sets
-	})
+  return ({
+    user: state.auth,
+    sets: state.sets
+  })
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchAllSetsFromDb: (userId) => { dispatch(fetchAllSetsFromDb(userId)) },
+  fetchAllSetsFromDb: (userId) => { dispatch(fetchAllSetsFromDb(userId)) },
   fetchSetFromDb: (userId, setId) => { dispatch(fetchSetFromDb(userId, setId))
   },
   receiveQueue: (queue, queueLeftOrRight) => {
