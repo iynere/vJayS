@@ -1,7 +1,8 @@
 module.exports = function(io) {
     io.on('connection', function(controllerSocket) {
-      controllerSocket.on('clearButtonClicked', data => {
+      controllerSocket.on('clearButtonClicked', (commandType) => {
         controllerSocket.broadcast.emit('clearCanvas')
+          controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
 
       controllerSocket.on('clickedWhiteEllipse', (commandType)=> {
@@ -10,12 +11,6 @@ module.exports = function(io) {
         // updates mobile front end
         controllerSocket.broadcast.emit('allowInteraction', commandType)
       })
-
-      controllerSocket.on('clickedColorEllipse', (commandType)=>{
-        controllerSocket.broadcast.emit('drawColorEllipse')
-        controllerSocket.broadcast.emit('allowInteraction', commandType)
-      })
-
 
       controllerSocket.on('clickedEmoticons', (commandType)=> {
         controllerSocket.broadcast.emit('drawEmoticons')

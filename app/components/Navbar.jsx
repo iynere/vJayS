@@ -3,16 +3,19 @@ import {Menu, Button, Container, Input} from 'semantic-ui-react'
 import YouTubeSearch from 'APP/app/containers/YouTubeSearch'
 import store from 'APP/app/store'
 import LoginLogout from 'APP/app/containers/LoginLogout'
-import SaveSetModal from 'APP/app/components/SaveSetModal'
 import {addToQueue, fetchQueue, clearQueue} from 'APP/app/reducers/queue'
 
 var socket = io(window.location.origin)
 
 export const Navbar = () => {
 
-  var buttonSpacingStyle = {
-    marginRight: "10px"
-  }
+	var buttonSpacingStyle = {
+		marginRight: "10px"
+	}
+	
+	var searchStyles = {
+		width: "500px"
+	}
 
   return (
     <Menu widths={3} inverted style={{width: "100%", margin: "0 auto"}}>
@@ -24,7 +27,6 @@ export const Navbar = () => {
           store.dispatch(clearQueue('queueLeft'))
           store.dispatch(clearQueue('queueRight'))
         }} style={buttonSpacingStyle}>Clear Queues</Button>
-      <SaveSetModal/>
       </Menu.Item>
       <Menu.Item style={{width: "50%"}}>
         {/*<YouTubeSearch
@@ -50,4 +52,3 @@ export const Navbar = () => {
       </Container>
     </Menu>
   )
-}
