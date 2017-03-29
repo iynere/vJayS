@@ -3,6 +3,7 @@ import {Menu, Button, Container, Input} from 'semantic-ui-react'
 import YouTubeSearch from 'APP/app/containers/YouTubeSearch'
 import store from 'APP/app/store'
 import LoginLogout from 'APP/app/containers/LoginLogout'
+import Search from 'APP/app/containers/Search'
 import {addToQueue, fetchQueue, clearQueue} from 'APP/app/reducers/queue'
 
 var socket = io(window.location.origin)
@@ -47,7 +48,8 @@ export const Navbar = () => {
               store.dispatch(addToQueue(results[0], 'queueRight'))
             }}
           />*/}
-          <Input fluid placeholder="Search Youtube" icon="search" style={{margin: "5px 20px"}}/>
+          {/*<Input fluid placeholder="Search Youtube" icon="search" style={{margin: "5px 20px"}}/>*/}
+          <Search />
         </Menu.Item>
         <LoginLogout />
       </Container>
