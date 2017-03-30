@@ -16858,7 +16858,7 @@ ItemMeta.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__lib__["i" /
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -16892,116 +16892,116 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var Controller = function (_Component) {
-	_inherits(Controller, _Component);
+  _inherits(Controller, _Component);
 
-	function Controller() {
-		_classCallCheck(this, Controller);
+  function Controller() {
+    _classCallCheck(this, Controller);
 
-		var _this = _possibleConstructorReturn(this, (Controller.__proto__ || Object.getPrototypeOf(Controller)).call(this));
+    var _this = _possibleConstructorReturn(this, (Controller.__proto__ || Object.getPrototypeOf(Controller)).call(this));
 
-		_this.commandType = _this.commandType.bind(_this);
-		_this.handleWhiteButton = _this.handleWhiteButton.bind(_this);
-		_this.handleEmoticonsButton = _this.handleEmoticonsButton.bind(_this);
-		_this.handleTapButton = _this.handleTapButton.bind(_this);
-		return _this;
-	}
+    _this.commandType = _this.commandType.bind(_this);
+    _this.handleWhiteButton = _this.handleWhiteButton.bind(_this);
+    _this.handleEmoticonsButton = _this.handleEmoticonsButton.bind(_this);
+    _this.handleTapButton = _this.handleTapButton.bind(_this);
+    return _this;
+  }
 
-	_createClass(Controller, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
+  _createClass(Controller, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
 
-			socket.on('connect', function () {
-				socket.on('getCommandType', function () {
-					console.log("get emoticons", _this2.props.command);
-					socket.emit("sendCommand", _this2.commandType());
-				});
-			});
-		}
-	}, {
-		key: 'commandType',
-		value: function commandType() {
-			//needed for mobile initial loading
-			if (this.props.command === "emoticons") {
-				return "emoticons";
-			}
+      socket.on('connect', function () {
+        socket.on('getCommandType', function () {
+          console.log("get emoticons", _this2.props.command);
+          socket.emit("sendCommand", _this2.commandType());
+        });
+      });
+    }
+  }, {
+    key: 'commandType',
+    value: function commandType() {
+      //needed for mobile initial loading
+      if (this.props.command === "emoticons") {
+        return "emoticons";
+      }
 
-			return "touchpad";
-		}
-	}, {
-		key: 'handleClearButton',
-		value: function handleClearButton() {
-			socket.emit("clearButtonClicked", "");
-		}
-	}, {
-		key: 'handleWhiteButton',
-		value: function handleWhiteButton() {
-			console.log("controller click white");
-			this.props.handleSetCommand("white");
-			var commandType = "touchpad";
-			socket.emit('clickedWhiteEllipse', commandType);
-		}
-	}, {
-		key: 'handleEmoticonsButton',
-		value: function handleEmoticonsButton() {
-			console.log("controller click emoticons");
-			this.props.handleSetCommand("emoticons");
-			var commandType = "emoticons";
-			socket.emit('clickedEmoticons', commandType);
-		}
-	}, {
-		key: 'handleTapButton',
-		value: function handleTapButton() {
-			this.props.handleSetCommand("tap");
-			var commandType = "tap";
-			socket.emit('clickedTap', commandType);
-		}
-	}, {
-		key: 'handleTapButton',
-		value: function handleTapButton() {
-			this.props.handleSetCommand("tap");
-			var commandType = "tap";
-			socket.emit('clickedTap', commandType);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				{ className: 'dj2MobileControls' },
-				_react2.default.createElement(
-					'h2',
-					null,
-					_react2.default.createElement(_semanticUiReact.Icon, { name: 'users' }),
-					' Interactions (link for audience members: vjays.herokuapp.com/live'
-				),
-				_react2.default.createElement(
-					_semanticUiReact.Button.Group,
-					{ style: { width: "100%" } },
-					_react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'green', inverted: true, size: 'massive', icon: 'paint brush', content: 'Draw', onClick: this.handleWhiteButton }),
-					_react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'yellow', inverted: true, size: 'massive', icon: 'smile', content: 'Emoticons', onClick: this.handleEmoticonsButton }),
-					_react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'blue', inverted: true, size: 'massive', icon: 'pointing up', content: 'Tap', onClick: this.handleTapButton }),
-					_react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'red', inverted: true, content: 'Clear', size: 'massive', icon: 'erase', onClick: this.handleClearButton })
-				)
-			);
-		}
-	}]);
+      return "touchpad";
+    }
+  }, {
+    key: 'handleClearButton',
+    value: function handleClearButton() {
+      socket.emit("clearButtonClicked", "");
+    }
+  }, {
+    key: 'handleWhiteButton',
+    value: function handleWhiteButton() {
+      console.log("controller click white");
+      this.props.handleSetCommand("white");
+      var commandType = "touchpad";
+      socket.emit('clickedWhiteEllipse', commandType);
+    }
+  }, {
+    key: 'handleEmoticonsButton',
+    value: function handleEmoticonsButton() {
+      console.log("controller click emoticons");
+      this.props.handleSetCommand("emoticons");
+      var commandType = "emoticons";
+      socket.emit('clickedEmoticons', commandType);
+    }
+  }, {
+    key: 'handleTapButton',
+    value: function handleTapButton() {
+      this.props.handleSetCommand("tap");
+      var commandType = "tap";
+      socket.emit('clickedTap', commandType);
+    }
+  }, {
+    key: 'handleTapButton',
+    value: function handleTapButton() {
+      this.props.handleSetCommand("tap");
+      var commandType = "tap";
+      socket.emit('clickedTap', commandType);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'dj2MobileControls' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          _react2.default.createElement(_semanticUiReact.Icon, { name: 'users' }),
+          ' Interactions (link for audience members: vjays.herokuapp.com/live'
+        ),
+        _react2.default.createElement(
+          _semanticUiReact.Button.Group,
+          { style: { width: "100%" } },
+          _react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'green', inverted: true, size: 'massive', icon: 'paint brush', content: 'Draw', onClick: this.handleWhiteButton }),
+          _react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'yellow', inverted: true, size: 'massive', icon: 'smile', content: 'Emoticons', onClick: this.handleEmoticonsButton }),
+          _react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'blue', inverted: true, size: 'massive', icon: 'pointing up', content: 'Tap', onClick: this.handleTapButton }),
+          _react2.default.createElement(_semanticUiReact.Button, { style: { maxWidth: '25%' }, basic: true, color: 'red', inverted: true, content: 'Clear', size: 'massive', icon: 'erase', onClick: this.handleClearButton })
+        )
+      );
+    }
+  }]);
 
-	return Controller;
+  return Controller;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-	return {
-		command: state.command
-	};
+  return {
+    command: state.command
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	return {
-		handleSetCommand: function handleSetCommand(command) {
-			return dispatch((0, _command.setCommand)(command));
-		}
-	};
+  return {
+    handleSetCommand: function handleSetCommand(command) {
+      return dispatch((0, _command.setCommand)(command));
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Controller);
@@ -43073,9 +43073,9 @@ var LiveApp = function (_Component) {
             'div',
             { id: 'p5parent' },
             _react2.default.createElement(
-              'h4',
-              null,
-              'Shimmy with your touch screen'
+              'h1',
+              { className: 'draw' },
+              'Draw something!'
             ),
             _react2.default.createElement(_reactP5Wrapper2.default, { sketch: _sketchMobile.sketch })
           )
@@ -44231,7 +44231,7 @@ exports.default = function (props) {
     _react2.default.createElement(
       'h1',
       null,
-      'How are you feeling?'
+      'Click Your Favorite Emojis'
     ),
     _react2.default.createElement(
       'div',

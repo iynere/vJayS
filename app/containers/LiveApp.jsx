@@ -58,7 +58,7 @@ class LiveApp extends Component {
           {this.state.interface === "touchpad" ?  
           <div className="touchPad"  onTouchMove={this.handleTouchMove}>
             <div id="p5parent">
-              <h4>Shimmy with your touch screen</h4>
+              <h1 className="draw">Draw something!</h1>
               <P5Wrapper sketch={sketch}/>
             </div>
           </div> : null}
