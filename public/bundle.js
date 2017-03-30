@@ -45710,7 +45710,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -45740,174 +45740,174 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var ControllerVid = function (_Component) {
-	_inherits(ControllerVid, _Component);
+  _inherits(ControllerVid, _Component);
 
-	function ControllerVid() {
-		_classCallCheck(this, ControllerVid);
+  function ControllerVid() {
+    _classCallCheck(this, ControllerVid);
 
-		var _this = _possibleConstructorReturn(this, (ControllerVid.__proto__ || Object.getPrototypeOf(ControllerVid)).call(this));
+    var _this = _possibleConstructorReturn(this, (ControllerVid.__proto__ || Object.getPrototypeOf(ControllerVid)).call(this));
 
-		_this.play = "play";
-		_this.pause = "pause";
-		_this.playing = 0;
-		_this.state = {
-			playStatus: "play",
-			hueLeftVal: 0,
-			hueRightVal: 0,
-			invertLeftVal: 0,
-			invertRightVal: 0,
-			saturateLeftVal: 100,
-			saturateRightVal: 100
-		};
-		_this.handleOpacitySlider = _this.handleOpacitySlider.bind(_this);
-		return _this;
-	}
+    _this.play = "play";
+    _this.pause = "pause";
+    _this.playing = 0;
+    _this.state = {
+      playStatus: "play",
+      hueLeftVal: 0,
+      hueRightVal: 0,
+      invertLeftVal: 0,
+      invertRightVal: 0,
+      saturateLeftVal: 100,
+      saturateRightVal: 100
+    };
+    _this.handleOpacitySlider = _this.handleOpacitySlider.bind(_this);
+    return _this;
+  }
 
-	_createClass(ControllerVid, [{
-		key: 'handleVolumeSlider',
-		value: function handleVolumeSlider(event) {
-			socket.emit('changeVolume', event.target.value * 2);
-		}
-	}, {
-		key: 'handleOpacitySlider',
-		value: function handleOpacitySlider(event) {
-			socket.emit('changeOpacity', event.target.value / 100);
-		}
-	}, {
-		key: 'handleHueSlider',
-		value: function handleHueSlider(direction, event) {
-			event.persist();
-			// console.log('EVENT', event.target.value)
-			socket.emit('changeHueRotation', event.target.value, direction);
+  _createClass(ControllerVid, [{
+    key: 'handleVolumeSlider',
+    value: function handleVolumeSlider(event) {
+      socket.emit('changeVolume', event.target.value * 2);
+    }
+  }, {
+    key: 'handleOpacitySlider',
+    value: function handleOpacitySlider(event) {
+      socket.emit('changeOpacity', event.target.value / 100);
+    }
+  }, {
+    key: 'handleHueSlider',
+    value: function handleHueSlider(direction, event) {
+      event.persist();
+      // console.log('EVENT', event.target.value)
+      socket.emit('changeHueRotation', event.target.value, direction);
 
-			this.setState(_defineProperty({}, 'hue' + direction + 'Val', event.target.value));
-		}
-	}, {
-		key: 'handleInvertSlider',
-		value: function handleInvertSlider(direction, event) {
-			event.persist();
-			// console.log('EVENT', event.target.value)
-			socket.emit('changeInvertPercent', event.target.value, direction);
+      this.setState(_defineProperty({}, 'hue' + direction + 'Val', event.target.value));
+    }
+  }, {
+    key: 'handleInvertSlider',
+    value: function handleInvertSlider(direction, event) {
+      event.persist();
+      // console.log('EVENT', event.target.value)
+      socket.emit('changeInvertPercent', event.target.value, direction);
 
-			this.setState(_defineProperty({}, 'invert' + direction + 'Val', event.target.value));
-		}
-	}, {
-		key: 'handleSaturationSlider',
-		value: function handleSaturationSlider(direction, event) {
-			event.persist();
-			// console.log('EVENT', event.target.value)
-			socket.emit('changeSaturationPercent', event.target.value, direction);
+      this.setState(_defineProperty({}, 'invert' + direction + 'Val', event.target.value));
+    }
+  }, {
+    key: 'handleSaturationSlider',
+    value: function handleSaturationSlider(direction, event) {
+      event.persist();
+      // console.log('EVENT', event.target.value)
+      socket.emit('changeSaturationPercent', event.target.value, direction);
 
-			this.setState(_defineProperty({}, 'saturate' + direction + 'Val', event.target.value));
-		}
-	}, {
-		key: 'handleSkipVideo',
-		value: function handleSkipVideo(direction) {
-			socket.emit('skipVideoPressed', direction);
-		}
-	}, {
-		key: 'handlePlayBoth',
-		value: function handlePlayBoth() {
-			this.playing = this.playing === 0 ? 1 : 0;
-			var playStatus = this.playing === 0 ? this.play : this.pause;
-			this.setState({ playStatus: playStatus });
-			socket.emit('playBothPressed', this.playing);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
+      this.setState(_defineProperty({}, 'saturate' + direction + 'Val', event.target.value));
+    }
+  }, {
+    key: 'handleSkipVideo',
+    value: function handleSkipVideo(direction) {
+      socket.emit('skipVideoPressed', direction);
+    }
+  }, {
+    key: 'handlePlayBoth',
+    value: function handlePlayBoth() {
+      this.playing = this.playing === 0 ? 1 : 0;
+      var playStatus = this.playing === 0 ? this.play : this.pause;
+      this.setState({ playStatus: playStatus });
+      socket.emit('playBothPressed', this.playing);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-			// console.log("command current", this.props.command);
+      // console.log("command current", this.props.command);
 
-			return _react2.default.createElement(
-				'div',
-				{ className: 'djControls' },
-				_react2.default.createElement(
-					'h2',
-					null,
-					_react2.default.createElement(_semanticUiReact.Icon, { name: 'options' }),
-					' Video Controls'
-				),
-				_react2.default.createElement(
-					'div',
-					{ className: 'djControlButtons' },
-					_react2.default.createElement(
-						'div',
-						{ className: 'singleSliders' },
-						_react2.default.createElement('input', { type: 'range', min: '0', max: '359', step: '1', value: this.state.hueLeftVal, onChange: this.handleHueSlider.bind(this, "Left") }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Hue'
-						),
-						_react2.default.createElement('input', { className: 'invertLeft', type: 'range', min: '0', max: '100', step: '1', value: this.state.invertLeftVal, onChange: this.handleInvertSlider.bind(this, "Left") }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Invert'
-						),
-						_react2.default.createElement('input', { className: 'saturateLeft', type: 'range', min: '0', max: '200', step: '1', value: this.state.saturateLeftVal, onChange: this.handleSaturationSlider.bind(this, "Left") }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Saturation'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'sliders' },
-						_react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'red', size: 'huge', onClick: function onClick() {
-								return _this2.handleSkipVideo("Left");
-							}, icon: 'fast forward', content: 'Skip Left ', style: { margin: "0px" } }),
-						_react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'blue', size: 'huge', icon: this.state.playStatus, style: { margin: "20px" }, onClick: function onClick() {
-								return _this2.handlePlayBoth();
-							} }),
-						_react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'red', size: 'huge', onClick: function onClick() {
-								return _this2.handleSkipVideo("Right");
-							}, icon: 'fast forward', content: 'Skip Right', style: { margin: "0px" } }),
-						_react2.default.createElement('p', null),
-						_react2.default.createElement(_SliderComponent2.default, { handleChange: this.handleOpacitySlider }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Video Balance'
-						),
-						_react2.default.createElement(_SliderComponent2.default, { handleChange: this.handleVolumeSlider }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Audio Balance'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'singleSliders' },
-						_react2.default.createElement('input', { className: 'hueRight', type: 'range', min: '0', max: '359', step: '1', value: this.state.hueRightVal, onChange: this.handleHueSlider.bind(this, "Right") }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Hue'
-						),
-						_react2.default.createElement('input', { className: 'invertRight', type: 'range', min: '0', max: '100', step: '1', value: this.state.invertRightVal, onChange: this.handleInvertSlider.bind(this, "Right") }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Invert'
-						),
-						_react2.default.createElement('input', { className: 'saturateRight', type: 'range', min: '0', max: '200', step: '1', value: this.state.saturateRightVal, onChange: this.handleSaturationSlider.bind(this, "Right") }),
-						_react2.default.createElement(
-							'p',
-							null,
-							'Saturation'
-						)
-					)
-				)
-			);
-		}
-	}]);
+      return _react2.default.createElement(
+        'div',
+        { className: 'djControls' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          _react2.default.createElement(_semanticUiReact.Icon, { name: 'options' }),
+          ' Video Controls'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'djControlButtons' },
+          _react2.default.createElement(
+            'div',
+            { className: 'singleSliders' },
+            _react2.default.createElement('input', { type: 'range', min: '0', max: '359', step: '1', value: this.state.hueLeftVal, onChange: this.handleHueSlider.bind(this, "Left") }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Hue'
+            ),
+            _react2.default.createElement('input', { className: 'invertLeft', type: 'range', min: '0', max: '100', step: '1', value: this.state.invertLeftVal, onChange: this.handleInvertSlider.bind(this, "Left") }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Invert'
+            ),
+            _react2.default.createElement('input', { className: 'saturateLeft', type: 'range', min: '0', max: '200', step: '1', value: this.state.saturateLeftVal, onChange: this.handleSaturationSlider.bind(this, "Left") }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Saturation'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'sliders' },
+            _react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'red', size: 'huge', onClick: function onClick() {
+                return _this2.handleSkipVideo("Left");
+              }, icon: 'fast forward', content: 'Skip Left ', style: { margin: "0px" } }),
+            _react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'blue', size: 'huge', icon: this.state.playStatus, style: { margin: "20px" }, onClick: function onClick() {
+                return _this2.handlePlayBoth();
+              } }),
+            _react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'red', size: 'huge', onClick: function onClick() {
+                return _this2.handleSkipVideo("Right");
+              }, icon: 'fast forward', content: 'Skip Right', style: { margin: "0px" } }),
+            _react2.default.createElement('p', null),
+            _react2.default.createElement(_SliderComponent2.default, { handleChange: this.handleOpacitySlider }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Video Balance'
+            ),
+            _react2.default.createElement(_SliderComponent2.default, { handleChange: this.handleVolumeSlider }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Audio Balance'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'singleSliders' },
+            _react2.default.createElement('input', { className: 'hueRight', type: 'range', min: '0', max: '359', step: '1', value: this.state.hueRightVal, onChange: this.handleHueSlider.bind(this, "Right") }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Hue'
+            ),
+            _react2.default.createElement('input', { className: 'invertRight', type: 'range', min: '0', max: '100', step: '1', value: this.state.invertRightVal, onChange: this.handleInvertSlider.bind(this, "Right") }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Invert'
+            ),
+            _react2.default.createElement('input', { className: 'saturateRight', type: 'range', min: '0', max: '200', step: '1', value: this.state.saturateRightVal, onChange: this.handleSaturationSlider.bind(this, "Right") }),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Saturation'
+            )
+          )
+        )
+      );
+    }
+  }]);
 
-	return ControllerVid;
+  return ControllerVid;
 }(_react.Component);
 
 exports.default = ControllerVid;
@@ -46094,7 +46094,7 @@ exports.default = _react2.default.createClass({
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46126,201 +46126,203 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var OutputPlayer = function (_Component) {
-	_inherits(OutputPlayer, _Component);
+  _inherits(OutputPlayer, _Component);
 
-	function OutputPlayer(props) {
-		var _this$state;
+  function OutputPlayer(props) {
+    var _this$state;
 
-		_classCallCheck(this, OutputPlayer);
+    _classCallCheck(this, OutputPlayer);
 
-		var _this = _possibleConstructorReturn(this, (OutputPlayer.__proto__ || Object.getPrototypeOf(OutputPlayer)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (OutputPlayer.__proto__ || Object.getPrototypeOf(OutputPlayer)).call(this, props));
 
-		var Direction = props.direction;
-		_this.state = (_this$state = {}, _defineProperty(_this$state, 'video' + Direction, {}), _defineProperty(_this$state, 'video' + Direction + 'Id', ''), _defineProperty(_this$state, 'queue' + Direction, props.queue), _this$state);
+    var Direction = props.direction;
+    _this.state = (_this$state = {}, _defineProperty(_this$state, 'video' + Direction, {}), _defineProperty(_this$state, 'video' + Direction + 'Id', ''), _defineProperty(_this$state, 'queue' + Direction, props.queue), _this$state);
 
-		_this.handlePlayerReady = _this.handlePlayerReady.bind(_this);
-		_this.handleVideoPlay = _this.handleVideoPlay.bind(_this);
-		_this.reinitializeVideo = _this.reinitializeVideo.bind(_this);
-		_this.handleVideoEnd = _this.handleVideoEnd.bind(_this);
-		return _this;
-	}
+    _this.handlePlayerReady = _this.handlePlayerReady.bind(_this);
+    _this.handleVideoPlay = _this.handleVideoPlay.bind(_this);
+    _this.reinitializeVideo = _this.reinitializeVideo.bind(_this);
+    _this.handleVideoEnd = _this.handleVideoEnd.bind(_this);
+    return _this;
+  }
 
-	_createClass(OutputPlayer, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
+  _createClass(OutputPlayer, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
 
-			var Direction = this.props.direction;
-			socket.emit('outputScreenMounted');
+      var Direction = this.props.direction;
+      socket.emit('outputScreenMounted');
 
-			socket.on('sendVideo' + Direction + 'ToOutput', function (videoId) {
-				// console.log(`${Direction}: `, videoId)
-				// this.setState({
-				//   [`video${Direction}Id`]: videoId
-				// })
-			});
+      socket.on('sendVideo' + Direction + 'ToOutput', function (videoId) {
+        // console.log(`${Direction}: `, videoId)
+        // this.setState({
+        //   [`video${Direction}Id`]: videoId
+        // })
+      });
 
-			socket.on('playOutputVideo' + Direction, function (newCueTime) {
-				// console.log('gettin here?')
-				_this2.state['video' + Direction].seekTo(newCueTime);
-				_this2.state['video' + Direction].playVideo();
-			});
+      socket.on('playOutputVideo' + Direction, function (newCueTime) {
+        // console.log('gettin here?')
+        _this2.state['video' + Direction].seekTo(newCueTime);
+        _this2.state['video' + Direction].playVideo();
+      });
 
-			socket.on('pauseOutputVideo' + Direction, function (newCueTime) {
-				// console.log('gettin here?')
-				_this2.state['video' + Direction].pauseVideo();
-			});
+      socket.on('pauseOutputVideo' + Direction, function (newCueTime) {
+        // console.log('gettin here?')
+        _this2.state['video' + Direction].pauseVideo();
+      });
 
-			socket.on('changeOutputVideo' + Direction + 'PlaybackRate', function (newRate) {
-				console.log(newRate);
-				_this2.state['video' + Direction].setPlaybackRate(newRate);
-			});
+      socket.on('changeOutputVideo' + Direction + 'PlaybackRate', function (newRate) {
+        console.log(newRate);
+        _this2.state['video' + Direction].setPlaybackRate(newRate);
+      });
 
-			socket.on('clearOutputVideos', function () {
-				_this2.setState(_defineProperty({}, 'video' + Direction + 'Id', ''));
-			});
+      socket.on('clearOutputVideos', function () {
+        _this2.setState(_defineProperty({}, 'video' + Direction + 'Id', ''));
+      });
 
-			socket.on('changeOutputOpacity', function (opacity) {
-				(0, _jquery2.default)(document).ready(function () {
-					(0, _jquery2.default)('.youtube1').css('opacity', opacity);
-				});
-			});
+      socket.on('changeOutputOpacity', function (opacity) {
+        (0, _jquery2.default)(document).ready(function () {
+          (0, _jquery2.default)('.youtube1').css('opacity', opacity);
+        });
+      });
 
-			socket.on('changeVideoHue', function (hueRotation, direction) {
-				var outputScreen = direction === 'Left' ? 'youtube2' : 'youtube1';
+      socket.on('changeVideoHue', function (hueRotation, direction) {
+        var outputScreen = direction === 'Left' ? 'youtube2' : 'youtube1';
 
-				(0, _jquery2.default)(document).ready(function () {
-					var currentCSS = (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter').split(' '),
-					    newCSS = currentCSS.map(function (filter, idx) {
-						return idx === 0 ? 'hue-rotate(' + hueRotation + 'deg)' : filter;
-					}).join(' ');
+        (0, _jquery2.default)(document).ready(function () {
+          var currentCSS = (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter').split(' '),
+              newCSS = currentCSS.map(function (filter, idx) {
+            return idx === 0 ? 'hue-rotate(' + hueRotation + 'deg)' : filter;
+          }).join(' ');
 
-					(0, _jquery2.default)('.' + outputScreen + '.filters').css('filter', newCSS);
-				});
-			});
+          (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter', newCSS);
+        });
+      });
 
-			socket.on('changeVideoInvert', function (invertPercent, direction) {
-				var outputScreen = direction === 'Left' ? 'youtube2' : 'youtube1';
+      socket.on('changeVideoInvert', function (invertPercent, direction) {
+        var outputScreen = direction === 'Left' ? 'youtube2' : 'youtube1';
 
-				(0, _jquery2.default)(document).ready(function () {
-					var currentCSS = (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter').split(' '),
-					    newCSS = currentCSS.map(function (filter, idx) {
-						return idx === 1 ? 'invert(' + invertPercent + '%)' : filter;
-					}).join(' ');
+        (0, _jquery2.default)(document).ready(function () {
+          var currentCSS = (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter').split(' '),
+              newCSS = currentCSS.map(function (filter, idx) {
+            return idx === 1 ? 'invert(' + invertPercent + '%)' : filter;
+          }).join(' ');
 
-					(0, _jquery2.default)('.' + outputScreen + '.filters').css('filter', newCSS);
-				});
-			});
+          (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter', newCSS);
+        });
+      });
 
-			socket.on('changeVideoSaturate', function (saturationPercent, direction) {
-				var outputScreen = direction === 'Left' ? 'youtube2' : 'youtube1';
+      socket.on('changeVideoSaturate', function (saturationPercent, direction) {
+        var outputScreen = direction === 'Left' ? 'youtube2' : 'youtube1';
 
-				(0, _jquery2.default)(document).ready(function () {
-					var currentCSS = (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter').split(' '),
-					    newCSS = currentCSS.map(function (filter, idx) {
-						return idx === 2 ? 'saturate(' + saturationPercent + '%)' : filter;
-					}).join(' ');
+        (0, _jquery2.default)(document).ready(function () {
+          var currentCSS = (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter').split(' '),
+              newCSS = currentCSS.map(function (filter, idx) {
+            return idx === 2 ? 'saturate(' + saturationPercent + '%)' : filter;
+          }).join(' ');
 
-					(0, _jquery2.default)('.' + outputScreen + '.filters').css('filter', newCSS);
-				});
-			});
+          (0, _jquery2.default)('.' + outputScreen + '.filters').css('filter', newCSS);
+        });
+      });
+    }
+  }, {
+    key: 'handlePlayerReady',
+    value: function handlePlayerReady(event) {
+      var _this3 = this;
 
-			socket.on('skipVideo', function (direction) {
-				if (direction === Direction) {
-					_this2.handleVideoEnd();
-				}
-			});
-		}
-	}, {
-		key: 'handlePlayerReady',
-		value: function handlePlayerReady(event) {
-			socket.on('seekTo' + this.props.direction, function (cueTime) {
-				event.target.seekTo(cueTime);
-			});
+      socket.on('seekTo' + this.props.direction, function (cueTime) {
+        event.target.seekTo(cueTime);
+      });
 
-			// 'ready' refers to iframe—not video
-			// need to reset playback quality, volume, rate each time a new video loads
-			this.reinitializeVideo(event);
-			setTimeout(function () {
-				event.target.setPlaybackQuality('small');
-				event.target.pauseVideo();
-				event.target.setVolume(0);
-				event.target.setPlaybackRate(1);
-			}, 100);
-		}
-	}, {
-		key: 'handleVideoPlay',
-		value: function handleVideoPlay(event) {
-			setTimeout(function () {
-				event.target.setPlaybackQuality('small');
-			}, 100);
-			// let Direction = this.props.direction,
-			//  cueTime = event.target.getCurrentTime()
-			//  event.target.setVolume(0)
-			//  event.target.setPlaybackQuality('small')
-			//  if (cueTime < .5) {
-			//    event.target.pauseVideo()
-			//  }
-		}
-	}, {
-		key: 'handleVideoEnd',
-		value: function handleVideoEnd(event) {
-			event.target.setPlaybackRate(1);
-			var Direction = this.props.direction,
-			    newQueue = this.state['queue' + Direction].slice(1);
-			console.log("getting to handle Video END", newQueue);
+      // 'ready' refers to iframe—not video
+      // need to reset playback quality, volume, rate each time a new video loads
+      this.reinitializeVideo(event);
+      setTimeout(function () {
+        event.target.setPlaybackQuality('small');
+        event.target.pauseVideo();
+        event.target.setVolume(0);
+        event.target.setPlaybackRate(1);
+      }, 100);
 
-			this.setState(_defineProperty({}, 'queue' + Direction, newQueue));
-		}
-	}, {
-		key: 'reinitializeVideo',
-		value: function reinitializeVideo(event) {
-			var Direction = this.props.direction;
-			this.setState(_defineProperty({}, 'video' + Direction, event.target));
-			console.log('reinitializing ', this.state);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var Direction = this.props.direction,
-			    queue = this.props.queue;
+      socket.on('skipVideo', function (direction) {
+        if (direction === Direction) {
+          _this3.handleVideoEnd(event);
+        }
+      });
+    }
+  }, {
+    key: 'handleVideoPlay',
+    value: function handleVideoPlay(event) {
+      setTimeout(function () {
+        event.target.setPlaybackQuality('small');
+      }, 100);
+      // let Direction = this.props.direction,
+      //  cueTime = event.target.getCurrentTime()
+      //  event.target.setVolume(0)
+      //  event.target.setPlaybackQuality('small')
+      //  if (cueTime < .5) {
+      //    event.target.pauseVideo()
+      //  }
+    }
+  }, {
+    key: 'handleVideoEnd',
+    value: function handleVideoEnd(event) {
+      event.target.setPlaybackRate(1);
+      var Direction = this.props.direction,
+          newQueue = this.state['queue' + Direction].slice(1);
+      console.log("getting to handle Video END", newQueue);
 
-			var playerOptions = {
-				width: window.innerWidth,
-				height: window.innerHeight,
-				playerVars: {
-					autoplay: 1,
-					cc_load_policy: 0,
-					controls: 0,
-					disablekb: 1,
-					enablejsapi: 1,
-					fs: 0,
-					iv_load_policy: 3,
-					modestbranding: 1,
-					rel: 0,
-					showInfo: 0
-				}
-			};
+      this.setState(_defineProperty({}, 'queue' + Direction, newQueue));
+    }
+  }, {
+    key: 'reinitializeVideo',
+    value: function reinitializeVideo(event) {
+      var Direction = this.props.direction;
+      this.setState(_defineProperty({}, 'video' + Direction, event.target));
+      console.log('reinitializing ', this.state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var Direction = this.props.direction,
+          queue = this.props.queue;
 
-			return _react2.default.createElement(_reactYoutube2.default, {
-				videoId: this.state['queue' + Direction].length ? this.state['queue' + Direction][0].id.videoId : '',
-				opts: playerOptions,
-				onReady: this.handlePlayerReady,
-				onStateChange: this.reinitializeVideo,
-				onPlay: this.handleVideoPlay,
-				onEnd: this.handleVideoEnd
-			});
-		}
-	}]);
+      var playerOptions = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        playerVars: {
+          autoplay: 1,
+          cc_load_policy: 0,
+          controls: 0,
+          disablekb: 1,
+          enablejsapi: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          rel: 0,
+          showInfo: 0
+        }
+      };
 
-	return OutputPlayer;
+      return _react2.default.createElement(_reactYoutube2.default, {
+        videoId: this.state['queue' + Direction].length ? this.state['queue' + Direction][0].id.videoId : '',
+        opts: playerOptions,
+        onReady: this.handlePlayerReady,
+        onStateChange: this.reinitializeVideo,
+        onPlay: this.handleVideoPlay,
+        onEnd: this.handleVideoEnd
+      });
+    }
+  }]);
+
+  return OutputPlayer;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-	return {
-		player: state.player['' + ownProps.direction],
-		queue: state.queue['' + ownProps.direction]
-	};
+  return {
+    player: state.player['' + ownProps.direction],
+    queue: state.queue['' + ownProps.direction]
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(OutputPlayer);
@@ -46333,7 +46335,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(OutputPlayer);
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46371,263 +46373,263 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var Player = function (_Component) {
-	_inherits(Player, _Component);
+  _inherits(Player, _Component);
 
-	function Player(props) {
-		_classCallCheck(this, Player);
+  function Player(props) {
+    _classCallCheck(this, Player);
 
-		var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
-		var Direction = props.direction;
-		_this.state = _defineProperty({}, 'video' + Direction, {});
+    var Direction = props.direction;
+    _this.state = _defineProperty({}, 'video' + Direction, {});
 
-		_this.handlePlayerStateChange = _this.handlePlayerStateChange.bind(_this);
-		_this.handlePlayerReady = _this.handlePlayerReady.bind(_this);
-		_this.handleVideoPlay = _this.handleVideoPlay.bind(_this);
-		_this.handleVideoPause = _this.handleVideoPause.bind(_this);
-		_this.handlePlaybackRateChange = _this.handlePlaybackRateChange.bind(_this);
-		_this.handleVideoEnd = _this.handleVideoEnd.bind(_this);
-		_this.handleVolumeChange = _this.handleVolumeChange.bind(_this);
-		return _this;
-	}
+    _this.handlePlayerStateChange = _this.handlePlayerStateChange.bind(_this);
+    _this.handlePlayerReady = _this.handlePlayerReady.bind(_this);
+    _this.handleVideoPlay = _this.handleVideoPlay.bind(_this);
+    _this.handleVideoPause = _this.handleVideoPause.bind(_this);
+    _this.handlePlaybackRateChange = _this.handlePlaybackRateChange.bind(_this);
+    _this.handleVideoEnd = _this.handleVideoEnd.bind(_this);
+    _this.handleVolumeChange = _this.handleVolumeChange.bind(_this);
+    return _this;
+  }
 
-	_createClass(Player, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			socket.on('changeVideoHue', function (hueRotation, direction) {
-				(0, _jquery2.default)(document).ready(function () {
+  _createClass(Player, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      socket.on('changeVideoHue', function (hueRotation, direction) {
+        (0, _jquery2.default)(document).ready(function () {
 
-					// 0-360
-					// console.log("Current CSS!", currentCSS)
-					// 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
+          // 0-360
+          // console.log("Current CSS!", currentCSS)
+          // 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
 
-					var currentCSS = (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter').split(' '),
-					    newCSS = currentCSS.map(function (filter, idx) {
-						return idx === 0 ? 'hue-rotate(' + hueRotation + 'deg)' : filter;
-					}).join(' ');
+          var currentCSS = (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter').split(' '),
+              newCSS = currentCSS.map(function (filter, idx) {
+            return idx === 0 ? 'hue-rotate(' + hueRotation + 'deg)' : filter;
+          }).join(' ');
 
-					(0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter', newCSS);
-				});
-			});
+          (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter', newCSS);
+        });
+      });
 
-			socket.on('changeVideoInvert', function (invertPercent, direction) {
-				(0, _jquery2.default)(document).ready(function () {
+      socket.on('changeVideoInvert', function (invertPercent, direction) {
+        (0, _jquery2.default)(document).ready(function () {
 
-					// 0-100
-					// console.log("Current CSS!", currentCSS)
-					// 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
+          // 0-100
+          // console.log("Current CSS!", currentCSS)
+          // 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
 
-					var currentCSS = (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter').split(' '),
-					    newCSS = currentCSS.map(function (filter, idx) {
-						return idx === 1 ? 'invert(' + invertPercent + '%)' : filter;
-					}).join(' ');
+          var currentCSS = (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter').split(' '),
+              newCSS = currentCSS.map(function (filter, idx) {
+            return idx === 1 ? 'invert(' + invertPercent + '%)' : filter;
+          }).join(' ');
 
-					(0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter', newCSS);
-				});
-			});
+          (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter', newCSS);
+        });
+      });
 
-			socket.on('changeVideoSaturate', function (saturatePercent, direction) {
-				(0, _jquery2.default)(document).ready(function () {
+      socket.on('changeVideoSaturate', function (saturatePercent, direction) {
+        (0, _jquery2.default)(document).ready(function () {
 
-					// 0-100-over100
-					// console.log("Current CSS!", currentCSS)
-					// 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
+          // 0-100-over100
+          // console.log("Current CSS!", currentCSS)
+          // 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
 
-					var currentCSS = (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter').split(' '),
-					    newCSS = currentCSS.map(function (filter, idx) {
-						return idx === 2 ? 'saturate(' + saturatePercent + '%)' : filter;
-					}).join(' ');
+          var currentCSS = (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter').split(' '),
+              newCSS = currentCSS.map(function (filter, idx) {
+            return idx === 2 ? 'saturate(' + saturatePercent + '%)' : filter;
+          }).join(' ');
 
-					(0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter', newCSS);
-				});
-			});
-		}
-	}, {
-		key: 'handlePlayerReady',
-		value: function handlePlayerReady(event) {
-			var _this2 = this;
+          (0, _jquery2.default)('.' + direction + 'Deck.filters').css('filter', newCSS);
+        });
+      });
+    }
+  }, {
+    key: 'handlePlayerReady',
+    value: function handlePlayerReady(event) {
+      var _this2 = this;
 
-			var Direction = this.props.direction,
-			    cueTime = event.target.getCurrentTime(),
-			    videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : '';
+      var Direction = this.props.direction,
+          cueTime = event.target.getCurrentTime(),
+          videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : '';
 
-			this.setState(_defineProperty({}, 'video' + Direction, event.target));
+      this.setState(_defineProperty({}, 'video' + Direction, event.target));
 
-			socket.on('outputReadyForPlayerVideos', function () {
-				socket.emit('sendCueTimeToOutput' + Direction, cueTime);
-			});
+      socket.on('outputReadyForPlayerVideos', function () {
+        socket.emit('sendCueTimeToOutput' + Direction, cueTime);
+      });
 
-			/*socket listeners for dj video controls*/
-			socket.on('playBothVideos', function (playing) {
-				playing === 0 ? event.target.pauseVideo() : event.target.playVideo();
-			});
+      /*socket listeners for dj video controls*/
+      socket.on('playBothVideos', function (playing) {
+        playing === 0 ? event.target.pauseVideo() : event.target.playVideo();
+      });
 
-			socket.on('skipVideo', function (direction) {
-				if (direction === Direction) {
-					_this2.handleVideoEnd();
-				}
-			});
+      socket.on('skipVideo', function (direction) {
+        if (direction === Direction) {
+          _this2.handleVideoEnd(event);
+        }
+      });
 
-			socket.on('updatePlaybackRate', function (newRate) {
-				event.target.setPlaybackRate(newRate);
-			});
+      socket.on('updatePlaybackRate', function (newRate) {
+        event.target.setPlaybackRate(newRate);
+      });
 
-			socket.on('changeVideosVolume', function (newVol) {
-				console.log("Changing the volume", newVol);
-				_this2.handleVolumeChange(newVol, event.target);
-			});
+      socket.on('changeVideosVolume', function (newVol) {
+        console.log("Changing the volume", newVol);
+        _this2.handleVolumeChange(newVol, event.target);
+      });
 
-			// 'ready' refers to iframe, not video
-			// need to reset playback quality for each new video
-			setTimeout(function () {
-				event.target.pauseVideo();
-				event.target.setPlaybackQuality('small');
-			}, 100);
+      // 'ready' refers to iframe, not video
+      // need to reset playback quality for each new video
+      setTimeout(function () {
+        event.target.pauseVideo();
+        event.target.setPlaybackQuality('small');
+      }, 100);
 
-			socket.emit('playerMounted' + Direction, videoToEmit);
+      socket.emit('playerMounted' + Direction, videoToEmit);
 
-			// event.target.loadVideoById(this.props.queue[0].id.videoId, event.target.getCurrentTime(), 'small')
+      // event.target.loadVideoById(this.props.queue[0].id.videoId, event.target.getCurrentTime(), 'small')
 
-			// setTimeout(() => {
-			//  event.target.pauseVideo()
-			// }, 2)
-		}
-	}, {
-		key: 'handleVideoPlay',
-		value: function handleVideoPlay(event) {
-			setTimeout(function () {
-				event.target.setPlaybackQuality('small');
-			}, 100);
+      // setTimeout(() => {
+      //  event.target.pauseVideo()
+      // }, 2)
+    }
+  }, {
+    key: 'handleVideoPlay',
+    value: function handleVideoPlay(event) {
+      setTimeout(function () {
+        event.target.setPlaybackQuality('small');
+      }, 100);
 
-			var Direction = this.props.direction,
-			    cueTime = event.target.getCurrentTime();
-			socket.emit('playingVideo' + Direction, cueTime);
-		}
-	}, {
-		key: 'handleVideoPause',
-		value: function handleVideoPause(event) {
-			var Direction = this.props.direction,
-			    newCueTime = event.target.getCurrentTime();
-			socket.emit('pausingVideo' + Direction, newCueTime);
-			// this.props.savePlayer(Object.assign({}, event), `player${Direction}`)
-		}
-	}, {
-		key: 'handlePlaybackRateChange',
-		value: function handlePlaybackRateChange(event) {
-			var Direction = this.props.direction,
-			    newRate = event.data;
+      var Direction = this.props.direction,
+          cueTime = event.target.getCurrentTime();
+      socket.emit('playingVideo' + Direction, cueTime);
+    }
+  }, {
+    key: 'handleVideoPause',
+    value: function handleVideoPause(event) {
+      var Direction = this.props.direction,
+          newCueTime = event.target.getCurrentTime();
+      socket.emit('pausingVideo' + Direction, newCueTime);
+      // this.props.savePlayer(Object.assign({}, event), `player${Direction}`)
+    }
+  }, {
+    key: 'handlePlaybackRateChange',
+    value: function handlePlaybackRateChange(event) {
+      var Direction = this.props.direction,
+          newRate = event.data;
 
-			// console.log(newRate)
+      // console.log(newRate)
 
-			socket.emit('changingVideo' + Direction + 'PlaybackRate', newRate);
-		}
-	}, {
-		key: 'handleVolumeChange',
-		value: function handleVolumeChange(newVol, video) {
-			var Direction = this.props.direction;
+      socket.emit('changingVideo' + Direction + 'PlaybackRate', newRate);
+    }
+  }, {
+    key: 'handleVolumeChange',
+    value: function handleVolumeChange(newVol, video) {
+      var Direction = this.props.direction;
 
-			if (Direction === "Right") {
-				if (newVol <= 100) {
-					this.state['video' + Direction].setVolume(newVol);
-				}
-			} else {
-				if (newVol > 100) {
-					this.state['video' + Direction].setVolume(200 - newVol);
-				} else if (newVol === 100) {
-					this.state['video' + Direction].setVolume(100);
-				}
-			}
-		}
-	}, {
-		key: 'handleVideoEnd',
-		value: function handleVideoEnd(event) {
-			event.target.setPlaybackRate(1);
-			// console.log('END EVENT: ',event)
-			var video = this.state['video' + this.props.direction],
-			    setItem = {
-				"direction": this.props.direction,
-				"videoId": this.props.queue[0].id.videoId,
-				"title": this.props.queue[0].snippet.title,
-				"thumbnailUrl": this.props.queue[0].snippet.thumbnails.default.url
-			};
+      if (Direction === "Right") {
+        if (newVol <= 100) {
+          this.state['video' + Direction].setVolume(newVol);
+        }
+      } else {
+        if (newVol > 100) {
+          this.state['video' + Direction].setVolume(200 - newVol);
+        } else if (newVol === 100) {
+          this.state['video' + Direction].setVolume(100);
+        }
+      }
+    }
+  }, {
+    key: 'handleVideoEnd',
+    value: function handleVideoEnd(event) {
+      event.target.setPlaybackRate(1);
+      // console.log('END EVENT: ',event)
+      var video = this.state['video' + this.props.direction],
+          setItem = {
+        "direction": this.props.direction,
+        "videoId": this.props.queue[0].id.videoId,
+        "title": this.props.queue[0].snippet.title,
+        "thumbnailUrl": this.props.queue[0].snippet.thumbnails.default.url
+      };
 
-			// console.log(this.state)
-			// console.log('SET ITEM: ', setItem)
-			// console.log("props direction", this.props.direction)
+      // console.log(this.state)
+      // console.log('SET ITEM: ', setItem)
+      // console.log("props direction", this.props.direction)
 
-			this.props.addToSet(setItem);
-			this.props.removeFromQueue(0, 'queue' + this.props.direction);
-		}
-	}, {
-		key: 'handlePlayerStateChange',
-		value: function handlePlayerStateChange(event) {
-			var Direction = this.props.direction;
+      this.props.addToSet(setItem);
+      this.props.removeFromQueue(0, 'queue' + this.props.direction);
+    }
+  }, {
+    key: 'handlePlayerStateChange',
+    value: function handlePlayerStateChange(event) {
+      var Direction = this.props.direction;
 
-			// switch (event.data) {
-			//  case -1:
-			//    this.props.savePlayer(event.target, `player${Direction}`)
-			// }
+      // switch (event.data) {
+      //  case -1:
+      //    this.props.savePlayer(event.target, `player${Direction}`)
+      // }
 
-			console.log('reinitializing', event);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var queue = this.props.queue,
-			    playerOptions = {
-				width: window.innerWidth / 2,
-				// height: window.innerHeight - 130,
-				playerVars: {
-					autoplay: 1,
-					cc_load_policy: 0,
-					controls: 1,
-					disablekb: 1,
-					enablejsapi: 1,
-					fs: 0,
-					iv_load_policy: 3,
-					modestbranding: 1,
-					rel: 0,
-					showInfo: 0
-				}
-			};
+      console.log('reinitializing', event);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var queue = this.props.queue,
+          playerOptions = {
+        width: window.innerWidth / 2,
+        // height: window.innerHeight - 130,
+        playerVars: {
+          autoplay: 1,
+          cc_load_policy: 0,
+          controls: 1,
+          disablekb: 1,
+          enablejsapi: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          rel: 0,
+          showInfo: 0
+        }
+      };
 
-			return _react2.default.createElement(_reactYoutube2.default, {
-				videoId: queue && queue.length ? queue[0].id.videoId : '',
-				opts: playerOptions,
-				onReady: this.handlePlayerReady,
-				onPlay: this.handleVideoPlay,
-				onPause: this.handleVideoPause,
-				onPlaybackRateChange: this.handlePlaybackRateChange,
-				onEnd: this.handleVideoEnd,
-				onStateChange: this.handlePlayerStateChange
-			});
-		}
-	}]);
+      return _react2.default.createElement(_reactYoutube2.default, {
+        videoId: queue && queue.length ? queue[0].id.videoId : '',
+        opts: playerOptions,
+        onReady: this.handlePlayerReady,
+        onPlay: this.handleVideoPlay,
+        onPause: this.handleVideoPause,
+        onPlaybackRateChange: this.handlePlaybackRateChange,
+        onEnd: this.handleVideoEnd,
+        onStateChange: this.handlePlayerStateChange
+      });
+    }
+  }]);
 
-	return Player;
+  return Player;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-	return {
-		player: state.player['' + ownProps.direction],
-		queue: state.queue['' + ownProps.direction],
-		set: state.set
-	};
+  return {
+    player: state.player['' + ownProps.direction],
+    queue: state.queue['' + ownProps.direction],
+    set: state.set
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	return {
-		addToSet: function addToSet(setItem) {
-			dispatch((0, _set.addToSet)(setItem));
-		},
-		removeFromQueue: function removeFromQueue(videoId, direction) {
-			dispatch((0, _queue.removeFromQueue)(videoId, direction));
-		},
-		savePlayer: function savePlayer(player, direction) {
-			// console.log('SAVING PLAYER??!??!?', player, direction)
-			dispatch((0, _player.savePlayer)(player, direction));
-		}
-	};
+  return {
+    addToSet: function addToSet(setItem) {
+      dispatch((0, _set.addToSet)(setItem));
+    },
+    removeFromQueue: function removeFromQueue(videoId, direction) {
+      dispatch((0, _queue.removeFromQueue)(videoId, direction));
+    },
+    savePlayer: function savePlayer(player, direction) {
+      // console.log('SAVING PLAYER??!??!?', player, direction)
+      dispatch((0, _player.savePlayer)(player, direction));
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Player);
