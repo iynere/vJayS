@@ -34,7 +34,6 @@ export default class SearchResultItem extends Component {
   onClickRight(event) {
     // console.log(this.props)
     store.dispatch(addToQueue(this.props.video, 'queueRight'))
-        this.props.handleClose();
     if (!event.shiftKey) {
       this.props.handleClose()
     };

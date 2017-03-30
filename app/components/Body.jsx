@@ -7,8 +7,6 @@ import {Queues} from './Queues'
 
 export const Body = () => {
 
-  // const visualClasses = "hue invert saturate"
-
   return (
     <div>
       <Grid columns='two'>

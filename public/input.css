@@ -4,6 +4,7 @@ a:visited{
 
 .LeftDeck.filters{
 	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+
 }
 
 .RightDeck.filters{
