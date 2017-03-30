@@ -46027,7 +46027,7 @@ var LoginLogout = function (_Component) {
       return _react2.default.createElement(
         _semanticUiReact.Menu.Item,
         { style: { width: "30%" }, position: 'right' },
-        _react2.default.createElement(_semanticUiReact.Button, { content: 'Submit Screenshots!', href: 'http://crossfader-screens.tumblr.com', target: '_blank', style: { marginRight: "10px" } }),
+        _react2.default.createElement(_semanticUiReact.Button, { content: 'Submit Screenshots!', href: 'http://vjays-screens.tumblr.com', target: '_blank', style: { marginRight: "10px" } }),
         _react2.default.createElement(_ViewAllSetsModal2.default, null),
         user ? this.renderUser() : null,
         user ? null : this.renderLogin()
