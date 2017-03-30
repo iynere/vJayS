@@ -50,7 +50,7 @@ class FetchSetModal extends Component {
 
         return (
           <List.Item key={set.id}
-            onClick={boundItemClick}>{set.name}
+            onClick={boundItemClick}><h2>{set.name}</h2>
           </List.Item>
         )
       })
@@ -69,7 +69,7 @@ class FetchSetModal extends Component {
         basic size='small'>
         <Modal.Content>
         <div>
-          <h4>Select a Set</h4>
+          <h1>Select a Set</h1>
           <List selection inverted onClick={null /*this.handleClick*/}>
             {sets ? sets : null}
           </List>

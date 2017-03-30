@@ -23,16 +23,21 @@ export default class SearchResultItem extends Component {
     this.setState({ active: false })
   }
 
-  onClickLeft() {
+  onClickLeft(event) {
     // console.log(this.props)
     store.dispatch(addToQueue(this.props.video, 'queueLeft'))
-    this.props.handleClose();
+    if (!event.shiftKey) {
+      this.props.handleClose()
+    };
   }
 
-  onClickRight() {
+  onClickRight(event) {
     // console.log(this.props)
     store.dispatch(addToQueue(this.props.video, 'queueRight'))
         this.props.handleClose();
+    if (!event.shiftKey) {
+      this.props.handleClose()
+    };
   }
 
   render() {
@@ -55,8 +60,8 @@ export default class SearchResultItem extends Component {
       <div style={dimDivStyle}>
         <p style={headerStyle}>{this.props.video.snippet.title.slice(0,36)}</p>
 
-        <Button className="blue mini circular icon" onClick={this.onClickLeft}><Icon name="add circle"/></Button>
-        <Button className="blue mini circular icon" onClick={this.onClickRight}><Icon name="add circle"/></Button>
+        <Button className="blue mini circular icon" onClick={this.onClickLeft}><Icon name="caret left"/></Button>
+        <Button className="blue mini circular icon" onClick={this.onClickRight}><Icon name="caret right"/></Button>
       </div>
     )
 
