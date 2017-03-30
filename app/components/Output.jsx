@@ -7,12 +7,12 @@ export const Output = () => {
 
   return (
   <div>
-    <div className={`youtube2 ${visualClasses}`}>
+    <div className={`youtube2 filters`}>
       <OutputPlayer
         direction='Left'
       />
     </div>
-    <div className={`youtube1 ${visualClasses}`}>
+    <div className={`youtube1 filters`}>
       <OutputPlayer
         direction='Right'
       />

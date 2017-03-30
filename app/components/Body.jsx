@@ -7,21 +7,21 @@ import {Queues} from './Queues'
 
 export const Body = () => {
 
-  const visualClasses = "hue invert saturate"
+  // const visualClasses = "hue invert saturate"
 
   return (
     <div>
       <Grid columns='two'>
         <Grid.Row>
           <Grid.Column>
-            <div className={`LeftDeck ${visualClasses}`}>
+            <div className={`LeftDeck filters`}>
               <Deck
                 direction='Left'
               />
             </div>
           </Grid.Column>
           <Grid.Column>
-            <div className={`RightDeck ${visualClasses}`}>
+            <div className={`RightDeck filters`}>
               <Deck
                 direction='Right'
               />

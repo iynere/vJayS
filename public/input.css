@@ -2,12 +2,20 @@ a:visited{
   color:white;
 }
 
-.LeftDeck .hue {
-  filter: hue-rotate();
+.LeftDeck.filters{
+  filter: hue-rotate() invert() saturate();
 }
 
-.RightDeck {
-/*  filter: grayscale(100%);*/
+.RightDeck .filters{
+  filter: hue-rotate() invert() saturate();
+}
+
+.youtube1 .filters {
+  filter: hue-rotate() invert() saturate();
+}
+
+.youtube2 .filters {
+  filter: hue-rotate() invert() saturate();
 }
 
 .effects {
@@ -19,9 +27,6 @@ a:visited{
   height:100%;
 }
 
-.youtube1 .hue {
-  filter: hue-rotate();
-}
 
 .youtube1 {
   /*Right player*/

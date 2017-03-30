@@ -62,13 +62,19 @@ class OutputPlayer extends Component {
       })
     })
 
-    socket.on('changeVideoHue', (hueRotation, direction) => {
+ socket.on('changeVideoHue', (hueRotation, direction) => {
       let outputScreen = direction === "Left" ? "youtube2" : "youtube1"
 
       $(document).ready(() => {
-        $(`.${outputScreen}.hue`).css('filter', `hue-rotate(${hueRotation}deg)`)
+        let currentCSS = $(`.${outputScreen}.filters`).css('filters')
+        // "hue-rotate() invert() saturate()"
+        let invert = currentCSS.indexOf("i")
+        let saturate = currentCSS.indexOf("s")
+        let newCSS = `hue-rotate(${hueRotation}deg) ${currentCSS.slice(invert)}`
+        $(`.${outputScreen}.filters`).css('filters', newCSS)
       })
     })
+
 
     socket.on('changeVideoInvert', (invertPercent, direction) => {
       let outputScreen = direction === "Left" ? "youtube2" : "youtube1"

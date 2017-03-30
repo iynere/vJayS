@@ -61,11 +61,14 @@ class Player extends Component {
       this.handleVolumeChange(newVol, event.target);
     })
 
-    socket.on('changeVideoHue', (hueRotation, direction) => {
-      console.log("Hue changing!", hueRotation, direction)
-
+socket.on('changeVideoHue', (hueRotation, direction) => {
       $(document).ready(() => {
-        $(`.${direction}Deck.hue`).css('filter', `hue-rotate(${hueRotation}deg)`)
+      let currentCSS = $(`.${direction}Deck.filters`).css('filter')
+      console.log("Current CSS!", currentCSS)
+      let invert = currentCSS.indexOf("i")
+      let saturate = currentCSS.indexOf("s")
+      let newCSS = `hue-rotate(${hueRotation}deg) ${currentCSS.slice(invert)}`
+      $(`.${direction}Deck.filters`).css('filter', newCSS)
       })
     })
 
