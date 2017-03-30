@@ -61,7 +61,7 @@ class ViewAllSetsModal extends Component {
         trigger={
           <Button
             onClick={this.handleModalOpen}>
-            View All Sets
+            All Sets
           </Button>
         }
         open={this.state.modalOpen}

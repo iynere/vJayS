@@ -45645,7 +45645,7 @@ var ViewAllSetsModal = function (_Component) {
             _semanticUiReact.Button,
             {
               onClick: this.handleModalOpen },
-            'View All Sets'
+            'All Sets'
           ),
           open: this.state.modalOpen,
           onClose: this.handleModalClose,
@@ -46027,6 +46027,7 @@ var LoginLogout = function (_Component) {
       return _react2.default.createElement(
         _semanticUiReact.Menu.Item,
         { style: { width: "30%" }, position: 'right' },
+        _react2.default.createElement(_semanticUiReact.Button, { content: 'Submit Screenshots!', href: 'http://crossfader-screens.tumblr.com', target: '_blank', style: { marginRight: "10px" } }),
         _react2.default.createElement(_ViewAllSetsModal2.default, null),
         user ? this.renderUser() : null,
         user ? null : this.renderLogin()
@@ -46799,10 +46800,12 @@ var Search = function (_Component) {
     key: 'showSearchResults',
     value: function showSearchResults(searchResults) {
       // console.log("search searchResults::", searchResults)
-      this.setState({
-        open: true,
-        searchResults: searchResults
-      });
+      if (document.getElementsByClassName('react-typeahead-usertext')[0].value.split(' ').join('').length) {
+        this.setState({
+          open: true,
+          searchResults: searchResults
+        });
+      }
     }
   }, {
     key: 'handleClose',
@@ -46854,7 +46857,7 @@ var Search = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        null,
+        { style: { width: "500px" } },
         _react2.default.createElement(_YouTubeSearch2.default, {
           apiKey: 'AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4',
           placeHolder: 'Search YouTube',

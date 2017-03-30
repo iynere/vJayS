@@ -1,91 +1,91 @@
 a:visited{
-	color:white;
+  color:white;
 }
 
 .LeftDeck.filters{
-	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+  filter: hue-rotate(0deg) invert(0%) saturate(100%);
 
 }
 
 .RightDeck.filters{
-	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+  filter: hue-rotate(0deg) invert(0%) saturate(100%);
 }
 
 .youtube1.filters {
-	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+  filter: hue-rotate(0deg) invert(0%) saturate(100%);
 }
 
 .youtube2.filters {
-	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+  filter: hue-rotate(0deg) invert(0%) saturate(100%);
 }
 
 .effects {
-	position: fixed;
-	pointer-events: none;
-	opacity: 1;
-	z-index: 1;
-	width:100%;
-	height:100%;
+  position: fixed;
+  pointer-events: none;
+  opacity: 1;
+  z-index: 1;
+  width:100%;
+  height:100%;
 }
 
 
 .youtube1 {
-	/*Right player*/
-	position: absolute;
-	pointer-events: none;
-	opacity: 0.5;
-	z-index: 1;
+  /*Right player*/
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 .youtube2 {
-	position: absolute;
-	pointer-events: none;
-	opacity: 1;
-	z-index: 0;
+  position: absolute;
+  pointer-events: none;
+  opacity: 1;
+  z-index: 0;
 }
 
 /* for react yt search */
 .react-typeahead-options {
-	color: #555;
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	border: 1px solid #ccc;
-	cursor: default;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	z-index: 1;
-	width: 100%;
+  color: #555;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  border: 1px solid #ccc;
+  cursor: default;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 100%;
 }
 
 /*.react-typeahead-options {
-	margin-left: -20px;
+  margin-left: -20px;
 }*/
 
 .react-typeahead-options li[role="option"] {
-	padding: 5px;
-	text-align: left;
-	cursor: pointer;
+  padding: 5px;
+  text-align: left;
+  cursor: pointer;
 }
 
 .react-typeahead-options li[role="option"][aria-selected="true"] {
-	background: #00bcd4;
-	color: white;
-	font-weight: bold;
+  background: #00bcd4;
+  color: white;
+  font-weight: bold;
 }
 
 .vid-search1 {
-	border: 1px solid #adadad;
-	margin: 10px auto;
+  border: 1px solid #adadad;
+  margin: 10px auto;
 }
 
 .vid-search2 {
-	border: 1px solid #adadad;
-	margin: 10px auto;
+  border: 1px solid #adadad;
+  margin: 10px auto;
 }
 
 /*QUEUES CONTAINER*/
 .queuesContainer{
-	border-top:2px solid #333333;
+  border-top:2px solid #333333;
 }
 
 
@@ -95,65 +95,65 @@ a:visited{
 /*DJ Controls*/
 
 h2{
-	font-weight: 400;
+  font-weight: 400;
 }
 
 .djControls{
-	color:white;
-	margin-bottom:30px;
-	border-bottom: 2px solid #333333;
-	padding: 30px;
-	padding-top:0px;
+  color:white;
+  margin-bottom:30px;
+  border-bottom: 2px solid #333333;
+  padding: 30px;
+  padding-top:0px;
 }
 
 .djControlButtons{
-	display:flex;
-	justify-content: space-around;
-	align-items: center;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .djControlButtons button{
-	background:#333333;
-	font-size: 2em;
-	padding:10px;
+  background:#333333;
+  font-size: 2em;
+  padding:10px;
 }
 
 .sliders{
-	width: 35%;
-	text-align:center;
+  width: 35%;
+  text-align:center;
 }
 
 .singleSliders{
-	width: 22.5%;
-	text-align:center;
+  width: 22.5%;
+  text-align:center;
 }
 
 input[type=range]
 {
-	width: 100%;
-	padding: 10px;
-	/*position: absolute;
-	top: 40%;*/
-	/*transform: rotate(270deg);*/
-	/*
-	To change css styles:
-	http://danielstern.ca/range.css/#/ */
+  width: 100%;
+  padding: 10px;
+  /*position: absolute;
+  top: 40%;*/
+  /*transform: rotate(270deg);*/
+  /*
+  To change css styles:
+  http://danielstern.ca/range.css/#/ */
 }
 
 .dj2MobileControls{
-	color: white;
-	margin: 30px;
+  color: white;
+  margin: 30px;
 }
 
 .dj2MobileButtons{
-	display:flex;
-	justify-content: space-around;
+  display:flex;
+  justify-content: space-around;
 }
 
 .dj2MobileButtons button{
-	background:#333333;
-	font-size: 2em;
-	padding:10px;
+  background:#333333;
+  font-size: 2em;
+  padding:10px;
 }
 
 
@@ -161,18 +161,18 @@ input[type=range]
 
 
 .mobileComponent {
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .tapButton {
-	height: 500px;
-	width: 500px;
-	text-align: center;
-	font-size: 300%;
+  height: 500px;
+  width: 500px;
+  text-align: center;
+  font-size: 300%;
 /*    display: block;*/
 /*  height: 100vh;*/
 }
@@ -180,122 +180,122 @@ input[type=range]
 
 
 .react-typeahead-container {
-	border: 1px solid #024e6a;
-	padding: 0;
-	border-radius: 0px;
-	background-color: white;
-	margin: 0 auto
-	max-height: 50px;
+  border: 1px solid #024e6a;
+  padding: 0;
+  border-radius: 0px;
+  background-color: white;
+  margin: 0 auto
+  max-height: 50px;
 }
 
 .react-typeahead-input {
-	color: #555;
-	position: relative;
-	padding: 5px 8px;
-	background: white;
-	outline: none;
-	line-height: 20px;
-	border: none;
-	margin-top: 0px;
+  color: #555;
+  position: relative;
+  padding: 5px 8px;
+  background: white;
+  outline: none;
+  line-height: 20px;
+  border: none;
+  margin-top: 0px;
 }
 
 .react-typeahead-usertext {
-	position: relative;
-	background: white;
-	outline: none;
-	width: 100%;
-	line-height: 20px;
-	border: none;
-	margin-top: 0px;
+  position: relative;
+  background: white;
+  outline: none;
+  width: 100%;
+  line-height: 20px;
+  border: none;
+  margin-top: 0px;
 }
 
 .react-typeahead-hint {
-	position: relative;
-	background: white;
-	outline: none;
-	width: 100%;
-	line-height: 20px;
-	border: none;
-	margin-top: 0px;
+  position: relative;
+  background: white;
+  outline: none;
+  width: 100%;
+  line-height: 20px;
+  border: none;
+  margin-top: 0px;
 }
 
 /*P5 and effects*/
 .touchPad{
-	width:100vw;
-	height:100vh;
+  width:100vw;
+  height:100vh;
 }
 
 #p5parent{
 
-	opacity:1;
-	position: absolute;
-	top:0;
-	left:0;
+  opacity:1;
+  position: absolute;
+  top:0;
+  left:0;
 }
 
 #p6parent{
 
-	opacity:1;
-	position: absolute;
-	top:0;
-	left:0;
+  opacity:1;
+  position: absolute;
+  top:0;
+  left:0;
 }
 
 .emojiEffect{
-	 position: absolute;
-	 width:100%;
-	 height:100%;
-	 display:flex;
-	 justify-content: space-between;
+   position: absolute;
+   width:100%;
+   height:100%;
+   display:flex;
+   justify-content: space-between;
 
 }
 
 .emojiEffect2{
-	 position: absolute;
-	 width:100%;
-	 height:100%;
-	 display:flex;
-	 justify-content: space-around;
+   position: absolute;
+   width:100%;
+   height:100%;
+   display:flex;
+   justify-content: space-around;
 
 }
 
 @keyframes emojiRain{
-	0% {
-			top:100%;
-	}
-	100% {
-			top: 50%;
-	}
+  0% {
+      top:100%;
+  }
+  100% {
+      top: 50%;
+  }
 }
 
 .emojiAnimation{
-	position: relative;
-	animation-name: emojiRain;
-	animation-duration: 5s;
-	animation-timing-function: linear;
+  position: relative;
+  animation-name: emojiRain;
+  animation-duration: 5s;
+  animation-timing-function: linear;
 }
 
 .col{
-	width:100%;
+  width:100%;
 }
 
 /*---P5 and effects---*/
 
 /*Emoji Buttons*/
 .emojiMobile{
-	width:100%;
-	height: 100vh;
-	color:lightblue;
+  width:100%;
+  height: 100vh;
+  color:lightblue;
 }
 
 .emojiMobile h1{
-	color:lightblue;
-	font-size:4em;
+  color:lightblue;
+  font-size:4em;
 }
 
 .buttonsContainer{
-	width:100%;
-	height:100%;
+  width:100%;
+  height:100%;
  display:flex;
  justify-content: space-around;
  flex-flow: row wrap;

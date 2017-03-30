@@ -79,6 +79,7 @@ class LoginLogout extends Component {
     // if (this.props.playlists.accessToken) {this.props.fetchUserPlaylists(this.props.playlists.accessToken)}
     return (
       <Menu.Item style={{ width: "30%"}} position='right'>
+        <Button content='Submit Screenshots!' href='http://crossfader-screens.tumblr.com' target="_blank" style={{marginRight: "10px"}}></Button>
         <ViewAllSetsModal />
         {user ? this.renderUser() : null}
         {user ? null : this.renderLogin()}

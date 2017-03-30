@@ -22,10 +22,12 @@ class Search extends Component {
 
   showSearchResults(searchResults) {
     // console.log("search searchResults::", searchResults)
-    this.setState({
-      open          : true,
-      searchResults : searchResults
-    })
+    if (document.getElementsByClassName('react-typeahead-usertext')[0].value.split(' ').join('').length) {
+      this.setState({
+        open          : true,
+        searchResults : searchResults
+      })
+    }
   }
 
   handleClose() {
@@ -72,7 +74,7 @@ class Search extends Component {
 
 
     return (
-      <div>
+      <div style={{width: "500px"}}>
         <YouTubeSearch
           apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4'
           placeHolder="Search YouTube"
