@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {saveSetToDb} from '../reducers/set'
+import {saveSetToDb} from 'APP/app/reducers/set'
+import {concatQueuesToSet} from 'APP/app/utils/queues'
 import localStore from 'store'
 import { Dropdown, Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
 
@@ -37,9 +38,23 @@ class SaveSetModal extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const videos = localStore.get('set')
-    const setToSave = {"name": this.state.setName, "videos": videos, "user_id": this.props.user.id}
+    let set = localStore.get('set'),
+      queueLeft = localStore.get('queueLeft'),
+      queueRight = localStore.get('queueRight')
+      
+    console.log('SET',set,'LEFT',queueLeft,'RIGHT',queueRight)
+      
+    // add queue items to set to save
+    let setVideos = concatQueuesToSet(set, queueLeft, queueRight)
+      
+    const setToSave = {
+      "name": this.state.setName,
+      "videos": setVideos,
+      "user_id": this.props.user.id
+    }
+    
     this.props.saveSetToDb(setToSave)
+    
     this.setState({
       modalOpen: false,
     })
@@ -55,7 +70,7 @@ class SaveSetModal extends Component {
         <div>
           <Form inverted onSubmit={this.handleSubmit}>
             <Form.Field>
-              <input type="text" placeholder="Set Name" onChange={this.handleChange} value={this.state.setName}/>
+              <input type="text" placeholder="A Descriptive Title" onChange={this.handleChange} value={this.state.setName}/>
             </Form.Field>
           {/*You can move button into form field if you'd like*/}
             <Button color={"red"} inverted basic type='submit'>Save Set</Button>

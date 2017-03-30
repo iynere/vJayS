@@ -67,7 +67,7 @@ export const insertQueueItem = (video, newIdx, queueLeftOrRight) => dispatch => 
 }
 
 export const rearrangeQueueItems = (oldIndex, newIndex) => dispatch => {
-  const leftLength = localStore.get('queueLeft').length
+  const leftLength = 2 * localStore.get('queueLeft').length
   // 1. what queue are we starting in ?
   let startDirection = oldIndex < leftLength ? 'queueLeft' : 'queueRight'
   

@@ -1,7 +1,7 @@
 {
   "name": "hatrock",
   "version": "0.0.1",
-  "description": "hatrock project",
+  "description": "Grace Hopper capstone project",
   "main": "index.js",
   "scripts": {
     "validate": "check-node-version --node '>= 6.7.0'",

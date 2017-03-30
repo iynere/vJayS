@@ -49,7 +49,7 @@ class FetchPlaylistsModal extends Component {
 
         return (
           <List.Item key={playlistItem.id} onClick={boundItemClick}>
-            {playlistItem.snippet.title}
+            <h2>{playlistItem.snippet.title}</h2>
           </List.Item>
         )
       })
@@ -68,7 +68,7 @@ class FetchPlaylistsModal extends Component {
         basic size='small'>
         <Modal.Content>
         <div>
-          <h4>Select a YouTube Playlist</h4>
+          <h1>Select a YouTube Playlist</h1>
           <List selection inverted onClick={null /*this.handleClick*/}>
             {playlists ? playlists : null}
           </List>

@@ -34,6 +34,12 @@ export const addToSet = setItem => dispatch => {
   dispatch(receiveSet(setToUpdate))
 }
 
+export const removeFromSet = setItemId => dispatch => {
+  let slicedSet = localStore.get('set').slice(0,setItemId).concat(localStore.get('set').slice(setItemId+1))
+  localStore.set('set', slicedSet)
+  dispatch(receiveSet(slicedSet))
+}
+
 export const saveSetToDb = (set) => dispatch => {
   axios.post('/api/sets', set)
     .then(() => {
@@ -42,8 +48,8 @@ export const saveSetToDb = (set) => dispatch => {
     .catch(console.error)
 }
 
-export const fetchSetFromDb = (userId, setId) => dispatch => {
-  axios.get(`/api/sets/${userId}/${setId}`)
+export const fetchSetFromDb = setId => dispatch => {
+  axios.get(`/api/sets/${setId}`)
     .then((foundSet) => {
       let setArray = foundSet.data[0].videos
       // dispatch(receiveSet(foundSet.data[0].videos))

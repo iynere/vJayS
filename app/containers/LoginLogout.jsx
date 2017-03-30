@@ -5,6 +5,7 @@ import {Button, Icon, Dropdown, Menu} from 'semantic-ui-react'
 import {logout} from 'APP/app/reducers/auth'
 import {fetchAllSetsFromDb} from 'APP/app/reducers/sets'
 import FetchSetModal from 'APP/app/components/FetchSetModal'
+import ViewAllSetsModal from 'APP/app/components/ViewAllSetsModal'
 import SaveSetModal from 'APP/app/components/SaveSetModal'
 import FetchPlaylistsModal from 'APP/app/components/FetchPlaylistsModal'
 
@@ -13,7 +14,7 @@ class LoginLogout extends Component {
     super(props)
     this.renderLogin = this.renderLogin.bind(this)
     this.renderUser = this.renderUser.bind(this)
-    this.renderLogout = this.renderLogout.bind(this)
+    // this.renderLogout = this.renderLogout.bind(this)
   }
   
   componentDidMount() {
@@ -29,6 +30,9 @@ class LoginLogout extends Component {
           <SaveSetModal />
           <FetchSetModal />
           <FetchPlaylistsModal />
+          <Menu.Item onClick={this.props.logout}>
+            Logout
+          </Menu.Item>
         {/*<Dropdown.Item
                     onClick={()=>{
                       this.props.fetchUserPlaylists(this.props.user.id)
@@ -57,26 +61,27 @@ class LoginLogout extends Component {
 
   renderLogin() {
     return (
-      <Button content="Login with Google" icon={'youtube'} color={'youtube'} href='/api/auth/login/google' style={{position: "relative", left: "-50px", width: "60%", maxWidth: "250px"}}></Button>
+      <Button content='Login' icon={'youtube'} color={'youtube'} href='/api/auth/login/google' style={{position: "relative", left: "10px", width: "25%", maxWidth: "115px"}}></Button>
     )
   }
 
-  renderLogout() {
-    const user = this.props.user
-    return (
-      <Menu.Item>
-        <Button onClick={this.props.logout}>Logout</Button></Menu.Item>
-    )
-  }
+  // renderLogout() {
+  //  const user = this.props.user
+  //  return (
+  //    <Menu.Item>
+  //      <Button onClick={this.props.logout}>Logout</Button></Menu.Item>
+  //  )
+  // }
 
   render() {
     const user = this.props.user
     // if (user) {this.props.dispatch(fetchAccessToken(user.id))}
     // if (this.props.playlists.accessToken) {this.props.fetchUserPlaylists(this.props.playlists.accessToken)}
     return (
-      <Menu.Item>
+      <Menu.Item style={{ width: "30%"}} position='right'>
+        <ViewAllSetsModal />
         {user ? this.renderUser() : null}
-        {user ? this.renderLogout() : this.renderLogin()}
+        {user ? null : this.renderLogin()}
       </Menu.Item>
     )
   }

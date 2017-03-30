@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Button, Dimmer, Image, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import {removeFromQueue, moveToFront} from 'APP/app/reducers/queue'
+import {addToQueue} from 'APP/app/reducers/queue'
+import {removeFromSet} from 'APP/app/reducers/set'
 
-class SortableQueueItem extends Component {
+class SetItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,24 +20,15 @@ class SortableQueueItem extends Component {
     this.setState({ active: false })
   }
 
-  onClickPlay() {
+  onClickAddBackToQueue() {
     // console.log(this.props)
-    if (this.props.direction === 'Left') {
-      this.props.moveToFront(this.props.index, 'queueLeft')
-    } else {
-      this.props.moveToFront(this.props.index - 2 * this.props.queueLeft.length, 'queueRight')
-    }
-    
+    this.props.addToQueue(this.props.video, `queue${this.props.video.direction}`)
+    this.props.removeFromSet(this.props.video.index)
   }
 
   onClickRemove() {
-    // console.log(this.props)
-    if (this.props.direction === 'Left') {
-      this.props.removeFromQueue(this.props.index, 'queueLeft')
-    } else {
-      this.props.removeFromQueue(this.props.index - 2 * this.props.queueLeft.length, 'queueRight')
-    }
-    
+    console.log('SETITEMPROPS',this.props)
+    this.props.removeFromSet(this.props.video.index)
   }
   
   render() {
@@ -60,7 +52,7 @@ class SortableQueueItem extends Component {
         <p style={headerStyle}>{this.props.video.snippet.title.slice(0,36)}</p>
         
         <Button className="red mini circular icon" onClick={this.onClickRemove.bind(this)}><Icon name="remove"/></Button>
-        <Button className="green mini circular icon" onClick={this.onClickPlay.bind(this)}><Icon name="play"/></Button>
+        <Button className="blue mini circular icon" onClick={this.onClickAddBackToQueue.bind(this)}><Icon name="add"/></Button>
       </div>
     )
 
@@ -78,18 +70,17 @@ class SortableQueueItem extends Component {
 }
 
 
-const mapStateToProps = state => ({
-  queueLeft: state.queue['Left'],
-  queueRight: state.queue['Right']
+const mapStateToProps = ({set}) => ({
+  set
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeFromQueue: (videoIdx, direction) => {
-    dispatch(removeFromQueue(videoIdx, direction))
+  addToQueue: (video, direction) => {
+    dispatch(addToQueue(video, direction))
   },
-  moveToFront: (videoIdx, direction) => {
-    dispatch(moveToFront(videoIdx, direction))
+  removeFromSet: setItemId => {
+    dispatch(removeFromSet(setItemId))
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortableQueueItem);
+export default connect(mapStateToProps, mapDispatchToProps)(SetItem);

@@ -6,6 +6,7 @@ const rootReducer = combineReducers({
   player: require ('./player').default,
   playlists: require('./playlists').default,
   queue: require('./queue').default,
+  search: require('./search').default,
   set: require('./set').default,
   sets: require('./sets').default
 })

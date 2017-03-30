@@ -7,9 +7,12 @@ import { connect } from 'react-redux'
 
 class SortableQueue extends Component {
   constructor(props) {
-    let Direction = props.direction
     super(props)
     this.onSortEnd = this.onSortEnd.bind(this)
+    this.state = {
+      queueLeft: props.queueLeft,
+      queueRight: props.queueRight
+    }
   }
 
   onSortEnd({oldIndex, newIndex}) {
@@ -27,14 +30,14 @@ class SortableQueue extends Component {
       whiteSpace: "normal",
     }
 
-    const SortableItem = SortableElement(({value, idx}) => {
+    const SortableItem = SortableElement(({value, idx, direction}) => {
       // console.log(idx)
       return (
         <List.Item style={listItemStyle}>
           <SortableQueueItem
             video={value}
             style={{wordWrap: "break-word", whiteSpace: "normal"}}
-            direction={this.props.direction}
+            direction={direction}
             index={idx}
           />      
         </List.Item>
@@ -58,7 +61,8 @@ class SortableQueue extends Component {
                     key={`item-${index}`}
                     idx={index}
                     index={index}
-                    value={value} 
+                    value={value}
+                    direction='Left'
                   />
                 )})}
               </List>
@@ -68,10 +72,11 @@ class SortableQueue extends Component {
                 {queueRight.map((value, index) => {
                   return (
                   <SortableItem
-                    key={`item-${index + queueLeft.length}`}
-                    idx={index + queueLeft.length}
-                    index={index + queueLeft.length}
+                    key={`item-${index + 2 * queueLeft.length}`}
+                    idx={index + 2 * queueLeft.length}
+                    index={index + 2 * queueLeft.length}
                     value={value} 
+                    direction='Right'
                   />
                 )})}
               </List>
