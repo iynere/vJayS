@@ -26,7 +26,54 @@ class Player extends Component {
 	}
 
 	componentDidMount() {
-		// console.log('PROPS', this.props)
+		socket.on('changeVideoHue', (hueRotation, direction) => {
+			$(document).ready(() => {
+				
+				// 0-360
+				// console.log("Current CSS!", currentCSS)
+				// 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
+				
+				let currentCSS = $(`.${direction}Deck.filters`).css('filter').split(' '),
+				
+					newCSS = currentCSS.map((filter, idx) => 
+							idx === 0 ? `hue-rotate(${hueRotation}deg)` : filter).join(' ')
+					
+				$(`.${direction}Deck.filters`).css('filter', newCSS)
+			})
+		})
+
+
+		socket.on('changeVideoInvert', (invertPercent, direction) => {
+			$(document).ready(() => {
+				
+				// 0-100
+				// console.log("Current CSS!", currentCSS)
+				// 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
+				
+				let currentCSS = $(`.${direction}Deck.filters`).css('filter').split(' '),
+				
+					newCSS = currentCSS.map((filter, idx) => 
+							idx === 1 ? `invert(${invertPercent}%)` : filter).join(' ')
+					
+				$(`.${direction}Deck.filters`).css('filter', newCSS)
+			})
+		})
+
+		socket.on('changeVideoSaturate', (saturatePercent, direction) => {
+			$(document).ready(() => {
+				
+				// 0-100-over100
+				// console.log("Current CSS!", currentCSS)
+				// 'hue-rotate(XXdeg) invert(XX%) saturate(XX%)'
+				
+				let currentCSS = $(`.${direction}Deck.filters`).css('filter').split(' '),
+				
+					newCSS = currentCSS.map((filter, idx) => 
+							idx === 2 ? `saturate(${saturatePercent}%)` : filter).join(' ')
+					
+				$(`.${direction}Deck.filters`).css('filter', newCSS)
+			})
+		})
 	}
 
 	handlePlayerReady(event) {
@@ -61,26 +108,6 @@ class Player extends Component {
 			this.handleVolumeChange(newVol, event.target);
 		})
 		
-		socket.on('changeVideoHue', (hueRotation, direction) => {
-			console.log("Hue changing!", hueRotation, direction)
-
-			$(document).ready(() => {
-				$(`.${direction}Deck.hue`).css('filter', `hue-rotate(${hueRotation}deg)`)
-			})
-		})
-
-
-		socket.on('changeVideoInvert', (invertPercent, direction) => {
-				$(document).ready(() => {
-					$(`.${direction}Deck.invert`).css('filter', `invert(${invertPercent}%)`)
-				})
-		})
-
-		socket.on('changeVideoSaturate', (saturationPercent, direction) => {
-				$(document).ready(() => {
-					$(`.${direction}Deck.saturate`).css('filter', `saturate(${saturationPercent}%)`)
-				})
-		})
 		// 'ready' refers to iframe, not video
 		// need to reset playback quality for each new video
 		setTimeout(() => {

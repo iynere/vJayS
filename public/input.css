@@ -2,12 +2,21 @@ a:visited{
 	color:white;
 }
 
-.LeftDeck .hue {
-	filter: hue-rotate();
+.LeftDeck.filters{
+	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+
 }
 
-.RightDeck {
-/*  filter: grayscale(100%);*/
+.RightDeck.filters{
+	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+}
+
+.youtube1.filters {
+	filter: hue-rotate(0deg) invert(0%) saturate(100%);
+}
+
+.youtube2.filters {
+	filter: hue-rotate(0deg) invert(0%) saturate(100%);
 }
 
 .effects {
@@ -19,9 +28,6 @@ a:visited{
 	height:100%;
 }
 
-.youtube1 .hue {
-	filter: hue-rotate();
-}
 
 .youtube1 {
 	/*Right player*/
@@ -93,8 +99,11 @@ h2{
 }
 
 .djControls{
-	color: white;
-	padding: 0 30px;
+	color:white;
+	margin-bottom:30px;
+	border-bottom: 2px solid #333333;
+	padding: 30px;
+	padding-top:0px;
 }
 
 .djControlButtons{

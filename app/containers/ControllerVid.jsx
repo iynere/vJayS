@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import SliderComponent from 'APP/app/components/SliderComponent'
 import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
 
-
 /*~~~DJ CONTROLS TO AFFECT OUTPUT SCREEN~~~*/
 
 var socket = io(window.location.origin)
@@ -15,7 +14,13 @@ export default class ControllerVid extends Component {
 		this.pause="pause"
 		this.playing=0;
 		this.state={
-			playStatus: "play"
+			playStatus: "play",
+			hueLeftVal: 0,
+			hueRightVal: 0,
+			invertLeftVal: 0,
+			invertRightVal: 0,
+			saturateLeftVal: 100,
+			saturateRightVal: 100
 		}
 		this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
 	}
@@ -29,15 +34,33 @@ export default class ControllerVid extends Component {
 	}
 
 	handleHueSlider(direction, event){
-		socket.emit('changeHueRotation', event.target.value, direction) 
+		event.persist()
+		// console.log('EVENT', event.target.value)
+		socket.emit('changeHueRotation', event.target.value, direction)
+		
+		this.setState({
+			[`hue${direction}Val`]: event.target.value
+		})
 	}
 
 	handleInvertSlider(direction, event){
-		socket.emit('changeInvertPercent', event.target.value, direction) 
+		event.persist()
+		// console.log('EVENT', event.target.value)
+		socket.emit('changeInvertPercent', event.target.value, direction)
+		
+		this.setState({
+			[`invert${direction}Val`]: event.target.value
+		})
 	}
 
 	handleSaturationSlider(direction, event){
-		socket.emit('changeSaturationPercent', (event.target.value * 6), direction) 
+		event.persist()
+		// console.log('EVENT', event.target.value)
+		socket.emit('changeSaturationPercent', event.target.value, direction)
+		
+		this.setState({
+			[`saturate${direction}Val`]: event.target.value
+		})
 	}
 
 	handleSkipVideo(direction){
@@ -59,32 +82,30 @@ export default class ControllerVid extends Component {
 				<h2><Icon name="options" /> Video Controls</h2>
 				<div className="djControlButtons">
 					<div className="singleSliders">
-						<SliderComponent handleChange={this.handleHueSlider.bind(this, "Left")}/>
+						<input type="range" min="0" max="359" step="1" value={this.state.hueLeftVal} onChange={this.handleHueSlider.bind(this, "Left")}/>
 						<p>Hue</p>
-						<SliderComponent handleChange={this.handleInvertSlider.bind(this, "Left")}/>
+						<input className="invertLeft" type="range" min="0" max="100" step="1" value={this.state.invertLeftVal} onChange={this.handleInvertSlider.bind(this, "Left")}/>
 						<p>Invert</p>
-					 <SliderComponent handleChange={this.handleSaturationSlider.bind(this, "Left")}/>
+						<input className="saturateLeft" type="range" min="0" max="200" step="1" value={this.state.saturateLeftVal} onChange={this.handleSaturationSlider.bind(this, "Left")}/>
 					 <p>Saturation</p>
 					</div>
 					<div className="sliders">
-						<Button.Group style={{width: "100%"}}>
-							<Button style={{maxWidth: '43%', margin: '0px'}} inverted basic color="red" size="big" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left"></Button>
-							<Button style={{maxWidth: '14%', marginLeft: '20px', marginRight: '20px'}} inverted basic color="blue" size="big" icon={this.state.playStatus} onClick={()=>this.handlePlayBoth()}></Button>
-							<Button style={{maxWidth: '43%', margin: '0px'}} inverted basic color="red" size="big" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right"></Button>
-						</Button.Group>
-						<p></p>
+						<Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Left")} icon="fast forward" content="Skip Left " style={{margin: "0px"}}></Button>
+						<Button inverted basic color="blue" size="huge" icon={this.state.playStatus} style={{margin: "20px"}} onClick={()=>this.handlePlayBoth()}></Button>
+						<Button inverted basic color="red" size="huge" onClick={()=>this.handleSkipVideo("Right")} icon="fast forward" content="Skip Right" style={{margin: "0px"}}></Button>
+						 <p></p>
 						<SliderComponent  handleChange={this.handleOpacitySlider}/>
-						<p>Opacity</p>
+						<p>Video Balance</p>
 						<SliderComponent  handleChange={this.handleVolumeSlider}/>
-						<p>Volume</p>
+						<p>Audio Balance</p>
 					</div>
 					<div className="singleSliders">
-						<SliderComponent handleChange={this.handleHueSlider.bind(this, "Right")}/>
+						<input className="hueRight" type="range" min="0" max="359" step="1" value={this.state.hueRightVal} onChange={this.handleHueSlider.bind(this, "Right")}/>
 						<p>Hue</p>
-						<SliderComponent handleChange={this.handleInvertSlider.bind(this, "Right")}/>
+						<input className="invertRight" type="range" min="0" max="100" step="1" value={this.state.invertRightVal} onChange={this.handleInvertSlider.bind(this, "Right")}/>
 						<p>Invert</p>
-						<SliderComponent handleChange={this.handleSaturationSlider.bind(this, "Right")}/>
-						<p>Saturation</p>
+						<input className="saturateRight" type="range" min="0" max="200" step="1" value={this.state.saturateRightVal} onChange={this.handleSaturationSlider.bind(this, "Right")}/>
+					 <p>Saturation</p>
 					</div>
 				</div>
 			</div>
