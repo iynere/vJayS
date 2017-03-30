@@ -34,6 +34,12 @@ export const addToSet = setItem => dispatch => {
   dispatch(receiveSet(setToUpdate))
 }
 
+export const removeFromSet = setItemId => dispatch => {
+  let slicedSet = localStore.get('set').slice(0,setItemId).concat(localStore.get('set').slice(setItemId+1))
+  localStore.set('set', slicedSet)
+  dispatch(receiveSet(slicedSet))
+}
+
 export const saveSetToDb = (set) => dispatch => {
   axios.post('/api/sets', set)
     .then(() => {

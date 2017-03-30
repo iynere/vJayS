@@ -78,8 +78,8 @@ class Search extends Component {
           basic size='small'>
           <Modal.Content>
           <div>
-            <h4>Search Results</h4>
-            {results? results: null}
+            <h4>Search Results (hold Shift to keep adding items to Queue)</h4>
+            {results ? results : null}
           </div>
         </Modal.Content>
         <Modal.Actions style={{textAlign:"left"}}>

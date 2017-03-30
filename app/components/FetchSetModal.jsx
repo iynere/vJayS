@@ -61,7 +61,7 @@ class FetchSetModal extends Component {
         trigger={
           <Dropdown.Item
             onClick={this.handleModalOpen}>
-            View Your Sets
+            Load a Saved Set
           </Dropdown.Item>
         }
         open={this.state.modalOpen}
