@@ -7,36 +7,36 @@ import {Queues} from './Queues'
 
 export const Body = () => {
 
-  const visualClasses = "hue invert saturate"
+	const visualClasses = "hue invert saturate"
 
-  return (
-    <div>
-      <Grid columns='two'>
-        <Grid.Row>
-          <Grid.Column>
-            <div className={`LeftDeck ${visualClasses}`}>
-              <Deck
-                direction='Left'
-              />
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <div className={`RightDeck ${visualClasses}`}>
-              <Deck
-                direction='Right'
-              />
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-      <Grid columns='one'>
-        <Grid.Row>
-          <Grid.Column>
-            <Queues />
-            <Controller />
-            <ControllerVid />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </div>
+	return (
+		<div>
+			<Grid columns='two'>
+				<Grid.Row>
+					<Grid.Column>
+						<div className={`LeftDeck ${visualClasses}`}>
+							<Deck
+								direction='Left'
+							/>
+						</div>
+					</Grid.Column>
+					<Grid.Column>
+						<div className={`RightDeck ${visualClasses}`}>
+							<Deck
+								direction='Right'
+							/>
+						</div>
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
+			<Grid columns='one'>
+				<Grid.Row style={{paddingBottom: '0px'}}>
+					<Grid.Column>
+						<Queues />
+						<Controller />
+						<ControllerVid />
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
+		</div>
 )}

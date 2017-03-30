@@ -9,218 +9,218 @@ import $ from 'jquery'
 var socket = io(window.location.origin)
 
 class Player extends Component {
-  constructor(props) {
-    super(props)
-    let Direction = props.direction
-    this.state = {
-      [`video${Direction}`]: {}
-    }
+	constructor(props) {
+		super(props)
+		let Direction = props.direction
+		this.state = {
+			[`video${Direction}`]: {}
+		}
 
-    this.handlePlayerStateChange = this.handlePlayerStateChange.bind(this)
-    this.handlePlayerReady = this.handlePlayerReady.bind(this)
-    this.handleVideoPlay = this.handleVideoPlay.bind(this)
-    this.handleVideoPause = this.handleVideoPause.bind(this)
-    this.handlePlaybackRateChange = this.handlePlaybackRateChange.bind(this)
-    this.handleVideoEnd = this.handleVideoEnd.bind(this)
-    this.handleVolumeChange=this.handleVolumeChange.bind(this)
-  }
+		this.handlePlayerStateChange = this.handlePlayerStateChange.bind(this)
+		this.handlePlayerReady = this.handlePlayerReady.bind(this)
+		this.handleVideoPlay = this.handleVideoPlay.bind(this)
+		this.handleVideoPause = this.handleVideoPause.bind(this)
+		this.handlePlaybackRateChange = this.handlePlaybackRateChange.bind(this)
+		this.handleVideoEnd = this.handleVideoEnd.bind(this)
+		this.handleVolumeChange=this.handleVolumeChange.bind(this)
+	}
 
-  componentDidMount() {
-    // console.log('PROPS', this.props)
-  }
+	componentDidMount() {
+		// console.log('PROPS', this.props)
+	}
 
-  handlePlayerReady(event) {
-    let Direction = this.props.direction,
-      cueTime = event.target.getCurrentTime(),
-      videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : ''
+	handlePlayerReady(event) {
+		let Direction = this.props.direction,
+			cueTime = event.target.getCurrentTime(),
+			videoToEmit = this.props.queue.length ? this.props.queue[0].id.videoId : ''
 
-      this.setState({[`video${Direction}`]: event.target})
-
-
-    socket.on('outputReadyForPlayerVideos', () => {
-      socket.emit(`sendCueTimeToOutput${Direction}`, cueTime,)
-    })
-
-    /*socket listeners for dj video controls*/
-    socket.on('playBothVideos', (playing) => {
-      playing === 0 ? event.target.pauseVideo() : event.target.playVideo()
-    })
-
-    socket.on('skipVideo', (direction) => {
-      if(direction === Direction){
-        this.handleVideoEnd();
-      }
-    })
-
-    socket.on('updatePlaybackRate', (newRate) => {
-      event.target.setPlaybackRate(newRate)
-    })
-
-    socket.on('changeVideosVolume', (newVol) => {
-      console.log("Changing the volume", newVol)
-      this.handleVolumeChange(newVol, event.target);
-    })
-
-    socket.on('changeVideoHue', (hueRotation, direction) => {
-      console.log("Hue changing!", hueRotation, direction)
-
-      $(document).ready(() => {
-        $(`.${direction}Deck.hue`).css('filter', `hue-rotate(${hueRotation}deg)`)
-      })
-    })
+			this.setState({[`video${Direction}`]: event.target})
 
 
-    socket.on('changeVideoInvert', (invertPercent, direction) => {
-        $(document).ready(() => {
-          $(`.${direction}Deck.invert`).css('filter', `invert(${invertPercent}%)`)
-        })
-    })
+		socket.on('outputReadyForPlayerVideos', () => {
+			socket.emit(`sendCueTimeToOutput${Direction}`, cueTime,)
+		})
 
-    socket.on('changeVideoSaturate', (saturationPercent, direction) => {
-        $(document).ready(() => {
-          $(`.${direction}Deck.saturate`).css('filter', `saturate(${saturationPercent}%)`)
-        })
-    })
-    // 'ready' refers to iframe, not video
-    // need to reset playback quality for each new video
-    setTimeout(() => {
-      event.target.pauseVideo()
-      event.target.setPlaybackQuality('small')
-    }, 100)
+		/*socket listeners for dj video controls*/
+		socket.on('playBothVideos', (playing) => {
+			playing === 0 ? event.target.pauseVideo() : event.target.playVideo()
+		})
 
-    socket.emit(`playerMounted${Direction}`, videoToEmit)
-    
-    // event.target.loadVideoById(this.props.queue[0].id.videoId, event.target.getCurrentTime(), 'small')
-    
-    // setTimeout(() => {
-    //  event.target.pauseVideo()
-    // }, 2)
-  }
+		socket.on('skipVideo', (direction) => {
+			if(direction === Direction){
+				this.handleVideoEnd();
+			}
+		})
 
-  handleVideoPlay(event) {
-    setTimeout(() => {
-      event.target.setPlaybackQuality('small')  
-    }, 100)
-    
-    let Direction = this.props.direction,
-      cueTime = event.target.getCurrentTime()
-    socket.emit(`playingVideo${Direction}`, cueTime)
-  }
+		socket.on('updatePlaybackRate', (newRate) => {
+			event.target.setPlaybackRate(newRate)
+		})
 
-  handleVideoPause(event) {
-    let Direction = this.props.direction,
-      newCueTime = event.target.getCurrentTime()
-    socket.emit(`pausingVideo${Direction}`, newCueTime)
-    // this.props.savePlayer(Object.assign({}, event), `player${Direction}`)
-  }
+		socket.on('changeVideosVolume', (newVol) => {
+			console.log("Changing the volume", newVol)
+			this.handleVolumeChange(newVol, event.target);
+		})
+		
+		socket.on('changeVideoHue', (hueRotation, direction) => {
+			console.log("Hue changing!", hueRotation, direction)
 
-  handlePlaybackRateChange(event) {
-    let Direction = this.props.direction,
-      newRate = event.data
+			$(document).ready(() => {
+				$(`.${direction}Deck.hue`).css('filter', `hue-rotate(${hueRotation}deg)`)
+			})
+		})
 
-    // console.log(newRate)
 
-    socket.emit(`changingVideo${Direction}PlaybackRate`, newRate)
-  }
+		socket.on('changeVideoInvert', (invertPercent, direction) => {
+				$(document).ready(() => {
+					$(`.${direction}Deck.invert`).css('filter', `invert(${invertPercent}%)`)
+				})
+		})
 
-  handleVolumeChange(newVol, video){
-    let Direction= this.props.direction
+		socket.on('changeVideoSaturate', (saturationPercent, direction) => {
+				$(document).ready(() => {
+					$(`.${direction}Deck.saturate`).css('filter', `saturate(${saturationPercent}%)`)
+				})
+		})
+		// 'ready' refers to iframe, not video
+		// need to reset playback quality for each new video
+		setTimeout(() => {
+			event.target.pauseVideo()
+			event.target.setPlaybackQuality('small')
+		}, 100)
 
-    if(Direction === "Right"){
-      if (newVol <= 100) {
-        this.state[`video${Direction}`].setVolume(newVol)
-      }
-    } else {
-      if (newVol > 100) {
-        this.state[`video${Direction}`].setVolume(200-newVol)
-      }else if(newVol === 100){
-        this.state[`video${Direction}`].setVolume(100)
-      }
-    }
+		socket.emit(`playerMounted${Direction}`, videoToEmit)
+		
+		// event.target.loadVideoById(this.props.queue[0].id.videoId, event.target.getCurrentTime(), 'small')
+		
+		// setTimeout(() => {
+		//  event.target.pauseVideo()
+		// }, 2)
+	}
 
-  }
+	handleVideoPlay(event) {
+		setTimeout(() => {
+			event.target.setPlaybackQuality('small')  
+		}, 100)
+		
+		let Direction = this.props.direction,
+			cueTime = event.target.getCurrentTime()
+		socket.emit(`playingVideo${Direction}`, cueTime)
+	}
 
-  handleVideoEnd(event) {
-    event.target.setPlaybackRate(1)
-    // console.log('END EVENT: ',event)
-    let video = this.state[`video${this.props.direction}`],
-      setItem = {
-        "direction": this.props.direction,
-        "videoId": this.props.queue[0].id.videoId,
-        "title": this.props.queue[0].snippet.title,
-        "thumbnailUrl": this.props.queue[0].snippet.thumbnails.default.url
-      }
+	handleVideoPause(event) {
+		let Direction = this.props.direction,
+			newCueTime = event.target.getCurrentTime()
+		socket.emit(`pausingVideo${Direction}`, newCueTime)
+		// this.props.savePlayer(Object.assign({}, event), `player${Direction}`)
+	}
 
-    // console.log(this.state)
-    // console.log('SET ITEM: ', setItem)
-    // console.log("props direction", this.props.direction)
+	handlePlaybackRateChange(event) {
+		let Direction = this.props.direction,
+			newRate = event.data
 
-    this.props.addToSet(setItem)
-    this.props.removeFromQueue(0, `queue${this.props.direction}`)
-  }
+		// console.log(newRate)
 
-  handlePlayerStateChange(event) {
-    let Direction = this.props.direction
+		socket.emit(`changingVideo${Direction}PlaybackRate`, newRate)
+	}
 
-    // switch (event.data) {
-    //  case -1:
-    //    this.props.savePlayer(event.target, `player${Direction}`)
-    // }
+	handleVolumeChange(newVol, video){
+		let Direction= this.props.direction
 
-    console.log('reinitializing',event)
-  }
+		if(Direction === "Right"){
+			if (newVol <= 100) {
+				this.state[`video${Direction}`].setVolume(newVol)
+			}
+		} else {
+			if (newVol > 100) {
+				this.state[`video${Direction}`].setVolume(200-newVol)
+			}else if(newVol === 100){
+				this.state[`video${Direction}`].setVolume(100)
+			}
+		}
 
-  render() {
-    let queue = this.props.queue,
-      playerOptions = {
-      width: window.innerWidth / 2,
-      // height: window.innerHeight - 130,
-      playerVars: {
-        autoplay: 1,
-        cc_load_policy: 0,
-        controls: 1,
-        disablekb: 1,
-        enablejsapi: 1,
-        fs: 0,
-        iv_load_policy: 3,
-        modestbranding: 1,
-        rel: 0,
-        showInfo: 0
-      }
-    }
+	}
 
-    return (
-        <YouTube
-          videoId={queue && queue.length ? queue[0].id.videoId : ''}
-          opts={playerOptions}
-          onReady={this.handlePlayerReady}
-          onPlay={this.handleVideoPlay}
-          onPause={this.handleVideoPause}
-          onPlaybackRateChange={this.handlePlaybackRateChange}
-          onEnd={this.handleVideoEnd}
-          onStateChange={this.handlePlayerStateChange}
-        />
-    )
-  }
+	handleVideoEnd(event) {
+		event.target.setPlaybackRate(1)
+		// console.log('END EVENT: ',event)
+		let video = this.state[`video${this.props.direction}`],
+			setItem = {
+				"direction": this.props.direction,
+				"videoId": this.props.queue[0].id.videoId,
+				"title": this.props.queue[0].snippet.title,
+				"thumbnailUrl": this.props.queue[0].snippet.thumbnails.default.url
+			}
+
+		// console.log(this.state)
+		// console.log('SET ITEM: ', setItem)
+		// console.log("props direction", this.props.direction)
+
+		this.props.addToSet(setItem)
+		this.props.removeFromQueue(0, `queue${this.props.direction}`)
+	}
+
+	handlePlayerStateChange(event) {
+		let Direction = this.props.direction
+
+		// switch (event.data) {
+		//  case -1:
+		//    this.props.savePlayer(event.target, `player${Direction}`)
+		// }
+
+		console.log('reinitializing',event)
+	}
+
+	render() {
+		let queue = this.props.queue,
+			playerOptions = {
+			width: window.innerWidth / 2,
+			// height: window.innerHeight - 130,
+			playerVars: {
+				autoplay: 1,
+				cc_load_policy: 0,
+				controls: 1,
+				disablekb: 1,
+				enablejsapi: 1,
+				fs: 0,
+				iv_load_policy: 3,
+				modestbranding: 1,
+				rel: 0,
+				showInfo: 0
+			}
+		}
+
+		return (
+				<YouTube
+					videoId={queue && queue.length ? queue[0].id.videoId : ''}
+					opts={playerOptions}
+					onReady={this.handlePlayerReady}
+					onPlay={this.handleVideoPlay}
+					onPause={this.handleVideoPause}
+					onPlaybackRateChange={this.handlePlaybackRateChange}
+					onEnd={this.handleVideoEnd}
+					onStateChange={this.handlePlayerStateChange}
+				/>
+		)
+	}
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  player: state.player[`${ownProps.direction}`],
-  queue: state.queue[`${ownProps.direction}`],
-  set: state.set
+	player: state.player[`${ownProps.direction}`],
+	queue: state.queue[`${ownProps.direction}`],
+	set: state.set
 })
 
 const mapDispatchToProps = dispatch => ({
-  addToSet: setItem => {
-    dispatch(addToSet(setItem))
-  },
-  removeFromQueue: (videoId, direction) => {
-    dispatch(removeFromQueue(videoId, direction))
-  },
-  savePlayer: (player, direction) => {
-    // console.log('SAVING PLAYER??!??!?', player, direction)
-    dispatch(savePlayer(player, direction))
-  }
+	addToSet: setItem => {
+		dispatch(addToSet(setItem))
+	},
+	removeFromQueue: (videoId, direction) => {
+		dispatch(removeFromQueue(videoId, direction))
+	},
+	savePlayer: (player, direction) => {
+		// console.log('SAVING PLAYER??!??!?', player, direction)
+		dispatch(savePlayer(player, direction))
+	}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player)
