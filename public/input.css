@@ -311,10 +311,14 @@ input[type=range]
  height: 22em;
  border-radius:50%;
  border:none;
- background:none;
+}
+
+.emojiButton:hover{
+ border:2px solid white;
 }
 
 .buttonsContainer img{
+  margin:auto;
  width: 15em;
  height: 15em;
 }
