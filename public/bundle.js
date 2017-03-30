@@ -16973,7 +16973,7 @@ var Controller = function (_Component) {
           'h2',
           null,
           _react2.default.createElement(_semanticUiReact.Icon, { name: 'users' }),
-          ' Interactions (link for audience members: vjays.herokuapp.com/live'
+          ' Interactions (link for audience members: vjays.herokuapp.com/live)'
         ),
         _react2.default.createElement(
           _semanticUiReact.Button.Group,

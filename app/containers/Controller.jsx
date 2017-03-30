@@ -69,7 +69,7 @@ class Controller extends Component {
   render() {
     return (
       <div className="dj2MobileControls">
-        <h2><Icon name="users" /> Interactions (link for audience members: vjays.herokuapp.com/live</h2>
+        <h2><Icon name="users" /> Interactions (link for audience members: vjays.herokuapp.com/live)</h2>
         <Button.Group style={{width: "100%"}}>
           <Button style={{maxWidth: '25%'}} basic color="green" inverted size="massive" icon="paint brush" content="Draw" onClick={this.handleWhiteButton}></Button>
           <Button style={{maxWidth: '25%'}} basic color="yellow" inverted size="massive" icon="smile" content="Emoticons" onClick={this.handleEmoticonsButton}></Button>
