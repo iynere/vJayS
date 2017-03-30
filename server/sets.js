@@ -8,7 +8,7 @@ const User = db.model('users')
 
 //These routes will eventually need to include the user
 module.exports = require('express').Router()
-  .get('/:userId', (req, res, next) => {
+  .get('/user/:userId', (req, res, next) => {
     // gets all sets
     Set.findAll({
       where: {user_id: req.params.userId}
@@ -18,7 +18,7 @@ module.exports = require('express').Router()
     })
     .catch(next)
   })
-  .get('/:userId/:setId', (req, res, next) => {
+  .get('/:setId', (req, res, next) => {
     // get single set
     Set.findOne({
       where: { id: req.params.setId },
@@ -28,6 +28,10 @@ module.exports = require('express').Router()
       res.json([foundSet])
     })
     .catch(next)
+  })
+  .get('/', (req, res, next) => {
+    // get all sets
+    Set.findAll().then(allSets => res.json(allSets)).catch(next)
   })
   .post('/', (req, res, next) => {
     Set.create(req.body, { include: [ Video ]})

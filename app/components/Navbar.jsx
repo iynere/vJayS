@@ -22,7 +22,7 @@ export const Navbar = () => {
   return (
     <Menu widths={3} inverted style={{width: "100%", margin: "0 auto"}}>
       <Container fluid>
-        <Menu.Item style={{ width: "24%"}}>
+        <Menu.Item style={{ width: "30%"}}>
           <a target="_blank" href="/output"><Button basic color={"youtube"} inverted style={buttonSpacingStyle}>Output</Button></a>
           <ViewSetModal />
           <Button basic color={"youtube"} inverted onClick={evt => {
@@ -32,7 +32,7 @@ export const Navbar = () => {
             store.dispatch(clearQueue('queueRight'))
           }} style={buttonSpacingStyle}>Clear Queues</Button>
         </Menu.Item>
-        <Menu.Item style={{width: "50%"}}>
+        <Menu.Item style={{width: "40%"}}>
           {/*<YouTubeSearch
             apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4' // how to use .env on the front-end
             maxResults='5'

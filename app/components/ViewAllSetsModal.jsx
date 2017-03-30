@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import localStore from 'store'
 import {connect} from 'react-redux'
 import { Button, List, Dropdown, Modal } from 'semantic-ui-react'
-import {fetchUserSets} from '../reducers/sets'
+import {fetchAllSets} from '../reducers/sets'
 import {fetchSetFromDb} from '../reducers/set'
 import {receiveQueue} from '../reducers/queue'
 
-class FetchSetModal extends Component {
+class ViewAllSetsModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,7 +19,7 @@ class FetchSetModal extends Component {
 
   handleModalOpen(e) {
     e.preventDefault()
-    this.props.fetchUserSets(this.props.user.id)
+    this.props.fetchAllSets()
     this.setState({
       modalOpen: true,
     })
@@ -59,17 +59,17 @@ class FetchSetModal extends Component {
     return (
       <Modal
         trigger={
-          <Dropdown.Item
+          <Button
             onClick={this.handleModalOpen}>
-            View Your Saved Sets
-          </Dropdown.Item>
+            View All Sets
+          </Button>
         }
         open={this.state.modalOpen}
         onClose={this.handleModalClose}
         basic size='small'>
         <Modal.Content>
         <div>
-          <h1>Select a Lovely Set (That You Made!)</h1>
+          <h1>Select a Lovely Set</h1>
           <List selection inverted onClick={null /*this.handleClick*/}>
             {sets ? sets : null}
           </List>
@@ -83,15 +83,17 @@ class FetchSetModal extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({auth, sets}) => {
   return ({
-    user: state.auth,
-    sets: state.sets
+    user: auth,
+    sets
   })
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchUserSets: (userId) => { dispatch(fetchUserSets(userId)) },
+const mapDispatchToProps = dispatch => ({
+  fetchAllSets: () => {
+    dispatch(fetchAllSets())
+  },
   fetchSetFromDb: setId => { dispatch(fetchSetFromDb(setId))
   },
   receiveQueue: (queue, queueLeftOrRight) => {
@@ -99,4 +101,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(FetchSetModal)
+export default connect(mapStateToProps, mapDispatchToProps)(ViewAllSetsModal)

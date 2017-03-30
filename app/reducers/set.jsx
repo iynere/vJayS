@@ -48,8 +48,8 @@ export const saveSetToDb = (set) => dispatch => {
     .catch(console.error)
 }
 
-export const fetchSetFromDb = (userId, setId) => dispatch => {
-  axios.get(`/api/sets/${userId}/${setId}`)
+export const fetchSetFromDb = setId => dispatch => {
+  axios.get(`/api/sets/${setId}`)
     .then((foundSet) => {
       let setArray = foundSet.data[0].videos
       // dispatch(receiveSet(foundSet.data[0].videos))

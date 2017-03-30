@@ -70,7 +70,7 @@ class SaveSetModal extends Component {
         <div>
           <Form inverted onSubmit={this.handleSubmit}>
             <Form.Field>
-              <input type="text" placeholder="Set Name" onChange={this.handleChange} value={this.state.setName}/>
+              <input type="text" placeholder="A Descriptive Title" onChange={this.handleChange} value={this.state.setName}/>
             </Form.Field>
           {/*You can move button into form field if you'd like*/}
             <Button color={"red"} inverted basic type='submit'>Save Set</Button>
