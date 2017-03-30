@@ -44810,11 +44810,11 @@ var SaveSetModal = function (_Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      var set = _store2.default.get('set'),
+      var set = _store2.default.get('set') ? _store2.default.get('set') : [],
           queueLeft = _store2.default.get('queueLeft'),
           queueRight = _store2.default.get('queueRight');
 
-      console.log('SET', set, 'LEFT', queueLeft, 'RIGHT', queueRight);
+      // console.log('SET',set,'LEFT',queueLeft,'RIGHT',queueRight)
 
       // add queue items to set to save
       var setVideos = (0, _queues.concatQueuesToSet)(set, queueLeft, queueRight);
@@ -45172,7 +45172,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -45192,37 +45192,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var SliderEffect = function (_Component) {
-	_inherits(SliderEffect, _Component);
+  _inherits(SliderEffect, _Component);
 
-	function SliderEffect() {
-		_classCallCheck(this, SliderEffect);
+  function SliderEffect() {
+    _classCallCheck(this, SliderEffect);
 
-		return _possibleConstructorReturn(this, (SliderEffect.__proto__ || Object.getPrototypeOf(SliderEffect)).call(this));
-	}
+    return _possibleConstructorReturn(this, (SliderEffect.__proto__ || Object.getPrototypeOf(SliderEffect)).call(this));
+  }
 
-	_createClass(SliderEffect, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			socket.on('updateSliderValue', function (newValue) {
-				console.log("GETTING THE SLIDES!!", newValue);
-			});
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'h4',
-					null,
-					'Slider effect component!!!'
-				)
-			);
-		}
-	}]);
+  _createClass(SliderEffect, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      socket.on('updateSliderValue', function (newValue) {
+        console.log("GETTING THE SLIDES!!", newValue);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h4',
+          null,
+          'Slider effect component!!!'
+        )
+      );
+    }
+  }]);
 
-	return SliderEffect;
+  return SliderEffect;
 }(_react.Component);
 
 exports.default = SliderEffect;

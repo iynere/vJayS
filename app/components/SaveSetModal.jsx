@@ -38,11 +38,11 @@ class SaveSetModal extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    let set = localStore.get('set'),
+    let set = localStore.get('set') ? localStore.get('set') : [],
       queueLeft = localStore.get('queueLeft'),
       queueRight = localStore.get('queueRight')
       
-    console.log('SET',set,'LEFT',queueLeft,'RIGHT',queueRight)
+    // console.log('SET',set,'LEFT',queueLeft,'RIGHT',queueRight)
       
     // add queue items to set to save
     let setVideos = concatQueuesToSet(set, queueLeft, queueRight)
