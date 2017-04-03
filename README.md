@@ -1,8 +1,8 @@
-![screenshot](https://68.media.tumblr.com/f9724048ae3503836df83a0bac82a1be/tumblr_onn8otjARF1w86khxo1_1280.png)
-
 # vJayS
 
 vJayS is a web performance app for video DJs, with live video effects and audience interactivity
+
+![screenshot](https://68.media.tumblr.com/f9724048ae3503836df83a0bac82a1be/tumblr_onn8otjARF1w86khxo1_1280.png)
 
 ## Works
 
