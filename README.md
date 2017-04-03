@@ -25,4 +25,4 @@ There have been a bunch of great YouTube crossfaders over the years, but most of
 
 ---
 
-*built by Anna Pamela Calinawan, Ari Israel, Rose Kaplan-Bomberg, and Ariane Joy Nova as a graduation project for the [Grace Hopper Program](http://gracehopper.com) at [Fullstack Academy](http://fullstackacademy.com)*
+*built by [Anna Pamela Calinawan](https://github.com/annapamma), [Ari Israel](https://github.com/ariisrael), [Rose Kaplan-Bomberg](https://github.com/isar0se), and [Ariane Joy Nova](https://github.com/arinova) as a graduation project for the [Grace Hopper Program](http://gracehopper.com) at [Fullstack Academy](http://fullstackacademy.com)*
