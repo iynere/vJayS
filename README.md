@@ -10,7 +10,7 @@ Log in with a Google account. Import one of your YouTube playlists (limited to f
 
 ## Needs work
 
-Syncing between the DJ and performance view is not perfect. Could be nice to integrate a tagging system for sets, as well as set descriptions, à la Mixcloud/SoundCloud, and eventually a User view with some social features (following people to see when they add new sets, etc.). Build out audience controls so they can do more. Integrate livestreaming via YouTube or Facebook. Need to introduce Rooms features for all the Socket.io functionality—currently any user's WebSocket signals will trigger changes for any other user (oops).
+Syncing between the DJ and performance view is not perfect. Could be nice to integrate a tagging system for sets, as well as set descriptions, à la Mixcloud/SoundCloud, and eventually a User view with some social features (following people to see when they add new sets, etc.). Build out audience controls so they can do more. Integrate livestreaming via YouTube or Facebook. Need to introduce Rooms features for all the Socket.io functionality—currently any user's WebSocket signals will trigger changes for any other user (this may be fun and strange but is not ideal).
 
 ## Inspiration
 
