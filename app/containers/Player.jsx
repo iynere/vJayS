@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
 import {addToSet} from 'APP/app/reducers/set'
-import {savePlayer} from 'APP/app/reducers/player'
 import {removeFromQueue} from 'APP/app/reducers/queue'
 import $ from 'jquery'
 
@@ -139,7 +138,6 @@ class Player extends Component {
     let Direction = this.props.direction,
       newCueTime = event.target.getCurrentTime()
     socket.emit(`pausingVideo${Direction}`, newCueTime)
-    // this.props.savePlayer(Object.assign({}, event), `player${Direction}`)
   }
 
   handlePlaybackRateChange(event) {
@@ -190,11 +188,6 @@ class Player extends Component {
   handlePlayerStateChange(event) {
     let Direction = this.props.direction
 
-    // switch (event.data) {
-    //  case -1:
-    //    this.props.savePlayer(event.target, `player${Direction}`)
-    // }
-
     console.log('reinitializing',event)
   }
 
@@ -233,7 +226,6 @@ class Player extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  player: state.player[`${ownProps.direction}`],
   queue: state.queue[`${ownProps.direction}`],
   set: state.set
 })
@@ -244,10 +236,6 @@ const mapDispatchToProps = dispatch => ({
   },
   removeFromQueue: (videoId, direction) => {
     dispatch(removeFromQueue(videoId, direction))
-  },
-  savePlayer: (player, direction) => {
-    // console.log('SAVING PLAYER??!??!?', player, direction)
-    dispatch(savePlayer(player, direction))
   }
 })
 
