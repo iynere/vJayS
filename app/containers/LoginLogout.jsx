@@ -33,27 +33,6 @@ class LoginLogout extends Component {
           <Menu.Item onClick={this.props.logout}>
             Logout
           </Menu.Item>
-        {/*<Dropdown.Item
-                    onClick={()=>{
-                      this.props.fetchUserPlaylists(this.props.user.id)
-                      // this.props.fetchSelectedPlaylist(this.props.user.id, "PLOiYwgsDuc0a4sAniPYhU4aJdyNXCQmO7")
-                      // this.props.fetchSelectedPlaylist(this.props.playlists.accessToken, this.props.playlists[1].id)
-                      // let accessToken;
-                      // axios.get(`/api/auth/users/${this.props.user.id}`)
-                      //  .then(res => {
-                      //    accessToken = res.data.accessToken
-                      //    return axios.get(`https://www.googleapis.com/youtube/v3/playlists?access_token=${accessToken}&part=snippet&mine=true`)
-                      //  })
-                      //  .then(res => {
-                      //    // console.log('playlists response: ',res.data)
-                      //    let playlistId = res.data.items[1].id
-                      //    return axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?access_token=${accessToken}&part=snippet&maxResults=50&playlistId=${playlistId}`)
-                      //  }).then((res) => {
-                      //    // console.log("playlist items??", res.data)
-                      //    this.props.loadYoutubePlaylist(res.data.items)
-                      //  }).catch(console.error)
-                    }}>Load Youtube Playlists
-                  </Dropdown.Item>*/}
         </Dropdown.Menu>
       </Dropdown>
     )
@@ -65,18 +44,8 @@ class LoginLogout extends Component {
     )
   }
 
-  // renderLogout() {
-  //  const user = this.props.user
-  //  return (
-  //    <Menu.Item>
-  //      <Button onClick={this.props.logout}>Logout</Button></Menu.Item>
-  //  )
-  // }
-
   render() {
     const user = this.props.user
-    // if (user) {this.props.dispatch(fetchAccessToken(user.id))}
-    // if (this.props.playlists.accessToken) {this.props.fetchUserPlaylists(this.props.playlists.accessToken)}
     return (
       <Menu.Item style={{ width: "30%"}} position='right'>
         <Button content='Submit Screenshots!' href='http://vjays-screens.tumblr.com' target="_blank" style={{marginRight: "10px"}}></Button>

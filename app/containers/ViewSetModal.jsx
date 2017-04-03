@@ -84,7 +84,7 @@ class ViewSetModal extends Component {
         trigger={
           <Button basic color={"youtube"} inverted style={buttonSpacingStyle}
             onClick={this.handleModalOpen}>
-            View Current Set
+            View Last Played
           </Button>
         }
         open={this.state.modalOpen}
@@ -92,7 +92,7 @@ class ViewSetModal extends Component {
         basic size='small'>
         <Modal.Content>
         <div>
-          <h2>Your set (played so far)<br /><i>'x' to remove from your set, '+' to add back into your queue</i></h2>
+          <h2>Played so far<br /><i>'x' to remove from your set, '+' to add back into your queue</i></h2>
           {setItems ? setItems : null}
         </div>
       </Modal.Content>

@@ -18,9 +18,3 @@ export default props => {
     </div>
   )
 }
-/*
-<div className="buttonsContainer">
-  <button className="emojiButton" onClick={()=>props.handleEmojiClick("alien")}><img src="/logos/alienemoji.png"/></button>
-  <button className="emojiButton" onClick={()=>props.handleEmojiClick("fire")}><img src="/logos/fireemoji.png"/></button>
-</div>
-*/

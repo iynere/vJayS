@@ -20,21 +20,10 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-// ACTION TYPES
-// export const receiveAccessToken = accessToken => ({
-//  type: RECEIVE_TOKEN,
-//  accessToken
-// })
-
 export const receiveUserPlaylists = userPlaylists => ({
   type: RECEIVE_PLAYLISTS,
   userPlaylists
 })
-
-// export const receiveSelectedPlaylist = selectedPlaylist => ({
-//  type: RECEIVE_PLAYLIST,
-//  selectedPlaylist
-// })
 
 // UTIL
 const fetchAccessToken = userId => axios.get(`/api/auth/users/${userId}`)

@@ -1,5 +1,7 @@
 import localStore from 'store'
 
+var socket = io(window.location.origin)
+
 // CONSTANTS
 const RECEIVE_LEFT = 'RECEIVE_LEFT'
 const RECEIVE_RIGHT = 'RECEIVE_RIGHT'
@@ -48,6 +50,7 @@ export const removeFromQueue = (videoIdx, queueLeftOrRight) => dispatch => {
   localStore.set(queueLeftOrRight, queueToUpdate)
   // put new queue on state
   dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
+  socket.emit(`${queueLeftOrRight}Updated`, queueToUpdate)
 }
 
 export const insertQueueItem = (video, newIdx, queueLeftOrRight) => dispatch => {
@@ -64,6 +67,7 @@ export const insertQueueItem = (video, newIdx, queueLeftOrRight) => dispatch => 
   
   // rereceive it on state
   dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
+  socket.emit(`${queueLeftOrRight}Updated`, queueToUpdate)
 }
 
 export const rearrangeQueueItems = (oldIndex, newIndex) => dispatch => {
@@ -102,6 +106,8 @@ export const moveToFront = (videoIdx, queueLeftOrRight) => dispatch => {
   
   // put new queue on state
   dispatch(receiveQueue(queueToUpdate, queueLeftOrRight))
+  
+  socket.emit(`${queueLeftOrRight}Updated`, queueToUpdate)
 }
 
 export const clearQueue = queueLeftOrRight => dispatch => {
