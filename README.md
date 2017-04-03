@@ -6,7 +6,7 @@ vJayS is a web performance app for video artists and DJs, with live video effect
 
 ## Works
 
-Log in with a Google account. Import one of your YouTube playlists (limited to first 50 playlist items by the YouTube API—tracks are evenly distributed between your left and right queue). Add videos via YouTube search. Rearrange playback order via drag-and-drop within and between your queues. Remove a video from your queue or play it immediately using buttons on each queue item. Adjust huge, inversion, and saturation for each individual video. Ajust audio/video balance between videos using the balance sliders. Skip tracks and play/pause both tracks at once. View all tracks played so far, clear your queue, submit screenshots, view all sets, etc., via the navbar buttons. Output button takes you to the performance view, which integrates both videos as well as all effects.
+Log in with a Google account. Import one of your YouTube playlists (limited to first 50 playlist items by the YouTube API—tracks are evenly distributed between your left and right queue). Add videos via YouTube search. Rearrange playback order via drag-and-drop within/between your queues. Remove a video from your queue or play it immediately using buttons on each queue item. Adjust huge, inversion, and saturation for each individual video. Ajust audio/video balance between videos using the balance sliders. Skip tracks and play/pause both tracks at once. View all tracks played so far, clear your queue, submit screenshots, view all sets, etc., via the navbar buttons. Output button takes you to the performance view, which integrates both videos as well as all effects.
 
 ## Needs work
 
