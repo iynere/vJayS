@@ -46230,7 +46230,6 @@ var OutputPlayer = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    player: state.player['' + ownProps.direction],
     queue: state.queue['' + ownProps.direction]
   };
 };
@@ -46522,7 +46521,6 @@ var Player = function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    player: state.player['' + ownProps.direction],
     queue: state.queue['' + ownProps.direction],
     set: state.set
   };

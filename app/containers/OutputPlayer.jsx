@@ -199,7 +199,6 @@ class OutputPlayer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  player: state.player[`${ownProps.direction}`],
   queue: state.queue[`${ownProps.direction}`]
 })
 
