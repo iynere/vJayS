@@ -16984,7 +16984,7 @@ var Controller = function (_Component) {
           'h2',
           null,
           _react2.default.createElement(_semanticUiReact.Icon, { name: 'users' }),
-          ' Interactions (link for audience members: vjays.club/live)'
+          ' Interactions (link for audience: vjays.herokuapp.com/live)'
         ),
         _react2.default.createElement(
           _semanticUiReact.Button.Group,
@@ -46152,7 +46152,7 @@ var OutputPlayer = function (_Component) {
         event.target.pauseVideo();
         event.target.setVolume(0);
         event.target.setPlaybackRate(1);
-      }, 100);
+      }, 200);
 
       socket.on('skipVideo', function (direction) {
         if (direction === Direction) {
@@ -46399,7 +46399,7 @@ var Player = function (_Component) {
       setTimeout(function () {
         event.target.pauseVideo();
         event.target.setPlaybackQuality('small');
-      }, 100);
+      }, 200);
 
       socket.emit('playerMounted' + Direction, videoToEmit);
 

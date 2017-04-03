@@ -122,7 +122,7 @@ class OutputPlayer extends Component {
       event.target.pauseVideo()
       event.target.setVolume(0)
       event.target.setPlaybackRate(1)
-    }, 100)
+    }, 200)
     
     socket.on('skipVideo', (direction) => {
       if(direction === Direction){
