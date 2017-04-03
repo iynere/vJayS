@@ -12,7 +12,6 @@ function sketch(p) {
     }
 }
 
-
 // function sketch2(p) {
 //   p.setup = setup
 //   function setup() {

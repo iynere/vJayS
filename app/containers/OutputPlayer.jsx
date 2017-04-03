@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
 import $ from 'jquery'
+import {fetchQueue} from 'APP/app/reducers/queue'
 
 var socket = io(window.location.origin)
 
@@ -32,7 +33,12 @@ class OutputPlayer extends Component {
       //   [`video${Direction}Id`]: videoId
       // })
     })
-
+    
+    socket.on(`receiveUpdatedQueue${Direction}`, updatedQueue => {
+      this.setState({
+        [`queue${Direction}`]: updatedQueue
+      })
+    })
 
     socket.on(`playOutputVideo${Direction}`, newCueTime => {
       // console.log('gettin here?')
@@ -52,7 +58,7 @@ class OutputPlayer extends Component {
 
     socket.on('clearOutputVideos', () => {
       this.setState({
-        [`video${Direction}Id`]: ''
+        [`queue${Direction}`]: []
       })
     })
 
@@ -195,6 +201,12 @@ class OutputPlayer extends Component {
 const mapStateToProps = (state, ownProps) => ({
   player: state.player[`${ownProps.direction}`],
   queue: state.queue[`${ownProps.direction}`]
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchQueue: direction => {
+    dispatch(fetchQueue(direction))
+  }
 })
 
 export default connect(mapStateToProps)(OutputPlayer)

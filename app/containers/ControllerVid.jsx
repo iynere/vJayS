@@ -25,6 +25,32 @@ export default class ControllerVid extends Component {
     this.handleOpacitySlider= this.handleOpacitySlider.bind(this)
   }
 
+
+  componentDidMount() {
+    socket.on('playOutputVideoLeft', () => {
+      this.setState({
+        playStatus: "pause"
+      })
+    })
+    
+    socket.on('playOutputVideoRight', () => {
+      this.setState({
+        playStatus: "pause"
+      })
+    })
+    
+    socket.on('pauseOutputVideoLeft', () => {
+      this.setState({
+        playStatus: "play"
+      })
+    })
+    
+    socket.on('pauseOutputVideoRight', () => {
+      this.setState({
+        playStatus: "play"
+      })
+    })
+  }
   handleVolumeSlider(event){
     socket.emit('changeVolume', event.target.value*2);
   }

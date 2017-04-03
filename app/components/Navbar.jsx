@@ -33,24 +33,6 @@ export const Navbar = () => {
           }} style={buttonSpacingStyle}>Clear Queues</Button>
         </Menu.Item>
         <Menu.Item style={{width: "40%"}}>
-          {/*<YouTubeSearch
-            apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4' // how to use .env on the front-end
-            maxResults='5'
-            placeHolder='<- search'
-            callback={results => {
-              store.dispatch(addToQueue(results[0], 'queueLeft'))
-            }}
-          />
-          <YouTubeSearch
-            apiKey='AIzaSyBOr-nJwESPXBlOSh-4-bf2R-ayOTUFVt4' // how to use .env on the front-end
-            maxResults='5'
-            placeHolder='search ->'
-            callback={results => {
-              // console.log(results[0])
-              store.dispatch(addToQueue(results[0], 'queueRight'))
-            }}
-          />*/}
-          {/*<Input fluid placeholder="Search Youtube" icon="search" style={{margin: "5px 20px"}}/>*/}
           <Search />
         </Menu.Item>
         <LoginLogout />

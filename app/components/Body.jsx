@@ -1,8 +1,8 @@
 import React from 'react'
 import {Grid} from 'semantic-ui-react'
-import {Deck} from './Deck'
 import Controller from '../containers/Controller'
 import ControllerVid from '../containers/ControllerVid'
+import Player from '../containers/Player'
 import {Queues} from './Queues'
 
 export const Body = () => {
@@ -13,14 +13,14 @@ export const Body = () => {
         <Grid.Row>
           <Grid.Column>
             <div className={`LeftDeck filters`}>
-              <Deck
+              <Player
                 direction='Left'
               />
             </div>
           </Grid.Column>
           <Grid.Column>
             <div className={`RightDeck filters`}>
-              <Deck
+              <Player
                 direction='Right'
               />
             </div>

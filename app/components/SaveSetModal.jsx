@@ -70,6 +70,7 @@ class SaveSetModal extends Component {
         <div>
           <Form inverted onSubmit={this.handleSubmit}>
             <Form.Field>
+              <label><h2>This saves every video you've played, plus everything in your queue</h2></label>
               <input type="text" placeholder="A Descriptive Title" onChange={this.handleChange} value={this.state.setName}/>
             </Form.Field>
           {/*You can move button into form field if you'd like*/}

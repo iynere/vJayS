@@ -2,6 +2,8 @@ import axios from 'axios'
 import localStore from 'store'
 import {receiveQueue} from './queue'
 
+var socket = io(window.location.origin)
+
 // CONSTANTS
 const RECEIVE_PLAYLISTS = 'RECEIVE_PLAYLISTS'
   
@@ -20,21 +22,10 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-// ACTION TYPES
-// export const receiveAccessToken = accessToken => ({
-//  type: RECEIVE_TOKEN,
-//  accessToken
-// })
-
 export const receiveUserPlaylists = userPlaylists => ({
   type: RECEIVE_PLAYLISTS,
   userPlaylists
 })
-
-// export const receiveSelectedPlaylist = selectedPlaylist => ({
-//  type: RECEIVE_PLAYLIST,
-//  selectedPlaylist
-// })
 
 // UTIL
 const fetchAccessToken = userId => axios.get(`/api/auth/users/${userId}`)
@@ -88,6 +79,8 @@ const loadYoutubePlaylist = playlistItems => dispatch => {
   localStore.set("queueRight", queueRight)
   dispatch(receiveQueue(queueLeft, 'queueLeft'))
   dispatch(receiveQueue(queueRight, 'queueRight'))
+  socket.emit('queueLeftUpdated', queueLeft)
+  socket.emit('queueRightUpdated', queueRight)
 }
 
 export default reducer
