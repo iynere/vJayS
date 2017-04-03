@@ -2,6 +2,8 @@ import axios from 'axios'
 import localStore from 'store'
 import {receiveQueue} from './queue'
 
+var socket = io(window.location.origin)
+
 // CONSTANTS
 const RECEIVE_PLAYLISTS = 'RECEIVE_PLAYLISTS'
   
@@ -77,6 +79,8 @@ const loadYoutubePlaylist = playlistItems => dispatch => {
   localStore.set("queueRight", queueRight)
   dispatch(receiveQueue(queueLeft, 'queueLeft'))
   dispatch(receiveQueue(queueRight, 'queueRight'))
+  socket.emit('queueLeftUpdated', queueLeft)
+  socket.emit('queueRightUpdated', queueRight)
 }
 
 export default reducer

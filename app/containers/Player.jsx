@@ -125,6 +125,7 @@ class Player extends Component {
   }
 
   handleVideoPlay(event) {
+    console.log('testing')
     setTimeout(() => {
       event.target.setPlaybackQuality('small')  
     }, 100)

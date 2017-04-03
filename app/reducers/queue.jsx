@@ -19,10 +19,14 @@ const reducer = (state = {Left: [], Right: []}, action) => {
 }
 
 // ACTION TYPES
-export const receiveQueue = (queue, queueLeftOrRight) => ({
-  type: queueLeftOrRight === 'queueLeft' ? RECEIVE_LEFT : RECEIVE_RIGHT,
-  [queueLeftOrRight]: queue
-})
+export const receiveQueue = (queue, queueLeftOrRight) => {
+  socket.emit(`${queueLeftOrRight}Updated`, queue)
+  return ({
+    type: queueLeftOrRight === 'queueLeft' ? RECEIVE_LEFT : RECEIVE_RIGHT,
+    [queueLeftOrRight]: queue
+  })
+  
+}
 
 // ACTION CREATORS
 export const fetchQueue = queueLeftOrRight => dispatch => {

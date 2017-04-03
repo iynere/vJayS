@@ -1,6 +1,9 @@
 import axios from 'axios'
 import localStore from 'store'
 import {receiveQueue} from './queue'
+
+var socket = io(window.location.origin)
+
 // CONSTANTS
 export const RECEIVE_SET = 'RECEIVE_SET'
 
@@ -75,6 +78,8 @@ export const fetchSetFromDb = setId => dispatch => {
       localStore.set('queueRight', queueRight)
       dispatch(receiveQueue(queueLeft, 'queueLeft'))
       dispatch(receiveQueue(queueRight, 'queueRight'))
+      socket.emit('queueLeftUpdated', queueLeft)
+      socket.emit('queueRightUpdated', queueRight)
       
     })
     .catch(console.error)

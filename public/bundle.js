@@ -1858,6 +1858,7 @@ var reducer = function reducer() {
 
 // ACTION TYPES
 var receiveQueue = exports.receiveQueue = function receiveQueue(queue, queueLeftOrRight) {
+  socket.emit(queueLeftOrRight + 'Updated', queue);
   return _defineProperty({
     type: queueLeftOrRight === 'queueLeft' ? RECEIVE_LEFT : RECEIVE_RIGHT
   }, queueLeftOrRight, queue);
@@ -3291,6 +3292,8 @@ var _queue = __webpack_require__(26);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var socket = io(window.location.origin);
+
 // CONSTANTS
 var RECEIVE_SET = exports.RECEIVE_SET = 'RECEIVE_SET';
 
@@ -3376,6 +3379,8 @@ var fetchSetFromDb = exports.fetchSetFromDb = function fetchSetFromDb(setId) {
       _store2.default.set('queueRight', queueRight);
       dispatch((0, _queue.receiveQueue)(queueLeft, 'queueLeft'));
       dispatch((0, _queue.receiveQueue)(queueRight, 'queueRight'));
+      socket.emit('queueLeftUpdated', queueLeft);
+      socket.emit('queueRightUpdated', queueRight);
     }).catch(console.error);
   };
 };
@@ -17842,6 +17847,8 @@ var _queue = __webpack_require__(26);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var socket = io(window.location.origin);
+
 // CONSTANTS
 var RECEIVE_PLAYLISTS = 'RECEIVE_PLAYLISTS';
 
@@ -17928,6 +17935,8 @@ var loadYoutubePlaylist = function loadYoutubePlaylist(playlistItems) {
     _store2.default.set("queueRight", queueRight);
     dispatch((0, _queue.receiveQueue)(queueLeft, 'queueLeft'));
     dispatch((0, _queue.receiveQueue)(queueRight, 'queueRight'));
+    socket.emit('queueLeftUpdated', queueLeft);
+    socket.emit('queueRightUpdated', queueRight);
   };
 };
 
@@ -45699,6 +45708,35 @@ var ControllerVid = function (_Component) {
   }
 
   _createClass(ControllerVid, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      socket.on('playOutputVideoLeft', function () {
+        _this2.setState({
+          playStatus: "pause"
+        });
+      });
+
+      socket.on('playOutputVideoRight', function () {
+        _this2.setState({
+          playStatus: "pause"
+        });
+      });
+
+      socket.on('pauseOutputVideoLeft', function () {
+        _this2.setState({
+          playStatus: "play"
+        });
+      });
+
+      socket.on('pauseOutputVideoRight', function () {
+        _this2.setState({
+          playStatus: "play"
+        });
+      });
+    }
+  }, {
     key: 'handleVolumeSlider',
     value: function handleVolumeSlider(event) {
       socket.emit('changeVolume', event.target.value * 2);
@@ -45751,7 +45789,7 @@ var ControllerVid = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       // console.log("command current", this.props.command);
 
@@ -45793,13 +45831,13 @@ var ControllerVid = function (_Component) {
             'div',
             { className: 'sliders' },
             _react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'red', size: 'huge', onClick: function onClick() {
-                return _this2.handleSkipVideo("Left");
+                return _this3.handleSkipVideo("Left");
               }, icon: 'fast forward', content: 'Skip Left ', style: { margin: "0px" } }),
             _react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'blue', size: 'huge', icon: this.state.playStatus, style: { margin: "20px" }, onClick: function onClick() {
-                return _this2.handlePlayBoth();
+                return _this3.handlePlayBoth();
               } }),
             _react2.default.createElement(_semanticUiReact.Button, { inverted: true, basic: true, color: 'red', size: 'huge', onClick: function onClick() {
-                return _this2.handleSkipVideo("Right");
+                return _this3.handleSkipVideo("Right");
               }, icon: 'fast forward', content: 'Skip Right', style: { margin: "0px" } }),
             _react2.default.createElement('p', null),
             _react2.default.createElement(_SliderComponent2.default, { handleChange: this.handleOpacitySlider }),
@@ -46435,6 +46473,7 @@ var Player = function (_Component) {
   }, {
     key: 'handleVideoPlay',
     value: function handleVideoPlay(event) {
+      console.log('testing');
       setTimeout(function () {
         event.target.setPlaybackQuality('small');
       }, 100);
