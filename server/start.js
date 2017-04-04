@@ -7,6 +7,8 @@ const passport = require('passport')
 const PrettyError = require('pretty-error')
 const finalHandler = require('finalhandler')
 const socketio = require('socket.io')
+const secure = require('express-force-https')
+
 // PrettyError docs: https://www.npmjs.com/package/pretty-error
 
 // Bones has a symlink from node_modules/APP to the root of the app.
@@ -19,8 +21,8 @@ const pkg = require('APP')
 const app = express()
 
 if (!pkg.isProduction && !pkg.isTesting) {
-  // Logging middleware (dev only)
-  app.use(require('volleyball'))
+	// Logging middleware (dev only)
+	app.use(require('volleyball'))
 }
 
 // Pretty error prints errors all pretty.
@@ -33,60 +35,75 @@ prettyError.skipNodeFiles()
 prettyError.skipPackage('express')
 
 module.exports = app
-  // Session middleware - compared to express-session (which is what's used in the Auther workshop), cookie-session stores sessions in a cookie, rather than some other type of session store.
-  // Cookie-session docs: https://www.npmjs.com/package/cookie-session
-  .use(require('cookie-session') ({
-    name: 'session',
-    keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
-  }))
+	// Force HTTPS
+	// .use(secure)
 
-  // Body parsing middleware
-  .use(bodyParser.urlencoded({ extended: true }))
-  .use(bodyParser.json())
+	// Session middleware - compared to express-session (which is what's used in the Auther workshop), cookie-session stores sessions in a cookie, rather than some other type of session store.
+	// Cookie-session docs: https://www.npmjs.com/package/cookie-session
+	.use(require('cookie-session') ({
+		name: 'session',
+		keys: [process.env.SESSION_SECRET || 'an insecure secret key'],
+	}))
 
-  // Authentication middleware
-  .use(passport.initialize())
-  .use(passport.session())
+	// Body parsing middleware
+	.use(bodyParser.urlencoded({ extended: true }))
+	.use(bodyParser.json())
 
-  // Serve static files from ../public
-  .use(express.static(resolve(__dirname, '..', 'public')))
+	// Authentication middleware
+	.use(passport.initialize())
+	.use(passport.session())
 
-  // Serve our api - ./api also requires in ../db, which syncs with our database
-  .use('/api', require('./api'))
+	// Serve static files from ../public
+	.use(express.static(resolve(__dirname, '..', 'public')))
 
-  // Send index.html for anything else.
-  .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
+	// Serve our api - ./api also requires in ../db, which syncs with our database
+	.use('/api', require('./api'))
 
-  // Error middleware interceptor, delegates to same handler Express uses.
-  // https://github.com/expressjs/express/blob/master/lib/application.js#L162
-  // https://github.com/pillarjs/finalhandler/blob/master/index.js#L172
-  .use((err, req, res, next) => {
-    console.error(prettyError.render(err))
-    finalHandler(req, res)(err)
-  })
+	// For HTTPS via Let's Encrypt
+	// https://github.com/certbot/certbot
+	// https://github.com/gboudreau/certbot-heroku
+	// https://stackchief.com/tutorials/Free%20SSL%20with%20Heroku%20&%20Node.js
+	
+	.get('/.well-known/acme-challenge/:cert', (req,res) => { 
+		let id = req.params.cert 
+		let finalString = id + 'F543hO9NZzW07BMuUXS78UXkQjSreIbZakVx_d9_dAE' 
+		res.setHeader('content-type', 'text/plain'); 
+		res.send(finalString)
+	})
+
+	// Send index.html for anything else.
+	.get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
+
+	// Error middleware interceptor, delegates to same handler Express uses.
+	// https://github.com/expressjs/express/blob/master/lib/application.js#L162
+	// https://github.com/pillarjs/finalhandler/blob/master/index.js#L172
+	.use((err, req, res, next) => {
+		console.error(prettyError.render(err))
+		finalHandler(req, res)(err)
+	})
 
 if (module === require.main) {
-  // Start listening only if we're the main module.
-  //
-  // https://nodejs.org/api/modules.html#modules_accessing_the_main_module
-  const server = app.listen(
-    process.env.PORT || 1337,
-    () => {
-      console.log(`--- Started HTTP Server for ${pkg.name} ---`)
-      const { address, port } = server.address()
-      const host = address === '::' ? 'localhost' : address
-      const urlSafeHost = host.includes(':') ? `[${host}]` : host
-      console.log(`Listening on http://${urlSafeHost}:${port}`)
-    }
-  )
+	// Start listening only if we're the main module.
+	//
+	// https://nodejs.org/api/modules.html#modules_accessing_the_main_module
+	const server = app.listen(
+		process.env.PORT || 1337,
+		() => {
+			console.log(`--- Started HTTP Server for ${pkg.name} ---`)
+			const { address, port } = server.address()
+			const host = address === '::' ? 'localhost' : address
+			const urlSafeHost = host.includes(':') ? `[${host}]` : host
+			console.log(`Listening on http://${urlSafeHost}:${port}`)
+		}
+	)
 
-  var io = socketio(server)
-  require('./sockets/controller.js')(io);
-  require('./sockets/mobile.js')(io);
-  require('./sockets/player.js')(io);
-  require('./sockets/output.js')(io);
-  require('./sockets/djcontrols.js')(io);
-  require('./sockets/queue.js')(io);
+	var io = socketio(server)
+	require('./sockets/controller.js')(io);
+	require('./sockets/mobile.js')(io);
+	require('./sockets/player.js')(io);
+	require('./sockets/output.js')(io);
+	require('./sockets/djcontrols.js')(io);
+	require('./sockets/queue.js')(io);
 }
 
 // This check on line 64 is only starting the server if this file is being run directly by Node, and not required by another file.
