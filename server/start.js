@@ -59,6 +59,18 @@ module.exports = app
 	// Serve our api - ./api also requires in ../db, which syncs with our database
 	.use('/api', require('./api'))
 
+	// For HTTPS via Let's Encrypt
+	// https://github.com/certbot/certbot
+	// https://github.com/gboudreau/certbot-heroku
+	// https://stackchief.com/tutorials/Free%20SSL%20with%20Heroku%20&%20Node.js
+	
+	.get('/.well-known/acme-challenge/:cert', (req,res) => { 
+		let id = req.params.cert 
+		let finalString = id + 'F543hO9NZzW07BMuUXS78UXkQjSreIbZakVx_d9_dAE' 
+		res.setHeader('content-type', 'text/plain'); 
+		res.send(finalString)
+	})
+
 	// Send index.html for anything else.
 	.get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html')))
 
