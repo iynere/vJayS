@@ -11,88 +11,88 @@ import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
 var socket = io(window.location.origin)
 
 class Controller extends Component {
-	constructor(){
-		super()
-		this.commandType = this.commandType.bind(this)
-		this.handleWhiteButton = this.handleWhiteButton.bind(this)
-		this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
-		this.handleTapButton = this.handleTapButton.bind(this)
-	}
+  constructor(){
+    super()
+    this.commandType = this.commandType.bind(this)
+    this.handleWhiteButton = this.handleWhiteButton.bind(this)
+    this.handleEmoticonsButton = this.handleEmoticonsButton.bind(this)
+    this.handleTapButton = this.handleTapButton.bind(this)
+  }
 
-	componentDidMount() {
-		socket.on('connect', () => {
-			socket.on('getCommandType', () => {
-				console.log("get emoticons", this.props.command)
-				socket.emit("sendCommand", this.commandType())
-			})
-		})
-	}
+  componentDidMount() {
+    socket.on('connect', () => {
+      socket.on('getCommandType', () => {
+        console.log("get emoticons", this.props.command)
+        socket.emit("sendCommand", this.commandType())
+      })
+    })
+  }
 
-	commandType(){ //needed for mobile initial loading
-		if(this.props.command === "emoticons"){
-			return "emoticons"
-		}
+  commandType(){ //needed for mobile initial loading
+    if(this.props.command === "emoticons"){
+      return "emoticons"
+    }
 
-		return "touchpad"
-	}
+    return "touchpad"
+  }
 
-	handleClearButton(){
-		socket.emit("clearButtonClicked", "")
-	}
+  handleClearButton(){
+    socket.emit("clearButtonClicked", "")
+  }
 
-	handleWhiteButton(){
-		console.log("controller click white")
-		this.props.handleSetCommand("white")
-		let commandType="touchpad"
-		socket.emit('clickedWhiteEllipse', commandType)
-	}
+  handleWhiteButton(){
+    console.log("controller click white")
+    this.props.handleSetCommand("white")
+    let commandType="touchpad"
+    socket.emit('clickedWhiteEllipse', commandType)
+  }
 
-	handleEmoticonsButton(){
-		console.log("controller click emoticons")
-		this.props.handleSetCommand("emoticons")
-		let commandType="emoticons"
-		socket.emit('clickedEmoticons', commandType)
-	}
+  handleEmoticonsButton(){
+    console.log("controller click emoticons")
+    this.props.handleSetCommand("emoticons")
+    let commandType="emoticons"
+    socket.emit('clickedEmoticons', commandType)
+  }
 
-	handleTapButton() {
-		this.props.handleSetCommand("tap")
-		let commandType="tap"
-		socket.emit('clickedTap', commandType)
-	}
+  handleTapButton() {
+    this.props.handleSetCommand("tap")
+    let commandType="tap"
+    socket.emit('clickedTap', commandType)
+  }
 
-	handleTapButton() {
-		this.props.handleSetCommand("tap")
-		let commandType="tap"
-		socket.emit('clickedTap', commandType)
-	}
+  handleTapButton() {
+    this.props.handleSetCommand("tap")
+    let commandType="tap"
+    socket.emit('clickedTap', commandType)
+  }
 
-	render() {
-		return (
-			<div className="dj2MobileControls">
-				<h2><Icon name="users" /> Interactions (link for audience: https://www.vjays.club/live)</h2>
-				<Button.Group style={{width: "100%"}}>
-					<Button style={{maxWidth: '25%'}} basic color="green" inverted size="massive" icon="paint brush" content="Draw" onClick={this.handleWhiteButton}></Button>
-					<Button style={{maxWidth: '25%'}} basic color="yellow" inverted size="massive" icon="smile" content="Emoticons" onClick={this.handleEmoticonsButton}></Button>
-					<Button style={{maxWidth: '25%'}} basic color="blue" inverted size="massive" icon="pointing up" content="Tap" onClick={this.handleTapButton}></Button>
-					<Button style={{maxWidth: '25%'}} basic color="red" inverted content="Clear" size="massive" icon="erase" onClick={this.handleClearButton}></Button>
-				</Button.Group>
-			</div>
-		)
-	}
+  render() {
+    return (
+      <div className="dj2MobileControls">
+        <h2><Icon name="users" /> Interactions (link for audience: https://www.vjays.club/live)</h2>
+        <Button.Group style={{width: "100%"}}>
+          <Button style={{maxWidth: '25%'}} basic color="green" inverted size="massive" icon="paint brush" content="Draw" onClick={this.handleWhiteButton}></Button>
+          <Button style={{maxWidth: '25%'}} basic color="yellow" inverted size="massive" icon="smile" content="Emoticons" onClick={this.handleEmoticonsButton}></Button>
+          <Button style={{maxWidth: '25%'}} basic color="blue" inverted size="massive" icon="pointing up" content="Tap" onClick={this.handleTapButton}></Button>
+          <Button style={{maxWidth: '25%'}} basic color="red" inverted content="Clear" size="massive" icon="erase" onClick={this.handleClearButton}></Button>
+        </Button.Group>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps=state => {
-	return {
-		command: state.command
-	}
+  return {
+    command: state.command
+  }
 }
 
 const mapDispatchToProps=dispatch => {
-	return {
-		handleSetCommand (command) {
-			return dispatch(setCommand(command))
-		}
-	}
+  return {
+    handleSetCommand (command) {
+      return dispatch(setCommand(command))
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Controller);

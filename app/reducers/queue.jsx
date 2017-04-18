@@ -1,6 +1,5 @@
 import localStore from 'store'
-
-var socket = io(window.location.origin)
+const socket = io(window.location.origin)
 
 // CONSTANTS
 const RECEIVE_LEFT = 'RECEIVE_LEFT'
