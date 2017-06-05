@@ -45500,7 +45500,7 @@ var _semanticUiReact = __webpack_require__(21);
 
 var _set = __webpack_require__(43);
 
-var _utils = __webpack_require__(1044);
+var _utils = __webpack_require__(549);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47027,10 +47027,10 @@ function sketch(p) {
       console.log("~~sketch~MainScreen Socket~~~~~");
 
       socket.on('sendMousePostoMain', function (data) {
-        // let colors=["red", "blue", "pink"]
-        // let color=colors[Math.floor(Math.random()*3)]
-        // console.log("main",color);
-        // p.fill(color);
+        var colors = ["red", "blue", "pink"];
+        var color = colors[Math.floor(Math.random() * 3)];
+        console.log("main", color);
+        p.fill(color);
         p.ellipse(data.x, data.y, 80, 80);
       });
 
@@ -47121,7 +47121,43 @@ module.exports = {
 };
 
 /***/ }),
-/* 549 */,
+/* 549 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var concatQueuesToSet = exports.concatQueuesToSet = function concatQueuesToSet(setArray, queueLeft, queueRight) {
+  var setCopy = setArray;
+
+  for (var i = 0; i < (queueLeft.length > queueRight.length ? queueLeft.length : queueRight.length); i++) {
+
+    if (queueLeft[i]) {
+      setCopy.push({
+        direction: 'Left',
+        thumbnailUrl: queueLeft[i].snippet.thumbnails.default.url,
+        title: queueLeft[i].snippet.title,
+        videoId: queueLeft[i].id.videoId
+      });
+    }
+
+    if (queueRight[i]) {
+      setCopy.push({
+        direction: 'Right',
+        thumbnailUrl: queueRight[i].snippet.thumbnails.default.url,
+        title: queueRight[i].snippet.title,
+        videoId: queueRight[i].id.videoId
+      });
+    }
+  }
+
+  return setCopy;
+};
+
+/***/ }),
 /* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -122845,43 +122881,6 @@ exports.default = function () {
 };
 
 module.exports = exports['default'];
-
-/***/ }),
-/* 1044 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var concatQueuesToSet = exports.concatQueuesToSet = function concatQueuesToSet(setArray, queueLeft, queueRight) {
-  var setCopy = setArray;
-
-  for (var i = 0; i < (queueLeft.length > queueRight.length ? queueLeft.length : queueRight.length); i++) {
-
-    if (queueLeft[i]) {
-      setCopy.push({
-        direction: 'Left',
-        thumbnailUrl: queueLeft[i].snippet.thumbnails.default.url,
-        title: queueLeft[i].snippet.title,
-        videoId: queueLeft[i].id.videoId
-      });
-    }
-
-    if (queueRight[i]) {
-      setCopy.push({
-        direction: 'Right',
-        thumbnailUrl: queueRight[i].snippet.thumbnails.default.url,
-        title: queueRight[i].snippet.title,
-        videoId: queueRight[i].id.videoId
-      });
-    }
-  }
-
-  return setCopy;
-};
 
 /***/ })
 /******/ ]);
