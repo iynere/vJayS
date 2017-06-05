@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import { Button } from 'semantic-ui-react';
+// node modules
+import React, {Component} from 'react'
+import {Button} from 'semantic-ui-react'
 
 var socket = io(window.location.origin)
 

@@ -1,15 +1,18 @@
-import React, {Component} from 'react';
-import Typeahead from 'react-typeahead-component2';
-import JSONP from 'jsonp';
-import OptionsTemplate from './OptionsTemplate';
-import YoutubeFinder from 'youtube-finder';
+// node modules
+import JSONP from 'jsonp'
+import React, {Component} from 'react'
+import Typeahead from 'react-typeahead-component2'
+import YoutubeFinder from 'youtube-finder'
 
-const googleAutoSuggestURL = '//suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=';
+// local files
+import OptionsTemplate from 'APP/app/components/OptionsTemplate'
+
+const googleAutoSuggestURL = '//suggestqueries.google.com/complete/search?client=youtube&ds=yt&q='
 
 class YoutubeAutocomplete extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       inputValue: ''
     }
@@ -19,33 +22,33 @@ class YoutubeAutocomplete extends Component {
     const
       self = this,
       query = event.target.value,
-      url = googleAutoSuggestURL + query;
+      url = googleAutoSuggestURL + query
 
     this.setState({
       inputValue: query
-    });
+    })
 
     JSONP(url, function(error, data) {
       if (query.includes('youtube.com/watch?v=') || query.includes('youtu.be/')) {
         self.setState({
           options: event.target.value
-        });
+        })
       } else if (error) {
-        console.log(error);
+        console.log(error)
       } else {
-        const searchResults = data[1];
+        const searchResults = data[1]
         self.setState({
           options: searchResults
-        });
+        })
       }
-    });
+    })
   }
 
   onClick(event, optionData) {
-    const searchTerm = optionData[0];
+    const searchTerm = optionData[0]
     this.setState({
       inputValue: searchTerm
-    });
+    })
   }
 
   onOptionChange(event, optionData, index) {
@@ -53,11 +56,11 @@ class YoutubeAutocomplete extends Component {
       self = this,
       searchTerm  = optionData[0],
       apiKey      = this.props.apiKey,
-      maxResults  = this.props.maxResults ? this.props.maxResults : '50';
+      maxResults  = this.props.maxResults ? this.props.maxResults : '50'
 
     this.setState({
       inputValue: searchTerm
-    });
+    })
   }
 
   onDropDownClose(event) {
@@ -72,17 +75,17 @@ class YoutubeAutocomplete extends Component {
         q           : searchTerm,
         maxResults  : maxResults,
         videoEmbeddable: true
-      };
+      }
 
     YoutubeClient.search(params, function(error,results){
-      if(error) return console.log(error);
-      self.props.callback(results.items);
+      if(error) return console.log(error)
+      self.props.callback(results.items)
       setTimeout(() => {
         self.setState({
           inputValue: ''
-        });
+        })
       }, 500)
-    });
+    })
 
   }
 
@@ -106,4 +109,4 @@ class YoutubeAutocomplete extends Component {
   }
 }
 
-export default YoutubeAutocomplete;
+export default YoutubeAutocomplete

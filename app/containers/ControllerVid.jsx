@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
-import SliderComponent from 'APP/app/components/SliderComponent'
-import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
+// node modules
+import React, {Component} from 'react'
+import {Form, Button, Header, Icon, Modal} from 'semantic-ui-react'
+
+// local files
+import {SliderComponent} from 'APP/app/components/SliderComponent'
 
 /*~~~DJ CONTROLS TO AFFECT OUTPUT SCREEN~~~*/
 
 var socket = io(window.location.origin)
 
 export default class ControllerVid extends Component {
-
   constructor(){
     super()
     this.play="play"

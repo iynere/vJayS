@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
+// node modules
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {saveSetToDb} from 'APP/app/reducers/set'
-import {concatQueuesToSet} from 'APP/app/utils/queues'
 import localStore from 'store'
-import { Dropdown, Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
+import {Dropdown, Form, Button, Header, Icon, Modal} from 'semantic-ui-react'
+
+// local files
+import {saveSetToDb} from 'APP/app/reducers/set'
+import {concatQueuesToSet} from 'APP/app/utils'
 
 class SaveSetModal extends Component {
   constructor(props) {

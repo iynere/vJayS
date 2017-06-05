@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-import {Grid, List} from 'semantic-ui-react';
-import SortableQueueItem from './SortableQueueItem';
-import {rearrangeQueueItems} from 'APP/app/reducers/queue';
-import { connect } from 'react-redux'
+// node modules
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
+import {Grid, List} from 'semantic-ui-react'
+
+// local files
+import SortableQueueItem from 'APP/app/containers/SortableQueueItem'
+import {rearrangeQueueItems} from 'APP/app/reducers/queue'
 
 var socket = io(window.location.origin)
 

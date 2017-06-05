@@ -1,5 +1,8 @@
+// node modules
 import React from 'react'
 import {Menu, Button, Container, Input} from 'semantic-ui-react'
+
+// local files
 import YouTubeSearch from 'APP/app/containers/YouTubeSearch'
 import store from 'APP/app/store'
 import LoginLogout from 'APP/app/containers/LoginLogout'

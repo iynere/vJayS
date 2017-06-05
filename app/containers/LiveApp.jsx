@@ -1,10 +1,13 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {sketch, sketch2} from '../sketches/sketchMobile'
+// node modules
+import React, {Component} from 'react'
 import P5Wrapper from 'react-p5-wrapper'
-import EmoticonButtons from '../components/EmoticonButtons'
-import TapComponent from '../components/TapComponent'
-import SliderComponent from '../components/SliderComponent'
+import {connect} from 'react-redux'
+
+// local files
+import EmoticonButtons from 'APP/app/components/EmoticonButtons'
+import {SliderComponent} from 'APP/app/components/SliderComponent'
+import TapComponent from 'APP/app/components/TapComponent'
+import {sketch, sketch2} from 'APP/app/sketches/sketchMobile'
 
 var socket = io(window.location.origin)
 

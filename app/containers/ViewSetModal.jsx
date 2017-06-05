@@ -1,14 +1,18 @@
+// node modules
 import React, {Component} from 'react'
-import localStore from 'store'
 import {connect} from 'react-redux'
 import {Button, List, Dropdown, Modal} from 'semantic-ui-react'
-import SetItem from 'APP/app/components/SetItem'
-import {fetchSetItems} from 'APP/app/reducers/set'
+import localStore from 'store'
+
+// local files
+import SetItem from 'APP/app/containers/SetItem'
 import {addToQueue} from 'APP/app/reducers/queue'
+import {fetchSetItems} from 'APP/app/reducers/set'
 
 class ViewSetModal extends Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       modalOpen: false,
       set: []
@@ -43,12 +47,12 @@ class ViewSetModal extends Component {
   }
 
   render() {
-    
     var buttonSpacingStyle = {
       marginRight: "10px"
     }
     
     let setItems
+    
     if (this.props.set && this.props.set.length) {
       
       // save set variable as mapped List Items from the set array

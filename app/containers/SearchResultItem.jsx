@@ -1,7 +1,8 @@
-// WRITE CODE TO USE THIS
-
+// node modules
 import React, {Component} from 'react'
 import {Button, Dimmer, Image, Icon} from 'semantic-ui-react'
+
+// local files
 import {addToQueue} from 'APP/app/reducers/queue'
 import store from 'APP/app/store'
 

@@ -1,3 +1,4 @@
+// node modules
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Menu} from 'semantic-ui-react'
@@ -42,5 +43,3 @@ const mapStateToProps = (state, ownProps) => ({queue: state.queue[`${ownProps.di
 })
 
 export default connect(mapStateToProps)(Queue)
-
-// Menu fixed='bottom' inverted={true}

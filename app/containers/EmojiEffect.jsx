@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
+// node modules
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import Twemoji from 'react-twemoji'
-import {twemojiList} from 'APP/app/utils/twemojis.js'
+
+// local files
+import {twemojiList} from 'APP/app/components/twemojis'
 
 // from state: liveEffect
 var socket = io(window.location.origin)

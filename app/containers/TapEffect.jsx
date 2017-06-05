@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+// node modules
+import React, {Component} from 'react'
 
 var socket = io(window.location.origin)
 

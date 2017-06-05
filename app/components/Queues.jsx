@@ -1,10 +1,11 @@
+// node modules
 import React from 'react'
 import {Grid} from 'semantic-ui-react'
-import SortableQueue from './SortableQueue'
+
+// local files
+import SortableQueue from 'APP/app/containers/SortableQueue'
 
 export const Queues = () => (
-       // <div className="queuesContainer">
-   // <div className="queuesContainerOpaque">
   <Grid columns='one'>
     <Grid.Row style={{paddingTop: '5px', paddingBottom: '5px'}}>
       <Grid.Column>

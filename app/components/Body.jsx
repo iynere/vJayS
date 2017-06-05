@@ -1,25 +1,27 @@
+// node modules
 import React from 'react'
 import {Grid} from 'semantic-ui-react'
-import Controller from '../containers/Controller'
-import ControllerVid from '../containers/ControllerVid'
-import Player from '../containers/Player'
-import {Queues} from './Queues'
+
+// local files
+import Controller from 'APP/app/containers/Controller'
+import ControllerVid from 'APP/app/containers/ControllerVid'
+import Player from 'APP/app/containers/Player'
+import {Queues} from 'APP/app/components/Queues'
 
 export const Body = () => {
-
   return (
     <div>
       <Grid columns='two'>
         <Grid.Row>
           <Grid.Column>
-            <div className={`LeftDeck filters`}>
+            <div className={'LeftDeck filters'}>
               <Player
                 direction='Left'
               />
             </div>
           </Grid.Column>
           <Grid.Column>
-            <div className={`RightDeck filters`}>
+            <div className={'RightDeck filters'}>
               <Player
                 direction='Right'
               />

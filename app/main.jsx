@@ -1,19 +1,29 @@
 'use strict'
+
+// node modules
+import axios from 'axios'
 import React from 'react'
-import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
 import {render} from 'react-dom'
 import {connect, Provider} from 'react-redux'
+import {Router, Route, IndexRedirect, browserHistory} from 'react-router'
+
+// reducers
+import {whoami} from 'APP/app/reducers/auth'
 import {fetchQueue} from 'APP/app/reducers/queue'
 import {fetchSetItems} from 'APP/app/reducers/set'
-import {whoami} from 'APP/app/reducers/auth'
 import {fetchAllSetsFromDb} from 'APP/app/reducers/sets'
+
+// redux store
 import store from 'APP/app/store'
+
+// components
 import {Output} from 'APP/app/components/Output'
 import {Root} from 'APP/app/components/Root'
-import LiveApp from './containers/LiveApp'
-import EffectScreen from './containers/EffectScreen'
-import Controller from './containers/Controller'
-import axios from 'axios'
+
+// containers
+import Controller from 'APP/app/containers/Controller'
+import EffectScreen from 'APP/app/containers/EffectScreen'
+import LiveApp from 'APP/app/containers/LiveApp'
 
 const socket = io(window.location.origin)
 
