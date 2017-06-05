@@ -1,7 +1,10 @@
+// node modules
+import $ from 'jquery'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
-import $ from 'jquery'
+
+// local files
 import {fetchQueue} from 'APP/app/reducers/queue'
 
 var socket = io(window.location.origin)
@@ -14,7 +17,6 @@ class OutputPlayer extends Component {
       [`video${Direction}`]: {},
       [`video${Direction}Id`]: '',
       [`queue${Direction}`]: props.queue
-
     }
 
     this.handlePlayerReady = this.handlePlayerReady.bind(this)
@@ -80,7 +82,6 @@ class OutputPlayer extends Component {
       $(`.${outputScreen}.filters`).css('filter', newCSS)
     })
   })
-
 
     socket.on('changeVideoInvert', (invertPercent, direction) => {
       let outputScreen = direction === 'Left' ? 'youtube2' : 'youtube1'

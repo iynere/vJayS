@@ -1,9 +1,13 @@
+// node modules
+import $ from 'jquery'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import YouTube from 'react-youtube'
+
+// local files
 import {addToSet} from 'APP/app/reducers/set'
 import {removeFromQueue} from 'APP/app/reducers/queue'
-import $ from 'jquery'
+
 
 var socket = io(window.location.origin)
 

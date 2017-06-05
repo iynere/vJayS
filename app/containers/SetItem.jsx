@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
-import { Button, Dimmer, Image, Icon } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+// node modules
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Button, Dimmer, Image, Icon} from 'semantic-ui-react'
+
+// local files
 import {addToQueue} from 'APP/app/reducers/queue'
 import {removeFromSet} from 'APP/app/reducers/set'
 

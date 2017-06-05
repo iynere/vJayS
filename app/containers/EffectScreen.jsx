@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
+// node modules
+import React, {Component} from 'react'
 import P5Wrapper from 'react-p5-wrapper'
-import {sketch, sketch2} from '../sketches/sketch'
-import EmojiEffect from '../components/EmojiEffect'
-import TapEffect from '../components/TapEffect'
-import SliderEffect from '../components/SliderEffect'
+import {connect} from 'react-redux'
+
+// local files
+import {sketch, sketch2} from 'APP/app/sketches/sketch'
+import EmojiEffect from 'APP/app/containers/EmojiEffect'
+import TapEffect from 'APP/app/containers/TapEffect'
 
 // from state: liveEffect
 var socket = io(window.location.origin)

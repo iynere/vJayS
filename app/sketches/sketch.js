@@ -13,10 +13,10 @@ function sketch(p) {
         console.log("~~sketch~MainScreen Socket~~~~~")
 
         socket.on('sendMousePostoMain', (data)=>{
-          // let colors=["red", "blue", "pink"]
-          // let color=colors[Math.floor(Math.random()*3)]
-          // console.log("main",color);
-          // p.fill(color);
+          let colors=["red", "blue", "pink"]
+          let color=colors[Math.floor(Math.random()*3)]
+          console.log("main",color);
+          p.fill(color);
           p.ellipse(data.x, data.y, 80, 80);
         })
 

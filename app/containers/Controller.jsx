@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
+// node modules
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {setCommand} from '../reducers/command'
 import {Link} from 'react-router'
-import SliderComponent from 'APP/app/components/SliderComponent'
-import { Form, Button, Header, Icon, Modal } from 'semantic-ui-react'
+import {Form, Button, Header, Icon, Modal} from 'semantic-ui-react'
 
+// local files
+import {SliderComponent} from 'APP/app/components/SliderComponent'
+import {setCommand} from 'APP/app/reducers/command'
 
 /*DJ TO MOBILE CONTROLS*/
 

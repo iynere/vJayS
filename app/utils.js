@@ -1,6 +1,8 @@
 export const concatQueuesToSet = (setArray, queueLeft, queueRight) => {
   let setCopy = setArray
+  
   for (let i = 0; i < (queueLeft.length > queueRight.length ? queueLeft.length : queueRight.length); i++) {
+    
     if (queueLeft[i]) {
       setCopy.push({
         direction: 'Left',
@@ -9,6 +11,7 @@ export const concatQueuesToSet = (setArray, queueLeft, queueRight) => {
         videoId: queueLeft[i].id.videoId
       })
     }
+    
     if (queueRight[i]) {
       setCopy.push({
         direction: 'Right',
@@ -18,5 +21,6 @@ export const concatQueuesToSet = (setArray, queueLeft, queueRight) => {
       })
     }
   }
+  
   return setCopy
 }

@@ -1,24 +1,24 @@
+// node modules
 import React from 'react'
-import EffectScreen from '../containers/EffectScreen'
-import OutputPlayer from '../containers/OutputPlayer'
 
-export const Output = () => {
-  const visualClasses = "hue invert saturate"
+// local files
+import EffectScreen from 'APP/app/containers/EffectScreen'
+import OutputPlayer from 'APP/app/containers/OutputPlayer'
 
-  return (
+export const Output = () => (
   <div>
-    <div className={`youtube2 filters`}>
+    <div className={'youtube2 filters'}>
       <OutputPlayer
         direction='Left'
       />
     </div>
-    <div className={`youtube1 filters`}>
+    <div className={'youtube1 filters'}>
       <OutputPlayer
         direction='Right'
       />
     </div>
-    <div className="effects">
+    <div className='effects'>
       <EffectScreen />
     </div>
   </div>
-)}
+)

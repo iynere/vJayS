@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
+// node modules
+import React, {Component} from 'react'
 import localStore from 'store'
 import {connect} from 'react-redux'
-import { Button, List, Dropdown, Modal } from 'semantic-ui-react'
-import {fetchAllSets} from '../reducers/sets'
-import {fetchSetFromDb} from '../reducers/set'
-import {receiveQueue} from '../reducers/queue'
+import {Button, List, Dropdown, Modal} from 'semantic-ui-react'
 
-class ViewAllSetsModal extends Component {
+// local files
+import {fetchUserSets} from 'APP/app/reducers/sets'
+import {fetchSetFromDb} from 'APP/app/reducers/set'
+import {receiveQueue} from 'APP/app/reducers/queue'
+
+class FetchSetModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -19,7 +22,7 @@ class ViewAllSetsModal extends Component {
 
   handleModalOpen(e) {
     e.preventDefault()
-    this.props.fetchAllSets()
+    this.props.fetchUserSets(this.props.user.id)
     this.setState({
       modalOpen: true,
     })
@@ -59,17 +62,17 @@ class ViewAllSetsModal extends Component {
     return (
       <Modal
         trigger={
-          <Button
+          <Dropdown.Item
             onClick={this.handleModalOpen}>
-            All Sets
-          </Button>
+            View Your Saved Sets
+          </Dropdown.Item>
         }
         open={this.state.modalOpen}
         onClose={this.handleModalClose}
         basic size='small'>
         <Modal.Content>
         <div>
-          <h1>Select a Lovely Set</h1>
+          <h1>Select a Lovely Set (That You Made!)</h1>
           <List selection inverted onClick={null /*this.handleClick*/}>
             {sets ? sets : null}
           </List>
@@ -83,17 +86,15 @@ class ViewAllSetsModal extends Component {
   }
 }
 
-const mapStateToProps = ({auth, sets}) => {
+const mapStateToProps = (state) => {
   return ({
-    user: auth,
-    sets
+    user: state.auth,
+    sets: state.sets
   })
 }
 
-const mapDispatchToProps = dispatch => ({
-  fetchAllSets: () => {
-    dispatch(fetchAllSets())
-  },
+const mapDispatchToProps = (dispatch) => ({
+  fetchUserSets: (userId) => { dispatch(fetchUserSets(userId)) },
   fetchSetFromDb: setId => { dispatch(fetchSetFromDb(setId))
   },
   receiveQueue: (queue, queueLeftOrRight) => {
@@ -101,4 +102,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewAllSetsModal)
+export default connect(mapStateToProps, mapDispatchToProps)(FetchSetModal)

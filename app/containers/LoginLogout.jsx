@@ -1,29 +1,27 @@
+// node modules
 import React, {Component} from 'react'
-import {Link} from 'react-router'
 import {connect} from 'react-redux'
+import {Link} from 'react-router'
 import {Button, Icon, Dropdown, Menu} from 'semantic-ui-react'
+
+// local files
 import {logout} from 'APP/app/reducers/auth'
 import {fetchAllSetsFromDb} from 'APP/app/reducers/sets'
-import FetchSetModal from 'APP/app/components/FetchSetModal'
-import ViewAllSetsModal from 'APP/app/components/ViewAllSetsModal'
-import SaveSetModal from 'APP/app/components/SaveSetModal'
-import FetchPlaylistsModal from 'APP/app/components/FetchPlaylistsModal'
+import FetchSetModal from 'APP/app/containers/FetchSetModal'
+import ViewAllSetsModal from 'APP/app/containers/ViewAllSetsModal'
+import SaveSetModal from 'APP/app/containers/SaveSetModal'
+import FetchPlaylistsModal from 'APP/app/containers/FetchPlaylistsModal'
 
 class LoginLogout extends Component {
   constructor(props) {
     super(props)
     this.renderLogin = this.renderLogin.bind(this)
     this.renderUser = this.renderUser.bind(this)
-    // this.renderLogout = this.renderLogout.bind(this)
-  }
-  
-  componentDidMount() {
-    // if (this.props.user) {this.props.dispatch(fetchAccessToken(this.props.user.id))}
-    // if (this.props.playlists.accessToken) {this.props.fetchUserPlaylists(this.props.playlists.accessToken)}
   }
   
   renderUser() {
     const user = this.props.user
+    
     return (
       <Dropdown text={`Hello ${user.name || user.email}!`} className='link item'>
         <Dropdown.Menu>
@@ -46,6 +44,7 @@ class LoginLogout extends Component {
 
   render() {
     const user = this.props.user
+     
     return (
       <Menu.Item style={{ width: "30%"}} position='right'>
         <Button content='Submit Screenshots!' href='http://vjays-screens.tumblr.com' target="_blank" style={{marginRight: "10px"}}></Button>
@@ -62,8 +61,7 @@ const mapStateToProps = ({auth}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  // FROM AUTH REDUCER
-  logout: () => dispatch(logout()),
+  logout: () => dispatch(logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginLogout)

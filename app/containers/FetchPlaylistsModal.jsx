@@ -1,7 +1,10 @@
+// node modules
 import React, {Component} from 'react'
-import localStore from 'store'
 import {connect} from 'react-redux'
+import localStore from 'store'
 import {Button, List, Dropdown, Modal} from 'semantic-ui-react'
+
+// local files
 import {fetchUserPlaylists, fetchSelectedPlaylist} from 'APP/app/reducers/playlists'
 
 class FetchPlaylistsModal extends Component {

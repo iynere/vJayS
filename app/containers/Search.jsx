@@ -1,18 +1,22 @@
+// node modules
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import YouTubeSearch from './YouTubeSearch';
-import SearchResultItem from 'APP/app/components/SearchResultItem'
 import {Modal, List, Input} from 'semantic-ui-react'
+
+// local files
+import SearchResultItem from 'APP/app/containers/SearchResultItem'
+import YouTubeSearch from 'APP/app/containers/YouTubeSearch'
 import {addToQueue} from 'APP/app/reducers/queue'
 
 class Search extends Component {
   constructor(props) {
     super(props)
-
-    this.state={
-      open:false,
-      searchResults:[]
+    
+    this.state = {
+      open: false,
+      searchResults: []
     }
+    
     this.showSearchResults = this.showSearchResults.bind(this)
     // this.onClickLeft=this.onClickLeft.bind(this)
     // this.onClickRight=this.onClickRight.bind(this)
@@ -31,26 +35,26 @@ class Search extends Component {
   }
 
   handleClose() {
-    this.setState({open: false});
+    this.setState({open: false})
   }
   
   handleOpen() {
-    this.setState({open: true});
+    this.setState({open: true})
   }
 
   onRequestClose() {
-    this.setState({open: false});
+    this.setState({open: false})
   }
 
  // onClickLeft() {
  //   // console.log(this.props)
- //  this.setState({open: false});
+ //  this.setState({open: false})
  //   this.props.addToQueue(this.props.video, 'queueLeft')
  // }
  //
  // onClickRight() {
  //   // console.log(this.props)
- //   this.setState({open: false});
+ //   this.setState({open: false})
  //   this.props.addToQueue(this.props.video, 'queueRight')
  // }
 
@@ -95,9 +99,7 @@ class Search extends Component {
         </Modal.Actions>
         </Modal>
       </div>
-
-
-    );
+    )
   }
 }
 

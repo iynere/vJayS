@@ -1,6 +1,9 @@
+// node modules
 import React, { Component } from 'react'
 import Twemoji from 'react-twemoji'
-import {twemojiList} from 'APP/app/utils/twemojis.js'
+
+// local files
+import {twemojiList} from 'APP/app/components/twemojis'
 
 export default props => {
   let emojiButtons= twemojiList ? twemojiList.map((twemoji, index) => {
