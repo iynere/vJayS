@@ -14,9 +14,30 @@ export default class TapEffect extends Component {
       taps: [],
       interval: 0
     }
+    
+    this.handleTaps = this.handleTaps.bind(this)
   }
 
   componentDidMount() {
+    socket.on('updateTapValue', () => {
+      this.setState({
+        taps: this.state.taps.concat(Date.now())
+      })
+      
+      console.log("updating tap value!", this.state.taps)
+    })
+    
+    // store taps as an array of Date.now()'s
+    // .25 speed:   < 1 tap / second
+    // .5 speed:    1 tap / second
+    // .75 speed:   1.5 taps / second
+    // 1 speed:     2 taps / second
+    // 1.25 speed:  3 taps / second
+    // 1.5 speed:   4 taps / second
+    // 2 speed:     > 4 taps / second
+  }
+  
+  handleTaps() {
     let interval = setInterval(() => {
       let tapsInTwoSeconds = this.state.taps.length
       
@@ -46,23 +67,6 @@ export default class TapEffect extends Component {
     this.setState({
       interval: interval
     })
-    // store taps as an array of Date.now()'s
-    // .25 speed:   < 1 tap / second
-    // .5 speed:    1 tap / second
-    // .75 speed:   1.5 taps / second
-    // 1 speed:     2 taps / second
-    // 1.25 speed:  3 taps / second
-    // 1.5 speed:   4 taps / second
-    // 2 speed:     > 4 taps / second
-    
-    
-    socket.on('updateTapValue', () => {
-      this.setState({
-        taps: this.state.taps.concat(Date.now())
-      })
-      
-      console.log("updating tap value!", this.state.taps)
-    })
   }
   
   componentWillUnmount() {
@@ -71,6 +75,8 @@ export default class TapEffect extends Component {
   } 
 
   render() {
+    this.handleTaps()
+    
     return (
       <div>
       </div>

@@ -46484,6 +46484,8 @@ var TapEffect = function (_Component) {
       taps: [],
       interval: 0
     };
+
+    _this.handleTaps = _this.handleTaps.bind(_this);
     return _this;
   }
 
@@ -46492,8 +46494,30 @@ var TapEffect = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      socket.on('updateTapValue', function () {
+        _this2.setState({
+          taps: _this2.state.taps.concat(Date.now())
+        });
+
+        console.log("updating tap value!", _this2.state.taps);
+      });
+
+      // store taps as an array of Date.now()'s
+      // .25 speed:   < 1 tap / second
+      // .5 speed:    1 tap / second
+      // .75 speed:   1.5 taps / second
+      // 1 speed:     2 taps / second
+      // 1.25 speed:  3 taps / second
+      // 1.5 speed:   4 taps / second
+      // 2 speed:     > 4 taps / second
+    }
+  }, {
+    key: 'handleTaps',
+    value: function handleTaps() {
+      var _this3 = this;
+
       var interval = setInterval(function () {
-        var tapsInTwoSeconds = _this2.state.taps.length;
+        var tapsInTwoSeconds = _this3.state.taps.length;
 
         if (1 <= tapsInTwoSeconds <= 2) {
           socket.emit('changePlaybackRate', 0.25);
@@ -46511,32 +46535,15 @@ var TapEffect = function (_Component) {
           socket.emit('changePlaybackRate', 2.0);
         }
 
-        _this2.setState({
-          taps: (0, _utils.lastTwoSecondsOfTaps)(_this2.state.taps)
+        _this3.setState({
+          taps: (0, _utils.lastTwoSecondsOfTaps)(_this3.state.taps)
         });
 
-        console.log('clearing old taps', _this2.state.taps);
+        console.log('clearing old taps', _this3.state.taps);
       }, 2000);
 
       this.setState({
         interval: interval
-      });
-      // store taps as an array of Date.now()'s
-      // .25 speed:   < 1 tap / second
-      // .5 speed:    1 tap / second
-      // .75 speed:   1.5 taps / second
-      // 1 speed:     2 taps / second
-      // 1.25 speed:  3 taps / second
-      // 1.5 speed:   4 taps / second
-      // 2 speed:     > 4 taps / second
-
-
-      socket.on('updateTapValue', function () {
-        _this2.setState({
-          taps: _this2.state.taps.concat(Date.now())
-        });
-
-        console.log("updating tap value!", _this2.state.taps);
       });
     }
   }, {
@@ -46548,6 +46555,8 @@ var TapEffect = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      this.handleTaps();
+
       return _react2.default.createElement('div', null);
     }
   }]);
