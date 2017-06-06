@@ -44990,6 +44990,11 @@ var OutputPlayer = function (_Component) {
         _this2.state['video' + Direction].setPlaybackRate(newRate);
       });
 
+      socket.on('updatePlaybackRate', function (newRate) {
+        console.log('FROM TAP', newRate);
+        _this2.state['video' + Direction].setPlaybackRate(newRate);
+      });
+
       socket.on('clearOutputVideos', function () {
         _this2.setState(_defineProperty({}, 'queue' + Direction, []));
       });
@@ -45294,6 +45299,7 @@ var Player = function (_Component) {
       });
 
       socket.on('updatePlaybackRate', function (newRate) {
+        console.log('FROM TAPS', newRate);
         event.target.setPlaybackRate(newRate);
       });
 
