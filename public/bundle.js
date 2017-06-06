@@ -46502,6 +46502,8 @@ var TapEffect = function (_Component) {
         console.log("updating tap value!", _this2.state.taps);
       });
 
+      this.handleTaps();
+
       // store taps as an array of Date.now()'s
       // .25 speed:   < 1 tap / second
       // .5 speed:    1 tap / second
@@ -46555,7 +46557,6 @@ var TapEffect = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      this.handleTaps();
 
       return _react2.default.createElement('div', null);
     }

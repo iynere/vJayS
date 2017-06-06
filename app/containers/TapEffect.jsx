@@ -27,6 +27,8 @@ export default class TapEffect extends Component {
       console.log("updating tap value!", this.state.taps)
     })
     
+    this.handleTaps()
+    
     // store taps as an array of Date.now()'s
     // .25 speed:   < 1 tap / second
     // .5 speed:    1 tap / second
@@ -75,7 +77,6 @@ export default class TapEffect extends Component {
   } 
 
   render() {
-    this.handleTaps()
     
     return (
       <div>
