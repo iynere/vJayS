@@ -24,7 +24,7 @@ class Controller extends Component {
   componentDidMount() {
     socket.on('connect', () => {
       socket.on('getCommandType', () => {
-        console.log("get emoticons", this.props.command)
+        // console.log("get emoticons", this.props.command)
         socket.emit("sendCommand", this.commandType())
       })
     })
@@ -59,7 +59,7 @@ class Controller extends Component {
   handleTapButton() {
     this.props.handleSetCommand("tap")
     let commandType="tap"
-    socket.emit('sendCommand', commandType)
+    socket.emit('clickedTap', commandType)
   }
 
   render() {

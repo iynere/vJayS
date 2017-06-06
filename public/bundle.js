@@ -16890,7 +16890,7 @@ var Controller = function (_Component) {
 
       socket.on('connect', function () {
         socket.on('getCommandType', function () {
-          console.log("get emoticons", _this2.props.command);
+          // console.log("get emoticons", this.props.command)
           socket.emit("sendCommand", _this2.commandType());
         });
       });
@@ -16931,7 +16931,7 @@ var Controller = function (_Component) {
     value: function handleTapButton() {
       this.props.handleSetCommand("tap");
       var commandType = "tap";
-      socket.emit('sendCommand', commandType);
+      socket.emit('clickedTap', commandType);
     }
   }, {
     key: 'render',
