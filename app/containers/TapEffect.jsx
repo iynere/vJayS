@@ -16,6 +16,12 @@ export default class TapEffect extends Component {
   }
 
   componentDidMount() {
+    setInterval(() => {
+      this.setState({
+        taps: lastTwoSecondsOfTaps(this.state.taps)
+      })
+      console.log('clearing old taps', this.state.taps)
+    }, 500)
     // store taps as an array of Date.now()'s
     // .25 speed:   < 1 tap / second
     // .5 speed:    1 tap / second
@@ -28,20 +34,20 @@ export default class TapEffect extends Component {
     
     socket.on('updateTapValue', () => {
       this.setState({
-        taps: lastTwoSecondsOfTaps(this.state.taps.concat(Date.now()))
+        taps: this.state.taps.concat(Date.now())
       })
       
       let tapesInTwoSeconds = this.state.taps.length
       
-      if (1 < tapesInTwoSeconds < 2) {
+      if (1 <= tapesInTwoSeconds <= 2) {
         socket.emit('changePlaybackRate', 0.25)
-      } else if (tapesInTwoSeconds < 3) {
+      } else if (tapesInTwoSeconds <= 3) {
         socket.emit('changePlaybackRate', 0.5)
-      } else if (tapesInTwoSeconds < 4) {
+      } else if (tapesInTwoSeconds <= 4) {
         socket.emit('changePlaybackRate', 0.75)
-      } else if (tapesInTwoSeconds < 5) {
+      } else if (tapesInTwoSeconds <= 5) {
         socket.emit('changePlaybackRate', 1.0)
-      } else if (tapesInTwoSeconds < 6) {
+      } else if (tapesInTwoSeconds <= 6) {
         socket.emit('changePlaybackRate', 1.25)
       } else if (tapesInTwoSeconds < 8) {
         socket.emit('changePlaybackRate', 1.5)
@@ -54,7 +60,7 @@ export default class TapEffect extends Component {
   }
   
   componentWillUnmount() {
-    socket.emit('changePlaybackRate', 1)
+    // socket.emit('changePlaybackRate', 1)
   } 
 
   render() {
