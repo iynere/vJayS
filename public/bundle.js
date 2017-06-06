@@ -46534,11 +46534,11 @@ var TapEffect = function (_Component) {
           socket.emit('changePlaybackRate', 0.75);
         } else if (tapsInTwoSeconds <= 5) {
           socket.emit('changePlaybackRate', 1.0);
-        } else if (tapsInTwoSeconds <= 7) {
+        } else if (tapsInTwoSeconds <= 10) {
           socket.emit('changePlaybackRate', 1.25);
-        } else if (tapsInTwoSeconds <= 9) {
+        } else if (tapsInTwoSeconds <= 15) {
           socket.emit('changePlaybackRate', 1.5);
-        } else if (tapsInTwoSeconds > 9) {
+        } else if (tapsInTwoSeconds > 15) {
           socket.emit('changePlaybackRate', 2.0);
         }
 
