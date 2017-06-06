@@ -46499,11 +46499,30 @@ var TapEffect = function (_Component) {
       var _this2 = this;
 
       setInterval(function () {
+        var tapsInTwoSeconds = _this2.state.taps.length;
+
+        if (1 <= tapsInTwoSeconds <= 2) {
+          socket.emit('changePlaybackRate', 0.25);
+        } else if (tapsInTwoSeconds <= 3) {
+          socket.emit('changePlaybackRate', 0.5);
+        } else if (tapsInTwoSeconds <= 4) {
+          socket.emit('changePlaybackRate', 0.75);
+        } else if (tapsInTwoSeconds <= 5) {
+          socket.emit('changePlaybackRate', 1.0);
+        } else if (tapsInTwoSeconds <= 6) {
+          socket.emit('changePlaybackRate', 1.25);
+        } else if (tapsInTwoSeconds < 8) {
+          socket.emit('changePlaybackRate', 1.5);
+        } else if (tapsInTwoSeconds >= 8) {
+          socket.emit('changePlaybackRate', 2.0);
+        }
+
         _this2.setState({
           taps: (0, _utils.lastTwoSecondsOfTaps)(_this2.state.taps)
         });
+
         console.log('clearing old taps', _this2.state.taps);
-      }, 500);
+      }, 2000);
       // store taps as an array of Date.now()'s
       // .25 speed:   < 1 tap / second
       // .5 speed:    1 tap / second
@@ -46518,24 +46537,6 @@ var TapEffect = function (_Component) {
         _this2.setState({
           taps: _this2.state.taps.concat(Date.now())
         });
-
-        var tapesInTwoSeconds = _this2.state.taps.length;
-
-        if (1 <= tapesInTwoSeconds <= 2) {
-          socket.emit('changePlaybackRate', 0.25);
-        } else if (tapesInTwoSeconds <= 3) {
-          socket.emit('changePlaybackRate', 0.5);
-        } else if (tapesInTwoSeconds <= 4) {
-          socket.emit('changePlaybackRate', 0.75);
-        } else if (tapesInTwoSeconds <= 5) {
-          socket.emit('changePlaybackRate', 1.0);
-        } else if (tapesInTwoSeconds <= 6) {
-          socket.emit('changePlaybackRate', 1.25);
-        } else if (tapesInTwoSeconds < 8) {
-          socket.emit('changePlaybackRate', 1.5);
-        } else if (tapesInTwoSeconds >= 8) {
-          socket.emit('changePlaybackRate', 2.0);
-        }
 
         console.log("updating tap value!", _this2.state.taps);
       });
