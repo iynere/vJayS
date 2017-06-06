@@ -45298,10 +45298,10 @@ var Player = function (_Component) {
         }
       });
 
-      // socket.on('updatePlaybackRate', (newRate) => {
-      //  console.log('FROM TAPS', newRate)
-      //  event.target.setPlaybackRate(newRate)
-      // })
+      socket.on('updatePlaybackRate', function (newRate) {
+        console.log('FROM TAPS', newRate);
+        event.target.setPlaybackRate(newRate);
+      });
 
       socket.on('changeVideosVolume', function (newVol) {
         console.log("Changing the volume", newVol);
@@ -46531,26 +46531,19 @@ var TapEffect = function (_Component) {
         if (tapsInTwoSeconds === 0) {
           console.log('no taps');
         } else if (tapsInTwoSeconds < 2) {
-          socket.emit('changingVideoLeftPlaybackRate', 0.25);
-          socket.emit('changingVideoRightPlaybackRate', 0.25);
+          socket.emit('changePlaybackRate', 0.25);
         } else if (tapsInTwoSeconds < 3) {
-          socket.emit('changingVideoLeftPlaybackRate', 0.5);
-          socket.emit('changingVideoRightPlaybackRate', 0.5);
+          socket.emit('changePlaybackRate', 0.5);
         } else if (tapsInTwoSeconds < 4) {
-          socket.emit('changingVideoLeftPlaybackRate', 0.75);
-          socket.emit('changingVideoRightPlaybackRate', 0.75);
+          socket.emit('changePlaybackRate', 0.75);
         } else if (tapsInTwoSeconds < 5) {
-          socket.emit('changingVideoLeftPlaybackRate', 1.0);
-          socket.emit('changingVideoRightPlaybackRate', 1.0);
+          socket.emit('changePlaybackRate', 1.0);
         } else if (tapsInTwoSeconds < 6) {
-          socket.emit('changingVideoLeftPlaybackRate', 1.25);
-          socket.emit('changingVideoRightPlaybackRate', 1.25);
+          socket.emit('changePlaybackRate', 1.25);
         } else if (tapsInTwoSeconds < 8) {
-          socket.emit('changingVideoLeftPlaybackRate', 1.5);
-          socket.emit('changingVideoRightPlaybackRate', 1.5);
+          socket.emit('changePlaybackRate', 1.5);
         } else if (tapsInTwoSeconds >= 8) {
-          socket.emit('changingVideoLeftPlaybackRate', 2.0);
-          socket.emit('changingVideoRightPlaybackRate', 2.0);
+          socket.emit('changePlaybackRate', 2.0);
         }
 
         _this3.setState({
