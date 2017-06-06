@@ -16991,7 +16991,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -17032,67 +17032,67 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var EffectScreen = function (_Component) {
-  _inherits(EffectScreen, _Component);
+	_inherits(EffectScreen, _Component);
 
-  function EffectScreen(props) {
-    _classCallCheck(this, EffectScreen);
+	function EffectScreen(props) {
+		_classCallCheck(this, EffectScreen);
 
-    var _this = _possibleConstructorReturn(this, (EffectScreen.__proto__ || Object.getPrototypeOf(EffectScreen)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (EffectScreen.__proto__ || Object.getPrototypeOf(EffectScreen)).call(this, props));
 
-    _this.state = {
-      sketchFunction: _sketch.sketch
-    };
-    return _this;
-  }
+		_this.state = {
+			sketchFunction: _sketch.sketch
+		};
+		return _this;
+	}
 
-  _createClass(EffectScreen, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(EffectScreen, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      socket.on('clearCanvas', function () {
-        _this2.setState({ sketchFunction: "" });
-      });
+			socket.on('clearCanvas', function () {
+				_this2.setState({ sketchFunction: "" });
+			});
 
-      socket.on('drawWhiteEllipse', function () {
-        _this2.setState({ sketchFunction: _sketch.sketch });
-      });
+			socket.on('drawWhiteEllipse', function () {
+				_this2.setState({ sketchFunction: _sketch.sketch });
+			});
 
-      socket.on('drawEmoticons', function () {
-        console.log("loading emoji screen");
-        _this2.setState({ sketchFunction: "emojiPoll" });
-      });
+			socket.on('drawEmoticons', function () {
+				console.log("loading emoji screen");
+				_this2.setState({ sketchFunction: "emojiPoll" });
+			});
 
-      socket.on('drawTap', function () {
-        console.log("loading tap screen");
-        _this2.setState({ sketchFunction: "tap" });
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
+			socket.on('drawTap', function () {
+				console.log("loading tap screen");
+				_this2.setState({ sketchFunction: "tap" });
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        this.state.sketchFunction === _sketch.sketch ? _react2.default.createElement(
-          'div',
-          { id: 'p5parent', className: 'p5parents' },
-          _react2.default.createElement(_reactP5Wrapper2.default, { sketch: _sketch.sketch })
-        ) : null,
-        this.state.sketchFunction === "emojiPoll" ? _react2.default.createElement(_EmojiEffect2.default, null) : null,
-        this.state.sketchFunction === "tap" ? _react2.default.createElement(_TapEffect2.default, null) : null
-      );
-    }
-  }]);
+			return _react2.default.createElement(
+				'div',
+				null,
+				this.state.sketchFunction === _sketch.sketch ? _react2.default.createElement(
+					'div',
+					{ id: 'p5parent', className: 'p5parents' },
+					_react2.default.createElement(_reactP5Wrapper2.default, { sketch: _sketch.sketch })
+				) : null,
+				this.state.sketchFunction === "emojiPoll" ? _react2.default.createElement(_EmojiEffect2.default, null) : null,
+				this.state.sketchFunction === "tap" ? _react2.default.createElement(_TapEffect2.default, null) : null
+			);
+		}
+	}]);
 
-  return EffectScreen;
+	return EffectScreen;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {
-    command: state.command
-  };
+	return {
+		command: state.command
+	};
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(EffectScreen);
@@ -43991,7 +43991,7 @@ var Queues = exports.Queues = function Queues() {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -44014,46 +44014,46 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var TapComponent = function (_Component) {
-  _inherits(TapComponent, _Component);
+	_inherits(TapComponent, _Component);
 
-  function TapComponent() {
-    _classCallCheck(this, TapComponent);
+	function TapComponent() {
+		_classCallCheck(this, TapComponent);
 
-    var _this = _possibleConstructorReturn(this, (TapComponent.__proto__ || Object.getPrototypeOf(TapComponent)).call(this));
+		var _this = _possibleConstructorReturn(this, (TapComponent.__proto__ || Object.getPrototypeOf(TapComponent)).call(this));
 
-    _this.state = {
-      size: "massive",
-      color: "purple"
-    };
+		_this.state = {
+			size: "massive",
+			color: "purple"
+		};
 
-    _this.handleTouchStart = _this.handleTouchStart.bind(_this);
-    return _this;
-  }
+		_this.handleTouchStart = _this.handleTouchStart.bind(_this);
+		return _this;
+	}
 
-  _createClass(TapComponent, [{
-    key: 'handleTouchStart',
-    value: function handleTouchStart(e) {
-      e.preventDefault();
-      this.state.color === "green" ? this.setState({ color: "purple" }) : this.setState({ color: "green" });
-      socket.emit('tappingScreen');
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'mobileComponent' },
-        _react2.default.createElement(
-          _semanticUiReact.Button,
-          { basic: true, circular: true, className: 'tapButton', size: 'massive', onTouchStart: this.handleTouchStart,
-            color: this.state.color },
-          'T A P'
-        )
-      );
-    }
-  }]);
+	_createClass(TapComponent, [{
+		key: 'handleTouchStart',
+		value: function handleTouchStart(e) {
+			e.preventDefault();
+			this.state.color === "green" ? this.setState({ color: "purple" }) : this.setState({ color: "green" });
+			socket.emit('tappingScreen');
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'mobileComponent' },
+				_react2.default.createElement(
+					_semanticUiReact.Button,
+					{ basic: true, circular: true, className: 'tapButton', size: 'massive', onTouchStart: this.handleTouchStart,
+						color: this.state.color },
+					'T A P'
+				)
+			);
+		}
+	}]);
 
-  return TapComponent;
+	return TapComponent;
 }(_react.Component);
 
 exports.default = TapComponent;
@@ -46454,7 +46454,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46480,80 +46480,86 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var TapEffect = function (_Component) {
-  _inherits(TapEffect, _Component);
+	_inherits(TapEffect, _Component);
 
-  function TapEffect() {
-    _classCallCheck(this, TapEffect);
+	function TapEffect() {
+		_classCallCheck(this, TapEffect);
 
-    var _this = _possibleConstructorReturn(this, (TapEffect.__proto__ || Object.getPrototypeOf(TapEffect)).call(this));
+		var _this = _possibleConstructorReturn(this, (TapEffect.__proto__ || Object.getPrototypeOf(TapEffect)).call(this));
 
-    _this.state = {
-      taps: []
-    };
-    return _this;
-  }
+		_this.state = {
+			taps: [],
+			interval: 0
+		};
+		return _this;
+	}
 
-  _createClass(TapEffect, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+	_createClass(TapEffect, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
 
-      setInterval(function () {
-        var tapsInTwoSeconds = _this2.state.taps.length;
+			var interval = setInterval(function () {
+				var tapsInTwoSeconds = _this2.state.taps.length;
 
-        if (1 <= tapsInTwoSeconds <= 2) {
-          socket.emit('changePlaybackRate', 0.25);
-        } else if (tapsInTwoSeconds <= 3) {
-          socket.emit('changePlaybackRate', 0.5);
-        } else if (tapsInTwoSeconds <= 4) {
-          socket.emit('changePlaybackRate', 0.75);
-        } else if (tapsInTwoSeconds <= 5) {
-          socket.emit('changePlaybackRate', 1.0);
-        } else if (tapsInTwoSeconds <= 6) {
-          socket.emit('changePlaybackRate', 1.25);
-        } else if (tapsInTwoSeconds < 8) {
-          socket.emit('changePlaybackRate', 1.5);
-        } else if (tapsInTwoSeconds >= 8) {
-          socket.emit('changePlaybackRate', 2.0);
-        }
+				if (1 <= tapsInTwoSeconds <= 2) {
+					socket.emit('changePlaybackRate', 0.25);
+				} else if (tapsInTwoSeconds <= 3) {
+					socket.emit('changePlaybackRate', 0.5);
+				} else if (tapsInTwoSeconds <= 4) {
+					socket.emit('changePlaybackRate', 0.75);
+				} else if (tapsInTwoSeconds <= 5) {
+					socket.emit('changePlaybackRate', 1.0);
+				} else if (tapsInTwoSeconds <= 6) {
+					socket.emit('changePlaybackRate', 1.25);
+				} else if (tapsInTwoSeconds < 8) {
+					socket.emit('changePlaybackRate', 1.5);
+				} else if (tapsInTwoSeconds >= 8) {
+					socket.emit('changePlaybackRate', 2.0);
+				}
 
-        _this2.setState({
-          taps: (0, _utils.lastTwoSecondsOfTaps)(_this2.state.taps)
-        });
+				_this2.setState({
+					taps: (0, _utils.lastTwoSecondsOfTaps)(_this2.state.taps)
+				});
 
-        console.log('clearing old taps', _this2.state.taps);
-      }, 2000);
-      // store taps as an array of Date.now()'s
-      // .25 speed:   < 1 tap / second
-      // .5 speed:    1 tap / second
-      // .75 speed:   1.5 taps / second
-      // 1 speed:     2 taps / second
-      // 1.25 speed:  3 taps / second
-      // 1.5 speed:   4 taps / second
-      // 2 speed:     > 4 taps / second
+				console.log('clearing old taps', _this2.state.taps);
+			}, 2000);
+
+			this.setState({
+				interval: interval
+			});
+			// store taps as an array of Date.now()'s
+			// .25 speed:   < 1 tap / second
+			// .5 speed:    1 tap / second
+			// .75 speed:   1.5 taps / second
+			// 1 speed:     2 taps / second
+			// 1.25 speed:  3 taps / second
+			// 1.5 speed:   4 taps / second
+			// 2 speed:     > 4 taps / second
 
 
-      socket.on('updateTapValue', function () {
-        _this2.setState({
-          taps: _this2.state.taps.concat(Date.now())
-        });
+			socket.on('updateTapValue', function () {
+				_this2.setState({
+					taps: _this2.state.taps.concat(Date.now())
+				});
 
-        console.log("updating tap value!", _this2.state.taps);
-      });
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      // socket.emit('changePlaybackRate', 1)
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement('div', null);
-    }
-  }]);
+				console.log("updating tap value!", _this2.state.taps);
+			});
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			// socket.emit('changePlaybackRate', 1)
+			clearInterval(this.state.interval);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement('div', null);
+		}
+	}]);
 
-  return TapEffect;
+	return TapEffect;
 }(_react.Component);
 
 exports.default = TapEffect;

@@ -11,12 +11,13 @@ export default class TapEffect extends Component {
     super()
 
     this.state = {
-      taps: []
+      taps: [],
+      interval: 0
     }
   }
 
   componentDidMount() {
-    setInterval(() => {
+    let interval = setInterval(() => {
       let tapsInTwoSeconds = this.state.taps.length
       
       if (1 <= tapsInTwoSeconds <= 2) {
@@ -41,6 +42,10 @@ export default class TapEffect extends Component {
       
       console.log('clearing old taps', this.state.taps)
     }, 2000)
+    
+    this.setState({
+      interval: interval
+    })
     // store taps as an array of Date.now()'s
     // .25 speed:   < 1 tap / second
     // .5 speed:    1 tap / second
@@ -62,6 +67,7 @@ export default class TapEffect extends Component {
   
   componentWillUnmount() {
     // socket.emit('changePlaybackRate', 1)
+    clearInterval(this.state.interval)
   } 
 
   render() {
