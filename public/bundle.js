@@ -16931,14 +16931,7 @@ var Controller = function (_Component) {
     value: function handleTapButton() {
       this.props.handleSetCommand("tap");
       var commandType = "tap";
-      socket.emit('clickedTap', commandType);
-    }
-  }, {
-    key: 'handleTapButton',
-    value: function handleTapButton() {
-      this.props.handleSetCommand("tap");
-      var commandType = "tap";
-      socket.emit('clickedTap', commandType);
+      socket.emit('sendCommand', commandType);
     }
   }, {
     key: 'render',
@@ -47219,7 +47212,7 @@ function sketch(p) {
         console.log("main", color);
         p.noStroke();
         p.fill(color);
-        var size = Math.floor(Math.random() * 100);
+        var size = Math.floor(Math.random() * 80);
         p.ellipse(data.x, data.y, size, size);
       });
 

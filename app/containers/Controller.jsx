@@ -59,13 +59,7 @@ class Controller extends Component {
   handleTapButton() {
     this.props.handleSetCommand("tap")
     let commandType="tap"
-    socket.emit('clickedTap', commandType)
-  }
-
-  handleTapButton() {
-    this.props.handleSetCommand("tap")
-    let commandType="tap"
-    socket.emit('clickedTap', commandType)
+    socket.emit('sendCommand', commandType)
   }
 
   render() {

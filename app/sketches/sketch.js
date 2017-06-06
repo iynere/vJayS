@@ -168,7 +168,7 @@ function sketch(p) {
           console.log("main",color);
           p.noStroke()
           p.fill(color);
-          let size = Math.floor(Math.random()*100)
+          let size = Math.floor(Math.random()*80)
           p.ellipse(data.x, data.y, size, size);
         })
 
