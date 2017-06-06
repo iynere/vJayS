@@ -42705,7 +42705,7 @@ var Root = exports.Root = function Root() {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -42750,90 +42750,90 @@ var socket = io(window.location.origin);
 // on first load, if interface isn't touchpad:
 
 var LiveApp = function (_Component) {
-	_inherits(LiveApp, _Component);
+  _inherits(LiveApp, _Component);
 
-	function LiveApp() {
-		_classCallCheck(this, LiveApp);
+  function LiveApp() {
+    _classCallCheck(this, LiveApp);
 
-		var _this = _possibleConstructorReturn(this, (LiveApp.__proto__ || Object.getPrototypeOf(LiveApp)).call(this));
+    var _this = _possibleConstructorReturn(this, (LiveApp.__proto__ || Object.getPrototypeOf(LiveApp)).call(this));
 
-		_this.state = {
-			interface: ""
-		};
+    _this.state = {
+      interface: ""
+    };
 
-		_this.handleEmojiClick = _this.handleEmojiClick.bind(_this);
-		return _this;
-	}
+    _this.handleEmojiClick = _this.handleEmojiClick.bind(_this);
+    return _this;
+  }
 
-	_createClass(LiveApp, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
+  _createClass(LiveApp, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
 
-			socket.on('allowInteraction', function (interaction) {
-				console.log("changing to", interaction);
-				if (_this2.state.interface !== interaction) {
-					_this2.setState({ interface: interaction });
-				}
-			});
+      socket.on('allowInteraction', function (interaction) {
+        console.log("changing to", interaction);
+        if (_this2.state.interface !== interaction) {
+          _this2.setState({ interface: interaction });
+        }
+      });
 
-			if (this.state.interface === "") {
-				socket.emit('getInterface');
-			}
+      if (this.state.interface === "") {
+        socket.emit('getInterface');
+      }
 
-			this.handleTouchMove = this.handleTouchMove.bind(this);
-		}
-	}, {
-		key: 'handleTouchMove',
-		value: function handleTouchMove(e) {
-			console.log("Mouse is moving");
-			e.preventDefault();
-			var x = void 0,
-			    y = void 0;
-			x = e.touches[0].clientX;
-			y = e.touches[0].clientY;
-			socket.emit('mouse_position', { x: x, y: y });
-		}
-	}, {
-		key: 'handleEmojiClick',
-		value: function handleEmojiClick(emoji) {
-			console.log("emoji clicked was", emoji);
-			socket.emit('emojiClicked', emoji);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'div',
-				null,
-				this.state.interface === "touchpad" ? _react2.default.createElement(
-					'div',
-					{ className: 'touchPad', onTouchMove: this.handleTouchMove },
-					_react2.default.createElement(
-						'div',
-						{ id: 'p5parent' },
-						_react2.default.createElement(
-							'h1',
-							{ className: 'draw' },
-							'Draw something!'
-						),
-						_react2.default.createElement(_reactP5Wrapper2.default, { sketch: _sketchMobile.sketch })
-					)
-				) : null,
-				this.state.interface === "emoticons" ? _react2.default.createElement(_EmoticonButtons2.default, { handleEmojiClick: this.handleEmojiClick }) : null,
-				this.state.interface === "tap" ? _react2.default.createElement(_TapComponent2.default, null) : null,
-				this.state.interface === "slider" ? _react2.default.createElement(_SliderComponent.SliderComponent, null) : null
-			);
-		}
-	}]);
+      this.handleTouchMove = this.handleTouchMove.bind(this);
+    }
+  }, {
+    key: 'handleTouchMove',
+    value: function handleTouchMove(e) {
+      console.log("Mouse is moving");
+      e.preventDefault();
+      var x = void 0,
+          y = void 0;
+      x = e.touches[0].clientX;
+      y = e.touches[0].clientY;
+      socket.emit('mouse_position', { x: x, y: y });
+    }
+  }, {
+    key: 'handleEmojiClick',
+    value: function handleEmojiClick(emoji) {
+      console.log("emoji clicked was", emoji);
+      socket.emit('emojiClicked', emoji);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        this.state.interface === "touchpad" ? _react2.default.createElement(
+          'div',
+          { className: 'touchPad', onTouchMove: this.handleTouchMove },
+          _react2.default.createElement(
+            'div',
+            { id: 'p5parent' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'draw' },
+              'Draw something!'
+            ),
+            _react2.default.createElement(_reactP5Wrapper2.default, { sketch: _sketchMobile.sketch })
+          )
+        ) : null,
+        this.state.interface === "emoticons" ? _react2.default.createElement(_EmoticonButtons2.default, { handleEmojiClick: this.handleEmojiClick }) : null,
+        this.state.interface === "tap" ? _react2.default.createElement(_TapComponent2.default, null) : null,
+        this.state.interface === "slider" ? _react2.default.createElement(_SliderComponent.SliderComponent, null) : null
+      );
+    }
+  }]);
 
-	return LiveApp;
+  return LiveApp;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-	return {
-		command: state.command
-	};
+  return {
+    command: state.command
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(LiveApp);
