@@ -58,10 +58,10 @@ class OutputPlayer extends Component {
         this.state[`video${Direction}`].setPlaybackRate(newRate)
     })
     
-    socket.on('updatePlaybackRate', (newRate) => {
-      console.log('FROM TAP', newRate)
-      this.state[`video${Direction}`].setPlaybackRate(newRate)
-    })
+    // socket.on('updatePlaybackRate', (newRate) => {
+    //  console.log('FROM TAP', newRate)
+    //  this.state[`video${Direction}`].setPlaybackRate(newRate)
+    // })
 
     socket.on('clearOutputVideos', () => {
       this.setState({

@@ -42,21 +42,29 @@ export default class TapEffect extends Component {
   handleTaps() {
     let interval = setInterval(() => {
       let tapsInTwoSeconds = this.state.taps.length
+      console.log('NUM TAPS', tapsInTwoSeconds)
       
       if (1 <= tapsInTwoSeconds <= 2) {
-        socket.emit('changePlaybackRate', 0.25)
-      } else if (tapsInTwoSeconds <= 3) {
-        socket.emit('changePlaybackRate', 0.5)
-      } else if (tapsInTwoSeconds <= 4) {
-        socket.emit('changePlaybackRate', 0.75)
-      } else if (tapsInTwoSeconds <= 5) {
-        socket.emit('changePlaybackRate', 1.0)
-      } else if (tapsInTwoSeconds <= 6) {
-        socket.emit('changePlaybackRate', 1.25)
-      } else if (tapsInTwoSeconds < 8) {
-        socket.emit('changePlaybackRate', 1.5)
+        socket.emit('changingVideoLeftPlaybackRate', 0.25)
+        socket.emit('changingVideoRightPlaybackRate', 0.25)
+      } else if (2 < tapsInTwoSeconds <= 3) {
+        socket.emit('changingVideoLeftPlaybackRate', 0.5)
+        socket.emit('changingVideoRightPlaybackRate', 0.5)
+      } else if (3 < tapsInTwoSeconds <= 4) {
+        socket.emit('changingVideoLeftPlaybackRate', 0.75)
+        socket.emit('changingVideoRightPlaybackRate', 0.75)
+      } else if (4 < tapsInTwoSeconds <= 5) {
+        socket.emit('changingVideoLeftPlaybackRate', 1.0)
+        socket.emit('changingVideoRightPlaybackRate', 1.0)
+      } else if (5 < tapsInTwoSeconds <= 6) {
+        socket.emit('changingVideoLeftPlaybackRate', 1.25)
+        socket.emit('changingVideoRightPlaybackRate', 1.25)
+      } else if (6 < tapsInTwoSeconds < 8) {
+        socket.emit('changingVideoLeftPlaybackRate', 1.5)
+        socket.emit('changingVideoRightPlaybackRate', 1.5)
       } else if (tapsInTwoSeconds >= 8) {
-        socket.emit('changePlaybackRate', 2.0)
+        socket.emit('changingVideoLeftPlaybackRate', 2.0)
+        socket.emit('changingVideoRightPlaybackRate', 2.0)
       }
       
       this.setState({

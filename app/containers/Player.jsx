@@ -102,10 +102,10 @@ class Player extends Component {
       }
     })
 
-    socket.on('updatePlaybackRate', (newRate) => {
-      console.log('FROM TAPS', newRate)
-      event.target.setPlaybackRate(newRate)
-    })
+    // socket.on('updatePlaybackRate', (newRate) => {
+    //  console.log('FROM TAPS', newRate)
+    //  event.target.setPlaybackRate(newRate)
+    // })
 
     socket.on('changeVideosVolume', (newVol) => {
       console.log("Changing the volume", newVol)
