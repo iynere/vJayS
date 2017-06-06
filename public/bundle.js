@@ -46119,7 +46119,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46155,141 +46155,141 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var SortableQueue = function (_Component) {
-	_inherits(SortableQueue, _Component);
+  _inherits(SortableQueue, _Component);
 
-	function SortableQueue(props) {
-		_classCallCheck(this, SortableQueue);
+  function SortableQueue(props) {
+    _classCallCheck(this, SortableQueue);
 
-		var _this = _possibleConstructorReturn(this, (SortableQueue.__proto__ || Object.getPrototypeOf(SortableQueue)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (SortableQueue.__proto__ || Object.getPrototypeOf(SortableQueue)).call(this, props));
 
-		_this.onSortEnd = _this.onSortEnd.bind(_this);
-		_this.state = {
-			queueLeft: props.queueLeft,
-			queueRight: props.queueRight
-		};
-		return _this;
-	}
+    _this.onSortEnd = _this.onSortEnd.bind(_this);
+    _this.state = {
+      queueLeft: props.queueLeft,
+      queueRight: props.queueRight
+    };
+    return _this;
+  }
 
-	_createClass(SortableQueue, [{
-		key: 'onSortEnd',
-		value: function onSortEnd(_ref) {
-			var oldIndex = _ref.oldIndex,
-			    newIndex = _ref.newIndex;
+  _createClass(SortableQueue, [{
+    key: 'onSortEnd',
+    value: function onSortEnd(_ref) {
+      var oldIndex = _ref.oldIndex,
+          newIndex = _ref.newIndex;
 
-			console.log('Old index:', oldIndex);
-			console.log('New index:', newIndex);
+      console.log('Old index:', oldIndex);
+      console.log('New index:', newIndex);
 
-			this.props.rearrangeQueueItems(oldIndex, newIndex);
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var listItemStyle = {
-				maxWidth: "120px",
-				verticalAlign: "top",
-				wordWrap: "break-word",
-				whiteSpace: "normal"
-			};
+      this.props.rearrangeQueueItems(oldIndex, newIndex);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var listItemStyle = {
+        maxWidth: "120px",
+        verticalAlign: "top",
+        wordWrap: "break-word",
+        whiteSpace: "normal"
+      };
 
-			var SortableItem = (0, _reactSortableHoc.SortableElement)(function (_ref2) {
-				var value = _ref2.value,
-				    idx = _ref2.idx,
-				    direction = _ref2.direction;
+      var SortableItem = (0, _reactSortableHoc.SortableElement)(function (_ref2) {
+        var value = _ref2.value,
+            idx = _ref2.idx,
+            direction = _ref2.direction;
 
-				// console.log(idx)
-				return _react2.default.createElement(
-					_semanticUiReact.List.Item,
-					{ style: listItemStyle },
-					_react2.default.createElement(_SortableQueueItem2.default, {
-						video: value,
-						style: { wordWrap: "break-word", whiteSpace: "normal" },
-						direction: direction,
-						index: idx
-					})
-				);
-			});
+        // console.log(idx)
+        return _react2.default.createElement(
+          _semanticUiReact.List.Item,
+          { style: listItemStyle },
+          _react2.default.createElement(_SortableQueueItem2.default, {
+            video: value,
+            style: { wordWrap: "break-word", whiteSpace: "normal" },
+            direction: direction,
+            index: idx
+          })
+        );
+      });
 
-			var SortableList = (0, _reactSortableHoc.SortableContainer)(function (_ref3) {
-				var queueLeft = _ref3.queueLeft,
-				    queueRight = _ref3.queueRight;
+      var SortableList = (0, _reactSortableHoc.SortableContainer)(function (_ref3) {
+        var queueLeft = _ref3.queueLeft,
+            queueRight = _ref3.queueRight;
 
-				return _react2.default.createElement(
-					_semanticUiReact.Grid,
-					{
-						columns: 'two',
-						style: { MozUserSelect: 'none',
-							WebkitUserSelect: 'none',
-							msUserSelect: 'none' }
-					},
-					_react2.default.createElement(
-						_semanticUiReact.Grid.Row,
-						null,
-						_react2.default.createElement(
-							_semanticUiReact.Grid.Column,
-							{ style: { paddingLeft: '0', paddingRight: '14px', borderRight: '1px solid #7f7f7f' } },
-							_react2.default.createElement(
-								_semanticUiReact.List,
-								{ horizontal: true, style: { whiteSpace: "nowrap", overflowX: "auto", overflowY: "hidden" } },
-								queueLeft.map(function (value, index) {
-									return _react2.default.createElement(SortableItem, {
-										key: 'item-' + index,
-										idx: index,
-										index: index,
-										value: value,
-										direction: 'Left'
-									});
-								})
-							)
-						),
-						_react2.default.createElement(
-							_semanticUiReact.Grid.Column,
-							{ style: { paddingRight: '0', paddingLeft: '14px' } },
-							_react2.default.createElement(
-								_semanticUiReact.List,
-								{ horizontal: true, style: { whiteSpace: "nowrap", overflowX: "auto", overflowY: "hidden" } },
-								queueRight.map(function (value, index) {
-									return _react2.default.createElement(SortableItem, {
-										key: 'item-' + (index + 2 * queueLeft.length),
-										idx: index + 2 * queueLeft.length,
-										index: index + 2 * queueLeft.length,
-										value: value,
-										direction: 'Right'
-									});
-								})
-							)
-						)
-					)
-				);
-			});
+        return _react2.default.createElement(
+          _semanticUiReact.Grid,
+          {
+            columns: 'two',
+            style: { MozUserSelect: 'none',
+              WebkitUserSelect: 'none',
+              msUserSelect: 'none' }
+          },
+          _react2.default.createElement(
+            _semanticUiReact.Grid.Row,
+            null,
+            _react2.default.createElement(
+              _semanticUiReact.Grid.Column,
+              { style: { paddingLeft: '0', paddingRight: '14px', borderRight: '1px solid #7f7f7f' } },
+              _react2.default.createElement(
+                _semanticUiReact.List,
+                { horizontal: true, style: { whiteSpace: "nowrap", overflowX: "auto", overflowY: "hidden" } },
+                queueLeft.map(function (value, index) {
+                  return _react2.default.createElement(SortableItem, {
+                    key: 'item-' + index,
+                    idx: index,
+                    index: index,
+                    value: value,
+                    direction: 'Left'
+                  });
+                })
+              )
+            ),
+            _react2.default.createElement(
+              _semanticUiReact.Grid.Column,
+              { style: { paddingRight: '0', paddingLeft: '14px' } },
+              _react2.default.createElement(
+                _semanticUiReact.List,
+                { horizontal: true, style: { whiteSpace: "nowrap", overflowX: "auto", overflowY: "hidden" } },
+                queueRight.map(function (value, index) {
+                  return _react2.default.createElement(SortableItem, {
+                    key: 'item-' + (index + 2 * queueLeft.length),
+                    idx: index + 2 * queueLeft.length,
+                    index: index + 2 * queueLeft.length,
+                    value: value,
+                    direction: 'Right'
+                  });
+                })
+              )
+            )
+          )
+        );
+      });
 
-			return _react2.default.createElement(SortableList, {
-				axis: 'x',
-				queueLeft: this.props.queueLeft,
-				queueRight: this.props.queueRight,
-				onSortEnd: this.onSortEnd,
-				distance: 30,
-				useWindowAsScrollContainer: true,
-				lockAxis: 'x'
-			});
-		}
-	}]);
+      return _react2.default.createElement(SortableList, {
+        axis: 'x',
+        queueLeft: this.props.queueLeft,
+        queueRight: this.props.queueRight,
+        onSortEnd: this.onSortEnd,
+        distance: 30,
+        useWindowAsScrollContainer: true,
+        lockAxis: 'x'
+      });
+    }
+  }]);
 
-	return SortableQueue;
+  return SortableQueue;
 }(_react.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-	return {
-		queueLeft: state.queue['Left'],
-		queueRight: state.queue['Right']
-	};
+  return {
+    queueLeft: state.queue['Left'],
+    queueRight: state.queue['Right']
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	return {
-		rearrangeQueueItems: function rearrangeQueueItems(oldIndex, newIndex) {
-			dispatch((0, _queue.rearrangeQueueItems)(oldIndex, newIndex));
-		}
-	};
+  return {
+    rearrangeQueueItems: function rearrangeQueueItems(oldIndex, newIndex) {
+      dispatch((0, _queue.rearrangeQueueItems)(oldIndex, newIndex));
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SortableQueue);
@@ -46454,7 +46454,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -46480,79 +46480,79 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var socket = io(window.location.origin);
 
 var TapEffect = function (_Component) {
-	_inherits(TapEffect, _Component);
+  _inherits(TapEffect, _Component);
 
-	function TapEffect() {
-		_classCallCheck(this, TapEffect);
+  function TapEffect() {
+    _classCallCheck(this, TapEffect);
 
-		var _this = _possibleConstructorReturn(this, (TapEffect.__proto__ || Object.getPrototypeOf(TapEffect)).call(this));
+    var _this = _possibleConstructorReturn(this, (TapEffect.__proto__ || Object.getPrototypeOf(TapEffect)).call(this));
 
-		_this.state = {
-			taps: []
-		};
-		return _this;
-	}
+    _this.state = {
+      taps: []
+    };
+    return _this;
+  }
 
-	_createClass(TapEffect, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
+  _createClass(TapEffect, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
 
-			setInterval(function () {
-				_this2.setState({
-					taps: (0, _utils.lastTwoSecondsOfTaps)(_this2.state.taps)
-				});
-				console.log('clearing old taps', _this2.state.taps);
-			}, 500);
-			// store taps as an array of Date.now()'s
-			// .25 speed:   < 1 tap / second
-			// .5 speed:    1 tap / second
-			// .75 speed:   1.5 taps / second
-			// 1 speed:     2 taps / second
-			// 1.25 speed:  3 taps / second
-			// 1.5 speed:   4 taps / second
-			// 2 speed:     > 4 taps / second
+      setInterval(function () {
+        _this2.setState({
+          taps: (0, _utils.lastTwoSecondsOfTaps)(_this2.state.taps)
+        });
+        console.log('clearing old taps', _this2.state.taps);
+      }, 500);
+      // store taps as an array of Date.now()'s
+      // .25 speed:   < 1 tap / second
+      // .5 speed:    1 tap / second
+      // .75 speed:   1.5 taps / second
+      // 1 speed:     2 taps / second
+      // 1.25 speed:  3 taps / second
+      // 1.5 speed:   4 taps / second
+      // 2 speed:     > 4 taps / second
 
 
-			socket.on('updateTapValue', function () {
-				_this2.setState({
-					taps: _this2.state.taps.concat(Date.now())
-				});
+      socket.on('updateTapValue', function () {
+        _this2.setState({
+          taps: _this2.state.taps.concat(Date.now())
+        });
 
-				var tapesInTwoSeconds = _this2.state.taps.length;
+        var tapesInTwoSeconds = _this2.state.taps.length;
 
-				if (1 <= tapesInTwoSeconds <= 2) {
-					socket.emit('changePlaybackRate', 0.25);
-				} else if (tapesInTwoSeconds <= 3) {
-					socket.emit('changePlaybackRate', 0.5);
-				} else if (tapesInTwoSeconds <= 4) {
-					socket.emit('changePlaybackRate', 0.75);
-				} else if (tapesInTwoSeconds <= 5) {
-					socket.emit('changePlaybackRate', 1.0);
-				} else if (tapesInTwoSeconds <= 6) {
-					socket.emit('changePlaybackRate', 1.25);
-				} else if (tapesInTwoSeconds < 8) {
-					socket.emit('changePlaybackRate', 1.5);
-				} else if (tapesInTwoSeconds >= 8) {
-					socket.emit('changePlaybackRate', 2.0);
-				}
+        if (1 <= tapesInTwoSeconds <= 2) {
+          socket.emit('changePlaybackRate', 0.25);
+        } else if (tapesInTwoSeconds <= 3) {
+          socket.emit('changePlaybackRate', 0.5);
+        } else if (tapesInTwoSeconds <= 4) {
+          socket.emit('changePlaybackRate', 0.75);
+        } else if (tapesInTwoSeconds <= 5) {
+          socket.emit('changePlaybackRate', 1.0);
+        } else if (tapesInTwoSeconds <= 6) {
+          socket.emit('changePlaybackRate', 1.25);
+        } else if (tapesInTwoSeconds < 8) {
+          socket.emit('changePlaybackRate', 1.5);
+        } else if (tapesInTwoSeconds >= 8) {
+          socket.emit('changePlaybackRate', 2.0);
+        }
 
-				console.log("updating tap value!", _this2.state.taps);
-			});
-		}
-	}, {
-		key: 'componentWillUnmount',
-		value: function componentWillUnmount() {
-			// socket.emit('changePlaybackRate', 1)
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement('div', null);
-		}
-	}]);
+        console.log("updating tap value!", _this2.state.taps);
+      });
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      // socket.emit('changePlaybackRate', 1)
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement('div', null);
+    }
+  }]);
 
-	return TapEffect;
+  return TapEffect;
 }(_react.Component);
 
 exports.default = TapEffect;
@@ -47158,39 +47158,39 @@ module.exports = {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 var concatQueuesToSet = exports.concatQueuesToSet = function concatQueuesToSet(setArray, queueLeft, queueRight) {
-	var setCopy = setArray;
+  var setCopy = setArray;
 
-	for (var i = 0; i < (queueLeft.length > queueRight.length ? queueLeft.length : queueRight.length); i++) {
+  for (var i = 0; i < (queueLeft.length > queueRight.length ? queueLeft.length : queueRight.length); i++) {
 
-		if (queueLeft[i]) {
-			setCopy.push({
-				direction: 'Left',
-				thumbnailUrl: queueLeft[i].snippet.thumbnails.default.url,
-				title: queueLeft[i].snippet.title,
-				videoId: queueLeft[i].id.videoId
-			});
-		}
+    if (queueLeft[i]) {
+      setCopy.push({
+        direction: 'Left',
+        thumbnailUrl: queueLeft[i].snippet.thumbnails.default.url,
+        title: queueLeft[i].snippet.title,
+        videoId: queueLeft[i].id.videoId
+      });
+    }
 
-		if (queueRight[i]) {
-			setCopy.push({
-				direction: 'Right',
-				thumbnailUrl: queueRight[i].snippet.thumbnails.default.url,
-				title: queueRight[i].snippet.title,
-				videoId: queueRight[i].id.videoId
-			});
-		}
-	}
+    if (queueRight[i]) {
+      setCopy.push({
+        direction: 'Right',
+        thumbnailUrl: queueRight[i].snippet.thumbnails.default.url,
+        title: queueRight[i].snippet.title,
+        videoId: queueRight[i].id.videoId
+      });
+    }
+  }
 
-	return setCopy;
+  return setCopy;
 };
 
 var lastTwoSecondsOfTaps = exports.lastTwoSecondsOfTaps = function lastTwoSecondsOfTaps(tapsArray) {
-	return tapsArray.filter(function (tapTime) {
-		return Date.now() - tapTime <= 2000;
-	});
+  return tapsArray.filter(function (tapTime) {
+    return Date.now() - tapTime <= 2000;
+  });
 };
 
 /***/ }),
